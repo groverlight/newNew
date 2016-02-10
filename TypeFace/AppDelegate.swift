@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  New New
+//  asdfwavea
 //
-//  Created by Grover Light on 2/9/16.
-//  Copyright © 2016 Grover Light. All rights reserved.
+//  Created by Aaron Liu on 2/9/16.
+//  Copyright © 2016 Aaron Liu. All rights reserved.
 //
 
 import UIKit

@@ -1,15 +1,15 @@
 //
-//  New_NewTests.swift
-//  New NewTests
+//  TypeFaceTests.swift
+//  TypeFaceTests
 //
-//  Created by Grover Light on 2/9/16.
-//  Copyright © 2016 Grover Light. All rights reserved.
+//  Created by Aaron Liu on 2/9/16.
+//  Copyright © 2016 Aaron Liu. All rights reserved.
 //
 
 import XCTest
-@testable import New_New
+@testable import TypeFace
 
-class New_NewTests: XCTestCase {
+class TypeFaceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

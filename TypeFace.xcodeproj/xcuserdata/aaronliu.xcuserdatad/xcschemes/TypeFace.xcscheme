@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F49F36A11C6AD4BA00BFA900"
-               BuildableName = "New New.app"
-               BlueprintName = "New New"
-               ReferencedContainer = "container:New New.xcodeproj">
+               BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
+               BuildableName = "TypeFace.app"
+               BlueprintName = "TypeFace"
+               ReferencedContainer = "container:TypeFace.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,30 +32,30 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F49F36B91C6AD4BB00BFA900"
-               BuildableName = "New NewTests.xctest"
-               BlueprintName = "New NewTests"
-               ReferencedContainer = "container:New New.xcodeproj">
+               BlueprintIdentifier = "2742A4551C6AF1F500B369E7"
+               BuildableName = "TypeFaceTests.xctest"
+               BlueprintName = "TypeFaceTests"
+               ReferencedContainer = "container:TypeFace.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F49F36C41C6AD4BB00BFA900"
-               BuildableName = "New NewUITests.xctest"
-               BlueprintName = "New NewUITests"
-               ReferencedContainer = "container:New New.xcodeproj">
+               BlueprintIdentifier = "2742A4601C6AF1F500B369E7"
+               BuildableName = "TypeFaceUITests.xctest"
+               BlueprintName = "TypeFaceUITests"
+               ReferencedContainer = "container:TypeFace.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F49F36A11C6AD4BA00BFA900"
-            BuildableName = "New New.app"
-            BlueprintName = "New New"
-            ReferencedContainer = "container:New New.xcodeproj">
+            BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
+            BuildableName = "TypeFace.app"
+            BlueprintName = "TypeFace"
+            ReferencedContainer = "container:TypeFace.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -75,10 +75,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F49F36A11C6AD4BA00BFA900"
-            BuildableName = "New New.app"
-            BlueprintName = "New New"
-            ReferencedContainer = "container:New New.xcodeproj">
+            BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
+            BuildableName = "TypeFace.app"
+            BlueprintName = "TypeFace"
+            ReferencedContainer = "container:TypeFace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F49F36A11C6AD4BA00BFA900"
-            BuildableName = "New New.app"
-            BlueprintName = "New New"
-            ReferencedContainer = "container:New New.xcodeproj">
+            BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
+            BuildableName = "TypeFace.app"
+            BlueprintName = "TypeFace"
+            ReferencedContainer = "container:TypeFace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
