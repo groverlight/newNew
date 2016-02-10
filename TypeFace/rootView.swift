@@ -90,7 +90,7 @@ class rootView: UIViewController {
                 } catch let err{
                     print(err)
                 }
-                //print (friends)
+                //sort friends after syncing
                 let sortArr:NSArray =
                 friends.sortedArrayUsingComparator(){
                     
@@ -103,7 +103,7 @@ class rootView: UIViewController {
                         return NSComparisonResult.OrderedAscending
                     }
                 }
-                //friends = sortArr
+                friends = NSMutableArray(array:sortArr)
                 break
             case .Denied, .NotDetermined:
                 contactStore.requestAccessForEntityType(CNEntityType.Contacts, completionHandler: { (access, accessError) -> Void in
