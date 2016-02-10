@@ -44,6 +44,7 @@ class pageView: UIPageViewController {
     }
     
     private func newColoredViewController(color: String) -> UIViewController {
+        
         return UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewControllerWithIdentifier("\(color)ViewController")
     }
@@ -60,6 +61,7 @@ class pageView: UIPageViewController {
                 // Setting the view controller programmatically does not fire
                 // any delegate methods, so we have to manually notify the
                 // 'tutorialDelegate' of the new index.
+                
                 self.notifypageDelegateOfNewIndex()
         })
     }
@@ -134,6 +136,11 @@ extension pageView: UIPageViewControllerDelegate {
         didFinishAnimating finished: Bool,
         previousViewControllers: [UIViewController],
         transitionCompleted completed: Bool) {
+            //print ("new view") // enter logic
+            if (finished){
+                
+            }
+            
         notifypageDelegateOfNewIndex()
     }
     
