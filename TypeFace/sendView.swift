@@ -12,23 +12,29 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("sendview loaded")
+       // print("sendview loaded")
         sendTable.delegate = self
         sendTable.dataSource = self
         sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        if (friends.count == 0)
+        {
+            
+        }
     }
 
-
+    override func viewWillAppear(animated: Bool) {
+        sendTable.reloadData()
+    }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("making friends count")
+       // print("making friends count")
         return friends.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print ("trying to make table")
+       // print ("trying to make table")
         let cell:UITableViewCell = sendTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let contact = friends[indexPath.row]
         cell.textLabel?.text = contact["fullName"] as? String

@@ -16,7 +16,7 @@
 		2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4751C6AF2A500B369E7 /* pageView.swift */; };
 		2742A4791C6AF2A500B369E7 /* rootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4761C6AF2A500B369E7 /* rootView.swift */; };
 		2742A47B1C6AF2C300B369E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A47A1C6AF2C300B369E7 /* Main.storyboard */; };
-		27D859431C6BA5A700F44985 /* friendRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859421C6BA5A700F44985 /* friendRecord.swift */; };
+		2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796D2F01C6D477B00FE580B /* WindowExtension.swift */; };
 		27D859451C6BA5DC00F44985 /* sendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859441C6BA5DC00F44985 /* sendView.swift */; };
 		27D859471C6BA5E800F44985 /* activityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859461C6BA5E800F44985 /* activityView.swift */; };
 		27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */; };
@@ -55,7 +55,7 @@
 		2742A4761C6AF2A500B369E7 /* rootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rootView.swift; sourceTree = "<group>"; };
 		2742A47A1C6AF2C300B369E7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypeFace-Bridging-Header.h"; sourceTree = "<group>"; };
-		27D859421C6BA5A700F44985 /* friendRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = friendRecord.swift; sourceTree = "<group>"; };
+		2796D2F01C6D477B00FE580B /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		27D859441C6BA5DC00F44985 /* sendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendView.swift; sourceTree = "<group>"; };
 		27D859461C6BA5E800F44985 /* activityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activityView.swift; sourceTree = "<group>"; };
 		27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 				2742A4741C6AF2A500B369E7 /* cameraView.swift */,
 				27D859441C6BA5DC00F44985 /* sendView.swift */,
 				27D859461C6BA5E800F44985 /* activityView.swift */,
+				2796D2F01C6D477B00FE580B /* WindowExtension.swift */,
 				2742A47A1C6AF2C300B369E7 /* Main.storyboard */,
-				27D859421C6BA5A700F44985 /* friendRecord.swift */,
 				2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
@@ -332,8 +332,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */,
 				27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */,
-				27D859431C6BA5A700F44985 /* friendRecord.swift in Sources */,
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* rootView.swift in Sources */,
 				27D859451C6BA5DC00F44985 /* sendView.swift in Sources */,

@@ -8,19 +8,19 @@
 
 import AVFoundation
 import UIKit
-
-class cameraView: UIViewController, UITextFieldDelegate {
+var frontWindow: UIWindow?
+class cameraView: UIViewController, UITextViewDelegate {
     let captureSession = AVCaptureSession()
     var captureDevice : AVCaptureDevice?
     var previewLayer : AVCaptureVideoPreviewLayer?
     var shouldEdit = true
-    @IBOutlet weak var cameraTextField: UITextField!
     @IBOutlet weak var cameraPreview: UIView!
     
+    @IBOutlet weak var cameraTextField: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraTextField.delegate = self
-        cameraTextField.becomeFirstResponder()
+       // cameraTextField.becomeFirstResponder()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
@@ -47,18 +47,20 @@ class cameraView: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         //print ("appear")
+        cameraTextField.autocorrectionType = UITextAutocorrectionType.No
         cameraTextField.becomeFirstResponder()
-        shouldEdit = true
+         shouldEdit = true
         
     }
     
-
+    override func viewDidAppear(animated: Bool) {
+        //print("camera view did appear")
+    }
     override func viewWillDisappear(animated: Bool) {
 
         //print("disappear")
         shouldEdit = false
         cameraTextField.resignFirstResponder()
-        
     }
     
     func beginSession() {
@@ -88,12 +90,7 @@ class cameraView: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {  //delegate method
         //print("shouldend")
-        if (shouldEdit){
-            return false
-        }
-        else{
-            return true
-        }
+        return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
@@ -106,7 +103,13 @@ class cameraView: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        let keyboardHeight = keyboardRectangle.height
+        print("keyboard will show")
+        cameraTextField.frame = CGRectMake(0, keyboardHeight, self.view.frame.width, 20)
+
     }
     
     func keyboardWillHide (notification: NSNotification) {

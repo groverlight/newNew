@@ -9,13 +9,31 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    //var frontWindow: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
+            frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+            frontWindow?.rootViewController = front;
+            frontWindow?.windowLevel = UIWindowLevelStatusBar
+            frontWindow?.startSwipeToOpenMenu()
+            frontWindow?.makeKeyAndVisible();
+            application.statusBarStyle = .LightContent
+            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurView = UIVisualEffectView(effect: blur)
+            let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
+            blurView.frame = UIScreen.mainScreen().bounds
+            BlurSurface.addSubview(blurView)
+            BlurSurface.alpha = 0
+            frontWindow?.addSubview(BlurSurface)
         return true
     }
 

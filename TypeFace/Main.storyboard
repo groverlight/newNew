@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gjb-cV-ex8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vLd-VQ-PH0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -63,20 +63,74 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erM-on-UPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19" y="-1109"/>
+            <point key="canvasLocation" x="11" y="-1245"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ppz-AT-20S">
+            <objects>
+                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hKI-4s-HmT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bUA-Gd-May"/>
+                        <viewControllerLayoutGuide type="bottom" id="VZo-jb-8ZU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HEV-hX-Obr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rnb-xd-tbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2147" y="-290"/>
         </scene>
         <!--PageView-->
         <scene sceneID="0aP-7b-wK4">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="vertical" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfP-Ta-ha7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19" y="-274"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Ev3-UN-PnY">
+            <objects>
+                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pC2-6g-e7d" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hww-ll-d91"/>
+                        <viewControllerLayoutGuide type="bottom" id="uZd-Ko-uKv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VjV-ub-AwO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HA0-13-ejJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1479" y="-290"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="BEs-zQ-m8p">
+            <objects>
+                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4l-k4-8x9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zbK-II-4kG"/>
+                        <viewControllerLayoutGuide type="bottom" id="v7S-WU-79C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0bV-f5-MGa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tdz-ZR-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="763" y="-274"/>
+        </scene>
         <!--ActivityView-->
         <scene sceneID="zBZ-Ga-tM6">
             <objects>
-                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLd-VQ-PH0" userLabel="ActivityView" customClass="activityView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLd-VQ-PH0" userLabel="ActivityView" customClass="activityView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oq9-E0-VNs"/>
                         <viewControllerLayoutGuide type="bottom" id="kEr-g4-6fA"/>
@@ -89,16 +143,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGC-Vd-7CF" userLabel="noFriendsView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w03-rv-iir">
+                                        <rect key="frame" x="225" y="290" width="151" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="w03-rv-iir" firstAttribute="centerX" secondItem="EGC-Vd-7CF" secondAttribute="centerX" id="I4O-0Y-u0Q"/>
+                                    <constraint firstItem="w03-rv-iir" firstAttribute="centerY" secondItem="EGC-Vd-7CF" secondAttribute="centerY" id="njJ-Xj-Cwg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="EGC-Vd-7CF" firstAttribute="height" secondItem="dnb-1J-9zv" secondAttribute="height" id="2H0-Dt-IaT"/>
+                            <constraint firstItem="EGC-Vd-7CF" firstAttribute="centerY" secondItem="dnb-1J-9zv" secondAttribute="centerY" id="4IL-Df-Oi9"/>
                             <constraint firstItem="exA-nC-50D" firstAttribute="height" secondItem="dnb-1J-9zv" secondAttribute="height" id="96H-6R-UEY"/>
                             <constraint firstItem="exA-nC-50D" firstAttribute="centerY" secondItem="dnb-1J-9zv" secondAttribute="centerY" id="PbG-5O-B3O"/>
                             <constraint firstItem="exA-nC-50D" firstAttribute="width" secondItem="dnb-1J-9zv" secondAttribute="width" id="Z5m-nU-d3k"/>
+                            <constraint firstItem="EGC-Vd-7CF" firstAttribute="centerX" secondItem="dnb-1J-9zv" secondAttribute="centerX" id="fP2-pQ-SQ1"/>
                             <constraint firstItem="exA-nC-50D" firstAttribute="centerX" secondItem="dnb-1J-9zv" secondAttribute="centerX" id="ho6-iT-nCW"/>
+                            <constraint firstItem="EGC-Vd-7CF" firstAttribute="width" secondItem="dnb-1J-9zv" secondAttribute="width" id="ua7-0B-nhT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityTable" destination="exA-nC-50D" id="ql9-S4-FMc"/>
+                        <outlet property="noFriendsView" destination="EGC-Vd-7CF" id="OtK-O9-oy1"/>
+                        <segue destination="gjb-cV-ex8" kind="presentation" identifier="goLogin" id="La7-tY-grx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w99-OQ-hPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -108,7 +184,7 @@
         <!--CameraView-->
         <scene sceneID="FZv-zF-sJb">
             <objects>
-                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xoz-Im-lQw" userLabel="CameraView" customClass="cameraView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xoz-Im-lQw" userLabel="CameraView" customClass="cameraView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rEe-LU-WEu"/>
                         <viewControllerLayoutGuide type="bottom" id="LhW-hI-PaP"/>
@@ -129,25 +205,29 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="sup" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z0s-vE-2NY" userLabel="cameraTextField">
-                                <rect key="frame" x="20" y="270" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="next"/>
-                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
+                                <rect key="frame" x="0.0" y="236" width="600" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="m0H-rH-xj3"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert"/>
+                            </textView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="rVk-Zv-SPM" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leading" id="0t3-Qm-3jr"/>
                             <constraint firstItem="rVk-Zv-SPM" firstAttribute="height" secondItem="VwB-MW-SDj" secondAttribute="height" id="5bd-xz-aVt"/>
+                            <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="8l2-kt-5fC"/>
                             <constraint firstItem="rVk-Zv-SPM" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="IU9-mv-3xN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Z0s-vE-2NY" secondAttribute="trailing" id="Psg-mx-lcl"/>
-                            <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="Z0s-vE-2NY" secondAttribute="bottom" constant="300" id="dxa-7c-bBT"/>
+                            <constraint firstItem="kw9-cJ-h9A" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="ftr-vy-USz"/>
                             <constraint firstItem="rVk-Zv-SPM" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="gNQ-Sc-dyV"/>
-                            <constraint firstItem="Z0s-vE-2NY" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" id="jyK-9w-LSn"/>
+                            <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerY" secondItem="VwB-MW-SDj" secondAttribute="centerY" id="jGo-jf-JwU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraPreview" destination="rVk-Zv-SPM" id="fPO-td-4wJ"/>
-                        <outlet property="cameraTextField" destination="Z0s-vE-2NY" id="qby-Qm-cj0"/>
+                        <outlet property="cameraTextField" destination="kw9-cJ-h9A" id="1Uh-bQ-qab"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXX-g8-aiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,7 +237,7 @@
         <!--SendView-->
         <scene sceneID="AX7-YJ-tFe">
             <objects>
-                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Sn-jB-clO"/>
                         <viewControllerLayoutGuide type="bottom" id="oKf-mC-0Wp"/>

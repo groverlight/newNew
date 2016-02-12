@@ -4,10 +4,10 @@
 import UIKit
 import Contacts
 var friends : NSMutableArray = []
+var activities : NSMutableArray = []
 class rootView: UIViewController {
 
     @IBOutlet weak var navBar: UINavigationBar!
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var containerView: UIView!
     override func viewDidLoad() {
         
@@ -177,3 +177,23 @@ extension rootView: pageDelegate {
     }
     
 }
+
+
+
+extension pageView: UIPageViewControllerDelegate {
+    
+    func pageViewController(pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool) {
+            print ("new view") // enter logic
+            if (finished){
+                
+            }
+            
+            
+    }
+    
+}
+
+

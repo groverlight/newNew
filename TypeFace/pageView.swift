@@ -18,7 +18,6 @@ class pageView: UIPageViewController {
             self.newColoredViewController("Red"),
             self.newColoredViewController("Blue")]
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,7 +129,7 @@ extension pageView: UIPageViewControllerDataSource {
     
 }
 
-extension pageView: UIPageViewControllerDelegate {
+/*extension pageView: UIPageViewControllerDelegate {
     
     func pageViewController(pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
@@ -144,7 +143,8 @@ extension pageView: UIPageViewControllerDelegate {
         notifypageDelegateOfNewIndex()
     }
     
-}
+}*/
+
 
 protocol pageDelegate {
     
