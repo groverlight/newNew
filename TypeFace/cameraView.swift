@@ -9,6 +9,7 @@
 import AVFoundation
 import UIKit
 import MobileCoreServices
+import GPUImage
 var frontWindow: UIWindow?
 var arrayofText: NSMutableArray = []
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -48,11 +49,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var shouldEdit = true
     @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var cameraTextField: UITextView!
+    var videoCamera:GPUImageVideoCamera?
+    var filter:GPUImageSepiaFilter?
+    var filter2: GPUImageLookupFilter?
+    var filteredImage: GPUImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
         //set the pop animations
         buttonScale.duration =   2;
-
         buttonScale.toValue = NSValue(CGPoint: CGPointMake(2, 2))
         buttonScale.completionBlock = {(animation, finished) in
             //Code goes here
@@ -76,6 +80,21 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
 
         self.createImagePicker()
+        filteredImage = GPUImageView()
+        videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPresetHigh, cameraPosition: .Front)
+        videoCamera!.outputImageOrientation = .Portrait
+       
+        filteredImage?.frame = self.view.bounds
+        print(filteredImage?.frame)
+        filter = GPUImageSepiaFilter()
+        filter2 = GPUImageLookupFilter()
+        videoCamera?.addTarget(filter)
+        print (filter)
+        filter?.addTarget(filteredImage)
+        filter2?.addTarget(filteredImage)
+        self.view.insertSubview(filteredImage!, atIndex: 0)
+        videoCamera?.startCameraCapture()
+        
         
      
     }
@@ -177,18 +196,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         imagePicker.delegate = self
         imagePicker.extendedLayoutIncludesOpaqueBars = true
         imagePicker.view.userInteractionEnabled = false
-        self.view.insertSubview(imagePicker.view, atIndex: 0)
+       // self.view.insertSubview(imagePicker.view, atIndex: 0)
     }
     func toggleVideoRecording() {
         
     }
     func startRecording() {
         recording = true;
+        //videoCamera?.stopCameraCapture()
         imagePicker.startVideoCapture()
         
     }
     func stopRecording() {
         recording = false;
+        
         imagePicker.stopVideoCapture()
     }
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
