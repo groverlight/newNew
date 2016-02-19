@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 @UIApplicationMain
 
@@ -17,23 +19,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId("CP7uHBTadzC2UNvEp2yhpAIv1GEM1gdiPHuzwtpr",
+            clientKey: "DQj2oBjtZZqSHpbcPzG20poPjEdwaVxI1xvZ5NzT")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
 
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
-            frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
-            frontWindow?.rootViewController = front;
-            frontWindow?.windowLevel = UIWindowLevelStatusBar
-            frontWindow?.startSwipeToOpenMenu()
-            frontWindow?.makeKeyAndVisible();
-            application.statusBarStyle = .LightContent
-            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let blurView = UIVisualEffectView(effect: blur)
-            let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
-            blurView.frame = UIScreen.mainScreen().bounds
-            BlurSurface.addSubview(blurView)
-            BlurSurface.alpha = 0
-            frontWindow?.addSubview(BlurSurface)
+
+        frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+        frontWindow?.rootViewController = front;
+        frontWindow?.windowLevel = UIWindowLevelStatusBar
+        frontWindow?.startSwipeToOpenMenu()
+        frontWindow?.makeKeyAndVisible();
+        application.statusBarStyle = .LightContent
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
+        blurView.frame = UIScreen.mainScreen().bounds
+        BlurSurface.addSubview(blurView)
+        BlurSurface.alpha = 0
+        frontWindow?.addSubview(BlurSurface)
+        
+      //  if (PFUser.currentUser() == nil) // needs some condition to go to login
+        if (false)
+        {
+            let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
+            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window?.rootViewController = back
+            window?.makeKeyAndVisible();
+            frontWindow?.hidden = true
+        }
+        //window?.rootViewController
         return true
     }
 
@@ -59,6 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+   
 }
 

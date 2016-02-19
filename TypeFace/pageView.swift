@@ -25,7 +25,7 @@ class pageView: UIPageViewController {
         delegate = self
         
        
-            scrollToViewController(orderedViewControllers[1])
+            scrollToViewController(orderedViewControllers[0])
         
         
         pageViewDelegate?.PageView(self, didUpdatePageCount: orderedViewControllers.count)
@@ -129,7 +129,7 @@ extension pageView: UIPageViewControllerDataSource {
     
 }
 
-/*extension pageView: UIPageViewControllerDelegate {
+extension pageView: UIPageViewControllerDelegate {
     
     func pageViewController(pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
@@ -143,18 +143,17 @@ extension pageView: UIPageViewControllerDataSource {
         notifypageDelegateOfNewIndex()
     }
     
-}*/
+}
 
 
 protocol pageDelegate {
     
 
     func PageView(PageView: pageView, didUpdatePageCount count: Int)
-    //pageControl.numberOfPages = count
     
     
     func PageView(PageView: pageView, didUpdatePageIndex index: Int)
-    //pageControl.currentPage = index
+
     
     
 }
