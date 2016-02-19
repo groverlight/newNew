@@ -50,8 +50,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var cameraTextField: UITextView!
     var videoCamera:GPUImageVideoCamera?
-    var filter:GPUImageSepiaFilter?
-    var filter2: GPUImageLookupFilter?
+    var filter:GPUImageMissEtikateFilter?
     var filteredImage: GPUImageView?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,12 +85,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
         filteredImage?.frame = self.view.bounds
         print(filteredImage?.frame)
-        filter = GPUImageSepiaFilter()
-        filter2 = GPUImageLookupFilter()
+        filter = GPUImageMissEtikateFilter()
         videoCamera?.addTarget(filter)
         print (filter)
         filter?.addTarget(filteredImage)
-        filter2?.addTarget(filteredImage)
         self.view.insertSubview(filteredImage!, atIndex: 0)
         videoCamera?.startCameraCapture()
         
