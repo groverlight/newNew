@@ -199,7 +199,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no friends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w03-rv-iir">
                                         <rect key="frame" x="225" y="290" width="151" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -299,6 +299,7 @@
                         <outlet property="cameraTextField" destination="kw9-cJ-h9A" id="1Uh-bQ-qab"/>
                         <outlet property="typingButton" destination="Skt-gV-BGX" id="sF5-ud-wLa"/>
                         <outlet property="typingLabel" destination="bhA-bU-T61" id="lBC-46-3ch"/>
+                        <segue destination="GY4-Pq-8RY" kind="presentation" identifier="goSend" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="HRl-Gu-UzX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXX-g8-aiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,7 +309,7 @@
         <!--SendView-->
         <scene sceneID="AX7-YJ-tFe">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sendView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Sn-jB-clO"/>
                         <viewControllerLayoutGuide type="bottom" id="oKf-mC-0Wp"/>
@@ -319,15 +320,30 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uHp-B1-iC1" userLabel="sendTable">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PVp-7g-8cR">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="kWs-nn-oVO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="QVc-kI-vvO">
+                                            <connections>
+                                                <action selector="goBack:" destination="GY4-Pq-8RY" id="Rxv-cp-Jqx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="PVp-7g-8cR" firstAttribute="centerX" secondItem="D7d-oM-V9K" secondAttribute="centerX" id="2a8-1t-Jf3"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="width" secondItem="D7d-oM-V9K" secondAttribute="width" id="3PA-O0-dzC"/>
                             <constraint firstItem="oKf-mC-0Wp" firstAttribute="top" secondItem="uHp-B1-iC1" secondAttribute="bottom" id="50M-eI-2fe"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="top" secondItem="4Sn-jB-clO" secondAttribute="bottom" constant="44" id="7Ig-56-qbc"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="centerX" secondItem="D7d-oM-V9K" secondAttribute="centerX" id="FKJ-pY-kxg"/>
+                            <constraint firstItem="PVp-7g-8cR" firstAttribute="width" secondItem="D7d-oM-V9K" secondAttribute="width" id="KW9-Wm-EEx"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="top" secondItem="4Sn-jB-clO" secondAttribute="bottom" constant="25" id="KsA-HA-xHA"/>
+                            <constraint firstItem="PVp-7g-8cR" firstAttribute="top" secondItem="4Sn-jB-clO" secondAttribute="bottom" id="XNN-1M-RPu"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="top" secondItem="D7d-oM-V9K" secondAttribute="topMargin" constant="20" id="tA2-qt-WQf"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="top" secondItem="4Sn-jB-clO" secondAttribute="bottom" id="vbe-Yu-wmH"/>
                         </constraints>
@@ -341,6 +357,7 @@
                     </view>
                     <connections>
                         <outlet property="sendTable" destination="uHp-B1-iC1" id="lw1-Ag-AxO"/>
+                        <segue destination="xoz-Im-lQw" kind="presentation" identifier="goBacktoCamera" modalTransitionStyle="flipHorizontal" id="8Ba-Ul-9g5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7CK-En-VCd" userLabel="First Responder" sceneMemberID="firstResponder"/>

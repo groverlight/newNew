@@ -33,13 +33,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             cameraTextField.resignFirstResponder()
             if (recording == false) {
 
-                print ("start recording")
+               // print ("start recording")
                 self.startRecording()
                 typingButton.pop_addAnimation(buttonScale, forKey: "scale")
             } else {
-                print ("stop recording")
+                //print ("stop recording")
 
-                self.stopRecording()            }
+                //self.stopRecording()
+            }
 
         }
     }
@@ -62,8 +63,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             if (finished){
                 print("animation done")
                 self.stopRecording()
+                self.cameraTextField.text.removeAll()
+                self.cameraTextField.returnKeyType = UIReturnKeyType.Go
                 self.cameraTextField.becomeFirstResponder()
                 self.typingButton.pop_addAnimation(self.buttonSpring, forKey: "shake")
+                
+                
             }
         }
         buttonSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -96,11 +101,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
      
     }
     override func viewWillAppear(animated: Bool) {
-  
+      // print ("appear")
         super.viewWillAppear(animated)
          cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
-         cameraTextField.delegate = self
-         cameraTextField.becomeFirstResponder()
+         //cameraTextField.delegate = self
+        cameraTextField.becomeFirstResponder()
+    
+        
          shouldEdit = true
         
     }
@@ -114,31 +121,26 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     override func viewWillDisappear(animated: Bool) {
 
-        //print("disappear")
+       // print("disappear")
         shouldEdit = false
-        //cameraTextField.removeObserver(self, forKeyPath: "contentSize")
+        cameraTextField.removeObserver(self, forKeyPath: "contentSize")
         cameraTextField.resignFirstResponder()
-    }
-    func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
-        //print ("didbeginediting")
-    }
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        print("shouldbegin")
-            return true
-    }
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {  //delegate method
-        //print("shouldend")
-        return true
-    }
-    func textFieldDidEndEditing(textField: UITextField) {
-        //print("didendediting")
-    }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
-        cameraTextField.resignFirstResponder()
-        print("shouldreturn")
-        return true
+        self.view.endEditing(true)
     }
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n" && cameraTextField.returnKeyType == UIReturnKeyType.Go){
+           // print ("go")
+            //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
+            cameraTextField.resignFirstResponder()
+            //self.view.endEditing(true)
+            self.presentViewController(vc, animated: false, completion: nil)
+            //self.performSegueWithIdentifier("goSend", sender: self)
+            return false
+        }
+        else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Go){
+            return false
+        }
         if(cameraTextField.text.characters.count - range.length + text.characters.count > 70){
             //print ("too many")
             return false;
@@ -151,11 +153,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func keyboardWillShow(notification: NSNotification) {
-
+        //print ("keyboardwillshow")
         updateBottomLayoutConstraintWithNotification(notification)
 
     }
     func keyboardWillHide (notification: NSNotification) {
+       // print ("keyboardwillhide")
         updateBottomLayoutConstraintWithNotification(notification)
     }
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -199,12 +202,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func startRecording() {
+        print ("start recording")
         recording = true;
         //videoCamera?.stopCameraCapture()
         imagePicker.startVideoCapture()
         
     }
     func stopRecording() {
+        print ("stoprecording")
         recording = false;
         
         imagePicker.stopVideoCapture()
