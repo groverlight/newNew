@@ -10,6 +10,7 @@ import AVFoundation
 import UIKit
 import MobileCoreServices
 import GPUImage
+
 var frontWindow: UIWindow?
 var arrayofText: NSMutableArray = []
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
@@ -53,6 +54,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var videoCamera:GPUImageVideoCamera?
     var filter:GPUImageMissEtikateFilter?
     var filteredImage: GPUImageView?
+    var movieWriter: GPUImageMovieWriter?
+    var clipCount = 0
+    var fileManager: NSFileManager? = NSFileManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         //set the pop animations
@@ -83,36 +87,70 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
          //[self performSelector:@selector(showcamera) withObject:nil afterDelay:0.3];
         
 
-        self.createImagePicker()
-        filteredImage = GPUImageView()
-        videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPresetHigh, cameraPosition: .Front)
-        videoCamera!.outputImageOrientation = .Portrait
-       
-        filteredImage?.frame = self.view.bounds
-        print(filteredImage?.frame)
-        filter = GPUImageMissEtikateFilter()
-        videoCamera?.addTarget(filter)
-        print (filter)
-        filter?.addTarget(filteredImage)
-        self.view.insertSubview(filteredImage!, atIndex: 0)
-        videoCamera?.startCameraCapture()
         
+        if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
+           // self.createImagePicker()
+            
+
+
+            
+            clipCount = 0;
+            filteredImage = GPUImageView()
+            videoCamera = GPUImageVideoCamera(sessionPreset: AVCaptureSessionPresetHigh, cameraPosition: .Front)
+            videoCamera?.horizontallyMirrorFrontFacingCamera = true
+            videoCamera!.outputImageOrientation = .Portrait
+            filteredImage?.frame = self.view.bounds
+            //print(filteredImage?.frame)
+            filter = GPUImageMissEtikateFilter()
+            videoCamera?.addTarget(filter)
+            //print (filter)
+                    filter?.addTarget(filteredImage)
+            self.view.insertSubview(filteredImage!, atIndex: 0)
+            //self.view.insertSubview(imagePicker.view, aboveSubview: filteredImage!)
+            videoCamera?.startCameraCapture()
+        }
+        else
+        { // for simulator
+            self.view.backgroundColor = UIColor.brownColor()
+            typingButton.userInteractionEnabled = false
+        }
         
      
     }
     override func viewWillAppear(animated: Bool) {
       // print ("appear")
+        
+        do{
+            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            for file:NSString in files!{
+                try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+            }
+            print (files)
+        }
+        catch {
+            print("bad")
+        }
+
         super.viewWillAppear(animated)
-         cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
-         //cameraTextField.delegate = self
+        cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
         cameraTextField.becomeFirstResponder()
-    
-        
-         shouldEdit = true
-        
+        panGesture?.enabled = true
+        shouldEdit = true
     }
     override func viewDidAppear(animated: Bool) {
         //print("camera view did appear")
+        
+        do{
+            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            for file:NSString in files!{
+                try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+            }
+            print (files)
+        }
+        catch {
+            print("bad")
+        }
+
         super.viewDidAppear(animated)
         let theRect = imagePicker.view.frame
         cameraPreview?.frame = theRect
@@ -123,7 +161,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
        // print("disappear")
         shouldEdit = false
-        cameraTextField.removeObserver(self, forKeyPath: "contentSize")
+        //cameraTextField.removeObserver(self, forKeyPath: "contentSize")
         cameraTextField.resignFirstResponder()
         self.view.endEditing(true)
     }
@@ -177,44 +215,64 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func createImagePicker() {
         print ("create image picker")
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        imagePicker.mediaTypes = [kUTTypeMovie as String]
-        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video
-        imagePicker.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
-        imagePicker.allowsEditing = false
-        imagePicker.showsCameraControls = false
-        imagePicker.cameraViewTransform = CGAffineTransformIdentity
-        
-        if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
-            print ("has camera device")
-            imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.Front
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera))
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.mediaTypes = [kUTTypeMovie as String]
+            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video
+            imagePicker.modalPresentationStyle = UIModalPresentationStyle.CurrentContext
+            imagePicker.allowsEditing = false
+            imagePicker.showsCameraControls = false
+            imagePicker.cameraViewTransform = CGAffineTransformIdentity
+            
+            if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
+                print ("has camera device")
+                imagePicker.cameraDevice = UIImagePickerControllerCameraDevice.Front
+            }
+            else{
+                print ("no camera device")
+            }
+            imagePicker.videoQuality = UIImagePickerControllerQualityType.Type640x480
+            imagePicker.delegate = self
+            imagePicker.extendedLayoutIncludesOpaqueBars = true
+            imagePicker.view.userInteractionEnabled = false
+            
+            
         }
-        else{
-            print ("no camera device")
-        }
-        imagePicker.videoQuality = UIImagePickerControllerQualityType.Type640x480
-        imagePicker.delegate = self
-        imagePicker.extendedLayoutIncludesOpaqueBars = true
-        imagePicker.view.userInteractionEnabled = false
-       // self.view.insertSubview(imagePicker.view, atIndex: 0)
-    }
-    func toggleVideoRecording() {
+
+
         
     }
     func startRecording() {
         print ("start recording")
         recording = true;
+        let clipCountString = String(clipCount)
+        movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString)",isDirectory: true), size: view.frame.size)
+        filter?.addTarget(movieWriter)
+
+        movieWriter?.encodingLiveVideo = true
+        //movieWriter?.
         //videoCamera?.stopCameraCapture()
-        imagePicker.startVideoCapture()
+        movieWriter?.startRecording()
         
     }
     func stopRecording() {
         print ("stoprecording")
+        clipCount++
         recording = false;
-        
-        imagePicker.stopVideoCapture()
+        movieWriter?.finishRecording()
+        do{
+        let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+        print (files)
+        }
+        catch {
+            print("bad")
+        }
+       // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
+       
     }
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    
+    /*func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         print("Got a video")
         
         if let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL) {
@@ -236,7 +294,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         imagePicker.dismissViewControllerAnimated(true, completion: {
             // Anything you want to happen when the user saves an video
         })
-    }
+    }*/
 
 
 }

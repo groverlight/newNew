@@ -17,7 +17,7 @@ private let kAnimationDuration: NSTimeInterval = 0.3
 private let kstatusBarStyle = UIStatusBarStyle.LightContent
 
 var tapGesture : UITapGestureRecognizer?
-var panGesture : UIPanGestureRecognizer?
+var panGesture : UIPanGestureRecognizer? = UIPanGestureRecognizer()
 let backWindow:UIWindow? = UIApplication.sharedApplication().delegate?.window!
 
 extension UIWindow{
@@ -35,7 +35,7 @@ extension UIWindow{
     }
     
     func startSwipeToOpenMenu(){
-        
+
         panGesture = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
         addGestureRecognizer(panGesture!);
         
@@ -51,6 +51,7 @@ extension UIWindow{
             
         case .Began:
             //print("began")
+
             beganOrigin = frame.origin;
             break;
         case .Changed:
@@ -115,7 +116,7 @@ extension UIWindow{
 
     // MARK: Private methids
     private func close(){
-        //print ("close")
+        print ("close")
         frontWindow?.rootViewController?.viewWillAppear(false)
         frontWindow?.subviews[1].alpha = 0
         // frontWindow?.rootViewController?.view.subviews[2]

@@ -28,6 +28,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         {
             
         }
+        panGesture?.enabled = false
     }
 
     override func viewWillAppear(animated: Bool) {
