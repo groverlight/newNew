@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BlurSurface.alpha = 0
         frontWindow?.addSubview(BlurSurface)
         
-      //  if (PFUser.currentUser() == nil) // needs some condition to go to login
+        //if (PFUser.currentUser() == nil) // needs some condition to go to login
         if (false)
         {
             let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController

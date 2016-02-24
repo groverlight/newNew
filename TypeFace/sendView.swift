@@ -30,7 +30,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         if (friends.count == 0){
             contactsync()
         }
-        print("sendview loaded")
+        //print("sendview loaded")
         sendTable.delegate = self
         sendTable.dataSource = self
         sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")

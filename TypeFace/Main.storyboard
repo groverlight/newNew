@@ -66,6 +66,13 @@
                     <view key="view" contentMode="scaleToFill" id="HEV-hX-Obr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-6h-BI5">
+                                <rect key="frame" x="251" y="285" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
@@ -92,6 +99,13 @@
                     <view key="view" contentMode="scaleToFill" id="VjV-ub-AwO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLk-5L-pmD">
+                                <rect key="frame" x="250" y="286" width="98" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
@@ -128,8 +142,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" keyboardAppearance="alert"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL7-DQ-xYV" userLabel="nextButton">
-                                <rect key="frame" x="277" y="262" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oL7-DQ-xYV" userLabel="nextButton">
+                                <rect key="frame" x="277" y="246" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="nextButton:" destination="t4l-k4-8x9" eventType="touchUpInside" id="0rp-5c-q9C"/>
@@ -154,13 +168,15 @@
                         <constraints>
                             <constraint firstItem="6de-qo-DiA" firstAttribute="top" secondItem="u5V-yA-axn" secondAttribute="bottom" constant="42" id="6Kw-Fy-O38"/>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="leading" secondItem="0bV-f5-MGa" secondAttribute="leadingMargin" constant="236" id="6Xh-AR-Xgj"/>
-                            <constraint firstItem="u5V-yA-axn" firstAttribute="top" secondItem="zbK-II-4kG" secondAttribute="bottom" constant="100" id="8YU-yx-iwk"/>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="centerX" secondItem="0bV-f5-MGa" secondAttribute="centerX" id="EQ1-xh-1hA"/>
                             <constraint firstItem="AnO-zT-x6o" firstAttribute="leading" secondItem="6de-qo-DiA" secondAttribute="trailing" constant="8" id="FMA-yz-2Eb"/>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="width" secondItem="0bV-f5-MGa" secondAttribute="width" id="Htc-07-l0H"/>
                             <constraint firstItem="AnO-zT-x6o" firstAttribute="centerX" secondItem="0bV-f5-MGa" secondAttribute="centerX" constant="33" id="IY6-za-56k"/>
+                            <constraint firstItem="u5V-yA-axn" firstAttribute="top" secondItem="zbK-II-4kG" secondAttribute="bottom" constant="100" id="K85-Ps-HLA"/>
+                            <constraint firstItem="oL7-DQ-xYV" firstAttribute="top" secondItem="AnO-zT-x6o" secondAttribute="bottom" constant="20" id="Q1s-y7-lpY"/>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="leading" secondItem="0bV-f5-MGa" secondAttribute="leadingMargin" id="rWB-Cp-tK4"/>
                             <constraint firstItem="AnO-zT-x6o" firstAttribute="top" secondItem="u5V-yA-axn" secondAttribute="bottom" constant="42" id="u0C-wp-d2S"/>
+                            <constraint firstItem="oL7-DQ-xYV" firstAttribute="centerX" secondItem="0bV-f5-MGa" secondAttribute="centerX" id="xEk-tN-KmL"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -381,31 +397,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVG-vK-CRX">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjn-gT-CrU">
-                                        <rect key="frame" x="272" y="285" width="57" height="30"/>
-                                        <state key="normal" title="Go back"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="jVG-vK-CRX" secondAttribute="centerY" id="rXk-Jc-Uip"/>
-                                    <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="jVG-vK-CRX" secondAttribute="centerX" id="vKt-iW-erm"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjn-gT-CrU">
+                                <rect key="frame" x="249" y="277" width="102" height="47"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="29"/>
+                                <state key="normal" title="Go back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="9aT-QD-KO1" eventType="touchUpInside" id="KhG-4F-G5u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="jVG-vK-CRX" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Tji-Jl-oCG"/>
-                            <constraint firstItem="jVG-vK-CRX" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="dJi-Kd-W7V"/>
-                            <constraint firstItem="jVG-vK-CRX" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="gLe-at-mFd"/>
-                            <constraint firstItem="jVG-vK-CRX" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="swd-Pe-7rg"/>
+                            <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="56e-tK-wUD"/>
+                            <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Sgm-H3-eHH"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="blurBackground" destination="jVG-vK-CRX" id="73X-wq-peg"/>
+                        <outlet property="backButton" destination="vjn-gT-CrU" id="AxC-PU-kGb"/>
                         <segue destination="xoz-Im-lQw" kind="presentation" identifier="segueToCamera" id="w1J-sQ-Der"/>
                     </connections>
                 </viewController>

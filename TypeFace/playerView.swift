@@ -17,8 +17,11 @@ class playerView: UIViewController {
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
 
-    @IBOutlet weak var blurBackground: UIView!
-
+    @IBAction func backButtonAction(sender: AnyObject) {
+        //self.performSegueWithIdentifier("segueToCamera", sender: self)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         /*let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
@@ -27,6 +30,7 @@ class playerView: UIViewController {
         overlay.frame = self.view.bounds
         self.blurBackground.addSubview(overlay)
         self.blurBackground.alpha = 0*/
+        backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
         self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
@@ -37,7 +41,7 @@ class playerView: UIViewController {
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             numOfClips = (files?.count)!
             totalReceivedClips = numOfClips
-            print (numOfClips) // last where I Started
+            //print (numOfClips) // last where I Started
         }
         catch {
             print("bad")
@@ -46,7 +50,7 @@ class playerView: UIViewController {
     }
     func setupVideo(index: Int){
         
-        print ("index: \(index)")
+        //print ("index: \(index)")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
 
@@ -62,7 +66,7 @@ class playerView: UIViewController {
     }
     
     func playerItemDidReachEnd(notification: NSNotification){
-        print ("item reached end \(numOfClips)")
+        //print ("item reached end \(numOfClips)")
        // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
         NSNotificationCenter.defaultCenter().removeObserver(self)
       
@@ -73,7 +77,7 @@ class playerView: UIViewController {
         else{
             print ("done with video clips")
 
-            /*do{
+            do{
                 let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
                     try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
@@ -82,7 +86,8 @@ class playerView: UIViewController {
             }
             catch {
                 print("bad")
-            }*/
+            }
+            arrayofText.removeAllObjects()
             //if you have more UIViews, use an insertS
             //self.dismissViewControllerAnimated(true, completion: nil)
             /*self.view.bringSubviewToFront(blurBackground)
@@ -91,14 +96,17 @@ class playerView: UIViewController {
             })*/
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
-            //let vibrancyEffect = UIVibrancyEffect(
+            //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             // Put it somewhere, give it a frame...
             overlay.frame = self.view.bounds
             self.view.addSubview(overlay)
-            
-            UIView.animateWithDuration(1.5) {
-                overlay.effect = blurEffect
-            }
+            UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
+                        self.view.bringSubviewToFront(self.backButton)
+                        self.backButton.hidden = false
+                       // self.backButton.layer
+                
+                })
+
         }
         
     }

@@ -32,7 +32,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
             cameraTextField.resignFirstResponder()
             if (recording == false) {
-
+                print (cameraTextField.text)
+                arrayofText.addObject(cameraTextField.text)
                // print ("start recording")
                 self.startRecording()
                 typingButton.pop_addAnimation(buttonScale, forKey: "scale")
@@ -58,13 +59,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var fileManager: NSFileManager? = NSFileManager()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //set the pop animations
+        print ("cameraView laoded")
         buttonScale.duration =   2;
         buttonScale.toValue = NSValue(CGPoint: CGPointMake(2, 2))
         buttonScale.completionBlock = {(animation, finished) in
             //Code goes here
             if (finished){
-                print("animation done")
+                //print("animation done")
                 self.stopRecording()
                 self.cameraTextField.text.removeAll()
                 self.cameraTextField.returnKeyType = UIReturnKeyType.Go
@@ -95,7 +96,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 for file:NSString in files!{
                     try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
                 }
-                print (files)
+                //print (files)
                 if (files?.count == 0){
                     clipCount = 1
                 }
@@ -133,6 +134,21 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
       // print ("appear")
        // print ("view will appear deleting files")
         //print (files)
+        do{
+            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            for file:NSString in files!{
+                try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+            }
+           // print (files)
+            if (files?.count == 0){
+                clipCount = 1
+            }
+            
+        }
+        catch {
+            print("bad")
+        }
+
         super.viewWillAppear(animated)
         cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
         cameraTextField.becomeFirstResponder()
@@ -232,7 +248,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func startRecording() {
-        print ("start recording")
+        //print ("start recording")
         recording = true;
         let clipCountString = String(clipCount)
         movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).m4v",isDirectory: true), size: view.frame.size)
@@ -246,7 +262,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func stopRecording() {
-        print ("stoprecording")
+        //print ("stoprecording")
         clipCount++
         recording = false;
         movieWriter?.finishRecording()

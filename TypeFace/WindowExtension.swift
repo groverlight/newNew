@@ -116,7 +116,7 @@ extension UIWindow{
 
     // MARK: Private methids
     private func close(){
-        print ("close")
+       // print ("close")
         frontWindow?.rootViewController?.viewWillAppear(false)
         frontWindow?.subviews[1].alpha = 0
         // frontWindow?.rootViewController?.view.subviews[2]
