@@ -62,8 +62,9 @@ class playerView: UIViewController {
     }
     
     func playerItemDidReachEnd(notification: NSNotification){
-        print ("item reached end")
-
+        print ("item reached end \(numOfClips)")
+       // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
       
         if (numOfClips > 0){
             let clipsLeft = totalReceivedClips - numOfClips + 1
@@ -72,7 +73,7 @@ class playerView: UIViewController {
         else{
             print ("done with video clips")
 
-            do{
+            /*do{
                 let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
                     try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
@@ -81,7 +82,7 @@ class playerView: UIViewController {
             }
             catch {
                 print("bad")
-            }
+            }*/
             //if you have more UIViews, use an insertS
             //self.dismissViewControllerAnimated(true, completion: nil)
             /*self.view.bringSubviewToFront(blurBackground)
@@ -89,7 +90,7 @@ class playerView: UIViewController {
                 self.blurBackground.alpha = 0.9
             })*/
             let overlay = UIVisualEffectView()
-            let blurEffect = UIBlurEffect(style: .Light)
+            let blurEffect = UIBlurEffect(style: .Dark)
             //let vibrancyEffect = UIVibrancyEffect(
             // Put it somewhere, give it a frame...
             overlay.frame = self.view.bounds

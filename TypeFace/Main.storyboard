@@ -383,7 +383,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVG-vK-CRX">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjn-gT-CrU">
+                                        <rect key="frame" x="272" y="285" width="57" height="30"/>
+                                        <state key="normal" title="Go back"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="jVG-vK-CRX" secondAttribute="centerY" id="rXk-Jc-Uip"/>
+                                    <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="jVG-vK-CRX" secondAttribute="centerX" id="vKt-iW-erm"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

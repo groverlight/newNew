@@ -239,6 +239,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         filter?.addTarget(movieWriter)
 
         movieWriter?.encodingLiveVideo = true
+        movieWriter?.shouldPassthroughAudio = false
         //movieWriter?.
         //videoCamera?.stopCameraCapture()
         movieWriter?.startRecording()
