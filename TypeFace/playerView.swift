@@ -17,6 +17,7 @@ class playerView: UIViewController {
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
 
+    @IBOutlet weak var scrollTextView: UITextView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -51,6 +52,7 @@ class playerView: UIViewController {
     func setupVideo(index: Int){
         
         //print ("index: \(index)")
+        scrollTextView.text = arrayofText.objectAtIndex(index-1) as! String
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
 
@@ -62,6 +64,7 @@ class playerView: UIViewController {
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
+        self.view.bringSubviewToFront(scrollTextView)
           --numOfClips
     }
     

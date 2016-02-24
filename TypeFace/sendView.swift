@@ -44,7 +44,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     override func viewWillAppear(animated: Bool) {
         sendTable.reloadData()
         if (self.wentPlayer == true){
-            dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
             self.wentPlayer = false
         }
     }

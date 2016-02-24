@@ -356,6 +356,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PVp-7g-8cR" firstAttribute="centerX" secondItem="D7d-oM-V9K" secondAttribute="centerX" id="2a8-1t-Jf3"/>
                             <constraint firstItem="uHp-B1-iC1" firstAttribute="width" secondItem="D7d-oM-V9K" secondAttribute="width" id="3PA-O0-dzC"/>
@@ -407,15 +408,26 @@
                                     <action selector="backButtonAction:" destination="9aT-QD-KO1" eventType="touchUpInside" id="KhG-4F-G5u"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uCL-rl-UqP">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="56e-tK-wUD"/>
+                            <constraint firstItem="uCL-rl-UqP" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="JIv-Iy-Wbi"/>
+                            <constraint firstItem="uCL-rl-UqP" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Pbm-Me-rfm"/>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Sgm-H3-eHH"/>
+                            <constraint firstItem="uCL-rl-UqP" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="Tfn-CT-P6n"/>
+                            <constraint firstItem="uCL-rl-UqP" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="kKx-C6-n2k"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="vjn-gT-CrU" id="AxC-PU-kGb"/>
+                        <outlet property="scrollTextView" destination="uCL-rl-UqP" id="EB7-9i-Amz"/>
                         <segue destination="xoz-Im-lQw" kind="presentation" identifier="segueToCamera" id="w1J-sQ-Der"/>
                     </connections>
                 </viewController>
@@ -425,6 +437,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="w1J-sQ-Der"/>
+        <segue reference="8Ba-Ul-9g5"/>
     </inferredMetricsTieBreakers>
 </document>

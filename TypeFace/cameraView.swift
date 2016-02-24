@@ -52,7 +52,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var cameraTextField: UITextView!
     var videoCamera:GPUImageVideoCamera?
-    var filter:GPUImageMissEtikateFilter?
+    var filter:GPUImageGaussianBlurFilter?
     var filteredImage: GPUImageView?
     var movieWriter: GPUImageMovieWriter?
     var clipCount = 1
@@ -114,10 +114,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             videoCamera!.outputImageOrientation = .Portrait
             filteredImage?.frame = self.view.bounds
             //print(filteredImage?.frame)
-            filter = GPUImageMissEtikateFilter()
+            filter = GPUImageGaussianBlurFilter()
+            filter?.blurRadiusInPixels = 4
             videoCamera?.addTarget(filter)
             //print (filter)
-                    filter?.addTarget(filteredImage)
+            filter?.addTarget(filteredImage)
             self.view.insertSubview(filteredImage!, atIndex: 0)
             //self.view.insertSubview(imagePicker.view, aboveSubview: filteredImage!)
             videoCamera?.startCameraCapture()
@@ -136,9 +137,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         //print (files)
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            for file:NSString in files!{
-                try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
-            }
            // print (files)
             if (files?.count == 0){
                 clipCount = 1

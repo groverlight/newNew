@@ -41,8 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         frontWindow?.addSubview(BlurSurface)
         
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
-        if (false)
-        {
+ 
+        //if (PFUser.currentUser()!.objectForKey("phoneNumber") == nil){
+        if (false){
             let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
             window = UIWindow(frame: UIScreen.mainScreen().bounds)
             window?.rootViewController = back
