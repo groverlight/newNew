@@ -14,7 +14,17 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //self.performSegueWithIdentifier("goBacktoCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    var wentPlayer = false
+    @IBAction func goSend(sender: AnyObject) {
+      //  self.dismissViewControllerAnimated(true, completion: nil)
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
+        
+        self.presentViewController(vc, animated: false, completion: { () -> Void in
+            self.wentPlayer = true
+        })
+
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         if (friends.count == 0){
@@ -33,6 +43,10 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     override func viewWillAppear(animated: Bool) {
         sendTable.reloadData()
+        if (self.wentPlayer == true){
+            dismissViewControllerAnimated(true, completion: nil)
+            self.wentPlayer = false
+        }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

@@ -331,6 +331,11 @@
                                                 <action selector="goBack:" destination="GY4-Pq-8RY" id="Rxv-cp-Jqx"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="r6V-zE-8dF">
+                                            <connections>
+                                                <action selector="goSend:" destination="GY4-Pq-8RY" id="efQ-v4-i6B"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -364,5 +369,42 @@
             </objects>
             <point key="canvasLocation" x="95" y="1285"/>
         </scene>
+        <!--playerView-->
+        <scene sceneID="Afn-Ro-Dox">
+            <objects>
+                <viewController storyboardIdentifier="playerView" id="9aT-QD-KO1" userLabel="playerView" customClass="playerView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Og-ra-Hd8"/>
+                        <viewControllerLayoutGuide type="bottom" id="4K0-8P-Z5V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ldb-f9-CNM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVG-vK-CRX">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jVG-vK-CRX" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Tji-Jl-oCG"/>
+                            <constraint firstItem="jVG-vK-CRX" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="dJi-Kd-W7V"/>
+                            <constraint firstItem="jVG-vK-CRX" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="gLe-at-mFd"/>
+                            <constraint firstItem="jVG-vK-CRX" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="swd-Pe-7rg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="blurBackground" destination="jVG-vK-CRX" id="73X-wq-peg"/>
+                        <segue destination="xoz-Im-lQw" kind="presentation" identifier="segueToCamera" id="w1J-sQ-Der"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wyN-Ht-3JE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="125" y="526"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="w1J-sQ-Der"/>
+    </inferredMetricsTieBreakers>
 </document>
