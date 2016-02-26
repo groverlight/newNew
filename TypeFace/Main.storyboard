@@ -401,6 +401,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="navBar" destination="PVp-7g-8cR" id="IyZ-Ei-zry"/>
                         <outlet property="sendTable" destination="uHp-B1-iC1" id="lw1-Ag-AxO"/>
                         <segue destination="xoz-Im-lQw" kind="presentation" identifier="goBacktoCamera" modalTransitionStyle="flipHorizontal" id="8Ba-Ul-9g5"/>
                     </connections>

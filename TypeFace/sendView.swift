@@ -10,10 +10,12 @@ import UIKit
 import Contacts
 class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var sendTable: UITableView!
+    
     @IBAction func goBack(sender: AnyObject) {
         //self.performSegueWithIdentifier("goBacktoCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBOutlet weak var navBar: UINavigationBar!
     var wentPlayer = false
     @IBAction func goSend(sender: AnyObject) {
       //  self.dismissViewControllerAnimated(true, completion: nil)
@@ -25,12 +27,19 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
         
     }
+    var tableBounds: CGRect!
     override func viewDidLoad() {
         super.viewDidLoad()
         if (friends.count == 0){
             contactsync()
         }
         //print("sendview loaded")
+        print (self.sendTable.bounds)
+        let tableBounds = self.sendTable.bounds
+        self.sendTable.transform = CGAffineTransformMakeTranslation(0, -1000)
+         self.navBar.transform = CGAffineTransformMakeTranslation(-1000, 0)
+        print (tableBounds)
+
         sendTable.delegate = self
         sendTable.dataSource = self
         sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -47,6 +56,14 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             self.dismissViewControllerAnimated(true, completion: nil)
             self.wentPlayer = false
         }
+        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.sendTable.transform = CGAffineTransformMakeTranslation(0, 0)
+            self.navBar.transform = CGAffineTransformMakeTranslation(0, 0)
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    override func viewDidAppear(animated: Bool) {
+
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

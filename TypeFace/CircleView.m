@@ -72,7 +72,7 @@
     strokeAnimation.fromValue = @(1);
     strokeAnimation.toValue = @(0);
     
-    strokeAnimation.duration = 5;
+    strokeAnimation.duration = duration;
     //strokeAnimation.removedOnCompletion = NO;
     [self.circleLayer pop_addAnimation:strokeAnimation forKey:@"layerStrokeAnimation"];
 }

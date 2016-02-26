@@ -13,7 +13,7 @@ import GPUImage
 var frontWindow: UIWindow?
 var arrayofText: NSMutableArray = []
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    var buttonScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
+
     var recording = false
     //var circle = CircleView?
     var previousRect = CGRectZero
@@ -23,6 +23,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var typingLabel: UILabel!
     @IBOutlet weak var typingButton: UIButton!
+    var typingButtonFrame : CGRect!
     @IBAction func typingButtonFunc(sender: AnyObject) {
         if (cameraTextField.text.characters.count == 0){
 
@@ -52,8 +53,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         else{
             typingButton.userInteractionEnabled = false
             cameraTextField.resignFirstResponder()
-            
-            let typeButtonHeight = self.typingButton.bounds.size.height
+            panGesture?.enabled = false
+          let typeButtonHeight = self.typingButton.bounds.size.height
+
             let buttonDecay = POPBasicAnimation(propertyNamed: kPOPViewSize)
             let buttonDecay2 = POPBasicAnimation(propertyNamed: kPOPViewSize)
             let circle = CircleView(frame: CGRectMake(self.typingButton.frame.origin.x + 3*self.typingButton.bounds.size.width/2, self.self.typingButton.frame.origin.y+3*self.typingButton.bounds.size.height/2, self.typingButton.bounds.size.height, self.self.typingButton.bounds.size.height))
@@ -68,7 +70,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
             buttonDecay2.toValue = NSValue(CGSize: CGSize(width: typeButtonHeight/3, height: typeButtonHeight/3))
             buttonDecay.toValue = NSValue(CGSize: CGSize(width: typeButtonHeight, height: typeButtonHeight))
-            buttonDecay.duration = 1
+            buttonDecay.duration = 0.3
             buttonDecay2.duration = 0.0000
 
             buttonDecay.completionBlock = { (animation, finished) in
@@ -80,7 +82,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.typingButton.pop_addAnimation(buttonDecay2, forKey: "decay2")
                 circle.strokeColor = UIColor.whiteColor()
                 circle.hidden = false
-                circle.animateToStrokeEnd(5)
+                circle.animateToStrokeEnd(2)
                 //print ((Int)(cameraTextField.contentSize.height/(self.cameraTextField.font?.lineHeight)!))
                 arrayofText.addObject(self.cameraTextField.text)
                 // print ("start recording")
@@ -92,9 +94,37 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.typingButton.layer.cornerRadius = self.typingButton.bounds.size.width/2
                 let scaleUp = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
                 scaleUp.toValue=NSValue(CGSize: CGSizeMake(3, 3))
-                scaleUp.duration = 5
-                self.typingButton.pop_addAnimation(scaleUp, forKey: "scaleup")
+                scaleUp.duration = 2
+                scaleUp.completionBlock = { (animation, finished) in
+                    self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
+                    self.stopRecording()
+                    let recover = POPBasicAnimation(propertyNamed: kPOPViewSize)
+                    recover.toValue = NSValue(CGSize: CGSize(width: self.view.bounds.size.width-60, height: self.typingButtonFrame.size
+                        .height))
 
+                    //recover.springBounciness =
+                    recover.completionBlock = { (animation, finished) in
+                        if (finished) {
+                            ///
+                            self.cameraTextField.text.removeAll()
+                            self.typingButton.userInteractionEnabled = true
+                            self.cameraTextField.returnKeyType = UIReturnKeyType.Go
+                            
+                            self.typingButton.layer.cornerRadius = 8
+                            panGesture?.enabled = true
+                            self.cameraTextField.becomeFirstResponder()
+
+                        }
+                    
+                    }
+                    self.emojiLabel.text = "💬"
+                    self.emojiLabel.hidden = false
+
+                    self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
+                    self.typingButton.setTitle("start typing", forState: UIControlState.Normal)
+                        self.typingButton.pop_addAnimation(recover, forKey: "recover")
+                }
+                self.typingButton.pop_addAnimation(scaleUp, forKey: "scaleup")
                 //circle.pop_addAnimation(scaleUp2, forKey: "scaleup")
 
                 
@@ -127,21 +157,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         print ("cameraView laoded")
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        typingButtonFrame = typingButton.frame
+        print ("typingButtoNFRAME \(typingButtonFrame)")
         // pop Animation 1
-        buttonScale.duration =  2;
-        buttonScale.toValue = NSValue(CGPoint: CGPointMake(2, 2))
-        buttonScale.completionBlock = {(animation, finished) in
-            //Code goes here
-            if (finished){
-                //print("animation done")
-                self.stopRecording()
-                self.cameraTextField.text.removeAll()
-                self.cameraTextField.returnKeyType = UIReturnKeyType.Go
-                self.cameraTextField.becomeFirstResponder()
-                //self.typingButton.pop_addAnimation(self.buttonSpring, forKey: "shake")
 
-            }
-        }
         //pop Animation 2
                // pop animation 3
     
@@ -212,7 +231,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
+        typingButton.transform = CGAffineTransformMakeScale(1, 1)
+        typingButton.setTitle("start typing", forState: UIControlState.Normal)
 
+        emojiLabel.hidden = false
+        emojiLabel.text = "💬"
+        
         super.viewWillAppear(animated)
         cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
         cameraTextField.becomeFirstResponder()
@@ -235,8 +259,30 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.view.endEditing(true)
     }
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        print ("textview changed")
         if (textView.text.characters.count == 0 && text != ""){
-            print ("textview changed")
+            if (text == "\n" && cameraTextField.returnKeyType == UIReturnKeyType.Go){
+                print ("go")
+                cameraTextField.resignFirstResponder()
+                self.view.bringSubviewToFront(typingButton)
+                let goScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
+                goScale.toValue = NSValue(CGPoint: CGPointMake(10, 30))
+                goScale.completionBlock = { (animated,finished) in
+                    //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
+                    self.cameraTextField.resignFirstResponder()
+                    //self.view.endEditing(true)
+                    self.presentViewController(vc, animated: false, completion: nil)
+                    //self.performSegueWithIdentifier("goSend", sender: self)
+                }
+                typingButton.setTitle("", forState: UIControlState.Normal)
+                emojiLabel.hidden = true
+                typingButton.pop_addAnimation(goScale, forKey: "go")
+                return false
+            }
+            else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Go){
+                return false
+            }
             let buttonSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             let buttonSpring2 = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             buttonSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -269,19 +315,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         else{
         
         }
-        if (text == "\n" && cameraTextField.returnKeyType == UIReturnKeyType.Go){
-           // print ("go")
-            //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
-            cameraTextField.resignFirstResponder()
-            //self.view.endEditing(true)
-            self.presentViewController(vc, animated: false, completion: nil)
-            //self.performSegueWithIdentifier("goSend", sender: self)
-            return false
-        }
-        else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Go){
-            return false
-        }
+
         if(cameraTextField.text.characters.count - range.length + text.characters.count > 70){
             //print ("too many")
             return false;
@@ -313,9 +347,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let userInfo = notification.userInfo!
         let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
-        bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 30
-        emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 45
-        
+        bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
+        emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
+        print (self.typingButton.frame)
     }
     func createImagePicker() {
         print ("create image picker")
@@ -347,7 +381,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func startRecording() {
-        //print ("start recording")
+        print ("start recording")
         recording = true;
         let clipCountString = String(clipCount)
         movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).m4v",isDirectory: true), size: view.frame.size)
@@ -361,7 +395,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func stopRecording() {
-        //print ("stoprecording")
+        print ("stoprecording")
         clipCount++
         recording = false;
         movieWriter?.finishRecording()
@@ -376,29 +410,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
     }
 
-    /*func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print("Got a video")
-        
-        if let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL) {
-            // Save video to the main photo album
-            print(pickedVideo)
-            //arrayofText .addObject(pickedVideo)
-            // Save the video to the app directory so we can play it later
-            let videoData = NSData(contentsOfURL: pickedVideo)
-            let paths = NSSearchPathForDirectoriesInDomains(
-                NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-            let documentsDirectory: AnyObject = paths[0]
-            let dataPath = documentsDirectory.stringByAppendingPathComponent("")
-            videoData?.writeToFile(dataPath, atomically: false)
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-            
-        }
-        
-        imagePicker.dismissViewControllerAnimated(true, completion: {
-            // Anything you want to happen when the user saves an video
-        })
-    }*/
+
 
 
 }
