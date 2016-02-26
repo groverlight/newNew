@@ -269,18 +269,26 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-gV-BGX">
-                                <rect key="frame" x="250" y="355" width="100" height="50"/>
+                                <rect key="frame" x="40" y="355" width="520" height="50"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.1647058824" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="LBY-e6-juh"/>
-                                    <constraint firstAttribute="width" constant="100" id="cIw-FA-cVb"/>
+                                    <constraint firstAttribute="width" constant="300" id="cIw-FA-cVb"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="start typing">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="2"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cIw-FA-cVb"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="typingButtonFunc:" destination="xoz-Im-lQw" eventType="touchUpInside" id="Bgo-Kl-mJh"/>
                                 </connections>
@@ -291,17 +299,30 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💬" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRs-pD-sa5">
+                                <rect key="frame" x="53" y="369" width="30" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="WNq-mD-JwC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="CRs-pD-sa5" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="33" id="1yv-R5-TlY"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="bhA-bU-T61" secondAttribute="bottom" constant="14" id="3d8-34-BIZ"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="8l2-kt-5fC"/>
+                            <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="CRs-pD-sa5" secondAttribute="bottom" constant="210" id="DPU-CD-FTe"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="Fni-jX-e3I"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="bhA-bU-T61" secondAttribute="bottom" constant="115" id="Jhq-WA-iDa"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="kw9-cJ-h9A" secondAttribute="bottom" constant="11" id="WT5-OC-y6T"/>
                             <constraint firstItem="bhA-bU-T61" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="50" id="aWE-gd-sJe"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="ftr-vy-USz"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerY" secondItem="VwB-MW-SDj" secondAttribute="centerY" id="jGo-jf-JwU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Skt-gV-BGX" secondAttribute="trailing" constant="20" id="ofS-70-hOt"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="Skt-gV-BGX" secondAttribute="bottom" constant="195" id="si9-ED-43f"/>
+                            <constraint firstItem="Skt-gV-BGX" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="trL-RI-Kux"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -313,6 +334,8 @@
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="si9-ED-43f" id="N3n-fU-QFb"/>
                         <outlet property="cameraTextField" destination="kw9-cJ-h9A" id="1Uh-bQ-qab"/>
+                        <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
+                        <outlet property="emojiLabel" destination="CRs-pD-sa5" id="kVX-Qf-xhX"/>
                         <outlet property="typingButton" destination="Skt-gV-BGX" id="sF5-ud-wLa"/>
                         <outlet property="typingLabel" destination="bhA-bU-T61" id="lBC-46-3ch"/>
                         <segue destination="GY4-Pq-8RY" kind="presentation" identifier="goSend" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="HRl-Gu-UzX"/>
