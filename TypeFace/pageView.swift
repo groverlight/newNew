@@ -41,7 +41,7 @@ class pageView: UIPageViewController {
                     scrollToViewController(nextViewController)
         }
     }
-    
+
     private func newColoredViewController(color: String) -> UIViewController {
         
         return UIStoryboard(name: "Main", bundle: nil) .

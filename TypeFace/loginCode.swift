@@ -40,7 +40,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
         var newDigit:UILabel!
 
         if (range.length == 0){
-            print ("morechar")
+            //print ("morechar")
             ++labelCounter
         }
         switch labelCounter{
@@ -66,14 +66,14 @@ class loginCode: UIViewController, UITextFieldDelegate {
             newDigit.text = string
         }
         else if (range.length == 1){
-            print ("lesschar")
+            //print ("lesschar")
             newDigit.text = ""
             --labelCounter
         }
-        print (newDigit)
+       // print (newDigit)
 
         
-
+        code = textField.text!
         return true
     }
 

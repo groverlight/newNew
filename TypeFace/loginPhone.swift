@@ -47,7 +47,7 @@ class loginPhone: UIViewController, UITextFieldDelegate {
                 textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
             }
         }
-        phoneNumber = numberFormatter(phoneTextField.text!)
+        phoneNumber = numberFormatter(phoneTextField.text!) as String
         return true
     }
     

@@ -5,18 +5,17 @@ import UIKit
 import Parse
 import Bolts
 import Contacts
-var phoneNumber:NSString = ""
+var phoneNumber:String = ""
+var code:String = ""
 class loginView: UIViewController {
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
+    var viewIndex = 0
     @IBAction func nextButton(sender: UIButton) {
-       
         print (phoneNumber)
-        
+        if (viewIndex == 0){
         let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
-        
-        
         PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
             finished in
             
@@ -25,6 +24,14 @@ class loginView: UIViewController {
             //pageDelegate.scrollToNextViewController()
             self.PageView!.scrollToNextViewController()
         })
+        }
+        else if (viewIndex == 1){
+            let params: [String: String] = ["phoneNumber": phoneNumber, "phoneVerificationCode": code]
+            PFCloud.callFunctionInBackground("verifyPhoneNumber", withParameters: params, block: {
+                finished in
+                print ("verified code")
+            })
+        }
         
         
     }
@@ -201,6 +208,8 @@ extension loginView: pageDelegate {
     func PageView(PageView: pageView,
         didUpdatePageIndex index: Int) {
         pageControl.currentPage = index
+        print (index)
+        viewIndex = index
     }
     
 }
