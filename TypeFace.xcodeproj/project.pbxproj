@@ -229,6 +229,7 @@
 		2742A4441C6AF1F500B369E7 /* TypeFace */ = {
 			isa = PBXGroup;
 			children = (
+				2742A47A1C6AF2C300B369E7 /* Main.storyboard */,
 				27862F131C6E61C000C62AAE /* mainViews */,
 				27862F141C6E61F400C62AAE /* misc */,
 				27862F081C6DA54F00C62AAE /* login */,
@@ -296,7 +297,6 @@
 				27578BBC1C76FAE100E378BE /* lookup_soft_elegance_2.png */,
 				27578BBD1C76FAE100E378BE /* lookup.png */,
 				27578BB61C76FA5B00E378BE /* lookup_miss_etikate.png */,
-				2742A47A1C6AF2C300B369E7 /* Main.storyboard */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
 				2742A4511C6AF1F500B369E7 /* Info.plist */,
@@ -746,6 +746,7 @@
 		2742A4711C6AF1F500B369E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Liu (KELEL6NU43)";
 				INFOPLIST_FILE = TypeFaceUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceUITests;
@@ -758,6 +759,7 @@
 		2742A4721C6AF1F500B369E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Liu (KELEL6NU43)";
 				INFOPLIST_FILE = TypeFaceUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceUITests;

@@ -2,15 +2,35 @@
 /// Root View Controller
 ///
 import UIKit
+import Parse
+import Bolts
 import Contacts
 var phoneNumber:NSString = ""
 class loginView: UIViewController {
-
+    @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
-    override func viewDidLoad() {
+    @IBAction func nextButton(sender: UIButton) {
+       
+        print (phoneNumber)
         
+        let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
+        
+        
+        PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
+            finished in
+            
+            print ("sent verification code")
+            //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("RedViewController") as! loginCode
+            //pageDelegate.scrollToNextViewController()
+            self.PageView!.scrollToNextViewController()
+        })
+        
+        
+    }
+    override func viewDidLoad() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
        // contactsync()
         
     }
@@ -152,7 +172,23 @@ class loginView: UIViewController {
     func buttonAction() -> Void {
         print("hi")
     }
-
+    func keyboardWillShow(notification: NSNotification) {
+        //print ("keyboardwillshow")
+        updateBottomLayoutConstraintWithNotification(notification)
+        
+    }
+    func keyboardWillHide (notification: NSNotification) {
+        // print ("keyboardwillhide")
+        updateBottomLayoutConstraintWithNotification(notification)
+        
+    }
+    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+        nextButtonBot.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
+ 
+    }
 }
 
 extension loginView: pageDelegate {
@@ -168,6 +204,8 @@ extension loginView: pageDelegate {
     }
     
 }
+
+
 
 
 

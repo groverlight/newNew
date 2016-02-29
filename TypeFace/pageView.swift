@@ -21,7 +21,7 @@ class pageView: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataSource = self
+        //dataSource = self
         delegate = self
         
        
@@ -146,9 +146,10 @@ extension pageView: UIPageViewControllerDelegate {
 }
 
 
+
+
 protocol pageDelegate {
     
-
     func PageView(PageView: pageView, didUpdatePageCount count: Int)
     
     

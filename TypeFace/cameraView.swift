@@ -159,10 +159,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
         print ("typingButtoNFRAME \(typingButtonFrame)")
-        // pop Animation 1
 
-        //pop Animation 2
-               // pop animation 3
     
         cameraTextField.delegate = self
         

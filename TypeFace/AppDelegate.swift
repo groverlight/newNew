@@ -26,29 +26,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
 
 
-        frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
-        frontWindow?.rootViewController = front;
-        frontWindow?.windowLevel = UIWindowLevelStatusBar
-        frontWindow?.startSwipeToOpenMenu()
-        frontWindow?.makeKeyAndVisible();
-        application.statusBarStyle = .LightContent
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let blurView = UIVisualEffectView(effect: blur)
-        let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
-        blurView.frame = UIScreen.mainScreen().bounds
-        BlurSurface.addSubview(blurView)
-        BlurSurface.alpha = 0
-        frontWindow?.addSubview(BlurSurface)
-        
+
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
  
-        //if (PFUser.currentUser()!.objectForKey("phoneNumber") == nil){
-        if (false){
+        if (PFUser.currentUser()?.objectForKey("phoneNumber") == nil){
+       // if (false){
             let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
             window = UIWindow(frame: UIScreen.mainScreen().bounds)
             window?.rootViewController = back
             window?.makeKeyAndVisible();
-            frontWindow?.hidden = true
+            //frontWindow?.hidden = true
+        }
+        else{
+            
+            frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+            frontWindow?.rootViewController = front;
+            frontWindow?.windowLevel = UIWindowLevelStatusBar
+            frontWindow?.startSwipeToOpenMenu()
+            frontWindow?.makeKeyAndVisible();
+            application.statusBarStyle = .LightContent
+            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurView = UIVisualEffectView(effect: blur)
+            let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
+            blurView.frame = UIScreen.mainScreen().bounds
+            BlurSurface.addSubview(blurView)
+            BlurSurface.alpha = 0
+            frontWindow?.addSubview(BlurSurface)
+            
+            
         }
         //window?.rootViewController
         return true

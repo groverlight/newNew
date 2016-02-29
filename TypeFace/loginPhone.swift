@@ -12,27 +12,17 @@ import Bolts
 
 class loginPhone: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneTextField: UITextField!
-    @IBAction func nextButton(sender: UIButton) {
-      phoneNumber = numberFormatter(phoneTextField.text!)
-        print (phoneNumber)
-        
-        let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
 
- 
-            PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
-                finished in
-
-                print ("sent verification code")
-            })
-        
-        
-    }
     
     @IBAction func countryCode(sender: AnyObject) {
     }
     override func viewDidLoad() {
         phoneTextField.delegate = self
         phoneTextField.becomeFirstResponder()
+    }
+    override func viewWillDisappear(animated: Bool) {
+        phoneTextField.resignFirstResponder()
+        self.view.endEditing(true)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -57,6 +47,7 @@ class loginPhone: UIViewController, UITextFieldDelegate {
                 textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
             }
         }
+        phoneNumber = numberFormatter(phoneTextField.text!)
         return true
     }
     
