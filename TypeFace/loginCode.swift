@@ -79,12 +79,12 @@ class loginCode: UIViewController, UITextFieldDelegate {
 
 
     func keyboardWillShow(notification: NSNotification) {
-        print ("keyboardwillshow")
+       // print ("keyboardwillshow")
         
         
     }
     func keyboardWillHide (notification: NSNotification) {
-         print ("keyboardwillhide")
+         //print ("keyboardwillhide")
    
     }
 }

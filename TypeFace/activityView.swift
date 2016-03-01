@@ -23,6 +23,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
             noFriendsView.hidden = false
         }
     }
+
     override func viewDidAppear(animated: Bool) {
 
     }

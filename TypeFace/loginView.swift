@@ -8,6 +8,7 @@ import Contacts
 var phoneNumber:String = ""
 var code:String = ""
 class loginView: UIViewController {
+    
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -34,12 +35,17 @@ class loginView: UIViewController {
             })
         }
         else if (viewIndex == 2){
-           self.performSegueWithIdentifier("leaveLogin", sender: self)
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
+
+            frontWindow?.rootViewController = vc
+
         }
         
         
     }
     override func viewDidLoad() {
+        panGesture?.enabled = false
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
        // contactsync()

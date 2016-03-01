@@ -81,14 +81,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-6h-BI5">
-                                <rect key="frame" x="251" y="285" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-6h-BI5">
+                                <rect key="frame" x="40" y="214" width="520" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uta-Vg-etb">
+                                <rect key="frame" x="40" y="170" width="520" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="U3F-6h-BI5" firstAttribute="top" secondItem="Uta-Vg-etb" secondAttribute="bottom" constant="14" id="5DK-XK-H5M"/>
+                            <constraint firstItem="Uta-Vg-etb" firstAttribute="leading" secondItem="HEV-hX-Obr" secondAttribute="leadingMargin" constant="20" id="FRG-rl-oJr"/>
+                            <constraint firstItem="U3F-6h-BI5" firstAttribute="leading" secondItem="HEV-hX-Obr" secondAttribute="leadingMargin" constant="20" id="Mfz-zs-YmF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="U3F-6h-BI5" secondAttribute="trailing" constant="20" id="Qpd-o3-E8C"/>
+                            <constraint firstItem="U3F-6h-BI5" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="Vbo-gX-5kg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uta-Vg-etb" secondAttribute="trailing" constant="20" id="fPv-u4-rc4"/>
+                            <constraint firstItem="Uta-Vg-etb" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="qbo-Qc-Y5T"/>
+                            <constraint firstItem="Uta-Vg-etb" firstAttribute="top" secondItem="bUA-Gd-May" secondAttribute="bottom" constant="150" id="vBa-Qd-iTf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="LowerTextField" destination="U3F-6h-BI5" id="AcT-vj-wvt"/>
+                        <outlet property="UpperTextField" destination="Uta-Vg-etb" id="Ebi-dM-23G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rnb-xd-tbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -100,7 +119,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfP-Ta-ha7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="19" y="-274"/>
+            <point key="canvasLocation" x="43" y="-274"/>
         </scene>
         <!--loginCode-->
         <scene sceneID="Ev3-UN-PnY">
@@ -241,9 +260,9 @@
                                 <exclude reference="2rz-RW-piU"/>
                                 <exclude reference="9T9-cG-VzN"/>
                                 <exclude reference="K0E-QO-Vf5"/>
-                                <exclude reference="DKv-Fz-8TN"/>
                                 <exclude reference="nbp-7f-qUB"/>
                                 <exclude reference="aHi-i6-6s8"/>
+                                <exclude reference="DKv-Fz-8TN"/>
                             </mask>
                         </variation>
                     </view>

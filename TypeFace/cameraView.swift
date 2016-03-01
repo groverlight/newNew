@@ -9,6 +9,8 @@
 import AVFoundation
 import UIKit
 import GPUImage
+import Parse
+import Bolts
 
 var frontWindow: UIWindow?
 var arrayofText: NSMutableArray = []
@@ -153,12 +155,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var clipCount = 1
     var fileManager: NSFileManager? = NSFileManager()
     override func viewDidLoad() {
+
+
         super.viewDidLoad()
-        print ("cameraView laoded")
+       // print ("cameraView laoded")
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
-        print ("typingButtoNFRAME \(typingButtonFrame)")
+        //print ("typingButtoNFRAME \(typingButtonFrame)")
 
     
         cameraTextField.delegate = self
@@ -213,6 +217,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
      
     }
+
     override func viewWillAppear(animated: Bool) {
       // print ("appear")
        // print ("view will appear deleting files")
@@ -346,7 +351,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
         emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
-        print (self.typingButton.frame)
+        //print (self.typingButton.frame)
     }
     func createImagePicker() {
         print ("create image picker")

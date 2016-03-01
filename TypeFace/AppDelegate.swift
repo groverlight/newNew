@@ -13,8 +13,8 @@ import Bolts
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
+    //var window: UIWindow?
     //var frontWindow: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -24,37 +24,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             clientKey: "DQj2oBjtZZqSHpbcPzG20poPjEdwaVxI1xvZ5NzT")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
-
+        let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
 
 
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
- 
-        if (PFUser.currentUser()?.objectForKey("phoneNumber") == nil){
-       // if (false){
-            let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
-            window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            window?.rootViewController = back
-            window?.makeKeyAndVisible();
+        frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+        if (true){
+            print ("hi")
+            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            // window?.rootViewController = back
+            // window?.makeKeyAndVisible();
             //frontWindow?.hidden = true
+            frontWindow?.rootViewController = vc
         }
         else{
-            
-            frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
-            frontWindow?.rootViewController = front;
-            frontWindow?.windowLevel = UIWindowLevelStatusBar
-            frontWindow?.startSwipeToOpenMenu()
-            frontWindow?.makeKeyAndVisible();
-            application.statusBarStyle = .LightContent
-            let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let blurView = UIVisualEffectView(effect: blur)
-            let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
-            blurView.frame = UIScreen.mainScreen().bounds
-            BlurSurface.addSubview(blurView)
-            BlurSurface.alpha = 0
-            frontWindow?.addSubview(BlurSurface)
-            
-            
+           frontWindow?.rootViewController = front;
         }
+        
+        frontWindow?.windowLevel = UIWindowLevelStatusBar
+        frontWindow?.startSwipeToOpenMenu()
+        frontWindow?.makeKeyAndVisible();
+        application.statusBarStyle = .LightContent
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
+        blurView.frame = UIScreen.mainScreen().bounds
+        BlurSurface.addSubview(blurView)
+        BlurSurface.alpha = 0
+        frontWindow?.addSubview(BlurSurface)
+        
+        if (PFUser.currentUser()?.objectForKey("phoneNumber") == nil){
+       // if (false){
+            //let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
+            
+           // window = UIWindow(frame: UIScreen.mainScreen().bounds)
+           // window?.rootViewController = back
+           // window?.makeKeyAndVisible();
+            //frontWindow?.hidden = true
+        }
+            
+
+            
+            
+        
         //window?.rootViewController
         return true
     }
