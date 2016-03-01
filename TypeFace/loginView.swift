@@ -30,7 +30,11 @@ class loginView: UIViewController {
             PFCloud.callFunctionInBackground("verifyPhoneNumber", withParameters: params, block: {
                 finished in
                 print ("verified code")
+                self.PageView!.scrollToNextViewController()
             })
+        }
+        else if (viewIndex == 2){
+           self.performSegueWithIdentifier("leaveLogin", sender: self)
         }
         
         

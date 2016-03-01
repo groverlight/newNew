@@ -36,7 +36,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
 
     }
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        print ("\(textField.text!)\(string)")
+        //print ("\(textField.text!)\(string)")
         var newDigit:UILabel!
 
         if (range.length == 0){

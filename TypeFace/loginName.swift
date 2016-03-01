@@ -10,6 +10,29 @@ import UIKit
 import Parse
 import Bolts
 
-class loginName: UIViewController {
-
+class loginName: UIViewController, UITextFieldDelegate {
+    @IBOutlet weak var LowerTextField: UITextField!
+    @IBOutlet weak var UpperTextField: UITextField!
+    override func viewDidLoad() {
+        UpperTextField.delegate = self
+        //UpperTextField.becomeFirstResponder()
+        UpperTextField.addTarget(self, action:Selector("UpperTextSelect"), forControlEvents: UIControlEvents.TouchUpInside)
+        LowerTextField.addTarget(self, action:Selector("LowerTextSelect"), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    override func viewDidAppear(animated: Bool) {
+        UpperTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
+        
+    }
+    func UpperTextSelect(){
+        if (LowerTextField.isFirstResponder()){
+            LowerTextField.resignFirstResponder()
+        }
+        UpperTextField.becomeFirstResponder()
+    }
+    func LowerTextSelect(){
+        if (UpperTextField.isFirstResponder()){
+            UpperTextField.resignFirstResponder()
+        }
+        LowerTextField.becomeFirstResponder()
+    }
 }
