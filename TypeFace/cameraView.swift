@@ -268,7 +268,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
     override func viewDidLoad() {
-        
+
         self.view.clipsToBounds = true
         super.viewDidLoad()
        print ("cameraView laoded")
