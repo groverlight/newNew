@@ -14,18 +14,71 @@ import Bolts
 
 var frontWindow: UIWindow?
 var arrayofText: NSMutableArray = []
-class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
 
+    @IBOutlet weak var quitScrollView: UIButton!
+    @IBOutlet weak var clearAllScroll: UIButton!
+    
+    @IBAction func clearScrollAct(sender: AnyObject) {
+        quitScrollView.hidden = true
+        clearAllScroll.hidden = true
+        self.typingButton.userInteractionEnabled = true
+        panGesture?.enabled = true
+        longPressRecognizer.enabled = true
+        self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+        for subview in self.scrollView.subviews {
+            if subview is UILabel{
+                subview.removeFromSuperview()
+            }
+        }
+        clipCount = 1
+        scrollCounter = 0
+        do{
+            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            for file:NSString in files!{
+                try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+            }
+
+            
+        }
+        catch {
+            print("bad")
+        }
+        self.cameraTextField.returnKeyType = UIReturnKeyType.Send
+        for subview in self.view.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        cameraTextField.becomeFirstResponder()
+    }
+    @IBAction func quitScrollAct(sender: AnyObject) {
+        quitScrollView.hidden = true
+        clearAllScroll.hidden = true
+        self.typingButton.userInteractionEnabled = true
+        panGesture?.enabled = true
+        longPressRecognizer.enabled = true
+        for subview in self.view.subviews {
+            if subview is UIVisualEffectView {
+                subview.removeFromSuperview()
+            }
+        }
+        cameraTextField.becomeFirstResponder()
+    }
+   
     var recording = false
     //var circle = CircleView?
     var previousRect = CGRectZero
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var emoji: NSLayoutConstraint!
     var imagePicker: UIImagePickerController! = UIImagePickerController()
+    var actualOffset:CGPoint = CGPoint()
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var typingLabel: UILabel!
     @IBOutlet weak var typingButton: UIButton!
     var typingButtonFrame : CGRect!
+    var scrollCounter:CGFloat = 0.0
     @IBAction func typingButtonFunc(sender: AnyObject) {
         if (cameraTextField.text.characters.count == 0){
 
@@ -53,8 +106,36 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
+            
+           /* let width = CGRectGetWidth(scrollView.frame)
+            let height = CGRectGetHeight(scrollView.frame)
+            let newPosition = scrollView.contentOffset.y-50
+            let toVisible = CGRectMake(0, newPosition, width, height)
+            scrollView.scrollRectToVisible(toVisible, animated: true)*/
+            
+
+            
+            //[scrollView scrollRectToVisible:toVisible animated:YES];
+            let newLabel = UILabel(frame: CGRectMake(0 + 10*scrollCounter, scrollView.bounds.size.height - 50.0 + 50*scrollCounter, scrollView.bounds.size.width, 50 ))
+            newLabel.font = UIFont(name: "Avenir Next", size: 32)
+            newLabel.textColor = UIColor.whiteColor()
+            ++scrollCounter
+            newLabel.text = cameraTextField.text
+            cameraTextField.text.removeAll()
+            //print (newLabel.text)
+            let yspace:CGFloat = 50.0
+            scrollView.addSubview(newLabel)
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+yspace)
+                }, completion: { (finished) -> Void in
+                    UIView.animateWithDuration(2, animations: { () -> Void in
+                        newLabel.alpha = 0.4
+                    })
+            })
+            
             typingButton.userInteractionEnabled = false
             cameraTextField.resignFirstResponder()
+            //cameraTextField.
             panGesture?.enabled = false
           let typeButtonHeight = self.typingButton.bounds.size.height
 
@@ -100,31 +181,56 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 scaleUp.completionBlock = { (animation, finished) in
                     self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
                     self.stopRecording()
-                    let recover = POPBasicAnimation(propertyNamed: kPOPViewSize)
+                    let recover = POPSpringAnimation(propertyNamed: kPOPViewSize)
                     recover.toValue = NSValue(CGSize: CGSize(width: self.view.bounds.size.width-60, height: self.typingButtonFrame.size
                         .height))
 
-                    //recover.springBounciness =
+                    recover.springBounciness = 20
+                    //recover.springSpeed =
+                    recover.springSpeed = 100
                     recover.completionBlock = { (animation, finished) in
                         if (finished) {
                             ///
-                            self.cameraTextField.text.removeAll()
-                            self.typingButton.userInteractionEnabled = true
-                            self.cameraTextField.returnKeyType = UIReturnKeyType.Go
+                            //scrollView.
+
                             
                             self.typingButton.layer.cornerRadius = 8
                             panGesture?.enabled = true
-                            self.cameraTextField.becomeFirstResponder()
+                            
+                            let yanim = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
+                            yanim.springBounciness = 20
+                            yanim.velocity = (500)
+                            yanim.springSpeed = 50
+                            yanim.completionBlock = { (animation, finished) in
+                                if (finished){
+                                    
+                                    let yanim2 = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
+                                    yanim2.springBounciness = 20
+                                    yanim2.velocity = (500)
+                                    yanim2.springSpeed = 50
+                                    yanim2.completionBlock = { (animation,finished) in
+                                        self.typingButton.userInteractionEnabled = true
+                                    }
+                                    self.typingButton.pop_addAnimation(yanim2, forKey: "nod2")
+                                }
+                            }
+                            newLabel.layer.pop_addAnimation(yanim, forKey: "nod")
 
                         }
                     
                     }
+                    //self.cameraTextField.text.removeAll()
                     self.emojiLabel.text = "💬"
                     self.emojiLabel.hidden = false
 
                     self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
+                    
                     self.typingButton.setTitle("start typing", forState: UIControlState.Normal)
-                        self.typingButton.pop_addAnimation(recover, forKey: "recover")
+                    self.typingButton.pop_addAnimation(recover, forKey: "recover")
+                    self.cameraTextField.returnKeyType = UIReturnKeyType.Send
+                    self.cameraTextField.becomeFirstResponder()
+                    
+
                 }
                 self.typingButton.pop_addAnimation(scaleUp, forKey: "scaleup")
                 //circle.pop_addAnimation(scaleUp2, forKey: "scaleup")
@@ -154,29 +260,25 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var movieWriter: GPUImageMovieWriter?
     var clipCount = 1
     var fileManager: NSFileManager? = NSFileManager()
+    var longPressRecognizer: UILongPressGestureRecognizer!
     override func viewDidLoad() {
-
-
+        
+        self.view.clipsToBounds = true
         super.viewDidLoad()
-       // print ("cameraView laoded")
+       print ("cameraView laoded")
+        quitScrollView.hidden = true
+        clearAllScroll.hidden = true
+        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        //longPressRecognizer.minimumPressDuration = 1.5
+        
+        self.view.addGestureRecognizer(longPressRecognizer)
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
-        //print ("typingButtoNFRAME \(typingButtonFrame)")
-
-    
         cameraTextField.delegate = self
-        
-       
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
-         //[self performSelector:@selector(showcamera) withObject:nil afterDelay:0.3];
-        
-        //typingButton.blur(blurRadius: 2)
-        
         if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
-           // self.createImagePicker()
-            
             do{
                 let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
@@ -217,7 +319,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
      
     }
-
     override func viewWillAppear(animated: Bool) {
       // print ("appear")
        // print ("view will appear deleting files")
@@ -227,18 +328,30 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
            // print (files)
             if (files?.count == 0){
                 clipCount = 1
+                scrollCounter = 0
+                self.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+                for subview in self.scrollView.subviews {
+                    if subview is UILabel{
+                        subview.removeFromSuperview()
+                    }
+                }
+            }
+            else{
+                self.scrollView.contentOffset = actualOffset
             }
             
         }
+
         catch {
             print("bad")
         }
+        
         typingButton.transform = CGAffineTransformMakeScale(1, 1)
         typingButton.setTitle("start typing", forState: UIControlState.Normal)
 
         emojiLabel.hidden = false
         emojiLabel.text = "💬"
-        
+        self.view.bringSubviewToFront(emojiLabel)
         super.viewWillAppear(animated)
         cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
         cameraTextField.becomeFirstResponder()
@@ -257,19 +370,74 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        // print("disappear")
         shouldEdit = false
         //cameraTextField.removeObserver(self, forKeyPath: "contentSize")
+        actualOffset = self.scrollView.contentOffset
         cameraTextField.resignFirstResponder()
         self.view.endEditing(true)
     }
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        print ("textview changed")
+        //print ("textview changed")
+        let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
+        let isBackSpace = strcmp(char, "\\b")
+        
+        if (isBackSpace == -92) {
+            //print("Backspace was pressed")
+            if (textView.text == ""){
+                if (scrollView.subviews.count > 0){
+                    //scrollView.subviews[0]
+                    if (scrollView.subviews[scrollView.subviews.count-1] is UILabel){
+                        let buttonSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
+                        let buttonSpring2 = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
+                        buttonSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
+                        buttonSpring.velocity = NSValue(CGPoint: CGPointMake(6, 6))
+                        buttonSpring.springBounciness = 20.0
+                        buttonSpring2.toValue = NSValue(CGPoint: CGPointMake(1, 1))
+                        buttonSpring2.velocity = NSValue(CGPoint: CGPointMake(6, 6))
+                        buttonSpring2.springBounciness = 20.0
+                        typingButton.layer.borderColor = UIColor.whiteColor().CGColor
+                        typingButton.layer.borderWidth  = 2
+                        typingButton.setTitle("record yourself", forState: UIControlState.Normal)
+                        typingButton.setTitleColor(UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0), forState: UIControlState.Normal)
+                        typingButton.titleLabel?.alpha = 1
+                        typingButton.backgroundColor = .clearColor()
+                        emojiLabel.text = "📹"
+                        typingButton.pop_addAnimation(buttonSpring, forKey: "spring")
+                        emojiLabel.pop_addAnimation(buttonSpring2, forKey: "spring2")
+                        let newLabel = scrollView.subviews[scrollView.subviews.count-1] as! UILabel
+                        cameraTextField.text = newLabel.text
+                        --scrollCounter
+                        --clipCount
+                        if (clipCount == 1){
+                            self.cameraTextField.returnKeyType = UIReturnKeyType.Default
+                        }
+                        do{
+                            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+                            //let file = files[files?.endIndex-1]
+                            try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(clipCount).m4v")
+                            
+                            print (files)
+                            
+                        }
+                        catch {
+                            print("bad")
+                        }
+
+                        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y-50.0)
+                        scrollView.subviews[scrollView.subviews.count-1].removeFromSuperview()
+                    }
+                }
+                return false
+                
+            }
+        }
         if (textView.text.characters.count == 0 && text != ""){
-            if (text == "\n" && cameraTextField.returnKeyType == UIReturnKeyType.Go){
-                print ("go")
+            if (text == "\n" && cameraTextField.returnKeyType == UIReturnKeyType.Send){
+                //print ("go")
                 cameraTextField.resignFirstResponder()
                 self.view.bringSubviewToFront(typingButton)
                 let goScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
                 goScale.toValue = NSValue(CGPoint: CGPointMake(10, 30))
                 goScale.completionBlock = { (animated,finished) in
+                goScale.duration = 0.01
                     //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
                     self.cameraTextField.resignFirstResponder()
@@ -282,7 +450,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 typingButton.pop_addAnimation(goScale, forKey: "go")
                 return false
             }
-            else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Go){
+            else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Send){
                 return false
             }
             let buttonSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -408,8 +576,83 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
+
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
        
+    }
+    func longPressed(sender: UILongPressGestureRecognizer)
+    {
+
+
+
+        if (sender.state == UIGestureRecognizerState.Began){
+                        // Put it somewhere, give it a frame...
+            self.typingButton.userInteractionEnabled = false
+            panGesture?.enabled = false
+            sender.enabled = false
+            let blurEffect = UIBlurEffect(style: .Dark)
+            let blurOverlay = UIVisualEffectView()
+            
+            
+            let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+            let vibrantOverlay = UIVisualEffectView(effect: vibrancyEffect)
+            let overlayScrollView = UIScrollView(frame: CGRectMake(0,0,self.view.bounds.size.width,quitScrollView.frame.origin.y))
+            overlayScrollView.showsVerticalScrollIndicator = true
+            overlayScrollView.userInteractionEnabled = true
+            overlayScrollView.scrollEnabled = true
+            overlayScrollView.delegate = self
+            overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height)
+            blurOverlay.frame = self.view.bounds
+            vibrantOverlay.frame = self.view.bounds
+            self.view.addSubview(blurOverlay)
+            
+            var labelCounter = 0
+            for subview in scrollView.subviews{
+                if subview is UILabel{
+                    let olderLabel = subview as! UILabel
+                    let newerLabel = UILabel(frame: CGRectMake(0, CGFloat(0+50*labelCounter), self.view.bounds.size.width, 50))
+                    newerLabel.font = UIFont(name: "Avenir Next", size: 32)
+                    newerLabel.textColor = UIColor.whiteColor()
+                    newerLabel.text = olderLabel.text
+                    overlayScrollView.addSubview(newerLabel)
+                    ++labelCounter
+                }
+                
+            }
+            vibrantOverlay.contentView.addSubview(overlayScrollView)
+            blurOverlay.contentView.addSubview(vibrantOverlay)
+            clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
+            quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
+            clearAllScroll.hidden = false
+            quitScrollView.hidden = false
+
+            cameraTextField.resignFirstResponder()
+            UIView.animateWithDuration(0.1, animations: {
+                blurOverlay.effect = blurEffect
+                }, completion: {
+                    finished in
+                    if (finished){
+                        self.view.bringSubviewToFront(self.clearAllScroll)
+                        self.view.bringSubviewToFront(self.quitScrollView)
+                         UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+                        self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 0)
+                        self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
+                        self.view.layoutIfNeeded()
+                        }, completion: nil)
+                    }
+            })
+            //print("longpressed")
+        }
+       /* else if (sender.state == UIGestureRecognizerState.Ended){
+            print ("longpress ended")
+            for subview in self.view.subviews {
+                if subview is UIVisualEffectView {
+                    subview.removeFromSuperview()
+                }
+            }
+            cameraTextField.becomeFirstResponder()
+            
+        }*/
     }
 
 

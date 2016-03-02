@@ -20,7 +20,6 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBAction func goSend(sender: AnyObject) {
       //  self.dismissViewControllerAnimated(true, completion: nil)
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
-        
         self.presentViewController(vc, animated: false, completion: { () -> Void in
             self.wentPlayer = true
         })
@@ -34,10 +33,10 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             contactsync()
         }
         //print("sendview loaded")
-        print (self.sendTable.bounds)
+        //print (self.sendTable.bounds)
         let tableBounds = self.sendTable.bounds
-        self.sendTable.transform = CGAffineTransformMakeTranslation(0, -1000)
-         self.navBar.transform = CGAffineTransformMakeTranslation(-1000, 0)
+        //self.sendTable.transform = CGAffineTransformMakeTranslation(0, -1000)
+         //self.navBar.transform = CGAffineTransformMakeTranslation(-1000, 0)
         print (tableBounds)
 
         sendTable.delegate = self
@@ -56,11 +55,11 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             self.dismissViewControllerAnimated(true, completion: nil)
             self.wentPlayer = false
         }
-        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+       /* UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.sendTable.transform = CGAffineTransformMakeTranslation(0, 0)
             self.navBar.transform = CGAffineTransformMakeTranslation(0, 0)
             self.view.layoutIfNeeded()
-            }, completion: nil)
+            }, completion: nil)*/
     }
     override func viewDidAppear(animated: Bool) {
 

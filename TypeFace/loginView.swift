@@ -7,6 +7,7 @@ import Bolts
 import Contacts
 var phoneNumber:String = ""
 var code:String = ""
+
 class loginView: UIViewController {
     
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
