@@ -116,17 +116,23 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
             
             //[scrollView scrollRectToVisible:toVisible animated:YES];
+            
+            let lineHeight = (Int)(cameraTextField.contentSize.height/(self.cameraTextField.font?.lineHeight)!)
+
             let newLabel = UILabel(frame: CGRectMake(0 + 10*scrollCounter, scrollView.bounds.size.height - 50.0 + 50*scrollCounter, scrollView.bounds.size.width, 50 ))
             newLabel.font = UIFont(name: "Avenir Next", size: 32)
             newLabel.textColor = UIColor.whiteColor()
             ++scrollCounter
             newLabel.text = cameraTextField.text
+            newLabel.numberOfLines = 0
+            newLabel.sizeToFit()
+
             cameraTextField.text.removeAll()
             //print (newLabel.text)
             let yspace:CGFloat = 50.0
             scrollView.addSubview(newLabel)
             UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+yspace)
+                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+yspace*CGFloat(lineHeight))
                 }, completion: { (finished) -> Void in
                     UIView.animateWithDuration(2, animations: { () -> Void in
                         newLabel.alpha = 0.4
@@ -376,9 +382,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         //print ("textview changed")
+      /*  if  ((Int)(cameraTextField.contentSize.height/(self.cameraTextField.font?.lineHeight)!) == 2){
+        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+50.0)
+        }*/
         let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         let isBackSpace = strcmp(char, "\\b")
-        
+
         if (isBackSpace == -92) {
             //print("Backspace was pressed")
             if (textView.text == ""){
