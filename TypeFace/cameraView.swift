@@ -410,7 +410,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         //let textHeight = self.cameraTextField.font?.lineHeight
         //let textHeight = self.cameraTextField.font?.lineHeight
         if (isBackSpace == -92) {
-            print("Backspace was pressed")
+           // print("Backspace was pressed")
             
             if (textView.text == ""){
                 if (scrollView.subviews.count > 0){
@@ -453,7 +453,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         catch {
                             print("bad")
                         }
-
+                        scrollHeight = scrollHeight - newLabel.bounds.size.height
                         self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y-newLabel.bounds.size.height)
                         scrollView.subviews[scrollView.subviews.count-1].removeFromSuperview()
                     }
