@@ -19,6 +19,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBOutlet weak var quitScrollView: UIButton!
     @IBOutlet weak var clearAllScroll: UIButton!
     
+    @IBOutlet weak var gradientView: UIView!
     @IBAction func clearScrollAct(sender: AnyObject) {
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
@@ -141,7 +142,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             cameraTextField.resignFirstResponder()
             //cameraTextField.
             panGesture?.enabled = false
-          let typeButtonHeight = self.typingButton.bounds.size.height
+            UIView.animateWithDuration(0.000000001, animations: { () -> Void in
+                self.gradientView.transform = CGAffineTransformMakeTranslation(0, 2000)
+            })
+            let typeButtonHeight = self.typingButton.bounds.size.height
 
             let buttonDecay = POPBasicAnimation(propertyNamed: kPOPViewSize)
             let buttonDecay2 = POPBasicAnimation(propertyNamed: kPOPViewSize)
@@ -197,7 +201,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                             ///
                             //scrollView.
 
-                            
+                            UIView.animateWithDuration(0.000000001, animations: { () -> Void in
+                                self.gradientView.transform = CGAffineTransformMakeTranslation(0, 0)
+                            })
                             self.typingButton.layer.cornerRadius = 8
                             panGesture?.enabled = true
                             
@@ -214,8 +220,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                                     yanim2.springSpeed = 50
                                     yanim2.completionBlock = { (animation,finished) in
                                         self.typingButton.userInteractionEnabled = true
+
                                     }
                                     self.typingButton.pop_addAnimation(yanim2, forKey: "nod2")
+                                    
                                 }
                             }
                             newLabel.layer.pop_addAnimation(yanim, forKey: "nod")
@@ -270,6 +278,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.view.clipsToBounds = true
         super.viewDidLoad()
        print ("cameraView laoded")
+        /*let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gradientView.bounds
+        let color1 = UIColor.clearColor().CGColor as CGColorRef
+        let color2 = UIColor.blackColor().CGColor as CGColorRef
+        gradientLayer.colors = [color1,color2]
+        gradientLayer.locations = [0.3,0.5]
+        self.gradientView.layer.addSublayer(gradientLayer)*/
         //self.cameraTextField.enablesReturnKeyAutomatically = false;
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
@@ -392,7 +407,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         }*/
         let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         let isBackSpace = strcmp(char, "\\b")
-        let textHeight = self.cameraTextField.font?.lineHeight
+        //let textHeight = self.cameraTextField.font?.lineHeight
         //let textHeight = self.cameraTextField.font?.lineHeight
         if (isBackSpace == -92) {
             print("Backspace was pressed")
@@ -439,7 +454,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                             print("bad")
                         }
 
-                        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y-(oldLabel?.bounds.size.height)!)
+                        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y-newLabel.bounds.size.height)
                         scrollView.subviews[scrollView.subviews.count-1].removeFromSuperview()
                     }
                 }

@@ -417,6 +417,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
                                 <rect key="frame" x="0.0" y="248" width="600" height="96"/>
                                 <constraints>
@@ -485,6 +489,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Y5I-t7-4wI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="fAm-gP-vKz"/>
+                                </constraints>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVM-oF-apa">
                                 <rect key="frame" x="40" y="504" width="520" height="50"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.1647058824" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -510,12 +520,6 @@
                                     <action selector="clearScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="qbn-fW-AHm"/>
                                 </connections>
                             </button>
-                            <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Y5I-t7-4wI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="fAm-gP-vKz"/>
-                                </constraints>
-                            </scrollView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="92i-ss-J1z" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="0C2-xh-pfb"/>
@@ -525,18 +529,23 @@
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="CRs-pD-sa5" secondAttribute="bottom" constant="210" id="DPU-CD-FTe"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="DgM-Vr-4uX"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="Fni-jX-e3I"/>
+                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="G6B-r4-5Eb"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="oVM-oF-apa" secondAttribute="bottom" constant="46" id="IUq-Sv-7Am"/>
                             <constraint firstItem="92i-ss-J1z" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="PqG-0a-RCk"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="Umm-TM-0yD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oVM-oF-apa" secondAttribute="trailing" constant="20" id="VdL-2q-EEh"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="kw9-cJ-h9A" secondAttribute="bottom" constant="11" id="WT5-OC-y6T"/>
+                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="aPn-Zf-Ge9"/>
+                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="b6N-Tw-8cp"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" multiplier="2" id="bSQ-5g-CvC"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="dMH-0D-Y7u"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="top" secondItem="92i-ss-J1z" secondAttribute="bottom" constant="8" id="ejt-v9-ubS"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="ftr-vy-USz"/>
+                            <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="l7S-wz-7Tu" secondAttribute="bottom" id="jGD-Td-XR4"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerY" secondItem="VwB-MW-SDj" secondAttribute="centerY" id="jGo-jf-JwU"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="l36-vN-oCD"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="lCF-V8-AGu"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="l7S-wz-7Tu" secondAttribute="bottom" id="n2B-5b-zsy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Skt-gV-BGX" secondAttribute="trailing" constant="20" id="ofS-70-hOt"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="oow-Bu-Vnt"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" multiplier="0.5" id="qeb-VJ-mwu"/>
@@ -550,6 +559,7 @@
                                 <exclude reference="qeb-VJ-mwu"/>
                                 <exclude reference="jGo-jf-JwU"/>
                                 <exclude reference="oow-Bu-Vnt"/>
+                                <exclude reference="jGD-Td-XR4"/>
                                 <exclude reference="l36-vN-oCD"/>
                             </mask>
                         </variation>
@@ -560,6 +570,7 @@
                         <outlet property="clearAllScroll" destination="oVM-oF-apa" id="B9L-x7-W60"/>
                         <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
                         <outlet property="emojiLabel" destination="CRs-pD-sa5" id="kVX-Qf-xhX"/>
+                        <outlet property="gradientView" destination="l7S-wz-7Tu" id="JFl-hO-ryx"/>
                         <outlet property="quitScrollView" destination="92i-ss-J1z" id="adk-vZ-3E3"/>
                         <outlet property="scrollView" destination="Y5I-t7-4wI" id="qHX-C0-bXg"/>
                         <outlet property="typingButton" destination="Skt-gV-BGX" id="sF5-ud-wLa"/>
@@ -686,6 +697,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8Ba-Ul-9g5"/>
+        <segue reference="w1J-sQ-Der"/>
     </inferredMetricsTieBreakers>
 </document>
