@@ -651,6 +651,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let vibrantOverlay = UIVisualEffectView(effect: vibrancyEffect)
             let overlayScrollView = UIScrollView(frame: CGRectMake(0,0,self.view.bounds.size.width,quitScrollView.frame.origin.y))
             overlayScrollView.showsVerticalScrollIndicator = true
+            overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
             overlayScrollView.userInteractionEnabled = true
             overlayScrollView.scrollEnabled = true
             overlayScrollView.delegate = self
@@ -676,6 +677,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             blurOverlay.contentView.addSubview(vibrantOverlay)
             clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
             quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
+            overlayScrollView.transform = CGAffineTransformMakeTranslation (0, -1000)
             clearAllScroll.hidden = false
             quitScrollView.hidden = false
 
@@ -685,13 +687,18 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 }, completion: {
                     finished in
                     if (finished){
+                        overlayScrollView.flashScrollIndicators()
                         self.view.bringSubviewToFront(self.clearAllScroll)
                         self.view.bringSubviewToFront(self.quitScrollView)
-                         UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-                        self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 0)
-                        self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
-                        self.view.layoutIfNeeded()
-                        }, completion: nil)
+    
+
+                        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: {
+                            self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 0)
+                            self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
+                            overlayScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
+                            self.view.layoutIfNeeded()
+                            }) { _ in
+                        }
                     }
             })
             //print("longpressed")
