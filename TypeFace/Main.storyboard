@@ -417,7 +417,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -490,10 +490,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Y5I-t7-4wI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="294"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="fAm-gP-vKz"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fAm-gP-vKz"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVM-oF-apa">
                                 <rect key="frame" x="40" y="504" width="520" height="50"/>
@@ -524,6 +529,7 @@
                         <constraints>
                             <constraint firstItem="92i-ss-J1z" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="0C2-xh-pfb"/>
                             <constraint firstItem="CRs-pD-sa5" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="33" id="1yv-R5-TlY"/>
+                            <constraint firstItem="kw9-cJ-h9A" firstAttribute="bottom" secondItem="Y5I-t7-4wI" secondAttribute="bottom" constant="50" id="3l1-or-PJL"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="8l2-kt-5fC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="92i-ss-J1z" secondAttribute="trailing" constant="20" id="BSC-zt-wMx"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="CRs-pD-sa5" secondAttribute="bottom" constant="210" id="DPU-CD-FTe"/>
