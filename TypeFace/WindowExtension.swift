@@ -45,7 +45,7 @@ extension UIWindow{
     func handlePanGesture(panGesture : UIPanGestureRecognizer){
         
         let translation:CGPoint = panGesture.translationInView(self);
-        let velocity:CGPoint = panGesture.velocityInView(self)
+       // let velocity:CGPoint = panGesture.velocityInView(self)
         
         switch (panGesture.state){
             
@@ -69,11 +69,11 @@ extension UIWindow{
                 backWindow?.rootViewController?.view.alpha = valAlphe;
             }
         case .Ended, .Cancelled:
-
+            print ("ended")
             var finalOrigin:CGPoint = CGPointZero;
             var finalTransform: CATransform3D = CATransform3DIdentity
             var alpha: CGFloat = 1.0;
-            if velocity.y >= 0 {
+            if frame.origin.y >= 70 {
                 finalOrigin.y = CGRectGetHeight(UIScreen.mainScreen().bounds) - kHeaderHeight;
                 addTapGestureToClose()
                 frontWindow?.subviews[1].alpha = 1
@@ -85,15 +85,17 @@ extension UIWindow{
                 finalTransform = CATransform3DScale(finalTransform, kTransform , kTransform , 1);
                 alpha = kAlphe
                // statusBarStyle = UIStatusBarStyle.Default
+               
                 removeTapGestureToClose()
                 frontWindow?.subviews[1].alpha = 0
                 frontWindow?.rootViewController?.viewWillAppear(false)
+                
 
             }
             
             var finalFrame = frame;
             finalFrame.origin = finalOrigin;
-            
+
             UIView.animateWithDuration(kAnimationDuration, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
                 
                 backWindow?.rootViewController?.view.layer.transform = finalTransform;
@@ -116,7 +118,6 @@ extension UIWindow{
 
     // MARK: Private methids
     private func close(){
-       // print ("close")
         frontWindow?.rootViewController?.viewWillAppear(false)
         frontWindow?.subviews[1].alpha = 0
         // frontWindow?.rootViewController?.view.subviews[2]
