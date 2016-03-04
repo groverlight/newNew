@@ -18,6 +18,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
     @IBOutlet weak var quitScrollView: UIButton!
     @IBOutlet weak var clearAllScroll: UIButton!
+    @IBOutlet weak var bottomScrollView: NSLayoutConstraint!
     
     @IBOutlet weak var gradientView: UIView!
     @IBAction func clearScrollAct(sender: AnyObject) {
@@ -72,6 +73,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var recording = false
     //var circle = CircleView?
     var previousRect = CGRectZero
+    var oldKeyboardHeight:CGFloat = 0.0
+    var autoCorrectHeight:CGFloat = 0.0
     @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var emoji: NSLayoutConstraint!
     var imagePicker: UIImagePickerController! = UIImagePickerController()
@@ -118,7 +121,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             }
             
 
-            let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height - textHeight! + scrollHeight, scrollView.bounds.size.width, textHeight! ))
+            let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
             newLabel.font = UIFont(name: "Avenir Next", size: 32)
             newLabel.textColor = getRandomColor()
             ++scrollCounter
@@ -127,12 +130,15 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             newLabel.sizeToFit()
             oldLabel = newLabel
             cameraTextField.text.removeAll()
-            //print (newLabel.text)
-            //let yspace:CGFloat = 50.0
+            print ((self.oldLabel?.bounds.size.height)!)
+            print (self.scrollHeight)
             scrollView.addSubview(newLabel)
+            let totalHeight = self.scrollHeight + (self.oldLabel?.bounds.size.height)!
+            print (totalHeight)
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollHeight+(self.oldLabel?.bounds.size.height)!   )
                 }, completion: { (finished) -> Void in
+                     print ((self.oldLabel?.bounds.size.height)! + self.scrollHeight)
                     UIView.animateWithDuration(2, animations: { () -> Void in
                         newLabel.alpha = 0.4
                     })
@@ -274,17 +280,18 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
     override func viewDidLoad() {
-
+        self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
         self.view.clipsToBounds = true
         super.viewDidLoad()
+       // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
        print ("cameraView laoded")
-        /*let gradientLayer = CAGradientLayer()
+        let gradientLayer = CAGradientLayer()
         gradientLayer.frame = gradientView.bounds
         let color1 = UIColor.clearColor().CGColor as CGColorRef
         let color2 = UIColor.blackColor().CGColor as CGColorRef
         gradientLayer.colors = [color1,color2]
-        gradientLayer.locations = [0.3,0.5]
-        self.gradientView.layer.addSublayer(gradientLayer)*/
+        gradientLayer.locations = [0.3,0.6]
+        self.gradientView.layer.addSublayer(gradientLayer)
         //self.cameraTextField.enablesReturnKeyAutomatically = false;
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
@@ -550,7 +557,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func keyboardWillShow(notification: NSNotification) {
-        //print ("keyboardwillshow")
+
         updateBottomLayoutConstraintWithNotification(notification)
 
     }
@@ -572,6 +579,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
         emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
+        print(CGRectGetMaxY(view.bounds))
+        print(CGRectGetMinY(convertedKeyboardEndFrame))
+        if (CGRectGetMaxY(view.bounds) != CGRectGetMinY(convertedKeyboardEndFrame)){
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                self.bottomScrollView.constant  = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) +
+                    self.typingButton.bounds.height + 11 + 10 + 50
+            }
+           
+            
+        }
         //print (self.typingButton.frame)
     }
     func createImagePicker() {

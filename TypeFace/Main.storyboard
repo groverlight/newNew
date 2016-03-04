@@ -417,18 +417,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
-                                <rect key="frame" x="0.0" y="248" width="600" height="96"/>
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
+                                <rect key="frame" x="0.0" y="229" width="600" height="115"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="96" id="m0H-rH-xj3"/>
+                                    <constraint firstAttribute="height" constant="115" id="m0H-rH-xj3"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="32"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="no" keyboardAppearance="alert"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-gV-BGX">
                                 <rect key="frame" x="40" y="355" width="520" height="50"/>
@@ -490,9 +489,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Y5I-t7-4wI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="294"/>
+                                <rect key="frame" x="0.0" y="200" width="600" height="400"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="fAm-gP-vKz"/>
+                                    <constraint firstAttribute="height" constant="400" id="oV9-UF-M0P"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -541,6 +541,7 @@
                             <constraint firstItem="oVM-oF-apa" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="Umm-TM-0yD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oVM-oF-apa" secondAttribute="trailing" constant="20" id="VdL-2q-EEh"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="kw9-cJ-h9A" secondAttribute="bottom" constant="11" id="WT5-OC-y6T"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="Xca-9F-z5E"/>
                             <constraint firstItem="l7S-wz-7Tu" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="aPn-Zf-Ge9"/>
                             <constraint firstItem="l7S-wz-7Tu" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="b6N-Tw-8cp"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" multiplier="2" id="bSQ-5g-CvC"/>
@@ -562,7 +563,9 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="bSQ-5g-CvC"/>
+                                <exclude reference="dMH-0D-Y7u"/>
                                 <exclude reference="qeb-VJ-mwu"/>
+                                <exclude reference="3l1-or-PJL"/>
                                 <exclude reference="jGo-jf-JwU"/>
                                 <exclude reference="oow-Bu-Vnt"/>
                                 <exclude reference="jGD-Td-XR4"/>
@@ -572,6 +575,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomLayoutConstraint" destination="si9-ED-43f" id="N3n-fU-QFb"/>
+                        <outlet property="bottomScrollView" destination="Xca-9F-z5E" id="UzY-Jq-Rry"/>
                         <outlet property="cameraTextField" destination="kw9-cJ-h9A" id="1Uh-bQ-qab"/>
                         <outlet property="clearAllScroll" destination="oVM-oF-apa" id="B9L-x7-W60"/>
                         <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
