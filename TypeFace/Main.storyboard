@@ -431,9 +431,6 @@
                                         <exclude reference="m0H-rH-xj3"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=compact">
-                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="32"/>
-                                </variation>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💬" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRs-pD-sa5">
                                 <rect key="frame" x="53" y="369" width="30" height="21"/>
@@ -506,9 +503,6 @@
                                     <action selector="clearScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="qbn-fW-AHm"/>
                                 </connections>
                             </button>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l7S-wz-7Tu">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-gV-BGX">
                                 <rect key="frame" x="40" y="355" width="520" height="50"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.1647058824" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -546,24 +540,19 @@
                             <constraint firstItem="oVM-oF-apa" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="DgM-Vr-4uX"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" id="F2i-6c-pst"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="Fni-jX-e3I"/>
-                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="G6B-r4-5Eb"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="oVM-oF-apa" secondAttribute="bottom" constant="46" id="IUq-Sv-7Am"/>
                             <constraint firstItem="92i-ss-J1z" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="PqG-0a-RCk"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="Umm-TM-0yD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="oVM-oF-apa" secondAttribute="trailing" constant="20" id="VdL-2q-EEh"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="kw9-cJ-h9A" secondAttribute="bottom" constant="11" id="WT5-OC-y6T"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="Xca-9F-z5E"/>
-                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="aPn-Zf-Ge9"/>
-                            <constraint firstItem="l7S-wz-7Tu" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="b6N-Tw-8cp"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" multiplier="2" id="bSQ-5g-CvC"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="dMH-0D-Y7u"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="top" secondItem="92i-ss-J1z" secondAttribute="bottom" constant="8" id="ejt-v9-ubS"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="ftr-vy-USz"/>
-                            <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="l7S-wz-7Tu" secondAttribute="bottom" id="jGD-Td-XR4"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerY" secondItem="VwB-MW-SDj" secondAttribute="centerY" id="jGo-jf-JwU"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="l36-vN-oCD"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="lCF-V8-AGu"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="l7S-wz-7Tu" secondAttribute="bottom" id="n2B-5b-zsy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Skt-gV-BGX" secondAttribute="trailing" constant="20" id="ofS-70-hOt"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="oow-Bu-Vnt"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" multiplier="0.5" id="qeb-VJ-mwu"/>
@@ -581,7 +570,6 @@
                                 <exclude reference="dMH-0D-Y7u"/>
                                 <exclude reference="qeb-VJ-mwu"/>
                                 <exclude reference="WT5-OC-y6T"/>
-                                <exclude reference="jGD-Td-XR4"/>
                                 <exclude reference="l36-vN-oCD"/>
                             </mask>
                         </variation>
@@ -593,7 +581,6 @@
                         <outlet property="clearAllScroll" destination="oVM-oF-apa" id="B9L-x7-W60"/>
                         <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
                         <outlet property="emojiLabel" destination="CRs-pD-sa5" id="kVX-Qf-xhX"/>
-                        <outlet property="gradientView" destination="l7S-wz-7Tu" id="JFl-hO-ryx"/>
                         <outlet property="quitScrollView" destination="92i-ss-J1z" id="adk-vZ-3E3"/>
                         <outlet property="scrollView" destination="Y5I-t7-4wI" id="qHX-C0-bXg"/>
                         <outlet property="textViewBottom" destination="1oy-rq-4UY" id="0u5-4N-27a"/>
