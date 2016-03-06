@@ -417,10 +417,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kw9-cJ-h9A" userLabel="cameraTextField">
+                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="580" id="WPJ-Wz-e6N"/>
+                                    <constraint firstAttribute="height" constant="300" id="WPJ-Wz-e6N"/>
                                     <constraint firstAttribute="height" constant="115" id="m0H-rH-xj3"/>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
