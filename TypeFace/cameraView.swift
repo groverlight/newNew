@@ -541,15 +541,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 //print ("go")
                 cameraTextField.resignFirstResponder()
                 self.view.bringSubviewToFront(typingButton)
-                /*let goScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
-                goScale.toValue = NSValue(CGPoint: CGPointMake(10, 30))
-                goScale.completionBlock = { (animated,finished) in
-                goScale.duration = 0.01*/
-                    //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
                     self.cameraTextField.resignFirstResponder()
                     //self.view.endEditing(true)
-                    self.presentViewController(vc, animated: false, completion: nil)
+                    self.presentViewController(vc, animated: true, completion: nil)
                     //self.performSegueWithIdentifier("goSend", sender: self)
                // }
                 

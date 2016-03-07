@@ -4,3 +4,4 @@
 
 #import <pop/POP.h>
 #import "CircleView.h"
+#import "BDKCollectionIndexView.h"

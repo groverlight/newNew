@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+
 class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var sendTable: UITableView!
     
@@ -27,14 +28,16 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
     var tableBounds: CGRect!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         if (friends.count == 0){
             contactsync()
         }
-
-        self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
-        self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
+        let indexList = BDKCollectionIndexView(frame: CGRectMake(self.view.bounds.size.width-28,self.view.bounds.size.height, 28, self.view.bounds.size.height))
+        self.view.addSubview(indexList)
+        //self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
+        //self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
       
 
         sendTable.delegate = self
@@ -53,7 +56,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     }
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.1, delay: 0.0, options: [], animations: {
+        UIView.animateWithDuration(1, delay: 0.0, options: [], animations: {
             self.sendTable.transform = CGAffineTransformMakeTranslation(0, 0)
             self.navBar.transform = CGAffineTransformMakeTranslation(0, 0)
             self.view.layoutIfNeeded()
