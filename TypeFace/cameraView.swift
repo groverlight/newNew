@@ -159,14 +159,17 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             cameraTextField.text.removeAll()
             // print ((self.oldLabel?.bounds.size.height)!)
             //print (self.scrollHeight)
-            
+            self.scrollView.addSubview(newLabel)
+            newLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                newLabel.transform = CGAffineTransformMakeScale(1, 1)
+                }, completion: nil)
             
            
      
             //print (totalHeight)
             
             UIView.animateWithDuration(0.5, animations: { () -> Void in
-                 self.scrollView.addSubview(newLabel)
                 self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollHeight+(self.oldLabel?.bounds.size.height)!   )
                 }, completion: { (finished) -> Void in
                     // print ((self.oldLabel?.bounds.size.height)! + self.scrollHeight)
@@ -409,7 +412,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        iPhoneScreenSizes()
     }
     override func viewWillAppear(animated: Bool) {
-
+        self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        self.emojiLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+            self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
+            self.emojiLabel.transform = CGAffineTransformMakeScale(1, 1)
+            }, completion: nil)
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
            // print (files)
@@ -453,7 +461,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     override func viewDidAppear(animated: Bool) {
 
-        super.viewDidAppear(animated)
+        //super.viewDidAppear(animated)
+
     }
     override func viewWillDisappear(animated: Bool) {
        // print("disappear")
@@ -509,7 +518,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                             //let file = files[files?.endIndex-1]
                             try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(clipCount).m4v")
-                            
+                            arrayofText.removeLastObject()
                             print (files)
                             
                         }
@@ -532,21 +541,21 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 //print ("go")
                 cameraTextField.resignFirstResponder()
                 self.view.bringSubviewToFront(typingButton)
-                let goScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
+                /*let goScale = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
                 goScale.toValue = NSValue(CGPoint: CGPointMake(10, 30))
                 goScale.completionBlock = { (animated,finished) in
-                goScale.duration = 0.01
+                goScale.duration = 0.01*/
                     //let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
                     self.cameraTextField.resignFirstResponder()
                     //self.view.endEditing(true)
                     self.presentViewController(vc, animated: false, completion: nil)
                     //self.performSegueWithIdentifier("goSend", sender: self)
-                }
+               // }
                 
                 typingButton.setTitle("", forState: UIControlState.Normal)
                 emojiLabel.hidden = true
-                typingButton.pop_addAnimation(goScale, forKey: "go")
+               // typingButton.pop_addAnimation(goScale, forKey: "go")
                 return false
             }
             else if (text == "\n" && cameraTextField.returnKeyType != UIReturnKeyType.Send){
@@ -647,6 +656,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func keyboardWillShow(notification: NSNotification) {
+
         updateBottomLayoutConstraintWithNotification(notification)
 
     }

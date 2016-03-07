@@ -32,12 +32,10 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         if (friends.count == 0){
             contactsync()
         }
-        //print("sendview loaded")
-        //print (self.sendTable.bounds)
-        let tableBounds = self.sendTable.bounds
+
         self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
-         self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
-        print (tableBounds)
+        self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
+      
 
         sendTable.delegate = self
         sendTable.dataSource = self
@@ -55,7 +53,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     }
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animateWithDuration(0.1, delay: 0.0, options: [], animations: {
             self.sendTable.transform = CGAffineTransformMakeTranslation(0, 0)
             self.navBar.transform = CGAffineTransformMakeTranslation(0, 0)
             self.view.layoutIfNeeded()
@@ -76,6 +74,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         let contact = friends[indexPath.row]
         cell.textLabel?.text = contact["fullName"] as? String
         cell.textLabel?.textAlignment = NSTextAlignment.Left
+        
         
         
         return cell

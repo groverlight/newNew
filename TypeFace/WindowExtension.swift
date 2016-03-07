@@ -131,6 +131,7 @@ extension UIWindow{
             
             self.frame = UIScreen.mainScreen().bounds;
             }, completion: { (finished: Bool) -> Void in
+                frontWindow?.rootViewController?.viewDidAppear(false)
                 self.removeTapGestureToClose()
         })
     }

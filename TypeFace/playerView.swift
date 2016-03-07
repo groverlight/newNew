@@ -79,7 +79,7 @@ class playerView: UIViewController {
         labelAnim.toValue = self.view.bounds.size.height/4
         labelAnim.completionBlock = { (animation, finished) in
             if (finished){
-                print ("finished")
+                //print ("finished")
                 UIView.animateWithDuration(1.25, animations: { () -> Void in
                     scrollLabel.alpha = 0
                     scrollLabel.frame.origin.y =  scrollLabel.frame.origin.y  - 100
@@ -142,6 +142,11 @@ class playerView: UIViewController {
             UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
                         self.view.bringSubviewToFront(self.backButton)
                         self.backButton.hidden = false
+                        self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                            self.backButton.transform = CGAffineTransformMakeScale(1, 1)
+                            }, completion: nil)
+
                        // self.backButton.layer
                 
                 })

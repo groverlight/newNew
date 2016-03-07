@@ -17,15 +17,26 @@ class loginView: UIViewController {
     @IBAction func nextButton(sender: UIButton) {
         print (phoneNumber)
         if (viewIndex == 0){
-        let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
-        PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
-            finished in
+            PFAnonymousUtils.logInWithBlock({ (user, error) -> Void in
+                if (error != nil){
+                    print("Anonymous login failed.")
+                }
+                else{
+                    print ("Anonymous user logged in ")
+                    let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
+                    PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
+                        finished in
+                        
+                        print ("sent verification code")
+                        //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("RedViewController") as! loginCode
+                        //pageDelegate.scrollToNextViewController()
+                        self.PageView!.scrollToNextViewController()
+                    })
+                }
             
-            print ("sent verification code")
-            //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("RedViewController") as! loginCode
-            //pageDelegate.scrollToNextViewController()
-            self.PageView!.scrollToNextViewController()
         })
+
+
         }
         else if (viewIndex == 1){
             let params: [String: String] = ["phoneNumber": phoneNumber, "phoneVerificationCode": code]
