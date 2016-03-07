@@ -9,9 +9,9 @@
 import UIKit
 import Contacts
 
-class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCollectionIndexViewDelegate {
     @IBOutlet weak var sendTable: UITableView!
-    
+
     @IBAction func goBack(sender: AnyObject) {
         //self.performSegueWithIdentifier("goBacktoCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -28,21 +28,27 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
     var tableBounds: CGRect!
-  
+    var indexTitles: NSArray?
+    var sectionsArray = Array(count: 27, repeatedValue: Array(count: 0, repeatedValue: NSDictionary()))
+    //var peopleinArray: NSMutableArray?
     override func viewDidLoad() {
         super.viewDidLoad()
         if (friends.count == 0){
             contactsync()
         }
-        let indexList = BDKCollectionIndexView(frame: CGRectMake(self.view.bounds.size.width-28,self.view.bounds.size.height, 28, self.view.bounds.size.height))
+        self.sendTable.sectionHeaderHeight = 5
+        indexTitles = ["🕒","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        let indexList = BDKCollectionIndexView(frame: CGRectMake(self.view.bounds.size.width-28,self.sendTable.frame.origin.y, 28, self.sendTable.bounds.size.height), indexTitles: indexTitles as! [AnyObject])
+        indexList.font = UIFont(name: "Avenir Next", size: 10)
         self.view.addSubview(indexList)
+        self.view.bringSubviewToFront(indexList)
         //self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
         //self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
       
 
         sendTable.delegate = self
         sendTable.dataSource = self
-        sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+       // sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
         panGesture?.enabled = false
     }
@@ -64,26 +70,57 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return (indexTitles?.count)!
+    }
+     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let vw = UIView(frame: CGRect.zero)
+        if (sectionsArray[section].count > 0 ){
+        vw.backgroundColor = UIColor.clearColor()
+        let label = UILabel(frame: CGRectMake(self.view.bounds.size.width/CGFloat(2)-7.5,-7.5,20,20))
+        label.textAlignment = NSTextAlignment.Center
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.whiteColor().CGColor
+            label.layer.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0).CGColor
+        label.layer.cornerRadius = label.bounds.size.width/2
+        label.text = indexTitles![section] as? String
+        vw.addSubview(label)
+        
+        }
+        return vw
+        
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        // print("making friends count")
-        return friends.count
+        let count = sectionsArray[section].count
+        return count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
        // print ("trying to make table")
-        let cell:UITableViewCell = sendTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        let contact = friends[indexPath.row]
-        cell.textLabel?.text = contact["fullName"] as? String
+        let cell:UITableViewCell = sendTable.dequeueReusableCellWithIdentifier("sendCell")! as UITableViewCell
+        
+        let contact = sectionsArray[indexPath.section][indexPath.row]
+       // cell.textLabel?.text = contact["fullName"] as? String
         cell.textLabel?.textAlignment = NSTextAlignment.Left
-        
-        
-        
+
+        let label:UILabel = (cell.contentView.subviews[0]) as! UILabel
+        let label2:UILabel = (cell.contentView.subviews[1]) as! UILabel
+        label.layer.borderWidth = 3
+        label.layer.borderColor = UIColor.blackColor().CGColor
+        label2.text = contact["fullName"] as? String
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let indexPath = tableView.indexPathForSelectedRow!
+        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
+        let label = currentCell.contentView.subviews[0] as! UILabel
+        if (label.text == "✓"){
+            label.text = ""
+        }
+        else{
+            label.text = "✓"
+        }
     }
     
     func contactsync() -> Void {
@@ -132,33 +169,26 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     }
                     //print (phone)
                     //print(contact.givenName)
-                    //print(contact.familyName)
+                   // print(contact.familyName)
                     phone = self.numberFormatter(phone) as String
                     let name:String = "\(contact.givenName) \(contact.familyName)"
                     let containsLetter =  name.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet())
                     
                     if (containsLetter != nil){
                         let contact: [String: String] = ["fullName": name, "phoneNumber": phone, "user" : ""]
-                        friends.addObject(contact)
+                        friends.append(contact)
                     }
                 }
             } catch let err{
                 print(err)
             }
-            //sort friends after syncing
-            let sortArr:NSArray =
-            friends.sortedArrayUsingComparator(){
-                
-                (p1:AnyObject!, p2:AnyObject!) -> NSComparisonResult in
-                
-                if p1["fullName"] as! String > p2["fullName"] as! String{
-                    return NSComparisonResult.OrderedDescending
-                }
-                else{
-                    return NSComparisonResult.OrderedAscending
-                }
+
+            friends = friends.sort { p1, p2 in
+                let name1 = p1["fullName"] as! String
+                let name2 = p2["fullName"] as! String
+                    return name1 < name2
             }
-            friends = NSMutableArray(array:sortArr)
+        
             break
         case .Denied, .NotDetermined:
             contactStore.requestAccessForEntityType(CNEntityType.Contacts, completionHandler: { (access, accessError) -> Void in
@@ -195,6 +225,25 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             break
         }
         
+        filterFriends()
+    }
+    func filterFriends(){
+        for people:NSDictionary in friends{
+            let fullName = people["fullName"] as! String
+           // fullName.
+            
+            let index = fullName.startIndex.advancedBy(0)
+            let nameIndex = Int(fullName[index].utf8Value()) - 64
+            
+            if (nameIndex > 0 ){
+                if (nameIndex < 26){
+                    sectionsArray[nameIndex].append(people)
+                }
+            }
+            //sectionsArray[
+        }
+        //print (sectionsArray)
+        //print (sectionsArray.count)
         
     }
     func numberFormatter(var mobileNumber: NSString) -> NSString {
@@ -213,5 +262,30 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         return mobileNumber
     }
-
+    func collectionIndexView(collectionIndexView: BDKCollectionIndexView!, isPressedOnIndex pressedIndex: UInt, indexTitle: String!) {
+        //
+    }
+    
+}
+extension Character {
+    func utf8Value() -> UInt8 {
+        for s in String(self).utf8 {
+            return s
+        }
+        return 0
+    }
+    
+    func utf16Value() -> UInt16 {
+        for s in String(self).utf16 {
+            return s
+        }
+        return 0
+    }
+    
+    func unicodeValue() -> UInt32 {
+        for s in String(self).unicodeScalars {
+            return s.value
+        }
+        return 0
+    }
 }

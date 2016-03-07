@@ -74,7 +74,7 @@
     _currentIndex = 0;
 	_touchStatusViewAlpha = 0.25;
 	_touchStatusBackgroundColor = [UIColor colorWithRed:1.00 green:0.28 blue:0.44 alpha:1.0];;
-	self.tintColor = [UIColor colorWithRed:1.00 green:0.28 blue:0.44 alpha:1.0]; //[UIColor blackColor];
+    self.tintColor = [UIColor whiteColor];//[UIColor colorWithRed:1.00 green:0.28 blue:0.44 alpha:1.0]; //[UIColor blackColor];
     self.backgroundColor = [UIColor clearColor];
 	
     SEL handleGestureSelector = @selector(handleGesture:);

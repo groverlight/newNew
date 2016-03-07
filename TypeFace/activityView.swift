@@ -10,8 +10,8 @@
 import UIKit
 import Parse
 import Bolts
-var friends : NSMutableArray = []
-var activities : NSMutableArray = []
+var friends : [NSDictionary] = []
+var activities : [NSDictionary] = []
 class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var activityTable: UITableView!
     @IBOutlet weak var noFriendsView: UIView!
