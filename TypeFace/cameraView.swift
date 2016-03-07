@@ -140,15 +140,15 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
-            //print(oldLabel?.bounds.size.height)
+            //print(self.cameraTextField.contentInset)
             let textHeight = self.cameraTextField.font?.lineHeight
             shouldGoDown = false
             if (oldLabel?.bounds.size.height != nil){
                 scrollHeight = scrollHeight + (oldLabel?.bounds.size.height)!
             }
             
-
-            let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
+            
+            let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, self.view.bounds.size.width, textHeight! ))
             newLabel.font = self.cameraTextField.font
             newLabel.textColor = UIColor.whiteColor()
             ++scrollCounter
@@ -159,9 +159,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             cameraTextField.text.removeAll()
             // print ((self.oldLabel?.bounds.size.height)!)
             //print (self.scrollHeight)
-            scrollView.addSubview(newLabel)
+            
+            
+           
+     
             //print (totalHeight)
+            
             UIView.animateWithDuration(0.5, animations: { () -> Void in
+                 self.scrollView.addSubview(newLabel)
                 self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollHeight+(self.oldLabel?.bounds.size.height)!   )
                 }, completion: { (finished) -> Void in
                     // print ((self.oldLabel?.bounds.size.height)! + self.scrollHeight)
@@ -205,8 +210,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 circle.hidden = false
                 self.cameraTextField.sizeToFit()
                let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
-               
-                print (time)
+                self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                    self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion: nil)
+
+                
+               // print (time)
 
                 switch (time){
                 case 1:
@@ -230,7 +240,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 }
                 
                 
-                arrayofText.addObject(self.cameraTextField.text)
+                arrayofText.addObject(newLabel.text!)
                 // print ("start recording")
                 //  typingButton.pop_addAnimation(buttonScale, forKey: "scale")
             }
@@ -240,7 +250,31 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.typingButton.layer.cornerRadius = self.typingButton.bounds.size.width/2
                 let scaleUp = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
                 scaleUp.toValue=NSValue(CGSize: CGSizeMake(1, 1))
-                scaleUp.duration = 2
+                let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
+                
+                //print (time)
+                
+                switch (time){
+                case 1:
+                    scaleUp.duration = 2
+                    break
+                case 2:
+                    scaleUp.duration = 2.75
+                    break
+                case 3:
+                    scaleUp.duration = 3.5
+                    break
+                case 4:
+                    scaleUp.duration = 4.25
+                    break
+                case 5:
+                    scaleUp.duration = 5
+                    break
+                default:
+                    print("wtf 2 many lines")
+                    break
+                }
+                
                 scaleUp.completionBlock = { (animation, finished) in
                     self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
                     self.stopRecording()
@@ -310,21 +344,21 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             typingButton.pop_addAnimation(buttonDecay, forKey: "decay")
         }
     }
-    @IBOutlet weak var cameraPreview: UIView!
     @IBOutlet weak var cameraTextField: UITextView!
     override func viewDidLoad() {
         self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
         self.view.clipsToBounds = true
         super.viewDidLoad()
+        self.cameraTextField.textContainer.lineFragmentPadding = 0
        // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
-       print ("cameraView laoded")
+       self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
+       //print ("cameraView laoded")
 
         //self.cameraTextField.enablesReturnKeyAutomatically = false;
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
         longPressRecognizer.minimumPressDuration = 1.5
-        
         self.view.addGestureRecognizer(longPressRecognizer)
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
@@ -375,9 +409,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        iPhoneScreenSizes()
     }
     override func viewWillAppear(animated: Bool) {
-       // print ("appear")
-        // print ("view will appear deleting files")
-        //print (files)
+
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
            // print (files)
@@ -398,9 +430,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 if (self.scrollView.contentOffset == CGPoint(x: 0, y: 0)){
                     self.scrollView.contentOffset = actualOffset
                 }
-                //print(self.scrollView.contentOffset)
-               // self.scrollView.contentOffset
-                    //{x:0, y:self.scrollView.contentOffset + self.cameraTextField.font}
+             
             }
             
         }
@@ -424,27 +454,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     override func viewDidAppear(animated: Bool) {
 
         super.viewDidAppear(animated)
-        let theRect = imagePicker.view.frame
-        cameraPreview?.frame = theRect
-        //imagePicker.cameraOverlayView = cameraPreview
-        //self.presentViewController(imagePicker, animated: animated, completion: nil)
     }
     override func viewWillDisappear(animated: Bool) {
-        print("disappear")
+       // print("disappear")
         shouldEdit = false
-        //cameraTextField.removeObserver(self, forKeyPath: "contentSize")
+   
         actualOffset = self.scrollView.contentOffset
        // print (actualOffset)
         cameraTextField.resignFirstResponder()
         self.view.endEditing(true)
     }
-
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        //print ("textview changed")
-      /*  if  ((Int)(cameraTextField.contentSize.height/(self.cameraTextField.font?.lineHeight)!) == 2){
-        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+50.0)
-        }*/
 
+        
         let  char = text.cStringUsingEncoding(NSUTF8StringEncoding)!
         let isBackSpace = strcmp(char, "\\b")
         //let textHeight = self.cameraTextField.font?.lineHeight
@@ -520,6 +543,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     self.presentViewController(vc, animated: false, completion: nil)
                     //self.performSegueWithIdentifier("goSend", sender: self)
                 }
+                
                 typingButton.setTitle("", forState: UIControlState.Normal)
                 emojiLabel.hidden = true
                 typingButton.pop_addAnimation(goScale, forKey: "go")
@@ -546,6 +570,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             emojiLabel.text = "📹"
             typingButton.pop_addAnimation(buttonSpring, forKey: "spring")
             emojiLabel.pop_addAnimation(buttonSpring2, forKey: "spring2")
+            return true
             
         }
         else if (textView.text.characters.count == 1 && range.length == 1){
@@ -557,13 +582,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             typingButton.titleLabel?.alpha  = 0.4
             emojiLabel.text = "💬"
             }
-            else{
+        else{
                 typingButton.layer.borderWidth = 0
                 typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
                 typingButton.setTitle("another one", forState: UIControlState.Normal)
                 typingButton.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0)
                 typingButton.titleLabel?.alpha  = 0.4
                 emojiLabel.text = "👆"
+                return true
             }
 
         }
@@ -583,13 +609,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let pos = self.cameraTextField.endOfDocument
         let currentRect = self.cameraTextField.caretRectForPosition(pos)
         if (currentRect.origin.y > previousRect.origin.y){
-            print ("go up")
+            //print ("go up")
             
             self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y + textHeight!)
             
         }
         else if (currentRect.origin.y < previousRect.origin.y){
-            print ("go down")
+           // print ("go down")
             if (shouldGoDown == true){
                 
                 self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y - textHeight!)
@@ -732,7 +758,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             let vibrantOverlay = UIVisualEffectView(effect: vibrancyEffect)
             let overlayScrollView = UIScrollView(frame: CGRectMake(0,0,self.view.bounds.size.width,2*self.view.bounds.height/3))
-            print (overlayScrollView.frame)
+           // print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
             overlayScrollView.userInteractionEnabled = true

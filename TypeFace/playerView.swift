@@ -16,8 +16,8 @@ class playerView: UIViewController {
     var numOfClips = 0
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
-
-    @IBOutlet weak var scrollTextView: UITextView!
+    var labelFont: UIFont?
+    @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -35,6 +35,7 @@ class playerView: UIViewController {
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
         self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+        iPhoneScreenSizes()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,13 +51,11 @@ class playerView: UIViewController {
         setupVideo(1)
     }
     func setupVideo(index: Int){
-        
-        //print ("index: \(index)")
-        scrollTextView.text = arrayofText.objectAtIndex(index-1) as! String
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
 
         let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
+       // print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
@@ -64,7 +63,44 @@ class playerView: UIViewController {
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
-        self.view.bringSubviewToFront(scrollTextView)
+        let scrollLabel = UILabel(frame: CGRectMake(0,2*self.view.bounds.size.height/3, self.view.bounds.size.width,50))
+        scrollLabel.textColor = UIColor.whiteColor()
+        scrollLabel.font = labelFont
+        scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
+        scrollLabel.numberOfLines = 0
+        scrollLabel.sizeToFit()
+        self.labelView.addSubview(scrollLabel)
+        self.view.bringSubviewToFront(labelView)
+       /* UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration)) { () -> Void in
+            scrollLabel.frame.origin.y = self.view.bounds.size.height/4
+        }*/
+        let labelAnim = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
+        labelAnim.duration = CMTimeGetSeconds(avAsset.duration)
+        labelAnim.toValue = self.view.bounds.size.height/4
+        labelAnim.completionBlock = { (animation, finished) in
+            if (finished){
+                print ("finished")
+                UIView.animateWithDuration(1.25, animations: { () -> Void in
+                    scrollLabel.alpha = 0
+                    scrollLabel.frame.origin.y =  scrollLabel.frame.origin.y  - 100
+                    }, completion: { (finished) -> Void in
+                        scrollLabel.removeFromSuperview()
+                })
+               /* let labelCloseAlpha = POPBasicAnimation (propertyNamed: kPOPViewAlpha)
+                labelCloseAlpha.toValue = 0
+                labelCloseAlpha.duration = 1.25
+                let labelCloseY = POPBasicAnimation (propertyNamed: kPOPLayerPositionY)
+                labelCloseY.duration = 1.25
+                labelCloseY.toValue = self.view.bounds.size.height/6
+                scrollLabel.pop_addAnimation(labelCloseAlpha, forKey: "alpha")
+                scrollLabel.pop_addAnimation(labelCloseY, forKey: "Y")*/
+             }
+            }
+        scrollLabel.pop_addAnimation(labelAnim, forKey: "scrollUP")
+
+                
+                
+        
           --numOfClips
     }
     
@@ -116,5 +152,29 @@ class playerView: UIViewController {
     
     func playerStartPlaying(notification: NSNotification){
         print ("player started playing")
+    }
+    func iPhoneScreenSizes(){
+        let bounds = UIScreen.mainScreen().bounds
+        let height = bounds.size.height
+        
+        switch height {
+        case 480.0:
+            print("iPhone 3,4")
+             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
+        case 568.0:
+            print("iPhone 5")
+             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
+        case 667.0:
+            print("iPhone 6")
+             labelFont = UIFont(name: "AvenirNext-Medium", size: 33.5)
+        case 736.0:
+            print("iPhone 6+")
+             labelFont = UIFont(name: "AvenirNext-Medium", size: 37 )
+        default:
+            print("not an iPhone")
+            
+        }
+        
+        
     }
 }

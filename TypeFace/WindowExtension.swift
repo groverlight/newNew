@@ -69,7 +69,7 @@ extension UIWindow{
                 backWindow?.rootViewController?.view.alpha = valAlphe;
             }
         case .Ended, .Cancelled:
-            print ("ended")
+           // print ("ended")
             var finalOrigin:CGPoint = CGPointZero;
             var finalTransform: CATransform3D = CATransform3DIdentity
             var alpha: CGFloat = 1.0;
@@ -118,13 +118,14 @@ extension UIWindow{
 
     // MARK: Private methids
     private func close(){
+        //print ("close")
         frontWindow?.rootViewController?.viewWillAppear(false)
         frontWindow?.subviews[1].alpha = 0
         // frontWindow?.rootViewController?.view.subviews[2]
         UIView.animateWithDuration(kAnimationDuration + 0.1, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
             
             backWindow?.rootViewController?.view.layer.transform = CATransform3DScale(CATransform3DIdentity, kTransform , kTransform , 1);
-            backWindow?.rootViewController?.view.alpha = kAlphe
+            backWindow?.rootViewController?.view.alpha = 0
             
             self.transform = CGAffineTransformIdentity;
             

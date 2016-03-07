@@ -26,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
         let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
 
-
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+        //if (PFUser.currentUser() == nil){
         if (false){
             print ("hi")
             //let storyboard = UIStoryboard(name: "Main", bundle: nil)

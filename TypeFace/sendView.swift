@@ -35,17 +35,14 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //print("sendview loaded")
         //print (self.sendTable.bounds)
         let tableBounds = self.sendTable.bounds
-        //self.sendTable.transform = CGAffineTransformMakeTranslation(0, -1000)
-         //self.navBar.transform = CGAffineTransformMakeTranslation(-1000, 0)
+        self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
+         self.navBar.transform = CGAffineTransformMakeTranslation(1500, 0)
         print (tableBounds)
 
         sendTable.delegate = self
         sendTable.dataSource = self
         sendTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        if (friends.count == 0)
-        {
-            
-        }
+
         panGesture?.enabled = false
     }
 
@@ -55,13 +52,14 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
             self.dismissViewControllerAnimated(true, completion: nil)
             self.wentPlayer = false
         }
-       /* UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(0.1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
             self.sendTable.transform = CGAffineTransformMakeTranslation(0, 0)
             self.navBar.transform = CGAffineTransformMakeTranslation(0, 0)
             self.view.layoutIfNeeded()
-            }, completion: nil)*/
-    }
-    override func viewDidAppear(animated: Bool) {
+            }, completion: nil)
 
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -77,7 +75,8 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         let cell:UITableViewCell = sendTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let contact = friends[indexPath.row]
         cell.textLabel?.text = contact["fullName"] as? String
-        cell.textLabel?.textAlignment = NSTextAlignment.Center
+        cell.textLabel?.textAlignment = NSTextAlignment.Left
+        
         
         return cell
     }
