@@ -63,7 +63,7 @@ class playerView: UIViewController {
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
-        let scrollLabel = UILabel(frame: CGRectMake(0,2*self.view.bounds.size.height/3, self.view.bounds.size.width,50))
+        let scrollLabel = UILabel(frame: CGRectMake(20,2*self.view.bounds.size.height/3, self.view.bounds.size.width,50))
         scrollLabel.textColor = UIColor.whiteColor()
         scrollLabel.font = labelFont
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
@@ -147,7 +147,7 @@ class playerView: UIViewController {
                             self.backButton.transform = CGAffineTransformMakeScale(1, 1)
                             }, completion: nil)
 
-                       // self.backButton.layer
+                
                 
                 })
 

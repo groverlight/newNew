@@ -30,6 +30,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     var tableBounds: CGRect!
     var indexTitles: NSArray?
     var sectionsArray = Array(count: 27, repeatedValue: Array(count: 0, repeatedValue: NSDictionary()))
+    var checkedIndexPath = [NSIndexPath]()
     //var peopleinArray: NSMutableArray?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,10 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         }
         self.sendTable.sectionHeaderHeight = 5
         indexTitles = ["🕒","A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-        let indexList = BDKCollectionIndexView(frame: CGRectMake(self.view.bounds.size.width-28,self.sendTable.frame.origin.y, 28, self.sendTable.bounds.size.height), indexTitles: indexTitles as! [AnyObject])
+        let indexList = BDKCollectionIndexView(frame: CGRectMake(self.view.bounds.size.width-28,CGRectGetMinY(self.sendTable.frame), 28, self.view.bounds.size.height - navBar.bounds.size.height
+            ), indexTitles: indexTitles as! [AnyObject])
         indexList.font = UIFont(name: "Avenir Next", size: 10)
+        indexList.delegate = self
         self.view.addSubview(indexList)
         self.view.bringSubviewToFront(indexList)
         //self.sendTable.transform = CGAffineTransformMakeTranslation(1500, 0)
@@ -54,11 +57,13 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     }
 
     override func viewWillAppear(animated: Bool) {
-        sendTable.reloadData()
+        self.sendTable.reloadData()
+        checkedIndexPath.removeAll()
         if (self.wentPlayer == true){
             self.dismissViewControllerAnimated(true, completion: nil)
             self.wentPlayer = false
         }
+        filterFriends()
 
     }
     override func viewDidAppear(animated: Bool) {
@@ -76,14 +81,16 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         
         let vw = UIView(frame: CGRect.zero)
         if (sectionsArray[section].count > 0 ){
-        vw.backgroundColor = UIColor.clearColor()
         let label = UILabel(frame: CGRectMake(self.view.bounds.size.width/CGFloat(2)-7.5,-7.5,20,20))
         label.textAlignment = NSTextAlignment.Center
-        label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.whiteColor().CGColor
-            label.layer.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0).CGColor
+        //label.layer.borderWidth = 1
+       // label.layer.borderColor = UIColor.grayColor()().CGColor
+        label.layer.backgroundColor = UIColor.grayColor().CGColor//UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0).CGColor
         label.layer.cornerRadius = label.bounds.size.width/2
         label.text = indexTitles![section] as? String
+        label.font = UIFont(name: "AvenirNext", size: 10)
+        label.textColor = UIColor.whiteColor()
+        label.alpha = 0.7
         vw.addSubview(label)
         
         }
@@ -99,30 +106,47 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
        // print ("trying to make table")
         let cell:UITableViewCell = sendTable.dequeueReusableCellWithIdentifier("sendCell")! as UITableViewCell
-        
+
         let contact = sectionsArray[indexPath.section][indexPath.row]
        // cell.textLabel?.text = contact["fullName"] as? String
         cell.textLabel?.textAlignment = NSTextAlignment.Left
-
+        
         let label:UILabel = (cell.contentView.subviews[0]) as! UILabel
         let label2:UILabel = (cell.contentView.subviews[1]) as! UILabel
-        label.layer.borderWidth = 3
+        label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.blackColor().CGColor
         label2.text = contact["fullName"] as? String
+        label2.font = UIFont(name: "AvenirNext-Medium", size: 17)
+        label2.textColor = UIColor.whiteColor()
+        if (self.checkedIndexPath.count > 0){
+            
+            if ( self.checkedIndexPath.contains(indexPath)){
+                label.text = "✓"
+            }
+            else{
+                label.text = ""
+            }
+
+        }
+        else{
+            label.text = ""
+        }
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let indexPath = tableView.indexPathForSelectedRow!
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
-        let label = currentCell.contentView.subviews[0] as! UILabel
+        let cell = self.sendTable.cellForRowAtIndexPath(indexPath)
+        let label:UILabel = (cell!.contentView.subviews[0]) as! UILabel
         if (label.text == "✓"){
-            label.text = ""
+          let index =  self.checkedIndexPath.indexOf(indexPath)
+          self.checkedIndexPath.removeAtIndex(index!)
         }
         else{
-            label.text = "✓"
+            self.checkedIndexPath.append(indexPath)
         }
+        self.sendTable.reloadData()
     }
     
+
     func contactsync() -> Void {
         
         let contactStore = CNContactStore()
@@ -225,7 +249,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
             break
         }
         
-        filterFriends()
+       
     }
     func filterFriends(){
         for people:NSDictionary in friends{
@@ -263,7 +287,13 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         return mobileNumber
     }
     func collectionIndexView(collectionIndexView: BDKCollectionIndexView!, isPressedOnIndex pressedIndex: UInt, indexTitle: String!) {
-        //
+        print ("selected")
+        let intIndex = Int(pressedIndex)
+        let path = NSIndexPath(forRow: 0, inSection: intIndex)
+        if (sectionsArray[intIndex].count > 0){
+            self.sendTable.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.None, animated: true)
+        }
+        
     }
     
 }

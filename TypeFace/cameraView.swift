@@ -522,8 +522,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                             print (files)
                             
                         }
-                        catch {
-                            print("bad")
+                        catch let err {
+                            print(err)
                         }
                         //self.cameraTextField.
                        // print ("newlabel\(newLabel.text)")
@@ -827,16 +827,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             })
             //print("longpressed")
         }
-       /* else if (sender.state == UIGestureRecognizerState.Ended){
-            print ("longpress ended")
-            for subview in self.view.subviews {
-                if subview is UIVisualEffectView {
-                    subview.removeFromSuperview()
-                }
-            }
-            cameraTextField.becomeFirstResponder()
-            
-        }*/
+
     }
     func iPhoneScreenSizes(){
         let bounds = UIScreen.mainScreen().bounds
