@@ -12,11 +12,13 @@ import GPUImage
 
 
 class playerView: UIViewController {
+    @IBOutlet weak var progressBar: UIView!
     var moviePlayer: AVPlayer?
     var numOfClips = 0
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
     var labelFont: UIFont?
+    
     @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
@@ -25,6 +27,7 @@ class playerView: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressBar.hidden = true
         /*let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let overlay = UIVisualEffectView(effect: blurEffect)
         // Put it somewhere, give it a frame...
@@ -39,6 +42,7 @@ class playerView: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        var duration: CFTimeInterval = 0
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             numOfClips = (files?.count)!
@@ -47,6 +51,16 @@ class playerView: UIViewController {
         }
         catch {
             print("bad")
+        }
+        for var i = numOfClips; i > 0; --i {
+            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
+           duration = duration + CMTimeGetSeconds(avAsset.duration)
+        }
+        
+        self.progressBar.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0)
+        self.progressBar.hidden = false
+        UIView.animateWithDuration(duration) { () -> Void in
+             self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }
         setupVideo(1)
     }
