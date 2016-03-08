@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+var frontWindow: UIWindow?
 private var beganOrigin = CGPoint()
 
 private let kHeaderHeight: CGFloat = 64
@@ -45,18 +45,18 @@ extension UIWindow{
     func handlePanGesture(panGesture : UIPanGestureRecognizer){
         
         let translation:CGPoint = panGesture.translationInView(self);
-       // let velocity:CGPoint = panGesture.velocityInView(self)
         
         switch (panGesture.state){
-            
         case .Began:
             //print("began")
 
             beganOrigin = frame.origin;
             break;
         case .Changed:
-            //print(frame.origin.y)
-            frontWindow?.subviews[1].alpha = frame.origin.y/300
+            
+            //print(frontWindow?.subviews[(frontWindow?.subviews.endIndex)!-1])
+
+            frontWindow?.subviews[0].alpha = frame.origin.y/300;
             let val = (frame.origin.y * ((1 - kTransform) / UIScreen.mainScreen().bounds.height)) + kTransform;
             let t1 = CATransform3DScale(CATransform3DIdentity, val , val , 1);
             
@@ -68,6 +68,7 @@ extension UIWindow{
                 backWindow?.rootViewController?.view.layer.transform = t1;
                 backWindow?.rootViewController?.view.alpha = valAlphe;
             }
+ 
         case .Ended, .Cancelled:
            // print ("ended")
             var finalOrigin:CGPoint = CGPointZero;
@@ -76,7 +77,7 @@ extension UIWindow{
             if frame.origin.y >= 70 {
                 finalOrigin.y = CGRectGetHeight(UIScreen.mainScreen().bounds) - kHeaderHeight;
                 addTapGestureToClose()
-                frontWindow?.subviews[1].alpha = 1
+                frontWindow?.subviews[0].alpha = 1;
                 frontWindow?.rootViewController?.viewWillDisappear(false)
 
 
@@ -87,7 +88,7 @@ extension UIWindow{
                // statusBarStyle = UIStatusBarStyle.Default
                
                 removeTapGestureToClose()
-                frontWindow?.subviews[1].alpha = 0
+                frontWindow?.subviews[0].alpha = 0;
                 frontWindow?.rootViewController?.viewWillAppear(false)
                 
 

@@ -47,10 +47,10 @@ class loginPhone: UIViewController, UITextFieldDelegate {
                 textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
             }
         }
-        phoneNumber = numberFormatter(phoneTextField.text!) as String
+        phoneNumber = numberFormatter(phoneTextField.text!+string) as String
         return true
     }
-    
+
     func getLength(var mobileNumber:NSString) -> NSInteger {
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
@@ -68,12 +68,7 @@ class loginPhone: UIViewController, UITextFieldDelegate {
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("-", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("+", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(".", withString: "")
-        
-        let length = mobileNumber.length
-        if(length > 10)
-        {
-            mobileNumber = mobileNumber.substringToIndex(length-10)
-        }
+        print (mobileNumber)
         
         return mobileNumber
     }

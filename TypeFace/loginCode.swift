@@ -35,6 +35,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
         codeTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
 
     }
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         //print ("\(textField.text!)\(string)")
         var newDigit:UILabel!
@@ -73,7 +74,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
        // print (newDigit)
 
         
-        code = textField.text!
+        code = textField.text! + string
         return true
     }
 

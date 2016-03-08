@@ -28,20 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
-        //if (PFUser.currentUser() == nil){
-        if (false){
-            print ("hi")
-            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            // window?.rootViewController = back
-            // window?.makeKeyAndVisible();
-            //frontWindow?.hidden = true
-            frontWindow?.rootViewController = vc
+
+        if (false
+            ){
+                
+                frontWindow?.rootViewController = vc
         }
         else{
-           frontWindow?.rootViewController = front;
+            
+            frontWindow?.rootViewController = front;
         }
-        
         frontWindow?.windowLevel = UIWindowLevelStatusBar
         frontWindow?.startSwipeToOpenMenu()
         frontWindow?.makeKeyAndVisible();
@@ -51,24 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
         blurView.frame = UIScreen.mainScreen().bounds
         BlurSurface.addSubview(blurView)
-        BlurSurface.alpha = 0
-        frontWindow?.addSubview(BlurSurface)
-        
-        if (PFUser.currentUser()?.objectForKey("phoneNumber") == nil){
-       // if (false){
-            //let back:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
-            
-           // window = UIWindow(frame: UIScreen.mainScreen().bounds)
-           // window?.rootViewController = back
-           // window?.makeKeyAndVisible();
-            //frontWindow?.hidden = true
-        }
-            
-
-            
-            
-        
-        //window?.rootViewController
+        //BlurSurface.alpha = 0
+        print(BlurSurface)
+        frontWindow?.insertSubview(BlurSurface, atIndex: 0)
         return true
     }
 

@@ -12,7 +12,7 @@ import GPUImage
 import Parse
 import Bolts
 
-var frontWindow: UIWindow?
+
 var arrayofText: NSMutableArray = []
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     var recording = false
@@ -352,10 +352,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
         self.view.clipsToBounds = true
         super.viewDidLoad()
+
         self.cameraTextField.textContainer.lineFragmentPadding = 0
        // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
-       self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
-       //print ("cameraView laoded")
+        self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
+        print ("cameraView laoded")
 
         //self.cameraTextField.enablesReturnKeyAutomatically = false;
         quitScrollView.hidden = true
@@ -460,8 +461,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         shouldEdit = true
     }
     override func viewDidAppear(animated: Bool) {
-
-        //super.viewDidAppear(animated)
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
+        blurView.frame = UIScreen.mainScreen().bounds
+        BlurSurface.addSubview(blurView)
+        BlurSurface.alpha = 0
+        frontWindow?.insertSubview(BlurSurface, atIndex: 1)
+        self.cameraTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
 
     }
     override func viewWillDisappear(animated: Bool) {

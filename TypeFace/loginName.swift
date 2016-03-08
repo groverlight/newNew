@@ -23,6 +23,11 @@ class loginName: UIViewController, UITextFieldDelegate {
         UpperTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
         
     }
+    override func viewWillDisappear(animated: Bool) {
+      //  LowerTextField.resignFirstResponder()
+        
+        self.view.endEditing(true)
+    }
     func UpperTextSelect(){
         if (LowerTextField.isFirstResponder()){
             LowerTextField.resignFirstResponder()

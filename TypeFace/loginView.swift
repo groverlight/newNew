@@ -7,7 +7,6 @@ import Bolts
 import Contacts
 var phoneNumber:String = ""
 var code:String = ""
-
 class loginView: UIViewController {
     
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
@@ -16,6 +15,8 @@ class loginView: UIViewController {
     var viewIndex = 0
     @IBAction func nextButton(sender: UIButton) {
         print (phoneNumber)
+        self.PageView!.scrollToNextViewController()
+
         if (viewIndex == 0){
             PFAnonymousUtils.logInWithBlock({ (user, error) -> Void in
                 if (error != nil){
@@ -23,14 +24,18 @@ class loginView: UIViewController {
                 }
                 else{
                     print ("Anonymous user logged in ")
-                    let params = NSDictionary(object: phoneNumber, forKey: "phoneNumber")
-                    PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: params as [NSObject : AnyObject], block: {
-                        finished in
-                        
+                    PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: ["phoneNumber":phoneNumber], block: {
+                        (result: AnyObject?, error: NSError?) in
                         print ("sent verification code")
+                        if (error == nil){
+                        print ("no error")
                         //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("RedViewController") as! loginCode
                         //pageDelegate.scrollToNextViewController()
                         self.PageView!.scrollToNextViewController()
+                        }
+                        else{
+                            print (error)
+                        }
                     })
                 }
             
@@ -39,16 +44,21 @@ class loginView: UIViewController {
 
         }
         else if (viewIndex == 1){
-            let params: [String: String] = ["phoneNumber": phoneNumber, "phoneVerificationCode": code]
-            PFCloud.callFunctionInBackground("verifyPhoneNumber", withParameters: params, block: {
-                finished in
+            print (code)
+            PFCloud.callFunctionInBackground("verifyPhoneNumber", withParameters: ["phoneNumber": phoneNumber, "phoneVerificationCode": code], block: {
+                (result: AnyObject?, error: NSError?) in
                 print ("verified code")
-                self.PageView!.scrollToNextViewController()
+                if (error == nil){
+                    self.PageView!.scrollToNextViewController()
+                }
+                else{
+                    print (error)
+                }
             })
         }
         else if (viewIndex == 2){
+            print ("hi")
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
-
             frontWindow?.rootViewController = vc
 
         }
