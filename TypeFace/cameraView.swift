@@ -35,6 +35,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var filter:GPUImageMissEtikateFilter?
     var filteredImage: GPUImageView?
     var movieWriter: GPUImageMovieWriter?
+    var gradientView:GradientView = GradientView()
     var clipCount = 1
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
@@ -148,7 +149,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             }
             
             
-            let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, self.view.bounds.size.width, textHeight! ))
+            let newLabel = UILabel(frame: CGRectMake(20, scrollView.bounds.size.height + scrollHeight, self.view.bounds.size.width*0.8-20, textHeight! ))
             newLabel.font = self.cameraTextField.font
             newLabel.textColor = UIColor.whiteColor()
             ++scrollCounter
@@ -349,7 +350,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     @IBOutlet weak var cameraTextField: UITextView!
     override func viewDidLoad() {
-        self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
+       // self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
         self.view.clipsToBounds = true
         super.viewDidLoad()
 
@@ -357,18 +358,18 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
         self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
         print ("cameraView laoded")
+        // Initialize a gradient view
 
-        //self.cameraTextField.enablesReturnKeyAutomatically = false;
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
         longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
-        longPressRecognizer.minimumPressDuration = 1.5
+        //longPressRecognizer.minimumPressDuration =
         self.view.addGestureRecognizer(longPressRecognizer)
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
         cameraTextField.delegate = self
-
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
@@ -447,12 +448,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
-        
         typingButton.transform = CGAffineTransformMakeScale(1, 1)
-        typingButton.setTitle("start typing", forState: UIControlState.Normal)
+        if (self.cameraTextField.text.characters.count == 0){
+            typingButton.setTitle("start typing", forState: UIControlState.Normal)
 
-        emojiLabel.hidden = false
-        emojiLabel.text = "💬"
+            emojiLabel.hidden = false
+            emojiLabel.text = "💬"
+        }
         self.view.bringSubviewToFront(emojiLabel)
         super.viewWillAppear(animated)
         cameraTextField.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
@@ -609,7 +611,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
 
         
-        if(cameraTextField.text.characters.count - range.length + text.characters.count > 90){
+        if(cameraTextField.text.characters.count - range.length + text.characters.count > 70){
             //print ("too many")
             return false;
         }
@@ -645,10 +647,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             }
         }
         else{
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.cameraTextField.resignFirstResponder()
-                self.cameraTextField.returnKeyType = UIReturnKeyType.Default
-                self.cameraTextField.becomeFirstResponder()
+            if (self.cameraTextField.returnKeyType == UIReturnKeyType.Send){
+                
+                
+                
+                
             }
             
             
@@ -664,8 +667,34 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardWillHide (notification: NSNotification) {
        // print ("keyboardwillhide")
+        gradientView.hidden = true
         updateBottomLayoutConstraintWithNotification(notification)
         
+    }
+    func keyboardDidShow(notification: NSNotification) {
+        if (gradientView.hidden == true){
+            gradientView.hidden = false
+        }
+        
+        if (!(self.view.subviews.contains(gradientView))){
+            let userInfo = notification.userInfo!
+            let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+            let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+            gradientView.frame = CGRectMake(0,0,self.view.bounds.size.width,CGRectGetMinY(convertedKeyboardEndFrame))
+            gradientView.backgroundColor = UIColor.clearColor()
+            // Set the gradient colors
+            gradientView.colors = [UIColor.clearColor(), UIColor.blackColor()]
+            // Optionally set some locations
+            gradientView.locations = [0, 1]
+            
+            // Optionally change the direction. The default is vertical.
+            gradientView.direction = .Vertical
+            gradientView.alpha = 0.7
+
+            
+            // Add it as a subview in all of its awesome
+            self.view.insertSubview(gradientView, aboveSubview:filteredImage!)
+        }
     }
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         let textView = object as! UITextView
@@ -679,6 +708,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
+
         emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
 
         //print(CGRectGetMaxY(view.bounds))
@@ -787,7 +817,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             for subview in scrollView.subviews{
                 if subview is UILabel{
                     let olderLabel = subview as! UILabel
-                    let newerLabel = UILabel(frame: CGRectMake(0, scrollHeightOverlay, self.view.bounds.size.width, 25))
+                    let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*0.8-20, 25))
                     newerLabel.font = UIFont(name: "Avenir Next", size: 22)
                     newerLabel.textColor = UIColor.whiteColor()
                     newerLabel.text = olderLabel.text
@@ -846,7 +876,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 568.0:
             print("iPhone 5")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 28.5)
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
             print("iPhone 6")
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 33.5)

@@ -36,6 +36,8 @@
 		27862F121C6DA8B500C62AAE /* loginName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27862F111C6DA8B500C62AAE /* loginName.swift */; };
 		2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796D2F01C6D477B00FE580B /* WindowExtension.swift */; };
 		279FA71E1C76988300BFD30D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279FA71D1C76988300BFD30D /* MobileCoreServices.framework */; };
+		27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592A81C8FAD7E00D37E5B /* GradientView.swift */; };
+		27D592AD1C8FB78900D37E5B /* paddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592AC1C8FB78900D37E5B /* paddedLabel.swift */; };
 		27D859451C6BA5DC00F44985 /* sendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859441C6BA5DC00F44985 /* sendView.swift */; };
 		27D859471C6BA5E800F44985 /* activityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859461C6BA5E800F44985 /* activityView.swift */; };
 		27D92ED21C86994E00433112 /* lookup_amatorka.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D92ECD1C86994E00433112 /* lookup_amatorka.png */; };
@@ -156,6 +158,9 @@
 		27862F111C6DA8B500C62AAE /* loginName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginName.swift; sourceTree = "<group>"; };
 		2796D2F01C6D477B00FE580B /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		279FA71D1C76988300BFD30D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		27D592A71C8FAD7E00D37E5B /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		27D592A81C8FAD7E00D37E5B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		27D592AC1C8FB78900D37E5B /* paddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = paddedLabel.swift; sourceTree = "<group>"; };
 		27D859441C6BA5DC00F44985 /* sendView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendView.swift; sourceTree = "<group>"; };
 		27D859461C6BA5E800F44985 /* activityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = activityView.swift; sourceTree = "<group>"; };
 		27D92ECD1C86994E00433112 /* lookup_amatorka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_amatorka.png; sourceTree = "<group>"; };
@@ -306,6 +311,8 @@
 				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
 				27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */,
 				27D92ED11C86994E00433112 /* lookup.png */,
+				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
+				27D592A81C8FAD7E00D37E5B /* GradientView.swift */,
 				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
 				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
 				27E400FD1C7FCC4F00C91017 /* CircleView.h */,
@@ -316,6 +323,7 @@
 				2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */,
 				27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */,
 				2796D2F01C6D477B00FE580B /* WindowExtension.swift */,
+				27D592AC1C8FB78900D37E5B /* paddedLabel.swift */,
 			);
 			name = misc;
 			sourceTree = "<group>";
@@ -559,6 +567,7 @@
 				27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */,
 				27862F121C6DA8B500C62AAE /* loginName.swift in Sources */,
 				27862F101C6DA8A700C62AAE /* loginCode.swift in Sources */,
+				27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */,
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */,
 				273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */,
@@ -566,6 +575,7 @@
 				2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */,
 				27E400FF1C7FCC4F00C91017 /* CircleView.m in Sources */,
 				270A90611C7D1779006FC3A0 /* playerView.swift in Sources */,
+				27D592AD1C8FB78900D37E5B /* paddedLabel.swift in Sources */,
 				27862F0E1C6DA89A00C62AAE /* loginPhone.swift in Sources */,
 				27D859471C6BA5E800F44985 /* activityView.swift in Sources */,
 			);

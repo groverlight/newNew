@@ -5,3 +5,4 @@
 #import <pop/POP.h>
 #import "CircleView.h"
 #import "BDKCollectionIndexView.h"
+#import "GradientView.h"

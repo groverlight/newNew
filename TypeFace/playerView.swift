@@ -77,43 +77,39 @@ class playerView: UIViewController {
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
-        let scrollLabel = UILabel(frame: CGRectMake(20,2*self.view.bounds.size.height/3, self.view.bounds.size.width,50))
+        let scrollLabel = PaddingLabel()
+        scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*0.8-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
+    
         scrollLabel.font = labelFont
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
+        scrollLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
+        scrollLabel.layer.cornerRadius = 8
+        scrollLabel.layer.masksToBounds = true
+        //scrollLabel.alpha = 0.5
+        scrollLabel.backgroundColor = getRandomColor()
+
+        scrollLabel.setLineHeight(0)
+       // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.labelView.addSubview(scrollLabel)
         self.view.bringSubviewToFront(labelView)
-       /* UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration)) { () -> Void in
-            scrollLabel.frame.origin.y = self.view.bounds.size.height/4
-        }*/
-        let labelAnim = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
-        labelAnim.duration = CMTimeGetSeconds(avAsset.duration)
-        labelAnim.toValue = self.view.bounds.size.height/4
-        labelAnim.completionBlock = { (animation, finished) in
-            if (finished){
-                //print ("finished")
-                UIView.animateWithDuration(1.25, animations: { () -> Void in
-                    scrollLabel.alpha = 0
-                    scrollLabel.frame.origin.y =  scrollLabel.frame.origin.y  - 100
-                    }, completion: { (finished) -> Void in
-                        scrollLabel.removeFromSuperview()
-                })
-               /* let labelCloseAlpha = POPBasicAnimation (propertyNamed: kPOPViewAlpha)
-                labelCloseAlpha.toValue = 0
-                labelCloseAlpha.duration = 1.25
-                let labelCloseY = POPBasicAnimation (propertyNamed: kPOPLayerPositionY)
-                labelCloseY.duration = 1.25
-                labelCloseY.toValue = self.view.bounds.size.height/6
-                scrollLabel.pop_addAnimation(labelCloseAlpha, forKey: "alpha")
-                scrollLabel.pop_addAnimation(labelCloseY, forKey: "Y")*/
-             }
-            }
-        scrollLabel.pop_addAnimation(labelAnim, forKey: "scrollUP")
 
-                
-                
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [UIViewAnimationOptions.CurveEaseOut], animations: { () -> Void in
+            scrollLabel.transform = CGAffineTransformMakeScale(1, 1)
+            }, completion: nil)
+        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 2, delay: 0, options: [UIViewAnimationOptions.CurveLinear], animations: { () -> Void in
+            scrollLabel.frame.origin.y = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height//scrollLabel.frame.origin.y - self.view.bounds.size.height * 0.5
+            
+            },completion: {(finished) -> Void in
+                scrollLabel.removeFromSuperview()})
+        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 2, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
+                       scrollLabel.alpha = 0
+            },completion: nil)
+
+        
+        
         
           --numOfClips
     }
@@ -182,7 +178,7 @@ class playerView: UIViewController {
              labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 568.0:
             print("iPhone 5")
-             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
+             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
             print("iPhone 6")
              labelFont = UIFont(name: "AvenirNext-Medium", size: 33.5)
@@ -193,7 +189,33 @@ class playerView: UIViewController {
             print("not an iPhone")
             
         }
+
+
+    }
+    func getRandomColor() -> UIColor{
         
+        let randomRed:CGFloat = CGFloat(drand48())
         
+        let randomGreen:CGFloat = CGFloat(drand48())
+        
+        let randomBlue:CGFloat = CGFloat(drand48())
+        
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 0.5)
+        
+    }
+}
+
+extension UILabel {
+    
+    func setLineHeight(lineHeight: CGFloat) {
+        let text = self.text
+        if let text = text {
+            let attributeString = NSMutableAttributedString(string: text)
+            let style = NSMutableParagraphStyle()
+            style.lineHeightMultiple = 0.9
+            style.lineSpacing = lineHeight
+            attributeString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, text.characters.count))
+            self.attributedText = attributeString
+        }
     }
 }
