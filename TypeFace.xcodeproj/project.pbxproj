@@ -20,6 +20,10 @@
 		2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4751C6AF2A500B369E7 /* pageView.swift */; };
 		2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4761C6AF2A500B369E7 /* loginView.swift */; };
 		2742A47B1C6AF2C300B369E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A47A1C6AF2C300B369E7 /* Main.storyboard */; };
+		2757FC831C92254D00050C11 /* RandomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC821C92254D00050C11 /* RandomColor.swift */; };
+		2757FC891C92256300050C11 /* ColorDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC861C92256300050C11 /* ColorDefinition.swift */; };
+		2757FC8A1C92256300050C11 /* Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC871C92256300050C11 /* Hue.swift */; };
+		2757FC8B1C92256300050C11 /* Luminosity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC881C92256300050C11 /* Luminosity.swift */; };
 		27862EF21C6D9B0800C62AAE /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27862EF01C6D9B0800C62AAE /* Bolts.framework */; };
 		27862EF31C6D9B0800C62AAE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27862EF11C6D9B0800C62AAE /* Parse.framework */; };
 		27862EF51C6D9B2700C62AAE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27862EF41C6D9B2700C62AAE /* AudioToolbox.framework */; };
@@ -142,6 +146,11 @@
 		2742A4761C6AF2A500B369E7 /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
 		2742A47A1C6AF2C300B369E7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypeFace-Bridging-Header.h"; sourceTree = "<group>"; };
+		2757FC811C92254D00050C11 /* RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomColor.h; sourceTree = "<group>"; };
+		2757FC821C92254D00050C11 /* RandomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomColor.swift; sourceTree = "<group>"; };
+		2757FC861C92256300050C11 /* ColorDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDefinition.swift; sourceTree = "<group>"; };
+		2757FC871C92256300050C11 /* Hue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hue.swift; sourceTree = "<group>"; };
+		2757FC881C92256300050C11 /* Luminosity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Luminosity.swift; sourceTree = "<group>"; };
 		27862EF01C6D9B0800C62AAE /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		27862EF11C6D9B0800C62AAE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		27862EF41C6D9B2700C62AAE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -311,6 +320,11 @@
 				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
 				27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */,
 				27D92ED11C86994E00433112 /* lookup.png */,
+				2757FC861C92256300050C11 /* ColorDefinition.swift */,
+				2757FC871C92256300050C11 /* Hue.swift */,
+				2757FC881C92256300050C11 /* Luminosity.swift */,
+				2757FC811C92254D00050C11 /* RandomColor.h */,
+				2757FC821C92254D00050C11 /* RandomColor.swift */,
 				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
 				27D592A81C8FAD7E00D37E5B /* GradientView.swift */,
 				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
@@ -563,6 +577,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2757FC8B1C92256300050C11 /* Luminosity.swift in Sources */,
 				2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */,
 				27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */,
 				27862F121C6DA8B500C62AAE /* loginName.swift in Sources */,
@@ -571,10 +586,13 @@
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */,
 				273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */,
+				2757FC8A1C92256300050C11 /* Hue.swift in Sources */,
 				27D859451C6BA5DC00F44985 /* sendView.swift in Sources */,
 				2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */,
 				27E400FF1C7FCC4F00C91017 /* CircleView.m in Sources */,
 				270A90611C7D1779006FC3A0 /* playerView.swift in Sources */,
+				2757FC891C92256300050C11 /* ColorDefinition.swift in Sources */,
+				2757FC831C92254D00050C11 /* RandomColor.swift in Sources */,
 				27D592AD1C8FB78900D37E5B /* paddedLabel.swift in Sources */,
 				27862F0E1C6DA89A00C62AAE /* loginPhone.swift in Sources */,
 				27D859471C6BA5E800F44985 /* activityView.swift in Sources */,

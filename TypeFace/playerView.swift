@@ -78,33 +78,34 @@ class playerView: UIViewController {
         self.view.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
         let scrollLabel = PaddingLabel()
-        scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*0.8-20,50)
+        scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
     
         scrollLabel.font = labelFont
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
-        scrollLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
         scrollLabel.layer.cornerRadius = 8
         scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
-        scrollLabel.backgroundColor = getRandomColor()
+        scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
 
         scrollLabel.setLineHeight(0)
        // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.labelView.addSubview(scrollLabel)
         self.view.bringSubviewToFront(labelView)
-
-        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [UIViewAnimationOptions.CurveEaseOut], animations: { () -> Void in
-            scrollLabel.transform = CGAffineTransformMakeScale(1, 1)
-            }, completion: nil)
-        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 2, delay: 0, options: [UIViewAnimationOptions.CurveLinear], animations: { () -> Void in
+        let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
+        
+        labelSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
+        labelSpring.velocity = NSValue(CGPoint: CGPointMake(6, 6))
+        labelSpring.springBounciness = 20.0
+        scrollLabel.pop_addAnimation(labelSpring, forKey: "spring")
+        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveLinear], animations: { () -> Void in
             scrollLabel.frame.origin.y = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height//scrollLabel.frame.origin.y - self.view.bounds.size.height * 0.5
             
             },completion: {(finished) -> Void in
                 scrollLabel.removeFromSuperview()})
-        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 2, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
+        UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
                        scrollLabel.alpha = 0
             },completion: nil)
 
@@ -137,12 +138,6 @@ class playerView: UIViewController {
                 print("bad")
             }
             arrayofText.removeAllObjects()
-            //if you have more UIViews, use an insertS
-            //self.dismissViewControllerAnimated(true, completion: nil)
-            /*self.view.bringSubviewToFront(blurBackground)
-            UIView.animateWithDuration(1.5, animations: {
-                self.blurBackground.alpha = 0.9
-            })*/
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
@@ -175,16 +170,16 @@ class playerView: UIViewController {
         switch height {
         case 480.0:
             print("iPhone 3,4")
-             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 568.0:
             print("iPhone 5")
-             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
             print("iPhone 6")
-             labelFont = UIFont(name: "AvenirNext-Medium", size: 33.5)
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
             print("iPhone 6+")
-             labelFont = UIFont(name: "AvenirNext-Medium", size: 37 )
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 32 )
         default:
             print("not an iPhone")
             
@@ -192,17 +187,7 @@ class playerView: UIViewController {
 
 
     }
-    func getRandomColor() -> UIColor{
-        
-        let randomRed:CGFloat = CGFloat(drand48())
-        
-        let randomGreen:CGFloat = CGFloat(drand48())
-        
-        let randomBlue:CGFloat = CGFloat(drand48())
-        
-        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 0.5)
-        
-    }
+
 }
 
 extension UILabel {
