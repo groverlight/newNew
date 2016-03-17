@@ -9,8 +9,7 @@
 import AVFoundation
 import UIKit
 import GPUImage
-import Parse
-import Bolts
+
 
 
 var arrayofText: NSMutableArray = []

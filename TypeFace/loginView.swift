@@ -2,59 +2,41 @@
 /// Root View Controller
 ///
 import UIKit
-import Parse
-import Bolts
+
 import Contacts
+import CloudKit
 var phoneNumber:String = ""
 var code:String = ""
+var cloudManager: CloudManager = CloudManager()
+var userFull: User?
 class loginView: UIViewController {
-    
+    var publicDB = CKContainer.defaultContainer().publicCloudDatabase
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     var viewIndex = 0
     @IBAction func nextButton(sender: UIButton) {
-        print (phoneNumber)
-        self.PageView!.scrollToNextViewController()
-
+               print (phoneNumber)
+       
         if (viewIndex == 0){
-            PFAnonymousUtils.logInWithBlock({ (user, error) -> Void in
-                if (error != nil){
-                    print("Anonymous login failed.")
+            self.iCloudLogin({ (success) -> () in
+                if success {
+                    self.PageView!.scrollToNextViewController()
+                } else {
+                    // TODO error handling
                 }
-                else{
-                    print ("Anonymous user logged in ")
-                    PFCloud.callFunctionInBackground("sendVerificationCode", withParameters: ["phoneNumber":phoneNumber], block: {
-                        (result: AnyObject?, error: NSError?) in
-                        print ("sent verification code")
-                        if (error == nil){
-                        print ("no error")
-                        //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("RedViewController") as! loginCode
-                        //pageDelegate.scrollToNextViewController()
-                        self.PageView!.scrollToNextViewController()
-                        }
-                        else{
-                            print (error)
-                        }
-                    })
-                }
-            
-        })
+            })
 
 
         }
         else if (viewIndex == 1){
-            print (code)
-            PFCloud.callFunctionInBackground("verifyPhoneNumber", withParameters: ["phoneNumber": phoneNumber, "phoneVerificationCode": code], block: {
-                (result: AnyObject?, error: NSError?) in
-                print ("verified code")
-                if (error == nil){
-                    self.PageView!.scrollToNextViewController()
-                }
-                else{
-                    print (error)
-                }
-            })
+            let greatID = CKRecordID(recordName: phoneNumber)
+            
+            publicDB.fetchRecordWithID(greatID) { fetchedPlace, error in
+       
+            }
+            self.PageView!.scrollToNextViewController()
+
         }
         else if (viewIndex == 2){
             print ("hi")
@@ -122,6 +104,33 @@ class loginView: UIViewController {
         nextButtonBot.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
  
     }
+    private func iCloudLogin(completionHandler: (success: Bool) -> ()) {
+        cloudManager.requestPermission { (granted) -> () in
+            if !granted {
+                let iCloudAlert = UIAlertController(title: "iCloud Error", message: "There was an error connecting to iCloud. Check iCloud settings by going to Settings > iCloud.", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                
+                iCloudAlert.addAction(okAction)
+                self.presentViewController(iCloudAlert, animated: true, completion: nil)
+            } else {
+                cloudManager.getUser({ (success, let user) -> () in
+                    if success {
+                        userFull = user
+                  
+                        cloudManager.getUserInfo(userFull!, completionHandler: { (success, user) -> () in
+                            if success {
+                            
+                                completionHandler(success: true)
+                            }
+                        })
+                    } else {
+                        // TODO error handling
+                    }
+                })
+            }
+        }
+    }
+
 }
 
 extension loginView: pageDelegate {

@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Parse
-import Bolts
+
 
 class loginCode: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var codeTextField: UITextField!

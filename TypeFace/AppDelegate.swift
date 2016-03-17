@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Parse
-import Bolts
+
 
 @UIApplicationMain
 
@@ -19,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        Parse.enableLocalDatastore()
-        Parse.setApplicationId("CP7uHBTadzC2UNvEp2yhpAIv1GEM1gdiPHuzwtpr",
-            clientKey: "DQj2oBjtZZqSHpbcPzG20poPjEdwaVxI1xvZ5NzT")
+
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
         let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
@@ -29,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
 
-        if (false
-            ){
+        if (true){
                 
                 frontWindow?.rootViewController = vc
         }
@@ -47,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
         blurView.frame = UIScreen.mainScreen().bounds
         BlurSurface.addSubview(blurView)
-        //BlurSurface.alpha = 0
-        print(BlurSurface)
         frontWindow?.insertSubview(BlurSurface, atIndex: 0)
         return true
     }

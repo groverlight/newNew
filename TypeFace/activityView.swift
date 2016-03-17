@@ -8,8 +8,7 @@
 //
 
 import UIKit
-import Parse
-import Bolts
+import CloudKit
 var friends : [NSDictionary] = []
 var activities : [NSDictionary] = []
 class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource  {
