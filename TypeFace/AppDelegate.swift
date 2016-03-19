@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
 
-        if (true){
+        if (userFull == nil){
                 
                 frontWindow?.rootViewController = vc
         }

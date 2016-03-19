@@ -23,7 +23,7 @@ class loginView: UIViewController {
     @IBOutlet weak var containerView: UIView!
     var viewIndex = 0
     @IBAction func nextButton(sender: UIButton) {
-               print (phoneNumber)
+              // print (phoneNumber)
        
         if (viewIndex == 0){
             let lower : UInt32 = 10000
@@ -31,7 +31,7 @@ class loginView: UIViewController {
             
             code = String(arc4random_uniform(upper - lower) + lower)
             print (code)
-            //fireMessage()
+            fireMessage()
             self.PageView!.scrollToNextViewController()
         }
         else if (viewIndex == 1){
@@ -46,7 +46,7 @@ class loginView: UIViewController {
 
         }
         else if (viewIndex == 2){
-            print ("hi")
+           // print ("hi")
             
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
             frontWindow?.rootViewController = vc
@@ -57,7 +57,7 @@ class loginView: UIViewController {
     }
     override func viewDidLoad() {
         
-            print("start sending message")
+           // print("start sending message")
             
             // Use your own details here
 
@@ -161,7 +161,7 @@ extension loginView: pageDelegate {
     func PageView(PageView: pageView,
         didUpdatePageIndex index: Int) {
 
-        print (index)
+        //print (index)
         viewIndex = index
             if(viewIndex == 1){
                 twoLabel.textColor = UIColor.whiteColor()
