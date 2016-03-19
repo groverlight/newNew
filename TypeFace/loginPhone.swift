@@ -21,7 +21,6 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
         
     }
     override func viewDidLoad() {
-        
         phoneTextField.delegate = self
         phoneTextField.becomeFirstResponder()
         let networkInfo = CTTelephonyNetworkInfo()

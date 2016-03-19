@@ -72,8 +72,14 @@ class loginCode: UIViewController, UITextFieldDelegate {
         }
        // print (newDigit)
 
+        if ( code == textField.text! + string){
+                NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
         
-        code = textField.text! + string
+
+        
         return true
     }
 

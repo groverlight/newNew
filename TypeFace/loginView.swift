@@ -9,25 +9,30 @@ var phoneNumber:String = ""
 var code:String = ""
 var cloudManager: CloudManager = CloudManager()
 var userFull: User?
+var twilioView: UIWebView = UIWebView(frame: CGRect.zero)
 class loginView: UIViewController {
     var publicDB = CKContainer.defaultContainer().publicCloudDatabase
+    
+    @IBOutlet weak var oneLabel: UILabel!
+    
+    @IBOutlet weak var twoLabel: UILabel!
+    
+    @IBOutlet weak var threeLabel: UILabel!
+    @IBOutlet weak var goButton: UIButton!
     @IBOutlet weak var nextButtonBot: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var pageControl: UIPageControl!
     var viewIndex = 0
     @IBAction func nextButton(sender: UIButton) {
                print (phoneNumber)
        
         if (viewIndex == 0){
-            self.iCloudLogin({ (success) -> () in
-                if success {
-                    self.PageView!.scrollToNextViewController()
-                } else {
-                    // TODO error handling
-                }
-            })
-
-
+            let lower : UInt32 = 10000
+            let upper : UInt32 = 99999
+            
+            code = String(arc4random_uniform(upper - lower) + lower)
+            print (code)
+            //fireMessage()
+            self.PageView!.scrollToNextViewController()
         }
         else if (viewIndex == 1){
             let greatID = CKRecordID(recordName: phoneNumber)
@@ -36,26 +41,49 @@ class loginView: UIViewController {
        
             }
             self.PageView!.scrollToNextViewController()
+ 
+
 
         }
         else if (viewIndex == 2){
             print ("hi")
+            
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
             frontWindow?.rootViewController = vc
-
+            
         }
         
         
     }
     override func viewDidLoad() {
-        panGesture?.enabled = false
+        
+            print("start sending message")
+            
+            // Use your own details here
 
+        panGesture?.enabled = false
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "moveNext:", name:"move", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
        // contactsync()
         
     }
+    func moveNext(notification: NSNotification){
+    self.PageView!.scrollToNextViewController()
+       /* dispatch_async(dispatch_get_main_queue()) {
+            self.iCloudLogin({ (success) -> () in
+                if success {
+                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
+                    frontWindow?.rootViewController = vc
+                    print ("success")
+                } else {
+                    ("error")
+                    // TODO error handling
+                }
+            })
+        }*/
 
+    }
     var PageView: pageView? {
         didSet {
             PageView?.pageViewDelegate = self
@@ -67,7 +95,22 @@ class loginView: UIViewController {
             self.PageView = PageView
         }
     }
-  
+
+    func fireMessage(){
+        let twilioSID = "ACf729e40728e0066539061b719410d14e"
+        let twilioSecret = "2a8412ba5e572dfc451d6e6afe9d8269"
+        let fromNumber = "3105893655"
+        let toNumber = phoneNumber
+        let message = "Your code is \(code)"
+        // Build the request
+        let request = NSMutableURLRequest(URL: NSURL(string:"https://\(twilioSID):\(twilioSecret)@api.twilio.com/2010-04-01/Accounts/\(twilioSID)/SMS/Messages")!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = "From=\(fromNumber)&To=\(toNumber)&Body=\(message)".dataUsingEncoding(NSUTF8StringEncoding)
+        
+        // Build the completion block and send the request
+        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+        }).resume()
+    }
     func numberFormatter(var mobileNumber: NSString) -> NSString {
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
@@ -108,10 +151,15 @@ class loginView: UIViewController {
         cloudManager.requestPermission { (granted) -> () in
             if !granted {
                 let iCloudAlert = UIAlertController(title: "iCloud Error", message: "There was an error connecting to iCloud. Check iCloud settings by going to Settings > iCloud.", preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-                
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+                let url = NSURL(string: "prefs:root=CASTLE")
+                    UIApplication.sharedApplication().openURL(url!)
+                })
+  
                 iCloudAlert.addAction(okAction)
-                self.presentViewController(iCloudAlert, animated: true, completion: nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                        self.presentViewController(iCloudAlert, animated: true, completion: nil)
+                }
             } else {
                 cloudManager.getUser({ (success, let user) -> () in
                     if success {
@@ -137,17 +185,30 @@ extension loginView: pageDelegate {
     
     func PageView(PageView: pageView,
         didUpdatePageCount count: Int) {
-        pageControl.numberOfPages = count
+
     }
     
     func PageView(PageView: pageView,
         didUpdatePageIndex index: Int) {
-        pageControl.currentPage = index
+
         print (index)
         viewIndex = index
+            if(viewIndex == 1){
+                twoLabel.textColor = UIColor.whiteColor()
+                twoLabel.backgroundColor = UIColor.blackColor()
+                twoLabel.layer.backgroundColor = UIColor.blackColor().CGColor
+                goButton.hidden = true
+            }
+            else if (viewIndex == 2){
+                threeLabel.textColor = UIColor.whiteColor()
+                threeLabel.layer.backgroundColor = UIColor.blackColor().CGColor
+
+                goButton.hidden = false
+            }
     }
     
 }
+
 
 
 
