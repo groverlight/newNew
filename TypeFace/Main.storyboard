@@ -168,13 +168,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlo-o0-8Hx">
-                                <rect key="frame" x="277" y="193" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlo-o0-8Hx">
+                                <rect key="frame" x="243" y="243" width="115" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="WcB-G4-lw8"/>
+                                    <constraint firstAttribute="width" constant="115" id="laR-d1-zuh"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="icloud.png"/>
+                                <connections>
+                                    <action selector="iCloudAction:" destination="hKI-4s-HmT" eventType="touchUpInside" id="gfS-qM-SKn"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up with iCloud" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TF8-Pd-VDl">
+                                <rect key="frame" x="226" y="192" width="148" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="centerY" secondItem="HEV-hX-Obr" secondAttribute="centerY" id="89n-Bg-saE"/>
+                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="top" secondItem="TF8-Pd-VDl" secondAttribute="bottom" constant="30" id="FwG-Uf-oet"/>
+                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="LPt-he-y8C"/>
+                            <constraint firstItem="TF8-Pd-VDl" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="NQS-n9-2B6"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iCloudButton" destination="Hlo-o0-8Hx" id="nTU-Lf-skq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rnb-xd-tbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -931,6 +953,9 @@
             <point key="canvasLocation" x="125" y="526"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icloud.png" width="380" height="384"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8Ba-Ul-9g5"/>
     </inferredMetricsTieBreakers>

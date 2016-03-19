@@ -147,37 +147,7 @@ class loginView: UIViewController {
         nextButtonBot.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25
  
     }
-    private func iCloudLogin(completionHandler: (success: Bool) -> ()) {
-        cloudManager.requestPermission { (granted) -> () in
-            if !granted {
-                let iCloudAlert = UIAlertController(title: "iCloud Error", message: "There was an error connecting to iCloud. Check iCloud settings by going to Settings > iCloud.", preferredStyle: UIAlertControllerStyle.Alert)
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
-                let url = NSURL(string: "prefs:root=CASTLE")
-                    UIApplication.sharedApplication().openURL(url!)
-                })
-  
-                iCloudAlert.addAction(okAction)
-                dispatch_async(dispatch_get_main_queue()) {
-                        self.presentViewController(iCloudAlert, animated: true, completion: nil)
-                }
-            } else {
-                cloudManager.getUser({ (success, let user) -> () in
-                    if success {
-                        userFull = user
-                  
-                        cloudManager.getUserInfo(userFull!, completionHandler: { (success, user) -> () in
-                            if success {
-                            
-                                completionHandler(success: true)
-                            }
-                        })
-                    } else {
-                        // TODO error handling
-                    }
-                })
-            }
-        }
-    }
+
 
 }
 
@@ -202,8 +172,8 @@ extension loginView: pageDelegate {
             else if (viewIndex == 2){
                 threeLabel.textColor = UIColor.whiteColor()
                 threeLabel.layer.backgroundColor = UIColor.blackColor().CGColor
-
-                goButton.hidden = false
+                threeLabel.backgroundColor = UIColor.blackColor()
+                goButton.hidden = true
             }
     }
     
