@@ -7,43 +7,71 @@
 //
 
 import UIKit
-
-
+import CloudKit
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     //var window: UIWindow?
     //var frontWindow: UIWindow?
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
+       window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
         let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
 
         //if (PFUser.currentUser() == nil) // needs some condition to go to login
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
-
-        if (userFull == nil){
-                
-                frontWindow?.rootViewController = vc
-        }
-        else{
+        let defaultContainer = CKContainer.defaultContainer()
+        defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
             
-            frontWindow?.rootViewController = front;
-        }
-        frontWindow?.windowLevel = UIWindowLevelStatusBar
-        frontWindow?.startSwipeToOpenMenu()
-        frontWindow?.makeKeyAndVisible();
-        application.statusBarStyle = .LightContent
-        let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let blurView = UIVisualEffectView(effect: blur)
-        let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
-        blurView.frame = UIScreen.mainScreen().bounds
-        BlurSurface.addSubview(blurView)
-        frontWindow?.insertSubview(BlurSurface, atIndex: 0)
+            let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
+            privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
+                print (userRecord)
+                userFull = User(userRecordID: (userRecord?.recordID)!)
+                dispatch_async(dispatch_get_main_queue()){
+                    frontWindow?.windowLevel = UIWindowLevelStatusBar
+                    frontWindow?.startSwipeToOpenMenu()
+                    frontWindow?.makeKeyAndVisible();
+                    application.statusBarStyle = .LightContent
+                    }
+                if (userRecord!["phoneNumber"] == nil){
+                    dispatch_async(dispatch_get_main_queue()) {
+
+                    frontWindow?.rootViewController = vc
+                    }
+                }
+                else{
+                    defaultContainer.discoverUserInfoWithUserRecordID(userRecord!.recordID) { (info, fetchError) in
+                     
+                            userFull?.firstName = info!.displayContact!.givenName
+                            userFull?.lastName = info!.displayContact!.familyName
+                            userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+                            print (userFull)
+                        
+                        }
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+
+                    frontWindow?.rootViewController = front
+                    
+                    let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    let blurView = UIVisualEffectView(effect: blur)
+                    blurView.frame = UIScreen.mainScreen().bounds
+                    blurView.alpha = 1
+                    frontWindow?.insertSubview(blurView, atIndex: 0)
+                    
+                    }
+
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    self.window?.rootViewController!.view.hidden = false
+                }
+            })}
+
+        
         return true
     }
 

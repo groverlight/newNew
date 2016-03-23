@@ -9,22 +9,91 @@
 
 import UIKit
 import CloudKit
+import AVFoundation
+import AVKit
+import Foundation
 var friends : [NSDictionary] = []
 var activities : [NSDictionary] = []
 class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var activityTable: UITableView!
     @IBOutlet weak var noFriendsView: UIView!
+    var numOfClips = 0
+    var totalReceivedClips = 0
+    var fileManager: NSFileManager? = NSFileManager()
+    var labelFont: UIFont?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if (activities.count == 0)
         {
-            noFriendsView.hidden = false
+            //noFriendsView.hidden = false
+        }
+
+    }
+    override func viewDidAppear(animated: Bool) {
+        print ("wild activityview will appear")
+
+
+        if (userFull?.phoneNumber != nil){
+            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+            let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
+            print (searchTerm)
+            let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
+            let query = CKQuery(recordType: "Message", predicate: predicate)
+            
+            publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
+                // ...
+                if (error == nil){
+                   
+                for result in results!{
+                  
+                    let videos = result["videos"] as? Array<CKAsset>
+                    for video in videos!{
+                                NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
+                        print (video)
+                        dispatch_async(dispatch_get_main_queue()) {
+                        let assetURL = video.fileURL as NSURL!
+                        let videoData = NSData(contentsOfURL: assetURL!) 
+                        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                        let destinationPath = documentsPath.stringByAppendingPathComponent("filename.MOV")
+                        NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
+                        print(destinationPath)
+                        let fileURL = NSURL(fileURLWithPath: destinationPath)
+                        let avasset = AVAsset(URL: fileURL) as! AVURLAsset
+                        print (avasset)
+                        let playerItem = AVPlayerItem(asset: avasset)
+                        print (playerItem)
+                        let player = AVPlayer(playerItem: playerItem)
+                        let avLayer = AVPlayerLayer(player: player)
+                        avLayer.frame = self.view.bounds
+                        avLayer.backgroundColor = UIColor.blackColor().CGColor
+                        self.view.layer.addSublayer(avLayer)
+                        player.seekToTime(kCMTimeZero)
+                        player.play()
+                
+                        
+                        print (avasset.duration)
+                        }
+                    
+                    }
+                    //let array = result["videos"]
+                    //print (array)
+                    
+                        
+                    
+                    }
+                
+
+                }
+                else{
+                    print (error)
+                }
+        
+            }
         }
     }
-
-    override func viewDidAppear(animated: Bool) {
-
+    func playerItemDidReachEnd(notification: NSNotification){
+        print ("video ended")
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
@@ -37,5 +106,16 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
+    
+   
+}
 
+extension String {
+    
+    func stringByAppendingPathComponent(path: String) -> String {
+        
+        let nsSt = self as NSString
+        
+        return nsSt.stringByAppendingPathComponent(path)
+    }
 }

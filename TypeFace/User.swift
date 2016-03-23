@@ -13,7 +13,7 @@ class User: NSObject {
     var userRecordID: CKRecordID
     var firstName: String?
     var lastName: String?
-
+    var phoneNumber: String?
     
     init(userRecordID: CKRecordID) {
         self.userRecordID = userRecordID

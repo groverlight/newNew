@@ -786,6 +786,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func keyboardDidShow(notification: NSNotification) {
+        //print ("did show")
         if (gradientView.hidden == true){
             gradientView.hidden = false
         }
@@ -807,7 +808,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
             
             // Add it as a subview in all of its awesome
-           // self.view.insertSubview(gradientView, aboveSubview:filteredImage!)
+            self.view.insertSubview(gradientView, aboveSubview:filteredImage!)
         }
     }
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -829,7 +830,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         if (self.cameraTextField.returnKeyType == UIReturnKeyType.Default){
         if (CGRectGetMaxY(view.bounds) != CGRectGetMinY(convertedKeyboardEndFrame)){
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                print ("uh oh")
+                //print ("uh oh")
                 self.bottomScrollView.constant  = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) +
                     self.typingButton.bounds.height + 11 + 10 + 50
                 self.textViewBottom.constant = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + self.typingButton.bounds.height + 10 + 11

@@ -55,8 +55,15 @@ extension UIWindow{
         case .Changed:
             
             //print(frontWindow?.subviews[(frontWindow?.subviews.endIndex)!-1])
-
-            frontWindow?.subviews[0].alpha = frame.origin.y/300;
+            for subview in (frontWindow?.subviews)!{
+                if (subview is UIVisualEffectView)
+                {
+                    frontWindow?.bringSubviewToFront(subview)
+                    subview.alpha = frame.origin.y/300
+                    //print (subview)
+                }
+            }
+            //frontWindow?.subviews[0].alpha = frame.origin.y/300;
             let val = (frame.origin.y * ((1 - kTransform) / UIScreen.mainScreen().bounds.height)) + kTransform;
             let t1 = CATransform3DScale(CATransform3DIdentity, val , val , 1);
             
@@ -77,9 +84,16 @@ extension UIWindow{
             if frame.origin.y >= 70 {
                 finalOrigin.y = CGRectGetHeight(UIScreen.mainScreen().bounds) - kHeaderHeight;
                 addTapGestureToClose()
-                frontWindow?.subviews[0].alpha = 1;
+                for subview in (frontWindow?.subviews)!{
+                    if (subview is UIVisualEffectView)
+                    {
+                        frontWindow?.bringSubviewToFront(subview)
+                        subview.alpha = 1
+                        //print (subview)
+                    }
+                }
                 frontWindow?.rootViewController?.viewWillDisappear(false)
-
+                backWindow?.rootViewController?.viewDidAppear(false)
 
             }
             else{
@@ -88,7 +102,14 @@ extension UIWindow{
                // statusBarStyle = UIStatusBarStyle.Default
                
                 removeTapGestureToClose()
-                frontWindow?.subviews[0].alpha = 0;
+                for subview in (frontWindow?.subviews)!{
+                    if (subview is UIVisualEffectView)
+                    {
+                        frontWindow?.bringSubviewToFront(subview)
+                        subview.alpha = 0
+                        //print (subview)
+                    }
+                }
                 frontWindow?.rootViewController?.viewWillAppear(false)
                 
 
@@ -121,7 +142,14 @@ extension UIWindow{
     private func close(){
         //print ("close")
         frontWindow?.rootViewController?.viewWillAppear(false)
-        frontWindow?.subviews[1].alpha = 0
+        for subview in (frontWindow?.subviews)!{
+            if (subview is UIVisualEffectView)
+            {
+                frontWindow?.bringSubviewToFront(subview)
+                subview.alpha = 0
+                //print (subview)
+            }
+        }
         // frontWindow?.rootViewController?.view.subviews[2]
         UIView.animateWithDuration(kAnimationDuration + 0.1, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
             

@@ -18,8 +18,14 @@ class loginName: UIViewController, UITextFieldDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
                     frontWindow?.rootViewController = vc
+                    let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                    let blurView = UIVisualEffectView(effect: blur)
+                    blurView.frame = UIScreen.mainScreen().bounds
+                    
+                    frontWindow?.insertSubview(blurView, atIndex: 0)
+
                 }
-                print ("success")
+               // print ("success")
             } else {
                 ("error")
                 // TODO error handling

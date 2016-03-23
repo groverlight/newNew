@@ -8,7 +8,7 @@
 
 import UIKit
 import Contacts
-
+import CloudKit
 class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCollectionIndexViewDelegate {
     @IBOutlet weak var sendTable: UITableView!
 
@@ -19,8 +19,41 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     @IBOutlet weak var navBar: UINavigationBar!
     var wentPlayer = false
     @IBAction func goSend(sender: AnyObject) {
-      //  self.dismissViewControllerAnimated(true, completion: nil)
+
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
+       
+
+        for path in checkedIndexPath {
+            
+            let contact = sectionsArray[path.section][path.row] as! [String:String]
+            print (contact)
+            if (contact["phoneNumber"] != nil){
+                print("composing message...")
+                var asset:CKAsset
+                var assetArray = [CKAsset]()
+                for var i = 0; i < arrayofText.count; ++i{
+                    asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
+                    assetArray.append(asset)
+                }
+                print (assetArray)
+                
+                
+                let message = CKRecord(recordType: "Message")
+                message["videos"] = assetArray
+                message["text"] = arrayofText
+                message["toUser"] = "7022808866"//contact["phoneNumber"]
+                message["fromUser"]  = String(userFull?.phoneNumber!.characters.suffix(10))
+                let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                publicDB.saveRecord(message) { savedRecord, error in
+                    // handle errors here
+                    print (error)
+                }
+                print(message)
+            }
+            }
+        
+    
+    
         self.presentViewController(vc, animated: false, completion: { () -> Void in
             self.wentPlayer = true
         })
@@ -113,11 +146,13 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         
         let label:UILabel = (cell.contentView.subviews[0]) as! UILabel
         let label2:UILabel = (cell.contentView.subviews[1]) as! UILabel
+        let label3:UILabel = (cell.contentView.subviews[2]) as! UILabel
         label.layer.borderWidth = 1
         label.layer.borderColor = UIColor.blackColor().CGColor
         label2.text = contact["fullName"] as? String
         label2.font = UIFont(name: "AvenirNext-Medium", size: 17)
         label2.textColor = UIColor.whiteColor()
+        label3.text = contact["phoneNumber"] as? String
         if (self.checkedIndexPath.count > 0){
             
             if ( self.checkedIndexPath.contains(indexPath)){
