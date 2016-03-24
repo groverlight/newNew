@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 import GPUImage
-
+import CloudKit
 
 
 var arrayofText: NSMutableArray = []
@@ -517,6 +517,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         }
         
        iPhoneScreenSizes()
+       
     }
     override func viewWillAppear(animated: Bool) {
         self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5)

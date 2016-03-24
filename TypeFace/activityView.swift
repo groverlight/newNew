@@ -14,6 +14,7 @@ import AVKit
 import Foundation
 var friends : [NSDictionary] = []
 var activities : [NSDictionary] = []
+var messages : [NSDictionary] = []
 class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var activityTable: UITableView!
     @IBOutlet weak var noFriendsView: UIView!
@@ -21,21 +22,24 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
     var labelFont: UIFont?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print ("activity did load")
+        activityTable.delegate = self
+        activityTable.dataSource = self
         if (activities.count == 0)
         {
             //noFriendsView.hidden = false
         }
-
+       
     }
     override func viewDidAppear(animated: Bool) {
         print ("wild activityview will appear")
 
 
-        if (userFull?.phoneNumber != nil){
-            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        if (userFull != nil){
+          /*  let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
             print (searchTerm)
             let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
@@ -44,9 +48,13 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                 // ...
                 if (error == nil){
-                   
+                //print ("RESULTS\(results)")
                 for result in results!{
-                  
+                    print (result)
+                    let message :[String: AnyObject] = ["fullName": result["fromUser"] as! String, "text": result["text"] as! Array<String>]
+                    messages.append(message)
+                    self.activityTable.reloadData()
+                    /*
                     let videos = result["videos"] as? Array<CKAsset>
                     for video in videos!{
                                 NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
@@ -75,7 +83,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
                         print (avasset.duration)
                         }
                     
-                    }
+                    }*/
                     //let array = result["videos"]
                     //print (array)
                     
@@ -89,18 +97,27 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
                     print (error)
                 }
         
-            }
+            }*/
         }
     }
     func playerItemDidReachEnd(notification: NSNotification){
         print ("video ended")
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        
+        return messages.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        print ("making cell")
+        print (messages)
+        let cellIdentifier = "activityCEll"
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let tempDict:NSDictionary = messages[indexPath.row]
+        cell.textLabel?.text = tempDict["fromUser"] as? String
+
+        return cell
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

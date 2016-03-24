@@ -42,7 +42,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 message["videos"] = assetArray
                 message["text"] = arrayofText
                 message["toUser"] = "7022808866"//contact["phoneNumber"]
-                message["fromUser"]  = String(userFull?.phoneNumber!.characters.suffix(10))
+                message["fromUser"]  = ("\(userFull?.firstName) \(userFull?.lastName)") //String(userFull?.phoneNumber!.characters.suffix(10))
                 let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                 publicDB.saveRecord(message) { savedRecord, error in
                     // handle errors here

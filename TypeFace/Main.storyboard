@@ -10,7 +10,7 @@
         <!--loginView-->
         <scene sceneID="0HJ-M1-5Z0">
             <objects>
-                <viewController storyboardIdentifier="login" id="gjb-cV-ex8" userLabel="loginView" customClass="loginView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" id="gjb-cV-ex8" userLabel="loginView" customClass="loginView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FN8-2S-wlo"/>
                         <viewControllerLayoutGuide type="bottom" id="211-Dy-ZQs"/>
@@ -159,7 +159,7 @@
         <!--loginName-->
         <scene sceneID="Ppz-AT-20S">
             <objects>
-                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hKI-4s-HmT" userLabel="loginName" customClass="loginName" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hKI-4s-HmT" userLabel="loginName" customClass="loginName" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bUA-Gd-May"/>
                         <viewControllerLayoutGuide type="bottom" id="VZo-jb-8ZU"/>
@@ -205,7 +205,7 @@
         <!--PageView-->
         <scene sceneID="0aP-7b-wK4">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfP-Ta-ha7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="43" y="-274"/>
@@ -213,7 +213,7 @@
         <!--loginCode-->
         <scene sceneID="Ev3-UN-PnY">
             <objects>
-                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pC2-6g-e7d" userLabel="loginCode" customClass="loginCode" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pC2-6g-e7d" userLabel="loginCode" customClass="loginCode" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hww-ll-d91"/>
                         <viewControllerLayoutGuide type="bottom" id="uZd-Ko-uKv"/>
@@ -371,7 +371,7 @@
         <!--loginPhone-->
         <scene sceneID="BEs-zQ-m8p">
             <objects>
-                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4l-k4-8x9" userLabel="loginPhone" customClass="loginPhone" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4l-k4-8x9" userLabel="loginPhone" customClass="loginPhone" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zbK-II-4kG"/>
                         <viewControllerLayoutGuide type="bottom" id="v7S-WU-79C"/>
@@ -443,7 +443,7 @@
         <!--ActivityView-->
         <scene sceneID="zBZ-Ga-tM6">
             <objects>
-                <viewController storyboardIdentifier="activity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLd-VQ-PH0" userLabel="ActivityView" customClass="activityView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="activity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vLd-VQ-PH0" userLabel="ActivityView" customClass="activityView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oq9-E0-VNs"/>
                         <viewControllerLayoutGuide type="bottom" id="kEr-g4-6fA"/>
@@ -452,7 +452,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="exA-nC-50D" userLabel="activityTable">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="exA-nC-50D" userLabel="activityTable">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -498,7 +498,7 @@
         <!--CameraView-->
         <scene sceneID="FZv-zF-sJb">
             <objects>
-                <viewController storyboardIdentifier="camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xoz-Im-lQw" userLabel="CameraView" customClass="cameraView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="camera" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xoz-Im-lQw" userLabel="CameraView" customClass="cameraView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rEe-LU-WEu"/>
                         <viewControllerLayoutGuide type="bottom" id="LhW-hI-PaP"/>
@@ -765,7 +765,7 @@
         <!--SendView-->
         <scene sceneID="AX7-YJ-tFe">
             <objects>
-                <viewController storyboardIdentifier="sendView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="sendView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GY4-Pq-8RY" userLabel="SendView" customClass="sendView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Sn-jB-clO"/>
                         <viewControllerLayoutGuide type="bottom" id="oKf-mC-0Wp"/>
@@ -895,7 +895,7 @@
         <!--playerView-->
         <scene sceneID="Afn-Ro-Dox">
             <objects>
-                <viewController storyboardIdentifier="playerView" id="9aT-QD-KO1" userLabel="playerView" customClass="playerView" customModule="TypeFace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerView" id="9aT-QD-KO1" userLabel="playerView" customClass="playerView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Og-ra-Hd8"/>
                         <viewControllerLayoutGuide type="bottom" id="4K0-8P-Z5V"/>

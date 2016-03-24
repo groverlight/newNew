@@ -124,14 +124,14 @@
 		270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKCollectionIndexView.h; sourceTree = "<group>"; };
 		273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKCollectionIndexView.m; sourceTree = "<group>"; };
-		2742A4421C6AF1F500B369E7 /* TypeFace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypeFace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742A4421C6AF1F500B369E7 /* cakeTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cakeTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A44C1C6AF1F500B369E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2742A44F1C6AF1F500B369E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2742A4511C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2742A4561C6AF1F500B369E7 /* TypeFaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TypeFaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742A4561C6AF1F500B369E7 /* cakeTalk.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cakeTalk.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A45A1C6AF1F500B369E7 /* TypeFaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFaceTests.swift; sourceTree = "<group>"; };
 		2742A45C1C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2742A4611C6AF1F500B369E7 /* TypeFaceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TypeFaceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2742A4611C6AF1F500B369E7 /* cakeTalk.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cakeTalk.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A4651C6AF1F500B369E7 /* TypeFaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFaceUITests.swift; sourceTree = "<group>"; };
 		2742A4671C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2742A4741C6AF2A500B369E7 /* cameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cameraView.swift; sourceTree = "<group>"; };
@@ -144,7 +144,7 @@
 		2757FC861C92256300050C11 /* ColorDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDefinition.swift; sourceTree = "<group>"; };
 		2757FC871C92256300050C11 /* Hue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hue.swift; sourceTree = "<group>"; };
 		2757FC881C92256300050C11 /* Luminosity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Luminosity.swift; sourceTree = "<group>"; };
-		277CB03E1C9892A70032E109 /* TypeFace.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TypeFace.entitlements; sourceTree = "<group>"; };
+		277CB03E1C9892A70032E109 /* cakeTalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = cakeTalk.entitlements; sourceTree = "<group>"; };
 		277CB03F1C9892B40032E109 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		277CB0411C98DF680032E109 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		277CB0421C98DF680032E109 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -218,9 +218,9 @@
 			isa = PBXGroup;
 			children = (
 				27EF18051C877670003A49A2 /* GPUImage.xcodeproj */,
-				2742A4441C6AF1F500B369E7 /* TypeFace */,
-				2742A4591C6AF1F500B369E7 /* TypeFaceTests */,
-				2742A4641C6AF1F500B369E7 /* TypeFaceUITests */,
+				2742A4441C6AF1F500B369E7 /* cakeTalk */,
+				2742A4591C6AF1F500B369E7 /* cakeTalkTests */,
+				2742A4641C6AF1F500B369E7 /* cakeTalkUITests */,
 				2742A4431C6AF1F500B369E7 /* Products */,
 				1EAFF290495ED62E899E49F4 /* Pods */,
 				38CB80103A402F40F49FC041 /* Frameworks */,
@@ -230,40 +230,43 @@
 		2742A4431C6AF1F500B369E7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2742A4421C6AF1F500B369E7 /* TypeFace.app */,
-				2742A4561C6AF1F500B369E7 /* TypeFaceTests.xctest */,
-				2742A4611C6AF1F500B369E7 /* TypeFaceUITests.xctest */,
+				2742A4421C6AF1F500B369E7 /* cakeTalk.app */,
+				2742A4561C6AF1F500B369E7 /* cakeTalk.xctest */,
+				2742A4611C6AF1F500B369E7 /* cakeTalk.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2742A4441C6AF1F500B369E7 /* TypeFace */ = {
+		2742A4441C6AF1F500B369E7 /* cakeTalk */ = {
 			isa = PBXGroup;
 			children = (
-				277CB03E1C9892A70032E109 /* TypeFace.entitlements */,
+				277CB03E1C9892A70032E109 /* cakeTalk.entitlements */,
 				2742A47A1C6AF2C300B369E7 /* Main.storyboard */,
 				27862F131C6E61C000C62AAE /* mainViews */,
 				27862F141C6E61F400C62AAE /* misc */,
 				27862F081C6DA54F00C62AAE /* login */,
 			);
+			name = cakeTalk;
 			path = TypeFace;
 			sourceTree = "<group>";
 		};
-		2742A4591C6AF1F500B369E7 /* TypeFaceTests */ = {
+		2742A4591C6AF1F500B369E7 /* cakeTalkTests */ = {
 			isa = PBXGroup;
 			children = (
 				2742A45A1C6AF1F500B369E7 /* TypeFaceTests.swift */,
 				2742A45C1C6AF1F500B369E7 /* Info.plist */,
 			);
+			name = cakeTalkTests;
 			path = TypeFaceTests;
 			sourceTree = "<group>";
 		};
-		2742A4641C6AF1F500B369E7 /* TypeFaceUITests */ = {
+		2742A4641C6AF1F500B369E7 /* cakeTalkUITests */ = {
 			isa = PBXGroup;
 			children = (
 				2742A4651C6AF1F500B369E7 /* TypeFaceUITests.swift */,
 				2742A4671C6AF1F500B369E7 /* Info.plist */,
 			);
+			name = cakeTalkUITests;
 			path = TypeFaceUITests;
 			sourceTree = "<group>";
 		};
@@ -346,9 +349,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2742A4411C6AF1F500B369E7 /* TypeFace */ = {
+		2742A4411C6AF1F500B369E7 /* cakeTalk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2742A46A1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFace" */;
+			buildConfigurationList = 2742A46A1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalk" */;
 			buildPhases = (
 				D1739C38AD432A32B573AC89 /* Check Pods Manifest.lock */,
 				2742A43E1C6AF1F500B369E7 /* Sources */,
@@ -362,14 +365,14 @@
 			dependencies = (
 				27EF18161C877C83003A49A2 /* PBXTargetDependency */,
 			);
-			name = TypeFace;
+			name = cakeTalk;
 			productName = TypeFace;
-			productReference = 2742A4421C6AF1F500B369E7 /* TypeFace.app */;
+			productReference = 2742A4421C6AF1F500B369E7 /* cakeTalk.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2742A4551C6AF1F500B369E7 /* TypeFaceTests */ = {
+		2742A4551C6AF1F500B369E7 /* cakeTalkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2742A46D1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFaceTests" */;
+			buildConfigurationList = 2742A46D1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalkTests" */;
 			buildPhases = (
 				2742A4521C6AF1F500B369E7 /* Sources */,
 				2742A4531C6AF1F500B369E7 /* Frameworks */,
@@ -380,14 +383,14 @@
 			dependencies = (
 				2742A4581C6AF1F500B369E7 /* PBXTargetDependency */,
 			);
-			name = TypeFaceTests;
+			name = cakeTalkTests;
 			productName = TypeFaceTests;
-			productReference = 2742A4561C6AF1F500B369E7 /* TypeFaceTests.xctest */;
+			productReference = 2742A4561C6AF1F500B369E7 /* cakeTalk.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2742A4601C6AF1F500B369E7 /* TypeFaceUITests */ = {
+		2742A4601C6AF1F500B369E7 /* cakeTalkUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2742A4701C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFaceUITests" */;
+			buildConfigurationList = 2742A4701C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalkUITests" */;
 			buildPhases = (
 				2742A45D1C6AF1F500B369E7 /* Sources */,
 				2742A45E1C6AF1F500B369E7 /* Frameworks */,
@@ -400,9 +403,9 @@
 				27EF18101C877AF5003A49A2 /* PBXTargetDependency */,
 				2742A4631C6AF1F500B369E7 /* PBXTargetDependency */,
 			);
-			name = TypeFaceUITests;
+			name = cakeTalkUITests;
 			productName = TypeFaceUITests;
-			productReference = 2742A4611C6AF1F500B369E7 /* TypeFaceUITests.xctest */;
+			productReference = 2742A4611C6AF1F500B369E7 /* cakeTalk.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -417,10 +420,16 @@
 				TargetAttributes = {
 					2742A4411C6AF1F500B369E7 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = KEKFU6H295;
+						DevelopmentTeam = 4THJ5Z3YGF;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 							com.apple.iCloud = {
 								enabled = 1;
@@ -437,7 +446,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2742A43D1C6AF1F500B369E7 /* Build configuration list for PBXProject "TypeFace" */;
+			buildConfigurationList = 2742A43D1C6AF1F500B369E7 /* Build configuration list for PBXProject "cakeTalk" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -456,9 +465,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				2742A4411C6AF1F500B369E7 /* TypeFace */,
-				2742A4551C6AF1F500B369E7 /* TypeFaceTests */,
-				2742A4601C6AF1F500B369E7 /* TypeFaceUITests */,
+				2742A4411C6AF1F500B369E7 /* cakeTalk */,
+				2742A4551C6AF1F500B369E7 /* cakeTalkTests */,
+				2742A4601C6AF1F500B369E7 /* cakeTalkUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -595,12 +604,12 @@
 /* Begin PBXTargetDependency section */
 		2742A4581C6AF1F500B369E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2742A4411C6AF1F500B369E7 /* TypeFace */;
+			target = 2742A4411C6AF1F500B369E7 /* cakeTalk */;
 			targetProxy = 2742A4571C6AF1F500B369E7 /* PBXContainerItemProxy */;
 		};
 		2742A4631C6AF1F500B369E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2742A4411C6AF1F500B369E7 /* TypeFace */;
+			target = 2742A4411C6AF1F500B369E7 /* cakeTalk */;
 			targetProxy = 2742A4621C6AF1F500B369E7 /* PBXContainerItemProxy */;
 		};
 		27EF18101C877AF5003A49A2 /* PBXTargetDependency */ = {
@@ -714,7 +723,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = TypeFace/TypeFace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TypeFace/cakeTalk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -731,8 +740,8 @@
 				INFOPLIST_FILE = TypeFace/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFace;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
+				PRODUCT_NAME = cakeTalk;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -745,7 +754,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = TypeFace/TypeFace.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TypeFace/cakeTalk.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -762,8 +771,8 @@
 				INFOPLIST_FILE = TypeFace/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFace;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
+				PRODUCT_NAME = cakeTalk;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
 			};
@@ -776,8 +785,8 @@
 				INFOPLIST_FILE = TypeFaceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TypeFace.app/TypeFace";
+				PRODUCT_NAME = cakeTalk;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cakeTalk.app/cakeTalk";
 			};
 			name = Debug;
 		};
@@ -788,8 +797,8 @@
 				INFOPLIST_FILE = TypeFaceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TypeFace.app/TypeFace";
+				PRODUCT_NAME = cakeTalk;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/cakeTalk.app/cakeTalk";
 			};
 			name = Release;
 		};
@@ -804,7 +813,7 @@
 				INFOPLIST_FILE = TypeFaceUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cakeTalk;
 				TEST_TARGET_NAME = TypeFace;
 				USES_XCTRUNNER = YES;
 			};
@@ -821,7 +830,7 @@
 				INFOPLIST_FILE = TypeFaceUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Aaron.typeFace.TypeFaceUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = cakeTalk;
 				TEST_TARGET_NAME = TypeFace;
 				USES_XCTRUNNER = YES;
 			};
@@ -830,7 +839,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2742A43D1C6AF1F500B369E7 /* Build configuration list for PBXProject "TypeFace" */ = {
+		2742A43D1C6AF1F500B369E7 /* Build configuration list for PBXProject "cakeTalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2742A4681C6AF1F500B369E7 /* Debug */,
@@ -839,7 +848,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2742A46A1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFace" */ = {
+		2742A46A1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2742A46B1C6AF1F500B369E7 /* Debug */,
@@ -848,7 +857,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2742A46D1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFaceTests" */ = {
+		2742A46D1C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2742A46E1C6AF1F500B369E7 /* Debug */,
@@ -857,7 +866,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2742A4701C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "TypeFaceUITests" */ = {
+		2742A4701C6AF1F500B369E7 /* Build configuration list for PBXNativeTarget "cakeTalkUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2742A4711C6AF1F500B369E7 /* Debug */,

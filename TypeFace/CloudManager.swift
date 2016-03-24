@@ -44,7 +44,7 @@ class CloudManager: NSObject {
                         privateDatabase.saveRecord(userRecord!, completionHandler: { record, error in
                             //...
                         })
-                        let user = User(userRecordID: userRecordID!)
+                        let user = User(userRecordID: userRecordID!, phoneNumber:phoneNumber)
                         completionHandler(success: true, user: user)
                     }
                 })

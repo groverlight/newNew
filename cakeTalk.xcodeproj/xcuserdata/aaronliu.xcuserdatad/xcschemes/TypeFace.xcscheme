@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
-               BuildableName = "TypeFace.app"
-               BlueprintName = "TypeFace"
-               ReferencedContainer = "container:TypeFace.xcodeproj">
+               BuildableName = "cakeTalk.app"
+               BlueprintName = "cakeTalk"
+               ReferencedContainer = "container:cakeTalk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2742A4551C6AF1F500B369E7"
-               BuildableName = "TypeFaceTests.xctest"
-               BlueprintName = "TypeFaceTests"
-               ReferencedContainer = "container:TypeFace.xcodeproj">
+               BuildableName = "cakeTalk.xctest"
+               BlueprintName = "cakeTalkTests"
+               ReferencedContainer = "container:cakeTalk.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2742A4601C6AF1F500B369E7"
-               BuildableName = "TypeFaceUITests.xctest"
-               BlueprintName = "TypeFaceUITests"
-               ReferencedContainer = "container:TypeFace.xcodeproj">
+               BuildableName = "cakeTalk.xctest"
+               BlueprintName = "cakeTalkUITests"
+               ReferencedContainer = "container:cakeTalk.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
-            BuildableName = "TypeFace.app"
-            BlueprintName = "TypeFace"
-            ReferencedContainer = "container:TypeFace.xcodeproj">
+            BuildableName = "cakeTalk.app"
+            BlueprintName = "cakeTalk"
+            ReferencedContainer = "container:cakeTalk.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
-            BuildableName = "TypeFace.app"
-            BlueprintName = "TypeFace"
-            ReferencedContainer = "container:TypeFace.xcodeproj">
+            BuildableName = "cakeTalk.app"
+            BlueprintName = "cakeTalk"
+            ReferencedContainer = "container:cakeTalk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2742A4411C6AF1F500B369E7"
-            BuildableName = "TypeFace.app"
-            BlueprintName = "TypeFace"
-            ReferencedContainer = "container:TypeFace.xcodeproj">
+            BuildableName = "cakeTalk.app"
+            BlueprintName = "cakeTalk"
+            ReferencedContainer = "container:cakeTalk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

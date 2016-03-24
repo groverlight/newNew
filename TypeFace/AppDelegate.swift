@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var window: UIWindow?
     //var frontWindow: UIWindow?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let notificationSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+        application.registerForRemoteNotifications()
+
         // Override point for customization after application launch.
-       window?.rootViewController!.view.hidden = true
+        window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
         let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
@@ -29,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
             privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
                 print (userRecord)
-                userFull = User(userRecordID: (userRecord?.recordID)!)
+                userFull = User(userRecordID: (userRecord?.recordID)!,phoneNumber:phoneNumber)
                 dispatch_async(dispatch_get_main_queue()){
                     frontWindow?.windowLevel = UIWindowLevelStatusBar
                     frontWindow?.startSwipeToOpenMenu()
@@ -48,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             userFull?.firstName = info!.displayContact!.givenName
                             userFull?.lastName = info!.displayContact!.familyName
                             userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+   
                             print (userFull)
                         
                         }
@@ -97,6 +102,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-   
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        print ("got notification")
+        
+        let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if cloudKitNotification.notificationType == .Query {
+            let queryNotification = cloudKitNotification as! CKQueryNotification
+            if queryNotification.queryNotificationReason == .RecordDeleted {
+                // If the record has been deleted in CloudKit then delete the local copy here
+            } else {
+                // If the record has been created or changed, we fetch the data from CloudKit
+                let database: CKDatabase
+                if queryNotification.isPublicDatabase {
+                    database = CKContainer.defaultContainer().publicCloudDatabase
+                } else {
+                    database = CKContainer.defaultContainer().privateCloudDatabase
+                }
+                database.fetchRecordWithID(queryNotification.recordID!, completionHandler: { (record: CKRecord?, error: NSError?) -> Void in
+                    guard error == nil else {
+                          completionHandler(UIBackgroundFetchResult.NoData)
+                        // Handle the error here
+                        return
+                    }
+                    
+                    if queryNotification.queryNotificationReason == .RecordUpdated {
+                        // Use the information in the record object to modify your local data
+                    } else {
+                        // Use the information in the record object to create a new local object
+                    }
+                })
+            }
+        }
+    }
 }
 
