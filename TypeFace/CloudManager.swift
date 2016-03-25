@@ -41,6 +41,7 @@ class CloudManager: NSObject {
                         userRecord!["phoneNumber"] = phoneNumber
                         userFull?.phoneNumber = phoneNumber
                         //print (userRecord)
+                        
                         privateDatabase.saveRecord(userRecord!, completionHandler: { record, error in
                             //...
                         })

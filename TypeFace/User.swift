@@ -20,20 +20,24 @@ class User: NSObject {
         let searchTerm = String(phoneNumber.characters.suffix(10))
         print (searchTerm)
         let predicate = NSPredicate(format: "toUser = '7022808866'")
-        print ("making subscription...")
-        let subscription = CKSubscription(recordType: "Message", predicate: predicate, options: [.FiresOnRecordCreation, .FiresOnRecordUpdate])
+        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+        
+        let subscription = CKSubscription(
+            recordType: "Spaceships",
+            predicate: NSPredicate(format: "TRUEPREDICATE"),
+            options: .FiresOnRecordCreation
+        )
         
         let info = CKNotificationInfo()
-        //info.soundName = UILocalNotificationDefaultSoundName
+        
+        info.alertBody = "New Spaceship Entered the Fleet!"
         info.shouldBadge = true
-        info.alertBody = "sup dude!"
-        info.shouldSendContentAvailable = true;
+        
         subscription.notificationInfo = info
-        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-        publicDB.saveSubscription(subscription) { subscription, error in
-            print (subscription)
-            print (error)//...
-        }
+        
+        publicDB.saveSubscription(subscription) { record, error in }
+
+        
 
     }
 
