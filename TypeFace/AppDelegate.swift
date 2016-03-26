@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
-        fetchNotificationChanges()
-        
+       // fetchNotificationChanges()
+        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
         window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
@@ -49,11 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 else{
                     defaultContainer.discoverUserInfoWithUserRecordID(userRecord!.recordID) { (info, fetchError) in
-                     
+                            print("we got into ohere")
                             userFull?.firstName = info!.displayContact!.givenName
                             userFull?.lastName = info!.displayContact!.familyName
                             userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
-                            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                        
+                           /* let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
                             // print (searchTerm)
                             let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
@@ -62,9 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                                 print (results)
                                 messages = results!
-                            }
+                            }*/
 
-                            print (userFull)
+                            //print (userFull)
                             
                     }
                     dispatch_async(dispatch_get_main_queue()) {
@@ -187,5 +188,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let operationQueue = NSOperationQueue()
         operationQueue.addOperation(operation)
     }
+    func timerFunc(timer : NSTimer){
+        print("timerfunc")
+        if (userFull?.phoneNumber != nil){
+            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+            let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
+            // print (searchTerm)
+            let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
+            let query = CKQuery(recordType: "Message", predicate: predicate)
+            
+            publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
+                print (results)
+                messages = results!
+            }
+        }
+        
+    }
+
 }
 
