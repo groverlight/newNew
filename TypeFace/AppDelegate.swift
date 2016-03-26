@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
-        
+        fetchNotificationChanges()
         
         window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -53,11 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             userFull?.firstName = info!.displayContact!.givenName
                             userFull?.lastName = info!.displayContact!.familyName
                             userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
-                        
-                            print (userFull)
                             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
-                            print (searchTerm)
+                            // print (searchTerm)
                             let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
                             let query = CKQuery(recordType: "Message", predicate: predicate)
                             
@@ -65,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 print (results)
                                 messages = results!
                             }
+
+                            print (userFull)
+                            
                     }
                     dispatch_async(dispatch_get_main_queue()) {
 
@@ -144,6 +145,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         completionHandler(UIBackgroundFetchResult.NewData)
     }
-    
+    func fetchNotificationChanges() {
+        let operation = CKFetchNotificationChangesOperation(previousServerChangeToken: nil)
+        
+        var notificationIDsToMarkRead = [CKNotificationID]()
+        
+        operation.notificationChangedBlock = { (notification: CKNotification) -> Void in
+            // Process each notification received
+            print (notification.notificationType)
+            if notification.notificationType == .Query {
+                let queryNotification = notification as! CKQueryNotification
+                let reason = queryNotification.queryNotificationReason
+                let recordID = queryNotification.recordID
+                
+                // Do your process here depending on the reason of the change
+                
+                // Add the notification id to the array of processed notifications to mark them as read
+                notificationIDsToMarkRead.append(queryNotification.notificationID!)
+            }
+        }
+        
+        operation.fetchNotificationChangesCompletionBlock = { (serverChangeToken: CKServerChangeToken?, operationError: NSError?) -> Void in
+            guard operationError == nil else {
+                // Handle the error here
+                return
+            }
+            
+            // Mark the notifications as read to avoid processing them again
+            let markOperation = CKMarkNotificationsReadOperation(notificationIDsToMarkRead: notificationIDsToMarkRead)
+            markOperation.markNotificationsReadCompletionBlock = { (notificationIDsMarkedRead: [CKNotificationID]?, operationError: NSError?) -> Void in
+                guard operationError == nil else {
+                    // Handle the error here
+                    return
+                }
+            }
+            
+            let operationQueue = NSOperationQueue()
+            operationQueue.addOperation(markOperation)
+        }
+        
+        let operationQueue = NSOperationQueue()
+        operationQueue.addOperation(operation)
+    }
 }
 

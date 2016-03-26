@@ -126,16 +126,19 @@ class playerView: UIViewController {
         }
         else{
             print ("done with video clips")
-
+            let delay = 1 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue()) {
             do{
-                let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+                let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
-                    try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+                    try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
                 }
                 print (files)
             }
             catch {
                 print("bad")
+            }
             }
             arrayofText.removeAllObjects()
             let overlay = UIVisualEffectView()

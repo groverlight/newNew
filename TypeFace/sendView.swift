@@ -40,7 +40,9 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 message["videos"] = assetArray
                 message["text"] = arrayofText
                 message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
-                message["fromUser"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
+                message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
+                message["time"] = NSDate().timeIntervalSince1970 * 1000
+                message ["fromUser"] = "\(userFull!.userRecordID)"
                 let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                 publicDB.saveRecord(message) { savedRecord, error in
                     // handle errors here

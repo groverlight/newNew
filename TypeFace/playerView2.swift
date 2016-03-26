@@ -22,7 +22,10 @@ class playerView2: UIViewController {
     @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
-        self.dismissViewControllerAnimated(false, completion: nil)
+        
+        self.dismissViewControllerAnimated(false, completion: {
+            frontWindow?.hidden = false
+        })
     }
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {

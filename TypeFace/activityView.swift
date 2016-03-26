@@ -43,7 +43,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
 
 
         if (userFull != nil){
-            activityTable.reloadData()
+                    activityTable.reloadData()
             /*let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
             print (searchTerm)
@@ -118,7 +118,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         let record:CKRecord = messages[indexPath.row]
-        cell.textLabel!.text = record["fromUser"] as? String
+        cell.textLabel!.text = record["name"] as? String
         //print (record)
         
         return cell
