@@ -35,14 +35,12 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                     asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
                     assetArray.append(asset)
                 }
-                print (assetArray)
-                
-                
+      
                 let message = CKRecord(recordType: "Message")
                 message["videos"] = assetArray
                 message["text"] = arrayofText
-                message["toUser"] = "7022808866"//contact["phoneNumber"]
-                message["fromUser"]  = ("\(userFull?.firstName) \(userFull?.lastName)") //String(userFull?.phoneNumber!.characters.suffix(10))
+                message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                message["fromUser"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
                 let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                 publicDB.saveRecord(message) { savedRecord, error in
                     // handle errors here

@@ -959,6 +959,72 @@
             </objects>
             <point key="canvasLocation" x="125" y="526"/>
         </scene>
+        <!--playerView-->
+        <scene sceneID="Mfx-e1-own">
+            <objects>
+                <viewController storyboardIdentifier="playerView2" id="2r0-lu-hH3" userLabel="playerView" customClass="playerView2" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Cq-eg-JcI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Svc-AV-WiT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8SS-Yd-BAj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC3-2S-WLv">
+                                <rect key="frame" x="206" y="277" width="188" height="47"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="29"/>
+                                <state key="normal" title="Message Sent! ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="2r0-lu-hH3" eventType="touchUpInside" id="lK6-Fs-U6u"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1i-Xy-kLm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EW-lC-87g">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="10"/>
+                                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="Fab-rP-PUs"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="5EW-lC-87g" firstAttribute="width" secondItem="W1i-Xy-kLm" secondAttribute="width" id="Iwq-aJ-eKk"/>
+                                    <constraint firstItem="5EW-lC-87g" firstAttribute="centerX" secondItem="W1i-Xy-kLm" secondAttribute="centerX" id="LsP-ah-z64"/>
+                                    <constraint firstItem="5EW-lC-87g" firstAttribute="top" secondItem="W1i-Xy-kLm" secondAttribute="top" id="rDS-VH-Q9o"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W1i-Xy-kLm" firstAttribute="centerX" secondItem="8SS-Yd-BAj" secondAttribute="centerX" id="0kW-CB-wYj"/>
+                            <constraint firstItem="W1i-Xy-kLm" firstAttribute="width" secondItem="8SS-Yd-BAj" secondAttribute="width" id="JOn-ja-6QV"/>
+                            <constraint firstItem="mC3-2S-WLv" firstAttribute="centerX" secondItem="8SS-Yd-BAj" secondAttribute="centerX" id="XoQ-1r-JHJ"/>
+                            <constraint firstItem="mC3-2S-WLv" firstAttribute="centerY" secondItem="8SS-Yd-BAj" secondAttribute="centerY" id="Ycb-GI-pIx"/>
+                            <constraint firstItem="W1i-Xy-kLm" firstAttribute="height" secondItem="8SS-Yd-BAj" secondAttribute="height" id="ZKm-he-p6F"/>
+                            <constraint firstItem="W1i-Xy-kLm" firstAttribute="leading" secondItem="8SS-Yd-BAj" secondAttribute="leading" id="j6j-Mi-4Fz"/>
+                            <constraint firstItem="W1i-Xy-kLm" firstAttribute="centerY" secondItem="8SS-Yd-BAj" secondAttribute="centerY" id="xef-b5-LuK"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0kW-CB-wYj"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="mC3-2S-WLv" id="dQ6-Le-95X"/>
+                        <outlet property="labelView" destination="W1i-Xy-kLm" id="L4f-cL-UiY"/>
+                        <outlet property="progressBar" destination="5EW-lC-87g" id="Dmj-si-p0k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vuu-wj-yIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-719" y="-150"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icloud.png" width="380" height="384"/>

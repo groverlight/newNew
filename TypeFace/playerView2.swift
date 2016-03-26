@@ -9,16 +9,16 @@ import AVFoundation
 import AVKit
 import UIKit
 import GPUImage
+import CloudKit
 
-
-class playerView: UIViewController {
+class playerView2: UIViewController {
     @IBOutlet weak var progressBar: UIView!
-    var moviePlayer: AVPlayer?
     var numOfClips = 0
     var totalReceivedClips = 0
     var fileManager: NSFileManager? = NSFileManager()
     var labelFont: UIFont?
-    
+    var arrayofMessageTxt: [String] = []
+    var arrayofMessageVids: [AVAsset] = []
     @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
@@ -28,70 +28,74 @@ class playerView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBar.hidden = true
-        /*let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let overlay = UIVisualEffectView(effect: blurEffect)
-        // Put it somewhere, give it a frame...
-        overlay.frame = self.view.bounds
-        self.blurBackground.addSubview(overlay)
-        self.blurBackground.alpha = 0*/
-        backButton.hidden = true
-        self.moviePlayer?.seekToTime(kCMTimeZero)
-        self.moviePlayer?.volume = 0.0
-        self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
         iPhoneScreenSizes()
+        arrayofMessageTxt = message!["text"] as! Array<String>
+        print (arrayofMessageTxt)
+        let videos = message!["videos"] as? Array<CKAsset>
+        for video in videos!{
+            dispatch_async(dispatch_get_main_queue()) {
+                let assetURL = video.fileURL as NSURL!
+                let videoData = NSData(contentsOfURL: assetURL!)
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                let destinationPath = documentsPath.stringByAppendingPathComponent("filename.MOV")
+                NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
+                print(destinationPath)
+                let fileURL = NSURL(fileURLWithPath: destinationPath)
+                let avasset = AVAsset(URL: fileURL) as! AVURLAsset
+                self.arrayofMessageVids.append(avasset)
+
+            }}
     }
     
     override func viewDidAppear(animated: Bool) {
         var duration: CFTimeInterval = 0
-        do{
-            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            numOfClips = (files?.count)!
-            totalReceivedClips = numOfClips
-            //print (numOfClips) // last where I Started
-        }
-        catch {
+    
+                   numOfClips = arrayofMessageTxt.count
+                   totalReceivedClips = numOfClips//print (numOfClips) // last where I Started
+    
             print("bad")
-        }
-        for var i = numOfClips; i > 0; --i {
-            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
-           duration = duration + CMTimeGetSeconds(avAsset.duration)
+        
+        for var i = 0; i < numOfClips; ++i {
+            let avAsset = arrayofMessageVids[i]
+            duration = duration + CMTimeGetSeconds(avAsset.duration)
         }
         
         self.progressBar.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0)
         self.progressBar.hidden = false
         UIView.animateWithDuration(duration) { () -> Void in
-             self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
+            self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
         }
         setupVideo(1)
     }
     func setupVideo(index: Int){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
-
-        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
-       // print("duration\(avAsset.duration)")
+        
+        let avAsset = arrayofMessageVids[index-1]//AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
+        // print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
-        moviePlayer = AVPlayer(playerItem: avPlayerItem)
+        let moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
         avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
-        self.moviePlayer?.play()
+        moviePlayer.seekToTime(kCMTimeZero)
+        moviePlayer.play()
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
-    
+        
         scrollLabel.font = labelFont
-        scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
+        scrollLabel.text = arrayofMessageTxt[index-1] 
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
         scrollLabel.layer.cornerRadius = 8
         scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
-
+        
         scrollLabel.setLineHeight(0)
-       // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
+        // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.labelView.addSubview(scrollLabel)
         self.view.bringSubviewToFront(labelView)
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -106,38 +110,35 @@ class playerView: UIViewController {
             },completion: {(finished) -> Void in
                 scrollLabel.removeFromSuperview()})
         UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
-                       scrollLabel.alpha = 0
+            scrollLabel.alpha = 0
             },completion: nil)
-
         
         
         
-          --numOfClips
+        
+        --numOfClips
     }
     
     func playerItemDidReachEnd(notification: NSNotification){
         //print ("item reached end \(numOfClips)")
-       // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
+        // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
         NSNotificationCenter.defaultCenter().removeObserver(self)
-      
+        
         if (numOfClips > 0){
             let clipsLeft = totalReceivedClips - numOfClips + 1
             setupVideo(clipsLeft)
         }
         else{
             print ("done with video clips")
-
-            do{
-                let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-                for file:NSString in files!{
-                    try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
-                }
-                print (files)
+            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+           
+            publicDB.deleteRecordWithID((message?.recordID)!, completionHandler: {recordID, error in
+                NSLog("OK or \(error)")
+                })
+            if let index = messages.indexOf(message!) {
+                messages.removeAtIndex(index)
             }
-            catch {
-                print("bad")
-            }
-            arrayofText.removeAllObjects()
+            
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
@@ -145,17 +146,17 @@ class playerView: UIViewController {
             overlay.frame = self.view.bounds
             self.view.addSubview(overlay)
             UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
-                        self.view.bringSubviewToFront(self.backButton)
-                        self.backButton.hidden = false
-                        self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
-                        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
-                            self.backButton.transform = CGAffineTransformMakeScale(1, 1)
-                            }, completion: nil)
-
+                self.view.bringSubviewToFront(self.backButton)
+                self.backButton.hidden = false
+                self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                    self.backButton.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion: nil)
                 
                 
-                })
-
+                
+            })
+            
         }
         
     }
@@ -184,22 +185,7 @@ class playerView: UIViewController {
             print("not an iPhone")
             
         }
-
-
-    }
-
+        
+        
 }
-extension UILabel {
-    
-    func setLineHeight(lineHeight: CGFloat) {
-        let text = self.text
-        if let text = text {
-            let attributeString = NSMutableAttributedString(string: text)
-            let style = NSMutableParagraphStyle()
-            style.lineHeightMultiple = 0.9
-            style.lineSpacing = lineHeight
-            attributeString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, text.characters.count))
-            self.attributedText = attributeString
-        }
-    }
 }

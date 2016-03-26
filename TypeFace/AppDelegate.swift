@@ -15,11 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //var window: UIWindow?
     //var frontWindow: UIWindow?
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let notificationSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil)
-        application.registerUserNotificationSettings(notificationSettings)
-        application.registerForRemoteNotifications()
 
-        // Override point for customization after application launch.
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        
+        
         window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
@@ -52,11 +53,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             userFull?.firstName = info!.displayContact!.givenName
                             userFull?.lastName = info!.displayContact!.familyName
                             userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
-   
-                            print (userFull)
                         
-                        }
-                    
+                            print (userFull)
+                            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                            let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
+                            print (searchTerm)
+                            let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
+                            let query = CKQuery(recordType: "Message", predicate: predicate)
+                            
+                            publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
+                                print (results)
+                                messages = results!
+                            }
+                    }
                     dispatch_async(dispatch_get_main_queue()) {
 
                     frontWindow?.rootViewController = front
@@ -101,9 +110,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {print("got notification1")}
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        print ("got notification")
+        print ("got notification2")
         
         let cloudKitNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
         if cloudKitNotification.notificationType == .Query {
@@ -133,6 +142,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
             }
         }
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
+    
 }
 
