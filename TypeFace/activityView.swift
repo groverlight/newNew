@@ -39,7 +39,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
        
     }
     override func viewDidAppear(animated: Bool) {
-       // print ("wild activityview will appear")
+        print ("wild activityview will appear")
 
 
         if (userFull != nil){

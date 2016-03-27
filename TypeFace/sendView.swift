@@ -23,7 +23,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
        
 
-        for path in checkedIndexPath {
+       for path in checkedIndexPath {
             
             let contact = sectionsArray[path.section][path.row] as! [String:String]
             print (contact)
@@ -46,11 +46,12 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                 publicDB.saveRecord(message) { savedRecord, error in
                     // handle errors here
+                    print ("savedrecord\(savedRecord)")
                     print (error)
                 }
                 print(message)
             }
-            }
+        }
         
     
     

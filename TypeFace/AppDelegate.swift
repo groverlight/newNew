@@ -53,7 +53,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             userFull?.firstName = info!.displayContact!.givenName
                             userFull?.lastName = info!.displayContact!.familyName
                             userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+                        let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                        let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
+                        // print (searchTerm)
+                        let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
+                        let query = CKQuery(recordType: "Message", predicate: predicate)
                         
+                        publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
+                            print (results)
+                            messages = results! as Array<CKRecord>
+                            messages.sortInPlace {
+                                item1, item2 in
+                                let date1 = item1["time"] as! NSNumber
+                                let date2 = item2["time"]as! NSNumber
+                                return date1.compare(date2) == NSComparisonResult.OrderedDescending
+                            }
+                            print (messages)
+                        }
                            /* let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
                             // print (searchTerm)
@@ -199,11 +215,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                 print (results)
-                messages = results!
+                messages = results! as Array<CKRecord>
+                messages.sortInPlace {
+                    item1, item2 in
+                    let date1 = item1["time"] as! NSNumber
+                    let date2 = item2["time"] as! NSNumber
+                    
+                    return date1.compare(date2) == NSComparisonResult.OrderedDescending
+                }
+                
+                var uniqueArray = Array<CKRecord>()
+                let names = NSMutableSet()
+                
+                for record in messages {
+                    //NSLog(@"phoneNumber: %@", record.phoneNumber);
+                    // NSLog(@"Timestamp : %f", record.lastActivityTime);
+                    let destinationName = record["fromUser"] as! String
+                    
+                    if (!names.containsObject(destinationName)) {
+  
+                            uniqueArray.append(record)
+                            names.addObject(destinationName)
+                        
+                        
+                    }
+                    else
+                    {
+                    
+                            for var i = 0; i < uniqueArray.count; ++i
+                            {
+                               let record2 = uniqueArray[i];
+                                if (record2["fromUser"] as! String == record["fromUser"] as! String)
+                                {
+                                    uniqueArray[i] = record;
+                                }
+                            }
+                        
+                    }
+                    
+                }
+                messages = uniqueArray as [CKRecord];
+                
+                print (messages)
             }
-        }
         
     }
 
 }
-
+}

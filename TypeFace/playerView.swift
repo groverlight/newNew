@@ -121,7 +121,10 @@ class playerView: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
       
         if (numOfClips > 0){
-            let clipsLeft = totalReceivedClips - numOfClips + 1
+            print ("(totalreceivedclips\(totalReceivedClips)")
+            print ("(numfoclips\(numOfClips)")
+            let clipsLeft = totalReceivedClips - numOfClips 
+            print ("clipsLeft\(clipsLeft)")
             setupVideo(clipsLeft)
         }
         else{
