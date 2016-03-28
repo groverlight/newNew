@@ -46,7 +46,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                 publicDB.saveRecord(message) { savedRecord, error in
                     // handle errors here
-                    print ("savedrecord\(savedRecord)")
+                    print ("savedrecord\(savedRecord)   ")
                     print (error)
                 }
                 print(message)
