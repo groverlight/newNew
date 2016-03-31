@@ -10,7 +10,7 @@ import AVKit
 import UIKit
 import GPUImage
 import CloudKit
-
+var recentMessages = Array<[String:AnyObject]>()
 class playerView2: UIViewController {
     @IBOutlet weak var progressBar: UIView!
     var numOfClips = 0
@@ -30,6 +30,8 @@ class playerView2: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //organizeMessages()
+        
         progressBar.hidden = true
         iPhoneScreenSizes()
         arrayofMessageTxt = message!["text"] as! Array<String>
@@ -134,7 +136,6 @@ class playerView2: UIViewController {
         else{
             print ("done with video clips")
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-           
             publicDB.deleteRecordWithID((message?.recordID)!, completionHandler: {recordID, error in
                 NSLog("OK or \(error)")
                 })
@@ -191,4 +192,5 @@ class playerView2: UIViewController {
         
         
 }
+
 }

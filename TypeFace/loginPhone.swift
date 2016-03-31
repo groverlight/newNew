@@ -68,7 +68,7 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
                 textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
             }
         }
-        phoneNumber = numberFormatter("\(countryTextField.text!)\(phoneTextField.text!+string))") as String
+        phoneNumber = numberFormatter("\(phoneTextField.text!+string)") as String
         return true
     }
 

@@ -746,7 +746,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
 				PRODUCT_NAME = cakeTalk;
-				PROVISIONING_PROFILE = "a504fca0-787a-4dfd-b09d-afcf2138a31a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -777,7 +777,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
 				PRODUCT_NAME = cakeTalk;
-				PROVISIONING_PROFILE = "a504fca0-787a-4dfd-b09d-afcf2138a31a";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
 			};
 			name = Release;

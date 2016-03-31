@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
        // fetchNotificationChanges()
-        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+        
         window?.rootViewController!.view.hidden = true
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
@@ -30,11 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         let defaultContainer = CKContainer.defaultContainer()
         defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
-            
-            let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
+                        let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
             privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
                 print (userRecord)
                 userFull = User(userRecordID: (userRecord?.recordID)!,phoneNumber:phoneNumber)
+                NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+
                 dispatch_async(dispatch_get_main_queue()){
                     frontWindow?.windowLevel = UIWindowLevelStatusBar
                     frontWindow?.startSwipeToOpenMenu()
@@ -48,11 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
                 else{
+                    
                     defaultContainer.discoverUserInfoWithUserRecordID(userRecord!.recordID) { (info, fetchError) in
-                            print("we got into ohere")
-                            userFull?.firstName = info!.displayContact!.givenName
-                            userFull?.lastName = info!.displayContact!.familyName
-                            userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+                           
+                        userFull?.firstName = info!.displayContact!.givenName
+                        userFull?.lastName = info!.displayContact!.familyName
+                        userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+                        //recentMessages = userRecord!["messages"] as! Array<[String:String]>
                         let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                         let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
                         // print (searchTerm)
@@ -203,23 +206,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func timerFunc(timer : NSTimer){
         print("timerfunc")
-        if (userFull?.phoneNumber != nil){
+        if (userFull != nil){
             let privateDB = CKContainer.defaultContainer().privateCloudDatabase
-            privateDB.fetchRecordWithID(userFull!.userRecordID, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
-                if (anError != nil) {
-                    
-                } else {
-                    //print (error)
-                    userRecord!["phoneNumber"] = phoneNumber
-                    userRecord!["messageArray"] = messages
-                    userFull?.phoneNumber = phoneNumber
-                    
-                    
-                    privateDB.saveRecord(userRecord!, completionHandler: { record, error in
-                        //...
-                    })
-              
-                }
+            privateDB.fetchRecordWithID((userFull?.userRecordID)!, completionHandler: { (Record, ErrorType) -> Void in
+                Record!["message"] = recentMessages
             })
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
@@ -229,59 +219,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                 print (results)
-                //messages = results! as Array<CKRecord>
-                let results = results! as Array<CKRecord>
-                for message in messages{
-                    for result in results{
-                        if (message["fromUser"] as! String == result["fromUser"] as! String)
-                        {
-                            message = result
-                        }
+                if (messages.count == 0){
+                    messages = results! as Array<CKRecord>
+                    messages.sortInPlace {
+                        item1, item2 in
+                        let date1 = item1["time"] as! NSNumber
+                        let date2 = item2["time"] as! NSNumber
+                        
+                        return date1.compare(date2) == NSComparisonResult.OrderedDescending
                     }
-                }
-                messages.sortInPlace {
-                    item1, item2 in
-                    let date1 = item1["time"] as! NSNumber
-                    let date2 = item2["time"] as! NSNumber
                     
-                    return date1.compare(date2) == NSComparisonResult.OrderedDescending
-                }
-                
-                var uniqueArray = Array<CKRecord>()
-                let names = NSMutableSet()
-                
-                for record in messages {
-                   
-                    let destinationName = record["fromUser"] as! String
+                    var uniqueArray = Array<CKRecord>()
+                    let names = NSMutableSet()
                     
-                    if (!names.containsObject(destinationName)) {
-  
+                    for record in messages {
+                        
+                        let destinationName = record["fromUser"] as! String
+                        
+                        if (!names.containsObject(destinationName)) {
+                            
                             uniqueArray.append(record)
                             names.addObject(destinationName)
-                        
-                        
-                    }
-                    else
-                    {
-                    
+                            
+                            
+                        }
+                        else
+                        {
+                            
                             for var i = 0; i < uniqueArray.count; ++i
                             {
-                               let record2 = uniqueArray[i];
+                                let record2 = uniqueArray[i];
                                 if (record2["fromUser"] as! String == record["fromUser"] as! String)
                                 {
                                     uniqueArray[i] = record;
                                 }
                             }
+                            
+                        }
                         
                     }
+                    messages = uniqueArray as [CKRecord];
                     
                 }
-                messages = uniqueArray as [CKRecord];
+                else{
+                    let results = results! as Array<CKRecord>
+                    for result in results{
+                        for var i=0; i < messages.count; ++i{
+                            if messages[i]["fromUser"] as! String == result{
+                                messages[i] = result
+                            }
+                        
+                        }
+                    }
+                }
+                self.organizeMessages()
+                
                 
                 print (messages)
             }
         
     }
+        
 
-}
+    }
+    func organizeMessages(){
+        
+        for message in messages{
+            var addToRecent: Bool = true
+            for var i = 0; i < recentMessages.count; ++i {
+            if (recentMessages[i]["phone"]! as! String == message["phone"] as! String){
+               // dictionary["video"] = message["video"]
+                recentMessages[i]["videos"] = message["videos"]
+                addToRecent = false
+            }
+        }
+        if (addToRecent == true){
+            let dictionary:[String:AnyObject] = ["fromUser":message["fromUser"] as! String, "fullName":message["name"] as! String, "phone":message["phone"] as! String, "video":message["videos"] as! Array<CKRecord>]
+            recentMessages.append(dictionary)
+            print (recentMessages)
+        }
+    }
+    }
 }

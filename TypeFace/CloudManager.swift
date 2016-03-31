@@ -39,6 +39,7 @@ class CloudManager: NSObject {
                     } else {
                         //print (error)
                         userRecord!["phoneNumber"] = phoneNumber
+                      
                         userFull?.phoneNumber = phoneNumber
                         //print (userRecord)
                         

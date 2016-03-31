@@ -40,6 +40,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 message["videos"] = assetArray
                 message["text"] = arrayofText
                 message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
                 message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
                 message["time"] = NSDate().timeIntervalSince1970 * 1000
                 message ["fromUser"] = "\(userFull!.userRecordID)"

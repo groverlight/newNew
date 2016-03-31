@@ -39,77 +39,17 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
        
     }
     override func viewDidAppear(animated: Bool) {
-        print ("wild activityview will appear")
+       // print ("wild activityview will appear")
 
 
-        if (userFull != nil){
-                    activityTable.reloadData()
-            /*let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-            let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
-            print (searchTerm)
-            let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
-            let query = CKQuery(recordType: "Message", predicate: predicate)
-            
-            publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
-                // ...
-                if (error == nil){
-                //print ("RESULTS\(results)")
-                for result in results!{
-                    print (result)
-                    
-                    self.activityTable.reloadData()
-                    
-                    let videos = result["videos"] as? Array<CKAsset>
-                    for video in videos!{
-                                NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
-                        print (video)
-                        dispatch_async(dispatch_get_main_queue()) {
-                        let assetURL = video.fileURL as NSURL!
-                        let videoData = NSData(contentsOfURL: assetURL!) 
-                        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                        let destinationPath = documentsPath.stringByAppendingPathComponent("filename.MOV")
-                        NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
-                        print(destinationPath)
-                        let fileURL = NSURL(fileURLWithPath: destinationPath)
-                        let avasset = AVAsset(URL: fileURL) as! AVURLAsset
-                        print (avasset)
-                        let playerItem = AVPlayerItem(asset: avasset)
-                        print (playerItem)
-                        let player = AVPlayer(playerItem: playerItem)
-                        let avLayer = AVPlayerLayer(player: player)
-                        avLayer.frame = self.view.bounds
-                        avLayer.backgroundColor = UIColor.blackColor().CGColor
-                        self.view.layer.addSublayer(avLayer)
-                        player.seekToTime(kCMTimeZero)
-                        player.play()
-                
-                        
-                        print (avasset.duration)
-                        }
-                    
-                    }
-                    //let array = result["videos"]
-                    //print (array)
-                    
-                        
-                    
-                    }
-                
 
-                }
-                else{
-                    print (error)
-                }
-        
-            }*/
-        }
     }
     func playerItemDidReachEnd(notification: NSNotification){
         print ("video ended")
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return messages.count
+        return recentMessages.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -117,8 +57,8 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
         //print (messages)
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        let record:CKRecord = messages[indexPath.row]
-        cell.textLabel!.text = record["name"] as? String
+        let dictionary:[String:AnyObject] = recentMessages[indexPath.row]
+        cell.textLabel!.text = dictionary["fullName"] as? String
         //print (record)
         
         return cell
@@ -130,6 +70,12 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
         frontWindow?.hidden = true
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView2") as! playerView2
         print ("mesesage\(messages)")
+        let tempDict:[String:AnyObject] = recentMessages[indexPath.row]
+        for eachMessage in messages{
+            if (eachMessage["phone"] as! String == tempDict["phone"] as! String){
+                message = eachMessage
+            }
+        }
         message = messages[indexPath.row]
         self.presentViewController(vc, animated: false, completion: { () -> Void in
            
