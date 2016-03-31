@@ -123,7 +123,7 @@ class playerView: UIViewController {
         if (numOfClips > 0){
             print ("(totalreceivedclips\(totalReceivedClips)")
             print ("(numfoclips\(numOfClips)")
-            let clipsLeft = totalReceivedClips - numOfClips 
+            let clipsLeft = totalReceivedClips - numOfClips + 1
             print ("clipsLeft\(clipsLeft)")
             setupVideo(clipsLeft)
         }

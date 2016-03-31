@@ -106,17 +106,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
@@ -172,8 +169,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print (notification.notificationType)
             if notification.notificationType == .Query {
                 let queryNotification = notification as! CKQueryNotification
-                let reason = queryNotification.queryNotificationReason
-                let recordID = queryNotification.recordID
+               // let reason = queryNotification.queryNotificationReason
+               // let recordID = queryNotification.recordID
                 
                 // Do your process here depending on the reason of the change
                 
@@ -207,6 +204,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func timerFunc(timer : NSTimer){
         print("timerfunc")
         if (userFull?.phoneNumber != nil){
+            let privateDB = CKContainer.defaultContainer().privateCloudDatabase
+            privateDB.fetchRecordWithID(userFull!.userRecordID, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
+                if (anError != nil) {
+                    
+                } else {
+                    //print (error)
+                    userRecord!["phoneNumber"] = phoneNumber
+                    userRecord!["messageArray"] = messages
+                    userFull?.phoneNumber = phoneNumber
+                    
+                    
+                    privateDB.saveRecord(userRecord!, completionHandler: { record, error in
+                        //...
+                    })
+              
+                }
+            })
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
             // print (searchTerm)
@@ -215,7 +229,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                 print (results)
-                messages = results! as Array<CKRecord>
+                //messages = results! as Array<CKRecord>
+                let results = results! as Array<CKRecord>
+                for message in messages{
+                    for result in results{
+                        if (message["fromUser"] as! String == result["fromUser"] as! String)
+                        {
+                            message = result
+                        }
+                    }
+                }
                 messages.sortInPlace {
                     item1, item2 in
                     let date1 = item1["time"] as! NSNumber
@@ -228,8 +251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let names = NSMutableSet()
                 
                 for record in messages {
-                    //NSLog(@"phoneNumber: %@", record.phoneNumber);
-                    // NSLog(@"Timestamp : %f", record.lastActivityTime);
+                   
                     let destinationName = record["fromUser"] as! String
                     
                     if (!names.containsObject(destinationName)) {
