@@ -33,7 +33,7 @@ class User: NSObject {
         publicDatabase.saveSubscription(subs, completionHandler: {
             subscription, error in
         
-         print (subscription)
+       //  print (subscription)
             //print (error)
         })
     

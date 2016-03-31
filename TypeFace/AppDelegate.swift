@@ -12,10 +12,9 @@ import CloudKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    //var window: UIWindow?
-    //var frontWindow: UIWindow?
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-       // NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -28,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         let defaultContainer = CKContainer.defaultContainer()
         defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
-                        let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
+                let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
             privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
-                //print (userRecord)
+                print (userRecord)
                 
 
                 dispatch_async(dispatch_get_main_queue()){
@@ -52,8 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         userFull?.firstName = info!.displayContact!.givenName
                         userFull?.lastName = info!.displayContact!.familyName
                         userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
+                        //recentMessages = userRecord!["message"] as! Array<[String:AnyObject]>
                         //recentMessages = userRecord!["messages"] as! Array<[String:String]>
-                       let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                       /*let publicDB = CKContainer.defaultContainer().publicCloudDatabase
                         let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
                         // print (searchTerm)
                         let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 return date1.compare(date2) == NSComparisonResult.OrderedDescending
                             }
                            // print (messages)
-                        }
+                        }*/
                         
 
                             
@@ -195,13 +195,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //  print("timerfunc")
         if (userFull != nil){
            // print ("userfull not init")
-            let privateDB = CKContainer.defaultContainer().privateCloudDatabase
+           /* let privateDB = CKContainer.defaultContainer().privateCloudDatabase
             privateDB.fetchRecordWithID((userFull?.userRecordID)!, completionHandler: { (Record, ErrorType) -> Void in
                 if (ErrorType == nil){
                     //Record!["message"] = recentMessages
                     
                 }
-            })
+            })*/
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
             // print (searchTerm)
@@ -267,14 +267,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 
                 //print (messages)
+                self.organizeMessages()
             }
         
     }
-         self.organizeMessages()
+        
 
     }
     func organizeMessages(){
-        //print ("organize messages")
+       // print ("organize messages")
+        print (recentMessages)
         for message in messages{
             var addToRecent: Bool = true
             for var i = 0; i < recentMessages.count; ++i {
@@ -286,11 +288,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         if (addToRecent == true){
-            print ("addtoRecent")
+            //print ("addtoRecent")
             let dictionary:[String:AnyObject] = ["fromUser":message["fromUser"] as! String, "fullName":message["name"] as! String, "phone":message["phone"] as! String, "video":message["videos"] as! Array<CKRecord>]
             recentMessages.append(dictionary)
-            print (recentMessages)
-        }
+            let privateDB = CKContainer.defaultContainer().privateCloudDatabase
+            func getUser(completionHandler: (success: Bool, user: User?) -> ()) {
+                CKContainer.defaultContainer().fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
+                    if error != nil {
+                        completionHandler(success: false, user: nil)
+                    } else {
+                        privateDB.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
+                            if (error != nil) {
+                                completionHandler(success: false, user: nil)
+                            } else {
+                                print (userRecord)
+                                print (error)
+                                let record:CKRecordValue = recentMessages
+                                userRecord!["message"] = record
+
+                                
+                                privateDB.saveRecord(userRecord!, completionHandler: { record, error in
+                                    print (error)
+                                })
+                                
+                            }
+                        })
+                    }
+                
+
+                }
+            }
+            }}
+        
     }
- }
 }

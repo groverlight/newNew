@@ -9,6 +9,9 @@
 import UIKit
 import Contacts
 import CloudKit
+//
+import AVFoundation
+import AVKit
 class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCollectionIndexViewDelegate {
     @IBOutlet weak var sendTable: UITableView!
 
@@ -22,39 +25,58 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     @IBAction func goSend(sender: AnyObject) {
 
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
-       
+         var assetArray = [CKAsset]()
+            
+            var asset:CKAsset
+            for var i = 0; i < arrayofText.count; ++i{
+                asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
+                let assetURL = asset.fileURL as NSURL!
+                let videoData = NSData(contentsOfURL: assetURL!)
+                let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
+                NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
+                let fileURL = NSURL(fileURLWithPath: destinationPath)
+                
+                
+                assetArray.append(CKAsset(fileURL: fileURL))
+            }
+        
 
        for path in checkedIndexPath {
-            
-            let contact = sectionsArray[path.section][path.row] as! [String:String]
-            print (contact)
-            if (contact["phoneNumber"] != nil){
-                print("composing message...")
-                var asset:CKAsset
-                var assetArray = [CKAsset]()
-                for var i = 0; i < arrayofText.count; ++i{
-                    asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
-                    assetArray.append(asset)
-                }
-      
-                let message = CKRecord(recordType: "Message")
-                message["videos"] = assetArray
-                message["text"] = arrayofText
-                message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
-                message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
-                message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
-                message["time"] = NSDate().timeIntervalSince1970 * 1000
-                message ["fromUser"] = "\(userFull!.userRecordID)"
-                let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-                publicDB.saveRecord(message) { savedRecord, error in
-                    // handle errors here
-                    print ("savedrecord\(savedRecord)   ")
-                    print (error)
-                    if (error == nil){}
-                }
-                //print(message)
-            }
+       
+
+
+                        let contact = self.sectionsArray[path.section][path.row] as! [String:String]
+                        //print (contact)
+                        if (contact["phoneNumber"] != nil){
+                            print("composing message...")
+                            
+                            
+                            
+                            let message = CKRecord(recordType: "Message")
+                            message["videos"] = assetArray
+                            message["text"] = arrayofText
+                            message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                            message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                            message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
+                            message["time"] = NSDate().timeIntervalSince1970 * 1000
+                            message ["fromUser"] = "\(userFull!.userRecordID)"
+                            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                            publicDB.saveRecord(message) { savedRecord, error in
+                                // handle errors here
+                                print ("savedrecord\(savedRecord)   ")
+                                print (error)
+                                if (error == nil){}
+                                else{
+                                    print ("network too slow...")
+                                }
+                            }
+                            //print(message)
+                        }
+                
         }
+
+        
         
     
     

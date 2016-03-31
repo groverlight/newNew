@@ -28,12 +28,6 @@ class playerView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBar.hidden = true
-        /*let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let overlay = UIVisualEffectView(effect: blurEffect)
-        // Put it somewhere, give it a frame...
-        overlay.frame = self.view.bounds
-        self.blurBackground.addSubview(overlay)
-        self.blurBackground.alpha = 0*/
         backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
@@ -45,12 +39,14 @@ class playerView: UIViewController {
         var duration: CFTimeInterval = 0
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())MediaCache")
+            print (files)   
             numOfClips = (files?.count)!
             totalReceivedClips = numOfClips
             //print (numOfClips) // last where I Started
         }
         catch {
-            print("bad")
+           // print("bad")
         }
         for var i = numOfClips; i > 0; --i {
             let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
@@ -129,10 +125,7 @@ class playerView: UIViewController {
         }
         else{
             print ("done with video clips")
-            let delay = 1  * Double(NSEC_PER_SEC)
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(time, dispatch_get_main_queue()) {
-                        }
+
             arrayofText.removeAllObjects()
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
@@ -146,7 +139,19 @@ class playerView: UIViewController {
                         self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                             self.backButton.transform = CGAffineTransformMakeScale(1, 1)
-                            }, completion: nil)
+                            }, completion: { finished in
+                                do{
+                                    let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+                                    for file:NSString in files!{
+                                        try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+                                    }
+                                    
+                                    
+                                }
+                                catch {
+                                   // print("bad")
+                                }
+                        })
 
                 
                 
@@ -165,19 +170,20 @@ class playerView: UIViewController {
         
         switch height {
         case 480.0:
-            print("iPhone 3,4")
+            //print("iPhone 3,4")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 568.0:
-            print("iPhone 5")
+            //print("iPhone 5")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
-            print("iPhone 6")
+            //print("iPhone 6")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
-            print("iPhone 6+")
+            //print("iPhone 6+")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 32 )
         default:
-            print("not an iPhone")
+            break
+            //print("not an iPhone")
             
         }
 

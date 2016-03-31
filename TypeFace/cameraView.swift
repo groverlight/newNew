@@ -778,6 +778,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardWillShow(notification: NSNotification) {
                //print (self.typingButton.frame)
+        panGesture?.enabled = true
         updateBottomLayoutConstraintWithNotification(notification)
 
     }
@@ -1008,19 +1009,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         switch height {
         case 480.0:
-            print("iPhone 3,4")
+           // print("iPhone 3,4")
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 24)
         case 568.0:
-            print("iPhone 5")
+            //print("iPhone 5")
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
-            print("iPhone 6")
+            //print("iPhone 6")
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
-            print("iPhone 6+")
+            //print("iPhone 6+")
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 32 )
         default:
-            print("not an iPhone")
+            break
+            //print("not an iPhone")
             
         }
         

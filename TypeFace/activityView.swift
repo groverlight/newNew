@@ -41,7 +41,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
     override func viewDidAppear(animated: Bool) {
        // print ("wild activityview will appear")
 
-
+        activityTable.reloadData()
 
     }
     func playerItemDidReachEnd(notification: NSNotification){
@@ -58,6 +58,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         let dictionary:[String:AnyObject] = recentMessages[indexPath.row]
+        print (dictionary)
         cell.textLabel!.text = dictionary["fullName"] as? String
         //print (record)
         
@@ -67,19 +68,21 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             print (indexPath)
-        frontWindow?.hidden = true
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView2") as! playerView2
-        print ("mesesage\(messages)")
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView2") as! playerView2
+        print ("message\(messages)")
         let tempDict:[String:AnyObject] = recentMessages[indexPath.row]
         for eachMessage in messages{
             if (eachMessage["phone"] as! String == tempDict["phone"] as! String){
                 message = eachMessage
+                frontWindow?.hidden = true
+
+                self.presentViewController(vc, animated: false, completion: { () -> Void in
+                    
+                })
             }
         }
-        message = messages[indexPath.row]
-        self.presentViewController(vc, animated: false, completion: { () -> Void in
-           
-        })
+       // message = messages[indexPath.row]
+
     }
     
    

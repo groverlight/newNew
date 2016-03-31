@@ -39,13 +39,12 @@ class CloudManager: NSObject {
                     } else {
                         //print (error)
                         userRecord!["phoneNumber"] = phoneNumber
-                      
+                        
                         userFull?.phoneNumber = phoneNumber
-                        //print (userRecord)
+                    
                         
                         privateDatabase.saveRecord(userRecord!, completionHandler: { record, error in
-                            //...
-                        })
+                                                   })
                         let user = User(userRecordID: userRecordID!, phoneNumber:phoneNumber)
                         completionHandler(success: true, user: user)
                     }

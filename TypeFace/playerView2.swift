@@ -58,7 +58,7 @@ class playerView2: UIViewController {
                    numOfClips = arrayofMessageTxt.count
                    totalReceivedClips = numOfClips//print (numOfClips) // last where I Started
     
-            print("bad")
+            //print("bad")
         
         for var i = 0; i < numOfClips; ++i {
             let avAsset = arrayofMessageVids[i]
@@ -174,20 +174,20 @@ class playerView2: UIViewController {
         
         switch height {
         case 480.0:
-            print("iPhone 3,4")
+           // print("iPhone 3,4")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 568.0:
-            print("iPhone 5")
+            //print("iPhone 5")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
         case 667.0:
-            print("iPhone 6")
+            //print("iPhone 6")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
-            print("iPhone 6+")
+            //print("iPhone 6+")
             labelFont = UIFont(name: "AvenirNext-Medium", size: 32 )
         default:
-            print("not an iPhone")
-            
+           // print("not an iPhone")
+            break
         }
         
         
