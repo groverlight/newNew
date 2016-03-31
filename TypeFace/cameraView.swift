@@ -462,7 +462,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.cameraTextField.textContainer.lineFragmentPadding = 0
        // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
         self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
-        print ("cameraView laoded")
+        print ("loading camera...")
         // Initialize a gradient view
 
         quitScrollView.hidden = true

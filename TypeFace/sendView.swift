@@ -18,6 +18,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     }
     @IBOutlet weak var navBar: UINavigationBar!
     var wentPlayer = false
+    var fileManager: NSFileManager? = NSFileManager()
     @IBAction func goSend(sender: AnyObject) {
 
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
@@ -49,8 +50,9 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                     // handle errors here
                     print ("savedrecord\(savedRecord)   ")
                     print (error)
+                    if (error == nil){}
                 }
-                print(message)
+                //print(message)
             }
         }
         

@@ -15,6 +15,7 @@ class loginName: UIViewController, UITextFieldDelegate {
     @IBAction func iCloudAction(sender: AnyObject) {
         self.iCloudLogin({ (success) -> () in
             if success {
+               
                 dispatch_async(dispatch_get_main_queue()) {
                     let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
                     frontWindow?.rootViewController = vc

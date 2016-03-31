@@ -18,6 +18,7 @@ class User: NSObject {
     init(userRecordID: CKRecordID, phoneNumber:String) {
         print ("making subscription...")
         self.userRecordID = userRecordID
+        self.phoneNumber = phoneNumber
         if (phoneNumber.characters.count > 0){
             
         
