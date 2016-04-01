@@ -190,7 +190,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
                 print (results)
-                if (messages.count == 0){
                     messages = results! as Array<CKRecord>
                     messages.sortInPlace {
                         item1, item2 in
@@ -230,19 +229,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                     messages = uniqueArray as [CKRecord];
-                    
-                }
-                else{
-                    let results = results! as Array<CKRecord>
-                    for result in results{
-                        for var i=0; i < messages.count; ++i{
-                            if messages[i]["fromUser"] as! String == result{
-                                messages[i] = result
-                            }
-                        
-                        }
-                    }
-                }
+
                
                 
                 
