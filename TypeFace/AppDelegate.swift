@@ -51,27 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         userFull?.firstName = info!.displayContact!.givenName
                         userFull?.lastName = info!.displayContact!.familyName
                         userFull?.phoneNumber = userRecord!["phoneNumber"] as? String
-                        //recentMessages = userRecord!["message"] as! Array<[String:AnyObject]>
-                        //recentMessages = userRecord!["messages"] as! Array<[String:String]>
-                       /*let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-                        let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
-                        // print (searchTerm)
-                        let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
-                        let query = CKQuery(recordType: "Message", predicate: predicate)
                         
-                        publicDB.performQuery(query, inZoneWithID:  nil) { results, error in
-                            print (results)
-                            messages = results! as Array<CKRecord>
-                            messages.sortInPlace {
-                                item1, item2 in
-                                let date1 = item1["time"] as! NSNumber
-                                let date2 = item2["time"]as! NSNumber
-                                return date1.compare(date2) == NSComparisonResult.OrderedDescending
-                            }
-                           // print (messages)
-                        }*/
-                        
-
                             
                     }
                     dispatch_async(dispatch_get_main_queue()) {

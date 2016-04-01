@@ -25,17 +25,39 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     @IBAction func goSend(sender: AnyObject) {
 
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
-         var assetArray = [CKAsset]()
+            var assetArray = [CKAsset]()
             
-            var asset:CKAsset
+             var asset:CKAsset
             for var i = 0; i < arrayofText.count; ++i{
                 asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
                 let assetURL = asset.fileURL as NSURL!
-                let videoData = NSData(contentsOfURL: assetURL!)
+               // let videoData = NSData(contentsOfURL: assetURL!)
                 let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                 let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
-                NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
+               // NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
+                self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
+                    
+                    if handler.status == AVAssetExportSessionStatus.Completed
+                    {
+                        let data = NSData(contentsOfURL: fileURL)
+                        
+                        print("File size after compression: \(Double(data!.length / 1048576)) mb")
+                        
+                      //  self.picker.dismissViewControllerAnimated(true, completion: nil)
+                        
+                        
+                    }
+                        
+                    else if handler.status == AVAssetExportSessionStatus.Failed
+                    {
+                        //let alert = UIAlertView(title: "Uh oh", message: " There was a problem compressing the video maybe you can try again later. Error: \(handler.error.localizedDescription)", delegate: nil, cancelButtonTitle: "Okay")
+                        
+                        //alert.show()
+                        
+                    }
+                })
+       
                 
                 
                 assetArray.append(CKAsset(fileURL: fileURL))
@@ -356,7 +378,24 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         }
         
     }
-    
+    func compressVideo(inputURL: NSURL, outputURL: NSURL, handler:(session: AVAssetExportSession)-> Void)
+    {
+        let urlAsset = AVURLAsset(URL: inputURL, options: nil)
+        
+        let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality)
+        
+        exportSession!.outputURL = outputURL
+        
+        exportSession!.outputFileType = AVFileTypeQuickTimeMovie
+        
+        exportSession!.shouldOptimizeForNetworkUse = true
+        
+        exportSession!.exportAsynchronouslyWithCompletionHandler { () -> Void in
+            
+            handler(session: exportSession!)
+        }
+        
+    }
 }
 extension Character {
     func utf8Value() -> UInt8 {

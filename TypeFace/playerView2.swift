@@ -81,7 +81,7 @@ class playerView2: UIViewController {
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         let moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
-        avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        avLayer.videoGravity = AVLayerVideoGravityResize
         avLayer.frame = self.view.bounds
         self.view.layer.addSublayer(avLayer)
         moviePlayer.seekToTime(kCMTimeZero)

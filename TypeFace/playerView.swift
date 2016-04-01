@@ -44,10 +44,12 @@ class playerView: UIViewController {
             numOfClips = (files?.count)!
             totalReceivedClips = numOfClips
             //print (numOfClips) // last where I Started
+            print (files)
         }
         catch {
            // print("bad")
         }
+        
         for var i = numOfClips; i > 0; --i {
             let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
            duration = duration + CMTimeGetSeconds(avAsset.duration)
@@ -117,14 +119,14 @@ class playerView: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
       
         if (numOfClips > 0){
-            print ("(totalreceivedclips\(totalReceivedClips)")
-            print ("(numfoclips\(numOfClips)")
+           // print ("(totalreceivedclips\(totalReceivedClips)")
+            //print ("(numfoclips\(numOfClips)")
             let clipsLeft = totalReceivedClips - numOfClips + 1
-            print ("clipsLeft\(clipsLeft)")
+           // print ("clipsLeft\(clipsLeft)")
             setupVideo(clipsLeft)
         }
         else{
-            print ("done with video clips")
+            //print ("done with video clips")
 
             arrayofText.removeAllObjects()
             let overlay = UIVisualEffectView()

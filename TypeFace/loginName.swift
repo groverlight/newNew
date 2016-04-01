@@ -138,7 +138,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                 privateDB.fetchRecordWithID((userFull?.userRecordID)!, completionHandler: { (Record, ErrorType) -> Void in
                     if (ErrorType == nil){
                         let record:CKRecordValue = recentMessages
-                        Record!["message"] = record
+                       // Record!["message"] = record
                         
                     }
                     print (recentMessages)
