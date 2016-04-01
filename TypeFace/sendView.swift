@@ -37,7 +37,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
                 NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
-               /* self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
+                self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
                     
                     if handler.status == AVAssetExportSessionStatus.Completed
                     {
@@ -57,7 +57,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                         //alert.show()
                         
                     }
-                })*/
+                })
        
                 
                assetArray.append(CKAsset(fileURL: fileURL))
@@ -79,7 +79,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                             let message = CKRecord(recordType: "Message")
                             message["videos"] = assetArray
                             message["text"] = arrayofText
-                            message["toUser"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                            message["toUser"] = contact["phoneNumber"]
                             message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
                             message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
                             message["time"] = NSDate().timeIntervalSince1970 * 1000

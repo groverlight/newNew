@@ -75,7 +75,7 @@ class activityView: UIViewController,UITableViewDelegate, UITableViewDataSource 
             if (eachMessage["phone"] as! String == tempDict["phone"] as! String){
                 message = eachMessage
                 frontWindow?.hidden = true
-
+                self.dismissViewControllerAnimated(false, completion: nil)
                 self.presentViewController(vc, animated: false, completion: { () -> Void in
                     
                 })
