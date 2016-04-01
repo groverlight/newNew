@@ -28,20 +28,21 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
             var assetArray = [CKAsset]()
             
              var asset:CKAsset
-            for var i = 0; i < arrayofText.count; ++i{
+              for var i = 0; i < arrayofText.count; ++i{
+                print ("arrayofText")
                 asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
                 let assetURL = asset.fileURL as NSURL!
-               // let videoData = NSData(contentsOfURL: assetURL!)
+                let videoData = NSData(contentsOfURL: assetURL!)
                 let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                 let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
-               // NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
+                NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
-                self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
+               /* self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
                     
                     if handler.status == AVAssetExportSessionStatus.Completed
                     {
                         let data = NSData(contentsOfURL: fileURL)
-                        
+                         assetArray.append(CKAsset(fileURL: fileURL))
                         print("File size after compression: \(Double(data!.length / 1048576)) mb")
                         
                       //  self.picker.dismissViewControllerAnimated(true, completion: nil)
@@ -56,11 +57,11 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                         //alert.show()
                         
                     }
-                })
+                })*/
        
                 
-                
-                assetArray.append(CKAsset(fileURL: fileURL))
+               assetArray.append(CKAsset(fileURL: fileURL))
+               
             }
         
 

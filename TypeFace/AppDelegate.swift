@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        NSTimer.scheduledTimerWithTimeInterval(10.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
