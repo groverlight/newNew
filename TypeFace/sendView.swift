@@ -46,7 +46,41 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                         print("File size after compression: \(Double(data!.length / 1048576)) mb")
                         
                       //  self.picker.dismissViewControllerAnimated(true, completion: nil)
-                        
+                        assetArray.append(CKAsset(fileURL: fileURL))
+                        for path in self.checkedIndexPath {
+                            
+                            
+                            
+                            let contact = self.sectionsArray[path.section][path.row] as! [String:String]
+                            //print (contact)
+                            if (contact["phoneNumber"] != nil){
+                                print("composing message...")
+                                
+                                
+                                
+                                let message = CKRecord(recordType: "Message")
+                                message["videos"] = assetArray
+                                message["text"] = arrayofText
+                                message["toUser"] = contact["phoneNumber"]
+                                message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                                message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
+                                message["time"] = NSDate().timeIntervalSince1970 * 1000
+                                message ["fromUser"] = "\(userFull!.userRecordID)"
+                                let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                                publicDB.saveRecord(message) { savedRecord, error in
+                                    // handle errors here
+                                    print ("savedrecord\(savedRecord)   ")
+                                    print (error)
+                                    if (error == nil){}
+                                    else{
+                                        print ("network too slow...")
+                                    }
+                                }
+                                //print(message)
+                            }
+                            
+                        }
+
                         
                     }
                         
@@ -60,44 +94,11 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 })
        
                 
-               assetArray.append(CKAsset(fileURL: fileURL))
-               
+                
             }
         
 
-       for path in checkedIndexPath {
-       
-
-
-                        let contact = self.sectionsArray[path.section][path.row] as! [String:String]
-                        //print (contact)
-                        if (contact["phoneNumber"] != nil){
-                            print("composing message...")
-                            
-                            
-                            
-                            let message = CKRecord(recordType: "Message")
-                            message["videos"] = assetArray
-                            message["text"] = arrayofText
-                            message["toUser"] = contact["phoneNumber"]
-                            message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
-                            message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
-                            message["time"] = NSDate().timeIntervalSince1970 * 1000
-                            message ["fromUser"] = "\(userFull!.userRecordID)"
-                            let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-                            publicDB.saveRecord(message) { savedRecord, error in
-                                // handle errors here
-                                print ("savedrecord\(savedRecord)   ")
-                                print (error)
-                                if (error == nil){}
-                                else{
-                                    print ("network too slow...")
-                                }
-                            }
-                            //print(message)
-                        }
-                
-        }
+      
 
         
         
@@ -381,6 +382,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     }
     func compressVideo(inputURL: NSURL, outputURL: NSURL, handler:(session: AVAssetExportSession)-> Void)
     {
+        print ("compress video")
         let urlAsset = AVURLAsset(URL: inputURL, options: nil)
         
         let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality)

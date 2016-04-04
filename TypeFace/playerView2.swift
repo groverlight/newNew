@@ -135,6 +135,17 @@ class playerView2: UIViewController {
         }
         else{
             print ("done with video clips")
+            do{
+                let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+                for file:NSString in files!{
+                    try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+                }
+                
+                
+            }
+            catch {
+                // print("bad")
+            }
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             publicDB.deleteRecordWithID((message?.recordID)!, completionHandler: {recordID, error in
                 NSLog("OK or \(error)")

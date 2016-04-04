@@ -129,7 +129,17 @@ class playerView: UIViewController {
         }
         else{
             //print ("done with video clips")
-
+            do{
+                let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+                for file:NSString in files!{
+                    try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
+                }
+                
+                
+            }
+            catch {
+                // print("bad")
+            }
             arrayofText.removeAllObjects()
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
@@ -144,17 +154,7 @@ class playerView: UIViewController {
                         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                             self.backButton.transform = CGAffineTransformMakeScale(1, 1)
                             }, completion: { finished in
-                                do{
-                                    let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-                                    for file:NSString in files!{
-                                        try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
-                                    }
-                                    
-                                    
-                                }
-                                catch {
-                                   // print("bad")
-                                }
+                               
                         })
 
                 

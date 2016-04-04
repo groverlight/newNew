@@ -34,6 +34,11 @@
 		27862F101C6DA8A700C62AAE /* loginCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27862F0F1C6DA8A600C62AAE /* loginCode.swift */; };
 		27862F121C6DA8B500C62AAE /* loginName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27862F111C6DA8B500C62AAE /* loginName.swift */; };
 		2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2796D2F01C6D477B00FE580B /* WindowExtension.swift */; };
+		27C2FE801CB32A2800091E65 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
+		27C2FE811CB32A2800091E65 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27C2FE891CB32B0700091E65 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C2FE7C1CB329C300091E65 /* AVFoundation.framework */; };
+		27C2FE8A1CB32B0C00091E65 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C2FE7C1CB329C300091E65 /* AVFoundation.framework */; };
+		27C2FE8B1CB32B0C00091E65 /* AVFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27C2FE7C1CB329C300091E65 /* AVFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27C8FF631C9D1463005B98FF /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C8FF621C9D1463005B98FF /* icloud.png */; };
 		27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592A81C8FAD7E00D37E5B /* GradientView.swift */; };
 		27D592AD1C8FB78900D37E5B /* paddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592AC1C8FB78900D37E5B /* paddedLabel.swift */; };
@@ -47,8 +52,6 @@
 		27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */; };
 		27EF18111C877B1C003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27EF18131C877B63003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		27EF18141C877C04003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
-		27EF18171C877C9B003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2742A4411C6AF1F500B369E7;
 			remoteInfo = TypeFace;
+		};
+		27C2FE821CB32A2800091E65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27EF18051C877670003A49A2 /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCE209E41943F20C002FEED8;
+			remoteInfo = GPUImageFramework;
 		};
 		27EF180B1C877671003A49A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -87,24 +97,19 @@
 			remoteGlobalIDString = BCE209E41943F20C002FEED8;
 			remoteInfo = GPUImageFramework;
 		};
-		27EF18151C877C83003A49A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 27EF18051C877670003A49A2 /* GPUImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCE209E41943F20C002FEED8;
-			remoteInfo = GPUImageFramework;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		27493FD21C76D2CE00E7AC20 /* CopyFiles */ = {
+		27C2FE841CB32A2800091E65 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				27EF18171C877C9B003A49A2 /* GPUImage.framework in CopyFiles */,
+				27C2FE8B1CB32B0C00091E65 /* AVFoundation.framework in Embed Frameworks */,
+				27C2FE811CB32A2800091E65 /* GPUImage.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		27EF18121C877B5D003A49A2 /* CopyFiles */ = {
@@ -156,6 +161,7 @@
 		27862F0F1C6DA8A600C62AAE /* loginCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginCode.swift; sourceTree = "<group>"; };
 		27862F111C6DA8B500C62AAE /* loginName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginName.swift; sourceTree = "<group>"; };
 		2796D2F01C6D477B00FE580B /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
+		27C2FE7C1CB329C300091E65 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		27C8FF621C9D1463005B98FF /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
 		27D592A71C8FAD7E00D37E5B /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		27D592A81C8FAD7E00D37E5B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -179,11 +185,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27EF18141C877C04003A49A2 /* GPUImage.framework in Frameworks */,
+				27C2FE891CB32B0700091E65 /* AVFoundation.framework in Frameworks */,
 				270A90671C7D1EE1006FC3A0 /* MediaPlayer.framework in Frameworks */,
+				27C2FE8A1CB32B0C00091E65 /* AVFoundation.framework in Frameworks */,
 				270A90651C7D1BA8006FC3A0 /* AVKit.framework in Frameworks */,
 				27862EFD1C6D9B6500C62AAE /* QuartzCore.framework in Frameworks */,
 				277CB0401C9892B40032E109 /* CloudKit.framework in Frameworks */,
+				27C2FE801CB32A2800091E65 /* GPUImage.framework in Frameworks */,
 				27862EF71C6D9B3100C62AAE /* CFNetwork.framework in Frameworks */,
 				205119C77528F37065B96E39 /* libPods-TypeFace.a in Frameworks */,
 			);
@@ -339,6 +347,7 @@
 		38CB80103A402F40F49FC041 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27C2FE7C1CB329C300091E65 /* AVFoundation.framework */,
 				277CB03F1C9892B40032E109 /* CloudKit.framework */,
 				270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */,
 				270A90641C7D1BA8006FC3A0 /* AVKit.framework */,
@@ -361,12 +370,12 @@
 				2742A43F1C6AF1F500B369E7 /* Frameworks */,
 				2742A4401C6AF1F500B369E7 /* Resources */,
 				44D5A6C4508FA35B566B9F8F /* Copy Pods Resources */,
-				27493FD21C76D2CE00E7AC20 /* CopyFiles */,
+				27C2FE841CB32A2800091E65 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				27EF18161C877C83003A49A2 /* PBXTargetDependency */,
+				27C2FE831CB32A2800091E65 /* PBXTargetDependency */,
 			);
 			name = cakeTalk;
 			productName = TypeFace;
@@ -616,15 +625,15 @@
 			target = 2742A4411C6AF1F500B369E7 /* cakeTalk */;
 			targetProxy = 2742A4621C6AF1F500B369E7 /* PBXContainerItemProxy */;
 		};
+		27C2FE831CB32A2800091E65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImageFramework;
+			targetProxy = 27C2FE821CB32A2800091E65 /* PBXContainerItemProxy */;
+		};
 		27EF18101C877AF5003A49A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GPUImageFramework;
 			targetProxy = 27EF180F1C877AF5003A49A2 /* PBXContainerItemProxy */;
-		};
-		27EF18161C877C83003A49A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GPUImageFramework;
-			targetProxy = 27EF18151C877C83003A49A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
