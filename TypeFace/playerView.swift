@@ -9,7 +9,9 @@ import AVFoundation
 import AVKit
 import UIKit
 import GPUImage
-
+import Social
+import Accounts
+import MessageUI
 
 class playerView: UIViewController {
     @IBOutlet weak var progressBar: UIView!
@@ -22,10 +24,14 @@ class playerView: UIViewController {
     @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
+        arrayofText.removeAllObjects()
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
+        //let vc = MFMessageComposeViewControlle
+
+       // let vc = SLComposeViewController(forServiceType: SLSer)
         super.viewDidLoad()
         progressBar.hidden = true
         backButton.hidden = true
@@ -144,7 +150,7 @@ class playerView: UIViewController {
             catch {
                 // print("bad")
             }
-            arrayofText.removeAllObjects()
+            
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)

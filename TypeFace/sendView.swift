@@ -37,9 +37,6 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
                 //let data = NSData(contentsOfURL: fileURL)
                 assetArray.append(CKAsset(fileURL: fileURL))
-                                
-                //  self.picker.dismissViewControllerAnimated(true, completion: nil)
-                assetArray.append(CKAsset(fileURL: fileURL))
 
         
             }

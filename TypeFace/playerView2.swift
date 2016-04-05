@@ -38,7 +38,7 @@ class playerView2: UIViewController {
         print (arrayofMessageTxt)
         let videos = message!["videos"] as? Array<CKAsset>
         for video in videos!{
-            dispatch_async(dispatch_get_main_queue()) {
+           // dispatch_async(dispatch_get_main_queue()) {
                 let assetURL = video.fileURL as NSURL!
                 let videoData = NSData(contentsOfURL: assetURL!)
                 let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -49,7 +49,8 @@ class playerView2: UIViewController {
                 let avasset = AVAsset(URL: fileURL) as! AVURLAsset
                 self.arrayofMessageVids.append(avasset)
 
-            }}
+            //}
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

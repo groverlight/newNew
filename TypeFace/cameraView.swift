@@ -282,169 +282,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
             
 
-          /*  let buttonDecay = POPBasicAnimation(propertyNamed: kPOPViewSize)
-            let buttonDecay2 = POPBasicAnimation(propertyNamed: kPOPViewSize)
-            let circle = CircleView(frame: CGRectMake(self.typingButton.frame.origin.x + 3*self.typingButton.bounds.size.width/2, self.self.typingButton.frame.origin.y+3*self.typingButton.bounds.size.height/2, self.typingButton.bounds.size.height, self.self.typingButton.bounds.size.height))
-            self.view.addSubview(circle)
-            circle.hidden = true
-            circle.translatesAutoresizingMaskIntoConstraints = false
-          //  let circlewidth = circle.bounds.size.width
-            circle.bottomAnchor.constraintEqualToAnchor(self.typingButton.topAnchor).active = true
-           // circle.centerXAnchor.constraintEqualToAnchor(self.typingButton.centerXAnchor).active = true
-            circle.centerXAnchor.constraintEqualToAnchor(self.typingButton.centerXAnchor, constant: -circle.bounds.size.width/2).active = true
-            //circle.centerYAnchor.constraintEqualToAnchor(self.typingButton.centerYAnchor, constant:0).active = true
-            
-            buttonDecay2.toValue = NSValue(CGSize: CGSize(width: typeButtonHeight/3, height: typeButtonHeight/3))
-            buttonDecay.toValue = NSValue(CGSize: CGSize(width: typeButtonHeight, height: typeButtonHeight))
-            buttonDecay.duration = 0.3
-            buttonDecay2.duration = 0.0000
-
-            buttonDecay.completionBlock = { (animation, finished) in
-                
-                self.typingButton.hidden = true
-                self.typingButton.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0)
-                self.typingButton.layer.borderWidth = 0
-               // self.typingButton.transform = CGAffineTransformMakeScale(0, 0)
-                self.typingButton.pop_addAnimation(buttonDecay2, forKey: "decay2")
-                circle.strokeColor = UIColor.whiteColor()
-                circle.hidden = false
-                self.cameraTextField.sizeToFit()
-               let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
-                self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5);
-                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
-                    self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
-                    }, completion: nil)
-
-                
-               // print (time)
-
-                switch (time){
-                case 1:
-                    circle.animateToStrokeEnd(2)
-                    break
-                case 2:
-                    circle.animateToStrokeEnd(2.75)
-                    break
-                case 3:
-                    circle.animateToStrokeEnd(3.5)
-                    break
-                case 4:
-                    circle.animateToStrokeEnd(4.25)
-                    break
-                case 5:
-                    circle.animateToStrokeEnd(5)
-                    break
-                default:
-                    print("wtf 2 many lines")
-                    break
-                }
-                
-                
-                arrayofText.addObject(newLabel.text!)
-                // print ("start recording")
-                //  typingButton.pop_addAnimation(buttonScale, forKey: "scale")
-            }
-            
-            buttonDecay2.completionBlock = { (animation, finished) in
-                self.typingButton.hidden =  false
-                self.typingButton.layer.cornerRadius = self.typingButton.bounds.size.width/2
-                let scaleUp = POPBasicAnimation(propertyNamed: kPOPViewScaleXY)
-                scaleUp.toValue=NSValue(CGSize: CGSizeMake(1, 1))
-                let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
-                
-                //print (time)
-                
-                switch (time){
-                case 1:
-                    scaleUp.duration = 2
-                    break
-                case 2:
-                    scaleUp.duration = 2.75
-                    break
-                case 3:
-                    scaleUp.duration = 3.5
-                    break
-                case 4:
-                    scaleUp.duration = 4.25
-                    break
-                case 5:
-                    scaleUp.duration = 5
-                    break
-                default:
-                    print("wtf 2 many lines")
-                    break
-                }
-                
-                scaleUp.completionBlock = { (animation, finished) in
-                    self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
-                    self.stopRecording()
-                    let recover = POPSpringAnimation(propertyNamed: kPOPViewSize)
-                    recover.toValue = NSValue(CGSize: CGSize(width: self.view.bounds.size.width-60, height: self.typingButtonFrame.size
-                        .height))
-
-                    recover.springBounciness = 20
-                    //recover.springSpeed =
-                    recover.springSpeed = 100
-                    recover.completionBlock = { (animation, finished) in
-                        if (finished) {
-
-                            self.typingButton.layer.cornerRadius = 8
-                            panGesture?.enabled = true
-                            
-                            let yanim = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
-                            yanim.springBounciness = 20
-                            yanim.velocity = (500)
-                            yanim.springSpeed = 50
-                            yanim.completionBlock = { (animation, finished) in
-                                if (finished){
-                                    
-                                    let yanim2 = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
-                                    yanim2.springBounciness = 20
-                                    yanim2.velocity = (500)
-                                    yanim2.springSpeed = 50
-                                    yanim2.completionBlock = { (animation,finished) in
-                                        self.typingButton.userInteractionEnabled = true
-
-                                    }
-                                    self.typingButton.pop_addAnimation(yanim2, forKey: "nod2")
-                                    
-                                }
-                            }
-                            newLabel.layer.pop_addAnimation(yanim, forKey: "nod")
-
-                        }
-                    
-                    }
-                    
-                    self.emojiLabel.text = ("👆")
-                    self.emojiLabel.hidden = false
-                    self.characterCounter.hidden = false
-                    self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
-                    
-                    self.typingButton.setTitle("another one", forState: UIControlState.Normal)
-                    self.typingButton.pop_addAnimation(recover, forKey: "recover")
-                    self.cameraTextField.returnKeyType = UIReturnKeyType.Send
-                    self.cameraTextField.becomeFirstResponder()
-                    
-
-                }
-                self.typingButton.pop_addAnimation(scaleUp, forKey: "scaleup")
-                //circle.pop_addAnimation(scaleUp2, forKey: "scaleup")
-
-                
-            }
-                //[NSValue valueWithCGSize:CGSizeMake(3, 2)];
-            self.startRecording()
-            self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
-            self.typingButton.setTitle("", forState: UIControlState.Normal)
-            self.emojiLabel.hidden = true
-            self.characterCounter.hidden = true
-            self.typingButton.layer.cornerRadius = 25
-            self.typingButton.layer.borderWidth = 2.0
-            self.typingButton.clipsToBounds = true
-            typingButton.pop_addAnimation(buttonDecay, forKey: "decay")
-*/
-        }
+         }
 
     }
     @IBOutlet weak var cameraTextField: UITextView!
@@ -660,10 +498,17 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 //print ("go")
                 cameraTextField.resignFirstResponder()
                 self.view.bringSubviewToFront(typingButton)
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("sendView") as! sendView
+                    //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
                     self.cameraTextField.resignFirstResponder()
                     //self.view.endEditing(true)
-                    self.presentViewController(vc, animated: true, completion: nil)
+                   // self.presentViewController(vc, animated: true, completion: nil)
+                let shareString = "String to share"
+                
+                let objectsToShare = [shareString]
+                
+                let activityViewController      = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
+                
+                presentViewController(activityViewController, animated: true, completion: nil)
                     //self.performSegueWithIdentifier("goSend", sender: self)
                // }
                 
@@ -778,9 +623,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardWillShow(notification: NSNotification) {
                //print (self.typingButton.frame)
-        if (gradientView.hidden == true){
-            gradientView.hidden = false
-        }
+
         panGesture?.enabled = true
         updateBottomLayoutConstraintWithNotification(notification)
 
@@ -793,20 +636,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardDidShow(notification: NSNotification) {
         //print ("did show")
-
-        
-    }
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let textView = object as! UITextView
-        var topCorrect = (textView.bounds.size.height - textView.contentSize.height)
-        topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
-        textView.contentInset.top = topCorrect
-
-    }
-    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
-        let userInfo = notification.userInfo!
-        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+        if (gradientView.hidden == true){
+            gradientView.hidden = false
+        }
         if (!(self.view.subviews.contains(gradientView))){
             let userInfo = notification.userInfo!
             let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
@@ -826,6 +658,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             // Add it as a subview in all of its awesome
             self.view.insertSubview(gradientView, aboveSubview:filteredImage!)
         }
+        
+    }
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        let textView = object as! UITextView
+        var topCorrect = (textView.bounds.size.height - textView.contentSize.height)
+        topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
+        textView.contentInset.top = topCorrect
+
+    }
+    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+
 
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
         
@@ -900,7 +746,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
-
+        
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
        
     }
@@ -1029,7 +875,60 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         
     }
+    func exportVideo(path:String, outputPath:String, nMovie:Int) -> Bool{
 
+
+       
+       
+        let composition = AVMutableComposition()
+        let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
+        
+        let insertTime = kCMTimeZero
+        do{
+            let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            print (files)
+            for i in 0..<files!.count{
+                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
+                  //  duration += CMTimeGetSeconds(avAsset.duration)
+                //let moviePath = path.stringByAppendingPathComponent("mp4")
+                //let moviePathUrl = NSURL(fileURLWithPath: moviePath)
+                //let sourceAsset = AVURLAsset(URL: moviePathUrl, options: nil)
+                
+                let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
+                
+                if tracks.count > 0{
+                    let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
+                  try  trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
+                    .duration), ofTrack: assetTrack, atTime: insertTime)
+                    
+                    //insertTime = CMTimeAdd(insertTime, sourceAsset.duration)
+                }
+                
+            }
+        }
+        
+        catch {
+            print("bad")
+        }
+            
+            let completeMovie = outputPath.stringByAppendingPathComponent("movie.mov")
+            let completeMovieUrl = NSURL(fileURLWithPath: completeMovie)
+            let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
+            exporter!.outputURL = completeMovieUrl
+            exporter!.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+            exporter!.exportAsynchronouslyWithCompletionHandler({
+                switch exporter!.status{
+                case  AVAssetExportSessionStatus.Failed:
+                    print("failed \(exporter!.error)")
+                case AVAssetExportSessionStatus.Cancelled:
+                    print("cancelled \(exporter!.error)")
+                default:
+                    print("complete")
+                }
+            })
+            return true
+
+    }
 
 
 }
