@@ -34,42 +34,12 @@ class playerView: UIViewController {
         self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
         iPhoneScreenSizes()
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        var duration: CFTimeInterval = 0
-        do{
-            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            let String = "MediaCache"
-
-            try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
-            print (files)   
-            numOfClips = (files?.count)!
-            totalReceivedClips = numOfClips
-            //print (numOfClips) // last where I Started
-            print (files)
-        }
-        catch {
-           // print("bad")
-        }
-        
-        for var i = numOfClips; i > 0; --i {
-            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
-           duration = duration + CMTimeGetSeconds(avAsset.duration)
-        }
-        
-        self.progressBar.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0)
-        self.progressBar.hidden = false
-        UIView.animateWithDuration(duration) { () -> Void in
-             self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
-        }
-        setupVideo(1)
-    }
     func setupVideo(index: Int){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
+        
         let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
-       // print("duration\(avAsset.duration)")
+        // print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
@@ -80,7 +50,7 @@ class playerView: UIViewController {
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
-    
+        
         scrollLabel.font = labelFont
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         scrollLabel.numberOfLines = 0
@@ -89,9 +59,9 @@ class playerView: UIViewController {
         scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
-
+        
         scrollLabel.setLineHeight(0)
-       // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
+        // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.labelView.addSubview(scrollLabel)
         self.view.bringSubviewToFront(labelView)
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
@@ -106,13 +76,46 @@ class playerView: UIViewController {
             },completion: {(finished) -> Void in
                 scrollLabel.removeFromSuperview()})
         UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
-                       scrollLabel.alpha = 0
+            scrollLabel.alpha = 0
             },completion: nil)
+        
+        
+        
+        
+        numOfClips -= 1
+    }
 
+    override func viewDidAppear(animated: Bool) {
+        var duration: CFTimeInterval = 0
+        do{
+            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            let String = "MediaCache"
+
+            try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
+            print (files)   
+            numOfClips = (files?.count)!
+            totalReceivedClips = numOfClips
+            //print (numOfClips) // last where I Started
+            print (files)
+        }
+        catch {
+            print("bad")
+        }
         
         
+        for i in (0..<numOfClips).reverse(){
+            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
+           duration = duration + CMTimeGetSeconds(avAsset.duration)
+        }
         
-          --numOfClips
+        self.progressBar.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0)
+        self.progressBar.hidden = false
+        UIView.animateWithDuration(duration) { () -> Void in
+             self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
+        }
+        setupVideo(1)
+    
+    
     }
     
     func playerItemDidReachEnd(notification: NSNotification){
@@ -195,6 +198,7 @@ class playerView: UIViewController {
     }
 
 }
+
 extension UILabel {
     
     func setLineHeight(lineHeight: CGFloat) {

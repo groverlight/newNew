@@ -60,7 +60,7 @@ class playerView2: UIViewController {
     
             //print("bad")
         
-        for var i = 0; i < numOfClips; ++i {
+        for i in 0 ..< numOfClips {
             let avAsset = arrayofMessageVids[i]
             duration = duration + CMTimeGetSeconds(avAsset.duration)
         }
@@ -73,8 +73,8 @@ class playerView2: UIViewController {
         setupVideo(1)
     }
     func setupVideo(index: Int){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerItemDidReachEnd:"), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("playerStartPlaying:"), name:UIApplicationDidBecomeActiveNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView2.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView2.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
         
         let avAsset = arrayofMessageVids[index-1]//AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
         // print("duration\(avAsset.duration)")
@@ -121,7 +121,7 @@ class playerView2: UIViewController {
         
         
         
-        --numOfClips
+        numOfClips -= 1
     }
     
     func playerItemDidReachEnd(notification: NSNotification){

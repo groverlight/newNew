@@ -72,7 +72,8 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
         return true
     }
 
-    func getLength(var mobileNumber:NSString) -> NSInteger {
+    func getLength(mobileNumbers:NSString) -> NSInteger {
+        var mobileNumber = mobileNumbers
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -82,7 +83,8 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
         return length
     }
     
-    func numberFormatter(var mobileNumber: NSString) -> NSString {
+    func numberFormatter( mobileNumbers: NSString) -> NSString {
+        var mobileNumber = mobileNumbers
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(" ", withString: "")

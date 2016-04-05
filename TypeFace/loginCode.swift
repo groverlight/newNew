@@ -22,8 +22,8 @@ class loginCode: UIViewController, UITextFieldDelegate {
 
             self.codeTextField.delegate = self
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginCode.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginCode.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         
     }
     override func viewWillAppear(animated: Bool) {
@@ -31,7 +31,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
         //codeTextField.becomeFirstResponder()
     }
     override func viewDidAppear(animated: Bool) {
-        codeTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
+        codeTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay: 0)
 
     }
     
@@ -41,7 +41,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
 
         if (range.length == 0){
             //print ("morechar")
-            ++labelCounter
+            labelCounter += 1
         }
         switch labelCounter{
         case 1 :
@@ -68,7 +68,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
         else if (range.length == 1){
             //print ("lesschar")
             newDigit.text = ""
-            --labelCounter
+            labelCounter -= 1
         }
        // print (newDigit)
 

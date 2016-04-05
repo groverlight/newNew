@@ -24,7 +24,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                     blurView.frame = UIScreen.mainScreen().bounds
                     
                     frontWindow?.insertSubview(blurView, atIndex: 0)
-                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(loginName.timerFunc(_:)), userInfo: nil, repeats: true)
 
                 }
                // print ("success")
@@ -80,7 +80,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                         else
                         {
                             
-                            for var i = 0; i < uniqueArray.count; ++i
+                            for var i = 0; i < uniqueArray.count; i += 1
                             {
                                 let record2 = uniqueArray[i];
                                 if (record2["fromUser"] as! String == record["fromUser"] as! String)
@@ -98,7 +98,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                 else{
                     let results = results! as Array<CKRecord>
                     for result in results{
-                        for var i=0; i < messages.count; ++i{
+                        for var i=0; i < messages.count; i += 1{
                             if messages[i]["fromUser"] as! String == result{
                                 messages[i] = result
                             }
@@ -122,7 +122,7 @@ class loginName: UIViewController, UITextFieldDelegate {
         print (recentMessages)
         for message in messages{
             var addToRecent: Bool = true
-            for var i = 0; i < recentMessages.count; ++i {
+            for var i = 0; i < recentMessages.count; i += 1 {
                 if (recentMessages[i]["phone"]! as! String == message["phone"] as! String){
                     // dictionary["video"] = message["video"]
                     print ("false")

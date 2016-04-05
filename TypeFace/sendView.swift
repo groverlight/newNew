@@ -28,7 +28,7 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
             var assetArray = [CKAsset]()
             
              var asset:CKAsset
-              for var i = 0; i < arrayofText.count; ++i{
+              for i in 0 ..< arrayofText.count{
                 print ("arrayofText")
                 asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
                 let assetURL = asset.fileURL as NSURL!
@@ -355,7 +355,8 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         //print (sectionsArray.count)
         
     }
-    func numberFormatter(var mobileNumber: NSString) -> NSString {
+    func numberFormatter( mobileNumbers: NSString) -> NSString {
+        var mobileNumber = mobileNumbers
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(" ", withString: "")

@@ -467,16 +467,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
-        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
+        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cameraView.longPressed(_:)))
         //longPressRecognizer.minimumPressDuration =
         self.view.addGestureRecognizer(longPressRecognizer)
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
         cameraTextField.delegate = self
-         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardDidShow(_:)), name:UIKeyboardDidShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         if (UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)){
             do{
                 let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
@@ -581,7 +581,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         BlurSurface.addSubview(blurView)
         BlurSurface.alpha = 0
         frontWindow?.insertSubview(BlurSurface, atIndex: 1)
-        self.cameraTextField.performSelector(Selector("becomeFirstResponder"), withObject: nil, afterDelay: 0)
+        self.cameraTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay: 0)
 
     }
     override func viewWillDisappear(animated: Bool) {
@@ -631,7 +631,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         let newLabel = scrollView.subviews[scrollView.subviews.count-1] as! UILabel
                         cameraTextField.text = newLabel.text
                         --scrollCounter
-                        --clipCount
+                        clipCount -= 1
 
                         do{
                             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
@@ -889,7 +889,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func stopRecording() {
         print ("stoprecording")
-        clipCount++
+        clipCount += 1
         recording = false;
         movieWriter?.finishRecording()
         do{

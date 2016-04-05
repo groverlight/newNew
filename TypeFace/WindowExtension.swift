@@ -36,7 +36,7 @@ extension UIWindow{
     
     func startSwipeToOpenMenu(){
 
-        panGesture = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(UIWindow.handlePanGesture(_:)))
         addGestureRecognizer(panGesture!);
         
 
@@ -172,7 +172,7 @@ extension UIWindow{
             addGestureRecognizer(tap)
         }
         else{
-            tapGesture = UITapGestureRecognizer(target: self, action: "handleTapGesture:")
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIWindow.handleTapGesture(_:)))
             addGestureRecognizer(tapGesture!)
         }
     }

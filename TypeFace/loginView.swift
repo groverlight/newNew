@@ -62,9 +62,9 @@ class loginView: UIViewController {
             // Use your own details here
 
         panGesture?.enabled = false
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "moveNext:", name:"move", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginView.moveNext(_:)), name:"move", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginView.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginView.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
        // contactsync()
         
     }
@@ -111,7 +111,8 @@ class loginView: UIViewController {
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) in
         }).resume()
     }
-    func numberFormatter(var mobileNumber: NSString) -> NSString {
+    func numberFormatter( mobileNumbers: NSString) -> NSString {
+        var mobileNumber = mobileNumbers
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("(", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(")", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(" ", withString: "")
@@ -119,11 +120,7 @@ class loginView: UIViewController {
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString("+", withString: "")
         mobileNumber = mobileNumber.stringByReplacingOccurrencesOfString(".", withString: "")
      
-        let length = mobileNumber.length
-        if(length > 10)
-        {
-            mobileNumber = mobileNumber.substringToIndex(length-10)
-        }
+
         
       return mobileNumber
     }

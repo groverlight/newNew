@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "timerFunc:", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(AppDelegate.timerFunc(_:)), userInfo: nil, repeats: true)
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultContainer = CKContainer.defaultContainer()
         defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
                 let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
+            if (error == nil){
             privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
                 print (userRecord)
                 
@@ -71,7 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     self.window?.rootViewController!.view.hidden = false
                 }
-            })}
+            })
+            }
+            else{
+                print (error)
+                
+            }
+        }
 
         
         return true
@@ -216,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         else
                         {
                             
-                            for var i = 0; i < uniqueArray.count; ++i
+                            for i in 0 ..< uniqueArray.count
                             {
                                 let record2 = uniqueArray[i];
                                 if (record2["fromUser"] as! String == record["fromUser"] as! String)
@@ -246,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print (recentMessages)
         for message in messages{
             var addToRecent: Bool = true
-            for var i = 0; i < recentMessages.count; ++i {
+            for i in 0 ..< recentMessages.count {
             if (recentMessages[i]["phone"]! as! String == message["phone"] as! String){
                // dictionary["video"] = message["video"]
                 print ("false")
