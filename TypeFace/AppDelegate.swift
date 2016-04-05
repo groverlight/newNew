@@ -263,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if (addToRecent == true){
             //print ("addtoRecent")
-            let dictionary:[String:AnyObject] = ["fromUser":message["fromUser"] as! String, "fullName":message["name"] as! String, "phone":message["phone"] as! String, "video":message["videos"] as! Array<CKRecord>]
+            let dictionary:[String:AnyObject] = [ "fullName":message["name"] as! String, "phone":message["phone"] as! String, "video":message["videos"] as! Array<CKRecord>]
             recentMessages.append(dictionary)
             let privateDB = CKContainer.defaultContainer().privateCloudDatabase
             func getUser(completionHandler: (success: Bool, user: User?) -> ()) {

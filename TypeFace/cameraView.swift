@@ -778,6 +778,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardWillShow(notification: NSNotification) {
                //print (self.typingButton.frame)
+        if (gradientView.hidden == true){
+            gradientView.hidden = false
+        }
         panGesture?.enabled = true
         updateBottomLayoutConstraintWithNotification(notification)
 
@@ -790,10 +793,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardDidShow(notification: NSNotification) {
         //print ("did show")
-        if (gradientView.hidden == true){
-            gradientView.hidden = false
-        }
+
         
+    }
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        let textView = object as! UITextView
+        var topCorrect = (textView.bounds.size.height - textView.contentSize.height)
+        topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
+        textView.contentInset.top = topCorrect
+
+    }
+    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
         if (!(self.view.subviews.contains(gradientView))){
             let userInfo = notification.userInfo!
             let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
@@ -808,24 +821,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             // Optionally change the direction. The default is vertical.
             gradientView.direction = .Vertical
             gradientView.alpha = 0.7
-
+            
             
             // Add it as a subview in all of its awesome
             self.view.insertSubview(gradientView, aboveSubview:filteredImage!)
         }
-    }
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let textView = object as! UITextView
-        var topCorrect = (textView.bounds.size.height - textView.contentSize.height)
-        topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
-        textView.contentInset.top = topCorrect
 
-    }
-    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
-        let userInfo = notification.userInfo!
-        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
-      
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 10
         
         emoji.constant  = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 25

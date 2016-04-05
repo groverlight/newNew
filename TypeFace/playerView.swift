@@ -86,12 +86,13 @@ class playerView: UIViewController {
     }
 
     override func viewDidAppear(animated: Bool) {
+        print ("videw did appear")
         var duration: CFTimeInterval = 0
         do{
             let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            let String = "MediaCache"
+          //  let String = "MediaCache"
 
-            try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
+            //try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
             print (files)   
             numOfClips = (files?.count)!
             totalReceivedClips = numOfClips

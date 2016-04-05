@@ -14,7 +14,7 @@ import AVFoundation
 import AVKit
 class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCollectionIndexViewDelegate {
     @IBOutlet weak var sendTable: UITableView!
-
+       var checkedIndexPath = [NSIndexPath]()
     @IBAction func goBack(sender: AnyObject) {
         //self.performSegueWithIdentifier("goBacktoCamera", sender: self)
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -24,10 +24,8 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
     var fileManager: NSFileManager? = NSFileManager()
     @IBAction func goSend(sender: AnyObject) {
 
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
-            var assetArray = [CKAsset]()
-            
-             var asset:CKAsset
+        var assetArray = [CKAsset]()
+        var asset:CKAsset
               for i in 0 ..< arrayofText.count{
                 print ("arrayofText")
                 asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
@@ -37,83 +35,57 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
                 let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
                 NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
-                self.compressVideo(assetURL, outputURL: fileURL, handler: { (handler) -> Void in
-                    
-                    if handler.status == AVAssetExportSessionStatus.Completed
-                    {
-                        let data = NSData(contentsOfURL: fileURL)
-                         assetArray.append(CKAsset(fileURL: fileURL))
-                        print("File size after compression: \(Double(data!.length / 1048576)) mb")
-                        
-                      //  self.picker.dismissViewControllerAnimated(true, completion: nil)
-                        assetArray.append(CKAsset(fileURL: fileURL))
-                        for path in self.checkedIndexPath {
-                            
-                            
-                            
-                            let contact = self.sectionsArray[path.section][path.row] as! [String:String]
-                            //print (contact)
-                            if (contact["phoneNumber"] != nil){
-                                print("composing message...")
+                //let data = NSData(contentsOfURL: fileURL)
+                assetArray.append(CKAsset(fileURL: fileURL))
                                 
-                                
-                                
-                                let message = CKRecord(recordType: "Message")
-                                message["videos"] = assetArray
-                                message["text"] = arrayofText
-                                message["toUser"] = contact["phoneNumber"]
-                                message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
-                                message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
-                                message["time"] = NSDate().timeIntervalSince1970 * 1000
-                                message ["fromUser"] = "\(userFull!.userRecordID)"
-                                let publicDB = CKContainer.defaultContainer().publicCloudDatabase
-                                publicDB.saveRecord(message) { savedRecord, error in
-                                    // handle errors here
-                                    print ("savedrecord\(savedRecord)   ")
-                                    print (error)
-                                    if (error == nil){}
-                                    else{
-                                        print ("network too slow...")
-                                    }
-                                }
-                                //print(message)
-                            }
-                            
-                        }
+                //  self.picker.dismissViewControllerAnimated(true, completion: nil)
+                assetArray.append(CKAsset(fileURL: fileURL))
 
-                        
-                    }
-                        
-                    else if handler.status == AVAssetExportSessionStatus.Failed
-                    {
-                        //let alert = UIAlertView(title: "Uh oh", message: " There was a problem compressing the video maybe you can try again later. Error: \(handler.error.localizedDescription)", delegate: nil, cancelButtonTitle: "Okay")
-                        
-                        //alert.show()
-                        
-                    }
-                })
-       
-                
-                
+        
             }
-        
-
-      
-
-        
-        
-    
-    
+        for path in checkedIndexPath {
+            
+            
+            
+            let contact = self.sectionsArray[path.section][path.row] as! [String:String]
+            //print (contact)
+            if (contact["phoneNumber"] != nil){
+                print("composing message...")
+                
+                
+                
+                let message = CKRecord(recordType: "Message")
+                message["videos"] = assetArray
+                message["text"] = arrayofText
+                message["toUser"] = contact["phoneNumber"]
+                message["phone"] = String(userFull!.phoneNumber!.characters.suffix(10))
+                message["name"]  = ("\(userFull!.firstName!) \(userFull!.lastName!)") //
+                message["time"] = NSDate().timeIntervalSince1970 * 1000
+                message ["fromUser"] = "\(userFull!.userRecordID)"
+                let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+                publicDB.saveRecord(message) { savedRecord, error in
+                    // handle errors here
+                    print ("savedrecord\(savedRecord)   ")
+                    print (error)
+                    if (error == nil){}
+                    else{
+                        print ("network too slow...")
+                    }
+                }
+                //print(message)
+            }
+            
+        }
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
         self.presentViewController(vc, animated: false, completion: { () -> Void in
             self.wentPlayer = true
         })
 
-        
     }
     var tableBounds: CGRect!
     var indexTitles: NSArray?
     var sectionsArray = Array(count: 27, repeatedValue: Array(count: 0, repeatedValue: NSDictionary()))
-    var checkedIndexPath = [NSIndexPath]()
+    //var checkedIndexPath = [NSIndexPath]()
     //var peopleinArray: NSMutableArray?
     override func viewDidLoad() {
         super.viewDidLoad()
