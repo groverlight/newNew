@@ -22,20 +22,20 @@ class User: NSObject {
         if (phoneNumber.characters.count > 0){
             
         
-        let searchTerm = String(phoneNumber.characters.suffix(10))
-        // print (searchTerm)
+       /* let searchTerm = String(phoneNumber.characters.suffix(10))
+         print (searchTerm)
         let predicate = NSPredicate(format: "toUser = '\(searchTerm)'")
         let defaultContainer = CKContainer.defaultContainer()
-        let publicDatabase = defaultContainer.publicCloudDatabase
+       let publicDatabase = defaultContainer.publicCloudDatabase
         let subs = CKSubscription(recordType: "Message", predicate: predicate,options: .FiresOnRecordCreation)
         subs.notificationInfo = CKNotificationInfo()
-        subs.notificationInfo!.alertBody = "New item added"
-        publicDatabase.saveSubscription(subs, completionHandler: {
+        subs.notificationInfo!.alertBody = "New item added"*/
+       /* publicDatabase.saveSubscription(subs, completionHandler: {
             subscription, error in
         
        //  print (subscription)
             //print (error)
-        })
+        })*/
     
         }
         

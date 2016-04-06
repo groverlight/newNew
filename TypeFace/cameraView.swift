@@ -474,7 +474,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         do{
                             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                             //let file = files[files?.endIndex-1]
-                            try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(clipCount).m4v")
+                            try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(clipCount).mov")
                             arrayofText.removeLastObject()
                             print (files)
                             
@@ -498,20 +498,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 //print ("go")
                 cameraTextField.resignFirstResponder()
                 self.view.bringSubviewToFront(typingButton)
-                    //let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
-                    self.cameraTextField.resignFirstResponder()
-                    //self.view.endEditing(true)
-                   // self.presentViewController(vc, animated: true, completion: nil)
-                let shareString = "String to share"
-                
-                let objectsToShare = [shareString]
-                
-                let activityViewController      = UIActivityViewController(activityItems: objectsToShare as [AnyObject], applicationActivities: nil)
-                
-                presentViewController(activityViewController, animated: true, completion: nil)
-                    //self.performSegueWithIdentifier("goSend", sender: self)
-               // }
-                
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
+                self.cameraTextField.resignFirstResponder()
+                self.view.endEditing(true)
+                self.presentViewController(vc, animated: false, completion: nil)
+                               
                 typingButton.setTitle("", forState: UIControlState.Normal)
                 emojiLabel.hidden = true
                 characterCounter.hidden = true
@@ -724,13 +715,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         print ("start recording")
         recording = true;
         let clipCountString = String(clipCount)
-        movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).m4v",isDirectory: true), size: view.frame.size)
+        movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).mov",isDirectory: true), size: view.frame.size)
         filter?.addTarget(movieWriter)
 
         movieWriter?.encodingLiveVideo = true
         movieWriter?.shouldPassthroughAudio = false
-        //movieWriter?.
-        //videoCamera?.stopCameraCapture()
+
         movieWriter?.startRecording()
         
     }
@@ -746,7 +736,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
-        
+        exportVideo()
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
        
     }
@@ -875,9 +865,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         
     }
-    func exportVideo(path:String, outputPath:String, nMovie:Int) -> Bool{
-
-
+    func exportVideo() -> Bool{
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        let outputPath = NSURL(fileURLWithPath: destinationPath)
+       
        
        
         let composition = AVMutableComposition()
@@ -885,10 +878,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         let insertTime = kCMTimeZero
         do{
+            try NSFileManager().removeItemAtURL(outputPath)
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
-            for i in 0..<files!.count{
-                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
+            for i in 1..<files!.count+1{
+                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).mov"))
                   //  duration += CMTimeGetSeconds(avAsset.duration)
                 //let moviePath = path.stringByAppendingPathComponent("mp4")
                 //let moviePathUrl = NSURL(fileURLWithPath: moviePath)
@@ -911,11 +905,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             print("bad")
         }
             
-            let completeMovie = outputPath.stringByAppendingPathComponent("movie.mov")
-            let completeMovieUrl = NSURL(fileURLWithPath: completeMovie)
+        
             let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
-            exporter!.outputURL = completeMovieUrl
-            exporter!.outputFileType = AVFileTypeMPEG4 //AVFileTypeQuickTimeMovie
+            exporter!.outputURL = outputPath
+            exporter!.outputFileType = AVFileTypeQuickTimeMovie //AVFileTypeQuickTimeMovie
             exporter!.exportAsynchronouslyWithCompletionHandler({
                 switch exporter!.status{
                 case  AVAssetExportSessionStatus.Failed:
@@ -924,6 +917,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     print("cancelled \(exporter!.error)")
                 default:
                     print("complete")
+                    print (AVURLAsset(URL: outputPath))
                 }
             })
             return true

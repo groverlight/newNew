@@ -77,7 +77,7 @@ class playerView2: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView2.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView2.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
         
-        let avAsset = arrayofMessageVids[index-1]//AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
+        let avAsset = arrayofMessageVids[index-1]//AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov"))
         // print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         let moviePlayer = AVPlayer(playerItem: avPlayerItem)

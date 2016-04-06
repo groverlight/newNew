@@ -15,8 +15,6 @@
 		273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */; };
 		2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44C1C6AF1F500B369E7 /* Assets.xcassets */; };
 		2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */; };
-		2742A45B1C6AF1F500B369E7 /* TypeFaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A45A1C6AF1F500B369E7 /* TypeFaceTests.swift */; };
-		2742A4661C6AF1F500B369E7 /* TypeFaceUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4651C6AF1F500B369E7 /* TypeFaceUITests.swift */; };
 		2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4741C6AF2A500B369E7 /* cameraView.swift */; };
 		2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4751C6AF2A500B369E7 /* pageView.swift */; };
 		2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4761C6AF2A500B369E7 /* loginView.swift */; };
@@ -133,10 +131,8 @@
 		2742A44F1C6AF1F500B369E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2742A4511C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2742A4561C6AF1F500B369E7 /* cakeTalk.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cakeTalk.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2742A45A1C6AF1F500B369E7 /* TypeFaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFaceTests.swift; sourceTree = "<group>"; };
 		2742A45C1C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2742A4611C6AF1F500B369E7 /* cakeTalk.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cakeTalk.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2742A4651C6AF1F500B369E7 /* TypeFaceUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeFaceUITests.swift; sourceTree = "<group>"; };
 		2742A4671C6AF1F500B369E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2742A4741C6AF2A500B369E7 /* cameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cameraView.swift; sourceTree = "<group>"; };
 		2742A4751C6AF2A500B369E7 /* pageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pageView.swift; sourceTree = "<group>"; };
@@ -259,7 +255,6 @@
 		2742A4591C6AF1F500B369E7 /* cakeTalkTests */ = {
 			isa = PBXGroup;
 			children = (
-				2742A45A1C6AF1F500B369E7 /* TypeFaceTests.swift */,
 				2742A45C1C6AF1F500B369E7 /* Info.plist */,
 			);
 			name = cakeTalkTests;
@@ -269,7 +264,6 @@
 		2742A4641C6AF1F500B369E7 /* cakeTalkUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2742A4651C6AF1F500B369E7 /* TypeFaceUITests.swift */,
 				2742A4671C6AF1F500B369E7 /* Info.plist */,
 			);
 			name = cakeTalkUITests;
@@ -596,7 +590,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2742A45B1C6AF1F500B369E7 /* TypeFaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,7 +597,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2742A4661C6AF1F500B369E7 /* TypeFaceUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,6 +676,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -721,6 +714,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -750,7 +744,7 @@
 				INFOPLIST_FILE = TypeFace/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
+				PRODUCT_BUNDLE_IDENTIFIER = 4THJ5Z3YGF.com.grover.caketalk;
 				PRODUCT_NAME = cakeTalk;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
@@ -782,7 +776,7 @@
 				INFOPLIST_FILE = TypeFace/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.grover.caketalk;
+				PRODUCT_BUNDLE_IDENTIFIER = 4THJ5Z3YGF.com.grover.caketalk;
 				PRODUCT_NAME = cakeTalk;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TypeFace/TypeFace-Bridging-Header.h";
@@ -792,6 +786,7 @@
 		2742A46E1C6AF1F500B369E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TypeFaceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -804,6 +799,7 @@
 		2742A46F1C6AF1F500B369E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TypeFaceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -816,6 +812,7 @@
 		2742A4711C6AF1F500B369E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Liu (KELEL6NU43)";
 				HEADER_SEARCH_PATHS = (
 					../GPUImage/Source,
@@ -833,6 +830,7 @@
 		2742A4721C6AF1F500B369E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Aaron Liu (KELEL6NU43)";
 				HEADER_SEARCH_PATHS = (
 					../GPUImage/Source,

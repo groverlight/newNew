@@ -24,7 +24,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                     blurView.frame = UIScreen.mainScreen().bounds
                     
                     frontWindow?.insertSubview(blurView, atIndex: 0)
-                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(loginName.timerFunc(_:)), userInfo: nil, repeats: true)
+                  //  NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(loginName.timerFunc(_:)), userInfo: nil, repeats: true)
 
                 }
                // print ("success")

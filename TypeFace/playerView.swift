@@ -14,6 +14,42 @@ import Accounts
 import MessageUI
 
 class playerView: UIViewController {
+    
+    
+    
+    
+    @IBOutlet weak var facebookBut: UIButton!
+    
+    
+    @IBOutlet weak var twitterBut: UIButton!
+    
+    
+    @IBOutlet weak var instagramBut: UIButton!
+    
+    @IBOutlet weak var shareBut: UIButton!
+    @IBAction func facebook(sender: AnyObject) {
+    }
+
+    @IBAction func twitter(sender: AnyObject) {
+    }
+    
+    @IBAction func instagram(sender: AnyObject) {
+    }
+    
+    @IBAction func share(sender: AnyObject) {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        let outputPath = NSURL(fileURLWithPath: destinationPath)
+        let shareString = AVURLAsset(URL: outputPath)
+      //  let shareString = "hi"
+        //let objectsToShare = [shareString]
+        
+        let activityViewController  = (activityItems:[outputPath], applicationActivities: nil)
+        
+        presentViewController(activityViewController, animated: true, completion: nil)
+
+
+    }
     @IBOutlet weak var progressBar: UIView!
     var moviePlayer: AVPlayer?
     var numOfClips = 0
@@ -33,6 +69,10 @@ class playerView: UIViewController {
 
        // let vc = SLComposeViewController(forServiceType: SLSer)
         super.viewDidLoad()
+        facebookBut.hidden = true
+        twitterBut.hidden = true
+        instagramBut.hidden = true
+        shareBut.hidden = true
         progressBar.hidden = true
         backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
@@ -44,7 +84,7 @@ class playerView: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
         
-        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).m4v"))
+        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov"))
         // print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
@@ -111,7 +151,7 @@ class playerView: UIViewController {
         
         
         for i in (0..<numOfClips).reverse(){
-            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).m4v"))
+            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).mov"))
            duration = duration + CMTimeGetSeconds(avAsset.duration)
         }
         
@@ -158,7 +198,16 @@ class playerView: UIViewController {
             overlay.frame = self.view.bounds
             self.view.addSubview(overlay)
             UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
+             
                         self.view.bringSubviewToFront(self.backButton)
+                        self.view.bringSubviewToFront(self.facebookBut)
+                        self.view.bringSubviewToFront(self.twitterBut)
+                        self.view.bringSubviewToFront(self.instagramBut)
+                        self.view.bringSubviewToFront(self.shareBut)
+                        self.facebookBut.hidden = false
+                        self.twitterBut.hidden = false
+                        self.instagramBut.hidden = false
+                        self.shareBut.hidden = false
                         self.backButton.hidden = false
                         self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in

@@ -28,11 +28,11 @@ class sendView: UIViewController,UITableViewDelegate,UITableViewDataSource,BDKCo
         var asset:CKAsset
               for i in 0 ..< arrayofText.count{
                 print ("arrayofText")
-                asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).m4v" ))
+                asset = CKAsset(fileURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).mov" ))
                 let assetURL = asset.fileURL as NSURL!
                 let videoData = NSData(contentsOfURL: assetURL!)
                 let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).m4v")
+                let destinationPath = documentsPath.stringByAppendingPathComponent("\(i+1).mov")
                 NSFileManager.defaultManager().createFileAtPath(destinationPath,contents:videoData, attributes:nil)
                 let fileURL = NSURL(fileURLWithPath: destinationPath)
                 //let data = NSData(contentsOfURL: fileURL)
