@@ -13,6 +13,7 @@
 		270A90671C7D1EE1006FC3A0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */; };
 		272110011CA6FA76004C2408 /* playerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272110001CA6FA76004C2408 /* playerView2.swift */; };
 		273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */; };
+		273F75681CB7032B00F5546B /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 273F75671CB7032B00F5546B /* SocialVideoHelper.m */; };
 		2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44C1C6AF1F500B369E7 /* Assets.xcassets */; };
 		2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */; };
 		2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4741C6AF2A500B369E7 /* cameraView.swift */; };
@@ -126,6 +127,8 @@
 		272110001CA6FA76004C2408 /* playerView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playerView2.swift; sourceTree = "<group>"; };
 		273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKCollectionIndexView.h; sourceTree = "<group>"; };
 		273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKCollectionIndexView.m; sourceTree = "<group>"; };
+		273F75661CB7032B00F5546B /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialVideoHelper.h; path = "../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.h"; sourceTree = "<group>"; };
+		273F75671CB7032B00F5546B /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialVideoHelper.m; path = "../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.m"; sourceTree = "<group>"; };
 		2742A4421C6AF1F500B369E7 /* cakeTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cakeTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A44C1C6AF1F500B369E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2742A44F1C6AF1F500B369E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -309,6 +312,8 @@
 				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
 				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
 				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
+				273F75661CB7032B00F5546B /* SocialVideoHelper.h */,
+				273F75671CB7032B00F5546B /* SocialVideoHelper.m */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
 				2742A4511C6AF1F500B369E7 /* Info.plist */,
@@ -568,6 +573,7 @@
 				27862F121C6DA8B500C62AAE /* loginName.swift in Sources */,
 				27862F101C6DA8A700C62AAE /* loginCode.swift in Sources */,
 				27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */,
+				273F75681CB7032B00F5546B /* SocialVideoHelper.m in Sources */,
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */,
 				277CB0441C98DF680032E109 /* User.swift in Sources */,

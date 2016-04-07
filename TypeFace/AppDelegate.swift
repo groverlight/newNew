@@ -34,10 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
 
                 dispatch_async(dispatch_get_main_queue()){
-                    frontWindow?.windowLevel = UIWindowLevelStatusBar
-                    frontWindow?.startSwipeToOpenMenu()
-                    frontWindow?.makeKeyAndVisible();
-                    application.statusBarStyle = .LightContent
+                  //  frontWindow?.windowLevel = UIWindowLevelStatusBar
+                   // frontWindow?.startSwipeToOpenMenu()
+                   // frontWindow?.makeKeyAndVisible();
+                   // application.statusBarStyle = .LightContent
                     }
                 if (userRecord!["phoneNumber"] == nil){
                     dispatch_async(dispatch_get_main_queue()) {
@@ -58,13 +58,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     dispatch_async(dispatch_get_main_queue()) {
 
-                    frontWindow?.rootViewController = front
+                   // frontWindow?.rootViewController = front
                     
                     let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
                     let blurView = UIVisualEffectView(effect: blur)
                     blurView.frame = UIScreen.mainScreen().bounds
                     blurView.alpha = 1
-                    frontWindow?.insertSubview(blurView, atIndex: 0)
+                    //frontWindow?.insertSubview(blurView, atIndex: 0)
                     
                     }
 
