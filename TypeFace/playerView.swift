@@ -36,11 +36,12 @@ class playerView: UIViewController {
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
             let options:[String:String] = [
-                "ACFacebookAppIdKey" : "123456789",
+                "ACFacebookAppIdKey" : "211844529189107",
                 "ACFacebookPermissionsKey" : "publish_stream",
                 "ACFacebookAudienceKey" : ACFacebookAudienceEveryone]
 
             accountStore.requestAccessToAccountsWithType(accountType, options: options) { granted, error in
+                print ("we in here")
                 if (granted){
                     guard let fbAcc = accountStore.accountsWithAccountType(accountType) where !fbAcc.isEmpty else {
                         print("There are no FB accounts configured. You can add or create a FB account in Settings.")
@@ -68,7 +69,7 @@ class playerView: UIViewController {
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
         let videoData = NSData(contentsOfURL: outputPath)
-        if (SocialVideoHelper.userHasAccessToTwitter()){
+       // if (SocialVideoHelper.userHasAccessToTwitter()){
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
 
@@ -80,6 +81,7 @@ class playerView: UIViewController {
                         return
                     }
                     let twitAccount = tweetAcc[0] as! ACAccount
+                    print (twitAccount)
                     SocialVideoHelper.uploadTwitterVideo(videoData,comment: "",account: twitAccount, withCompletion: nil)
                 }
                 else{
@@ -92,7 +94,7 @@ class playerView: UIViewController {
                 
             }
             
-        }
+        //}
     }
     
     @IBAction func instagram(sender: AnyObject) {
@@ -151,7 +153,7 @@ class playerView: UIViewController {
         instagramBut.hidden = true
         shareBut.hidden = true
         progressBar.hidden = true
-        backButton.hidden = true
+        //backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
         self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
@@ -282,7 +284,7 @@ class playerView: UIViewController {
                         self.view.bringSubviewToFront(self.twitterBut)
                         self.view.bringSubviewToFront(self.instagramBut)
                         self.view.bringSubviewToFront(self.shareBut)
-                       // self.facebookBut.hidden = false
+                        //self.facebookBut.hidden = false
                         //self.twitterBut.hidden = false
                         //self.instagramBut.hidden = false
                         //self.shareBut.hidden = false

@@ -231,7 +231,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
     NSMutableDictionary * compressionProperties = [[NSMutableDictionary alloc] init];
     [compressionProperties setObject:videoCleanApertureSettings forKey:AVVideoCleanApertureKey];
     [compressionProperties setObject:videoAspectRatioSettings forKey:AVVideoPixelAspectRatioKey];
-    [compressionProperties setObject:[NSNumber numberWithInt: 500000] forKey:AVVideoAverageBitRateKey];
+    [compressionProperties setObject:[NSNumber numberWithInt: 2000000] forKey:AVVideoAverageBitRateKey];
     [compressionProperties setObject:[NSNumber numberWithInt: 16] forKey:AVVideoMaxKeyFrameIntervalKey];
     [compressionProperties setObject:AVVideoProfileLevelH264Main31 forKey:AVVideoProfileLevelKey];
     
