@@ -63,6 +63,7 @@ class playerView: UIViewController {
     }
 
     @IBAction func twitter(sender: AnyObject) {
+        print ("twitter")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
@@ -281,7 +282,7 @@ class playerView: UIViewController {
                         self.view.bringSubviewToFront(self.twitterBut)
                         self.view.bringSubviewToFront(self.instagramBut)
                         self.view.bringSubviewToFront(self.shareBut)
-                        //self.facebookBut.hidden = false
+                       // self.facebookBut.hidden = false
                         //self.twitterBut.hidden = false
                         //self.instagramBut.hidden = false
                         //self.shareBut.hidden = false
