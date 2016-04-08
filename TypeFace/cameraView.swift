@@ -909,6 +909,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
             exporter!.outputURL = outputPath
             exporter!.outputFileType = AVFileTypeQuickTimeMovie //AVFileTypeQuickTimeMovie
+
             exporter!.exportAsynchronouslyWithCompletionHandler({
                 switch exporter!.status{
                 case  AVAssetExportSessionStatus.Failed:

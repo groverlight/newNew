@@ -10,19 +10,21 @@ import UIKit
 import CloudKit
 //import FBSDKCoreKit/FBSDKCoreKit.h>
 import FBSDKCoreKit
+
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
        /* NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(AppDelegate.timerFunc(_:)), userInfo: nil, repeats: true)
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         window?.rootViewController!.view.hidden = true*/
-
+    
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController

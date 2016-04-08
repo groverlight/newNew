@@ -15,11 +15,14 @@ import MessageUI
 import FBSDKShareKit
 import FBSDKCoreKit
 import FBSDKLoginKit
-class playerView: UIViewController,UIImagePickerControllerDelegate {
+import Photos
+import MobileCoreServices
+
+class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate {
     
     
     
-    
+    //var imagePicker:UIImagePickerController
     @IBOutlet weak var facebookBut: UIButton!
     
     
@@ -30,45 +33,78 @@ class playerView: UIViewController,UIImagePickerControllerDelegate {
     
     @IBOutlet weak var shareBut: UIButton!
     @IBAction func facebook(sender: AnyObject) {
-        
-        let login = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, NSError) in
-            if (NSError != nil){
-                print ("error")
-            }
-            else{
-                print("logged in")
-            }
-        }
-        
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
-        //let videoData = NSData(contentsOfURL: outputPath)
-        let video : FBSDKShareVideo = FBSDKShareVideo()
-        video.videoURL = outputPath
-        let content : FBSDKShareVideoContent = FBSDKShareVideoContent()
-        content.video = video
-        newButton.shareContent = content
-        newButton.frame = facebookBut.bounds
-        //newButton.sendActionsForControlEvents(.TouchUpInside)
-        //facebookBut = newButton
-       // self.view.addSubview(newButton)
-        //print(newButton)
-
-
+        
+        let photoLibrary = PHPhotoLibrary.sharedPhotoLibrary()
+        var videoAssetPlaceholder:PHObjectPlaceholder!
+        photoLibrary.performChanges({
+            let request = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(outputPath)
+            videoAssetPlaceholder = request!.placeholderForCreatedAsset
+            },
+                                    completionHandler: { success, error in
+                                        if success {
+                                            let localID = videoAssetPlaceholder.localIdentifier
+                                            let assetID =
+                                                localID.stringByReplacingOccurrencesOfString(
+                                                    "/.*", withString: "",
+                                                    options: NSStringCompareOptions.RegularExpressionSearch, range: nil)
+                                            let ext = "mov"
+                                            let assetURLStr =
+                                                "assets-library://asset/asset.\(ext)?id=\(assetID)&ext=\(ext)"
+                                            let video : FBSDKShareVideo = FBSDKShareVideo()
+                                            video.videoURL = NSURL(string:assetURLStr)
+                                            let content : FBSDKShareVideoContent = FBSDKShareVideoContent()
+                                            content.video = video
+                                            
+                                            // FBSDKShareDialog.showFromViewController(self, withContent: content, delegate: nil)
+                                            
+                                            let dialog = FBSDKShareDialog()
+                                            let newURL = NSURL(string: "fbauth2://")
+                                            if (UIApplication.sharedApplication() .canOpenURL(newURL!)){
+                                                print("native")
+                                                dialog.mode = FBSDKShareDialogMode.ShareSheet
+                                            }
+                                            else{
+                                                print("browser")
+                                                dialog.mode = FBSDKShareDialogMode.Browser
+                                            }
+                                            
+                                            dialog.shareContent = content;
+                                            dialog.delegate = self;
+                                            dialog.fromViewController = self;
+                                            dialog.show()
+                                            // Do something with assetURLStr
+                                        }
+        })
     }
-    var newButton:FBSDKShareButton = FBSDKShareButton()
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+       
+    }
+
+    //var newButton:FBSDKShareButton = FBSDKShareButton()
     @IBAction func twitter(sender: AnyObject) {
-        print ("twitter")
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let videoData = NSData(contentsOfURL: outputPath)
-       // if (SocialVideoHelper.userHasAccessToTwitter()){
+
+        
+
+        let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "#cakeTalk"
+        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            //Just dismiss the action sheet
+        }
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+            let outputPath = NSURL(fileURLWithPath: destinationPath)
+            let videoData = NSData(contentsOfURL: outputPath)
+            // if (SocialVideoHelper.userHasAccessToTwitter()){
             let accountStore = ACAccountStore()
             let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-
+            
             
             accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
                 if (granted){
@@ -78,7 +114,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate {
                     }
                     let twitAccount = tweetAcc[0] as! ACAccount
                     print (twitAccount)
-                    SocialVideoHelper.uploadTwitterVideo(videoData,comment: "",account: twitAccount, withCompletion: nil)
+                    let textfield = alertController.textFields![0] as UITextField
+                    SocialVideoHelper.uploadTwitterVideo(videoData,comment:textfield.text,account: twitAccount, withCompletion: nil)
                 }
                 else{
                     print (error)
@@ -90,7 +127,16 @@ class playerView: UIViewController,UIImagePickerControllerDelegate {
                 
             }
             
-        //}
+        })
+        
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+       
+        
     }
     
     @IBAction func instagram(sender: AnyObject) {
@@ -112,6 +158,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate {
         //}
 
     }
+
     
     @IBAction func share(sender: AnyObject) {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -328,6 +375,18 @@ class playerView: UIViewController,UIImagePickerControllerDelegate {
         }
 
 
+    }
+    func sharer(sharer: FBSDKSharing!, didCompleteWithResults results: [NSObject: AnyObject]) {
+        print(results)
+    }
+    
+    func sharer(sharer: FBSDKSharing!, didFailWithError error: NSError!) {
+        print("sharer NSError")
+        print(error.description)
+    }
+    
+    func sharerDidCancel(sharer: FBSDKSharing!) {
+        print("sharerDidCancel")
     }
 
 }
