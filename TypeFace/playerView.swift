@@ -12,8 +12,10 @@ import GPUImage
 import Social
 import Accounts
 import MessageUI
-
-class playerView: UIViewController {
+import FBSDKShareKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+class playerView: UIViewController,UIImagePickerControllerDelegate {
     
     
     
@@ -28,41 +30,35 @@ class playerView: UIViewController {
     
     @IBOutlet weak var shareBut: UIButton!
     @IBAction func facebook(sender: AnyObject) {
+        
+        let login = FBSDKLoginManager()
+        login.logInWithReadPermissions(["public_profile"], fromViewController: self) { (FBSDKLoginManagerLoginResult, NSError) in
+            if (NSError != nil){
+                print ("error")
+            }
+            else{
+                print("logged in")
+            }
+        }
+        
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let videoData = NSData(contentsOfURL: outputPath)
-        if (SocialVideoHelper.userHasAccessToFacebook()){
-            let accountStore = ACAccountStore()
-            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
-            let options:[String:String] = [
-                "ACFacebookAppIdKey" : "211844529189107",
-                "ACFacebookPermissionsKey" : "publish_stream",
-                "ACFacebookAudienceKey" : ACFacebookAudienceEveryone]
+        //let videoData = NSData(contentsOfURL: outputPath)
+        let video : FBSDKShareVideo = FBSDKShareVideo()
+        video.videoURL = outputPath
+        let content : FBSDKShareVideoContent = FBSDKShareVideoContent()
+        content.video = video
+        newButton.shareContent = content
+        newButton.frame = facebookBut.bounds
+        //newButton.sendActionsForControlEvents(.TouchUpInside)
+        //facebookBut = newButton
+       // self.view.addSubview(newButton)
+        //print(newButton)
 
-            accountStore.requestAccessToAccountsWithType(accountType, options: options) { granted, error in
-                print ("we in here")
-                if (granted){
-                    guard let fbAcc = accountStore.accountsWithAccountType(accountType) where !fbAcc.isEmpty else {
-                        print("There are no FB accounts configured. You can add or create a FB account in Settings.")
-                        return
-                    }
-                    let FacebookAccount = fbAcc[0] as! ACAccount
-                    SocialVideoHelper.uploadFacebookVideo(videoData,comment: "",account: FacebookAccount, withCompletion: nil)
-                }
-                else{
-                    print (error)
-                }
-                
-                
- 
-                
 
-            }
-            
-        }
     }
-
+    var newButton:FBSDKShareButton = FBSDKShareButton()
     @IBAction func twitter(sender: AnyObject) {
         print ("twitter")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -145,8 +141,9 @@ class playerView: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     override func viewDidLoad() {
         //let vc = MFMessageComposeViewControlle
+        
 
-       // let vc = SLComposeViewController(forServiceType: SLSer)
+        // let vc = SLComposeViewController(forServiceType: SLSer)
         super.viewDidLoad()
         facebookBut.hidden = true
         twitterBut.hidden = true
@@ -284,11 +281,11 @@ class playerView: UIViewController {
                         self.view.bringSubviewToFront(self.twitterBut)
                         self.view.bringSubviewToFront(self.instagramBut)
                         self.view.bringSubviewToFront(self.shareBut)
-                        //self.facebookBut.hidden = false
-                        //self.twitterBut.hidden = false
-                        //self.instagramBut.hidden = false
-                        //self.shareBut.hidden = false
-                        self.backButton.hidden = false
+                        self.facebookBut.hidden = false
+                        self.twitterBut.hidden = false
+                        self.instagramBut.hidden = false
+                        self.shareBut.hidden = false
+                        self.backButton.hidden = true
                         self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                             self.backButton.transform = CGAffineTransformMakeScale(1, 1)

@@ -17,6 +17,9 @@
 		273F756E1CB71CD900F5546B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */; };
 		273F756F1CB71CD900F5546B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */; };
 		273F75701CB71CD900F5546B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */; };
+		273F75741CB731B600F5546B /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75711CB731B600F5546B /* fb.png */; };
+		273F75751CB731B600F5546B /* insta.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75721CB731B600F5546B /* insta.png */; };
+		273F75761CB731B600F5546B /* twtr.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75731CB731B600F5546B /* twtr.png */; };
 		2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44C1C6AF1F500B369E7 /* Assets.xcassets */; };
 		2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */; };
 		2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4741C6AF2A500B369E7 /* cameraView.swift */; };
@@ -135,6 +138,9 @@
 		273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = TypeFace/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = TypeFace/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = TypeFace/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		273F75711CB731B600F5546B /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
+		273F75721CB731B600F5546B /* insta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta.png; sourceTree = "<group>"; };
+		273F75731CB731B600F5546B /* twtr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twtr.png; sourceTree = "<group>"; };
 		2742A4421C6AF1F500B369E7 /* cakeTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cakeTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A44C1C6AF1F500B369E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2742A44F1C6AF1F500B369E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -311,6 +317,9 @@
 		27862F141C6E61F400C62AAE /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				273F75711CB731B600F5546B /* fb.png */,
+				273F75721CB731B600F5546B /* insta.png */,
+				273F75731CB731B600F5546B /* twtr.png */,
 				27C8FF621C9D1463005B98FF /* icloud.png */,
 				27D92ECD1C86994E00433112 /* lookup_amatorka.png */,
 				27D92ECE1C86994E00433112 /* lookup_miss_etikate.png */,
@@ -517,8 +526,11 @@
 				2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */,
 				2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */,
 				27D92ED51C86994E00433112 /* lookup_soft_elegance_2.png in Resources */,
+				273F75751CB731B600F5546B /* insta.png in Resources */,
 				27D92ED41C86994E00433112 /* lookup_soft_elegance_1.png in Resources */,
+				273F75741CB731B600F5546B /* fb.png in Resources */,
 				27D92ED21C86994E00433112 /* lookup_amatorka.png in Resources */,
+				273F75761CB731B600F5546B /* twtr.png in Resources */,
 				27D92ED31C86994E00433112 /* lookup_miss_etikate.png in Resources */,
 				27D92ED61C86994E00433112 /* lookup.png in Resources */,
 				27C8FF631C9D1463005B98FF /* icloud.png in Resources */,
