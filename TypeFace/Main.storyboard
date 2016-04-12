@@ -915,7 +915,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iv8-ko-PhJ" userLabel="Facebook">
-                                <rect key="frame" x="153" y="266" width="50" height="50"/>
+                                <rect key="frame" x="153" y="475" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Te7-1d-k92"/>
                                     <constraint firstAttribute="width" constant="50" id="lWq-bb-Szy"/>
@@ -926,7 +926,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFY-zB-l09" userLabel="Twitter">
-                                <rect key="frame" x="233" y="266" width="50" height="50"/>
+                                <rect key="frame" x="233" y="475" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CuO-LY-u7h"/>
                                     <constraint firstAttribute="width" constant="50" id="MU3-jo-tvb"/>
@@ -937,7 +937,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m01-8M-Qa5" userLabel="Instagram">
-                                <rect key="frame" x="318" y="266" width="50" height="50"/>
+                                <rect key="frame" x="318" y="475" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="MbJ-h4-Ysw"/>
                                     <constraint firstAttribute="height" constant="50" id="Mjd-R9-nkT"/>
@@ -948,7 +948,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uA-pH-BL5" userLabel="Share">
-                                <rect key="frame" x="398" y="266" width="30" height="30"/>
+                                <rect key="frame" x="398" y="475" width="30" height="30"/>
                                 <state key="normal" title="SH"/>
                                 <connections>
                                     <action selector="share:" destination="9aT-QD-KO1" eventType="touchUpInside" id="GiV-PI-0c3"/>
@@ -992,7 +992,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="vjn-gT-CrU" secondAttribute="trailing" constant="20" id="AJu-JD-Ump"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="DOW-yV-qNo"/>
                             <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="vjn-gT-CrU" secondAttribute="bottom" constant="50" id="Eg5-2v-ZBb"/>
-                            <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="bottom" constant="284" id="MYw-1u-lsC"/>
+                            <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="bottom" constant="75" id="MYw-1u-lsC"/>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Sgm-H3-eHH"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="leading" secondItem="ldb-f9-CNM" secondAttribute="leading" id="lOs-zz-kFe"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="leading" secondItem="rFY-zB-l09" secondAttribute="trailing" constant="15" id="mQv-xT-qHU"/>

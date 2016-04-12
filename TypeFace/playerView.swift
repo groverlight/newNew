@@ -18,7 +18,7 @@ import FBSDKLoginKit
 import Photos
 import MobileCoreServices
 
-class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate {
+class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     
     
     
@@ -197,7 +197,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         instagramBut.hidden = true
         shareBut.hidden = true
         progressBar.hidden = true
-        //backButton.hidden = true
+        backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
         self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
@@ -317,22 +317,49 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
+            let overlayScrollView = UIScrollView(frame: CGRectMake(20,20,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
+            // print (overlayScrollView.frame)
+            overlayScrollView.showsVerticalScrollIndicator = true
+            overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
+            overlayScrollView.userInteractionEnabled = true
+            overlayScrollView.scrollEnabled = true
+            overlayScrollView.delegate = self
+            
+            var scrollHeightOverlay:CGFloat = 0.0
+            //  let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
+            for text in arrayofText{
+                
+                
+                    let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
+                    newerLabel.font = UIFont(name: "Avenir Next", size: 22)
+                    newerLabel.textColor = UIColor.whiteColor()
+                    newerLabel.text = text as? String
+                    newerLabel.numberOfLines = 0
+                    newerLabel.sizeToFit()
+                    overlayScrollView.addSubview(newerLabel)
+                    scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
+                }
+                
+            
+            overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             // Put it somewhere, give it a frame...
             overlay.frame = self.view.bounds
             self.view.addSubview(overlay)
             UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
-             
+                        self.view.addSubview(overlayScrollView)
+                        self.view.bringSubviewToFront(overlayScrollView)
                         self.view.bringSubviewToFront(self.backButton)
                         self.view.bringSubviewToFront(self.facebookBut)
                         self.view.bringSubviewToFront(self.twitterBut)
                         self.view.bringSubviewToFront(self.instagramBut)
                         self.view.bringSubviewToFront(self.shareBut)
+                
                         self.facebookBut.hidden = false
                         self.twitterBut.hidden = false
                         self.instagramBut.hidden = false
                         self.shareBut.hidden = false
-                        self.backButton.hidden = true
+                        self.backButton.hidden = false
                         self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
                         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                             self.backButton.transform = CGAffineTransformMakeScale(1, 1)
