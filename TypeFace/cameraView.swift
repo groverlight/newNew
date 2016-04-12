@@ -33,6 +33,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var videoCamera:GPUImageVideoCamera?
     var filter:GPUImageMissEtikateFilter?
     var filteredImage: GPUImageView?
+    var newImage: GPUImageView?
     var movieWriter: GPUImageMovieWriter?
     var gradientView:GradientView = GradientView()
     var clipCount = 1
@@ -161,6 +162,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
+            newImage = GPUImageView()
+            newImage?.frame = self.view.bounds
+            let newfilter = GPUImagePixellateFilter()
+            //filter?.blurRadiusInPixels = 4
+            videoCamera?.addTarget(newfilter)
+            //print (filter)
+            newfilter.addTarget(newImage)
+            self.view.insertSubview(newImage!, aboveSubview:(filteredImage)!)
             self.typingButton.userInteractionEnabled = false
             self.cameraTextField.resignFirstResponder()
             //cameraTextField.
@@ -718,6 +727,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).mov",isDirectory: true), size: view.frame.size)
         filter?.addTarget(movieWriter)
 
+
         movieWriter?.encodingLiveVideo = true
         movieWriter?.shouldPassthroughAudio = false
 
@@ -725,6 +735,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
     }
     func stopRecording() {
+        newImage?.removeFromSuperview()
         print ("stoprecording")
         clipCount += 1
         recording = false;
