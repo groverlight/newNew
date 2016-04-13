@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5453B66BE7F0BEBA77E4F6E4'
+               BlueprintIdentifier = '222940CFE7779755C0DA8D40'
                BlueprintName = 'Pods-cakeTalk'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-cakeTalk.a'>

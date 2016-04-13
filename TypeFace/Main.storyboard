@@ -1195,7 +1195,6 @@
         <!--carousel2-->
         <scene sceneID="3b5-AK-M7t">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vU8-Oy-byP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Red2ViewController" title="carousel2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sae-05-i3v" userLabel="carousel2" customClass="carousel2" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bxZ-6Z-y8p"/>
@@ -1225,13 +1224,13 @@
                         </variation>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU8-Oy-byP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1447" y="-1130"/>
         </scene>
         <!--carousel1-->
         <scene sceneID="S5X-EW-P9E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nbp-BU-OC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Green2ViewController" title="carousel1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UOv-rr-YSY" userLabel="carousel1" customClass="carousel1" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yvz-1k-3NJ"/>
@@ -1261,6 +1260,7 @@
                         </variation>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbp-BU-OC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="741" y="-1124"/>
         </scene>
@@ -1333,8 +1333,8 @@
         <!--carouselPage-->
         <scene sceneID="SF8-OD-ffs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iKA-Wc-rZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Gpf-bC-DoY" userLabel="carouselPage" customClass="TutorialPageViewController" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iKA-Wc-rZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-813" y="-1124"/>
         </scene>
