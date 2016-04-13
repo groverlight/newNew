@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:carousel1.swift">
+   </FileRef>
+   <FileRef
       location = "group:/Users/aaronliu/Documents/newNew/cakeTalk.xcodeproj">
    </FileRef>
    <FileRef

@@ -17,21 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        print ("starting appdelegate...")
         //NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(AppDelegate.timerFunc(_:)), userInfo: nil, repeats: true)
         
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        //window?.rootViewController!.view.endEditing(true)
+        self.window?.rootViewController!.view.hidden = true
         
-        window?.rootViewController!.view.hidden = true
-    
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      //  let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
-        let vc = storyboard.instantiateViewControllerWithIdentifier("login") as UIViewController
+        let front:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("login2") as UIViewController
 
-        frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
+      //  frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         let defaultContainer = CKContainer.defaultContainer()
         defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
                 let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
@@ -40,13 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print (userRecord)
                 
 
-                dispatch_async(dispatch_get_main_queue()){
+               
                   //  frontWindow?.windowLevel = UIWindowLevelStatusBar
                    // frontWindow?.startSwipeToOpenMenu()
                    // frontWindow?.makeKeyAndVisible();
                    // application.statusBarStyle = .LightContent
-                    }
+                
                 if (userRecord!["phoneNumber"] == nil){
+                   // print ("this is nil")
                     dispatch_async(dispatch_get_main_queue()) {
                         self.window?.rootViewController = vc
                     }
@@ -64,8 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                     }
                     dispatch_async(dispatch_get_main_queue()) {
-
-                   // frontWindow?.rootViewController = front
+                        self.window?.rootViewController = front
                     
                     let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
                     let blurView = UIVisualEffectView(effect: blur)

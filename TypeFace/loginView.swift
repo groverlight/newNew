@@ -46,17 +46,16 @@ class loginView: UIViewController {
 
         }
         else if (viewIndex == 2){
-           // print ("hi")
-            
+    
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
-            frontWindow?.rootViewController = vc
+           UIApplication.sharedApplication().delegate?.window!?.rootViewController = vc
             
         }
         
         
     }
     override func viewDidLoad() {
-        
+        print ("loading login...")
            // print("start sending message")
             
             // Use your own details here
@@ -158,8 +157,11 @@ extension loginView: pageDelegate {
     func PageView(PageView: pageView,
         didUpdatePageIndex index: Int) {
 
-        //print (index)
+        print ("did update:\(index)")
         viewIndex = index
+            if(viewIndex == 0){
+                goButton.hidden = true
+            }
             if(viewIndex == 1){
                 twoLabel.textColor = UIColor.whiteColor()
                 twoLabel.backgroundColor = UIColor.blackColor()

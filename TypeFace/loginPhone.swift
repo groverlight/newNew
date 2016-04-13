@@ -49,7 +49,7 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let length = getLength(textField.text!)
         //print (length)
-        if (length == 15){
+        if (length == 10){
             if (range.length == 0){
                 return false;
             }
@@ -63,9 +63,12 @@ class loginPhone: UIViewController, UITextFieldDelegate, UITableViewDataSource,U
         }
         else if (length == 6){
             let num = numberFormatter(textField.text!)
-            textField.text = "(\(num.substringToIndex(3)))-\(num.substringFromIndex(3))-"
+            
             if (range.length > 0){
-                textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
+               // textField.text = "\(num.substringToIndex(3))-\(num.substringFromIndex(3)))"
+            }
+            else{
+                textField.text = "(\(num.substringToIndex(3)))-\(num.substringFromIndex(3))-"
             }
         }
         phoneNumber = numberFormatter("\(phoneTextField.text!+string)") as String

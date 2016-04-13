@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xoz-Im-lQw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vLd-VQ-PH0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -76,7 +76,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ArQ-uy-mt8">
-                                <rect key="frame" x="30" y="275" width="540" height="50"/>
+                                <rect key="frame" x="30" y="540" width="540" height="50"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.1647058824" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="520" id="cVW-aw-i4R"/>
@@ -113,7 +113,7 @@
                             <constraint firstItem="W39-zX-h8F" firstAttribute="bottom" secondItem="PdF-Fk-Td1" secondAttribute="bottom" id="EPt-Kl-4Rn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aqo-nF-YDz" secondAttribute="trailing" constant="20" id="Gf3-V1-Uer"/>
                             <constraint firstItem="ArQ-uy-mt8" firstAttribute="centerX" secondItem="w7O-um-obi" secondAttribute="centerX" id="HOb-2Q-Aax"/>
-                            <constraint firstItem="211-Dy-ZQs" firstAttribute="top" secondItem="ArQ-uy-mt8" secondAttribute="bottom" constant="275" id="HxW-af-mue"/>
+                            <constraint firstItem="211-Dy-ZQs" firstAttribute="top" secondItem="ArQ-uy-mt8" secondAttribute="bottom" constant="10" id="HxW-af-mue"/>
                             <constraint firstItem="W39-zX-h8F" firstAttribute="bottom" secondItem="PdF-Fk-Td1" secondAttribute="bottom" id="JvU-li-kcm"/>
                             <constraint firstItem="W39-zX-h8F" firstAttribute="centerX" secondItem="w7O-um-obi" secondAttribute="centerX" id="VHp-qd-cvg"/>
                             <constraint firstItem="aqo-nF-YDz" firstAttribute="leading" secondItem="W39-zX-h8F" secondAttribute="trailing" constant="100" id="Wyx-mh-iLn"/>
@@ -154,12 +154,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="erM-on-UPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="-1245"/>
+            <point key="canvasLocation" x="-9" y="-253"/>
         </scene>
         <!--loginName-->
         <scene sceneID="Ppz-AT-20S">
             <objects>
-                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hKI-4s-HmT" userLabel="loginName" customClass="loginName" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hKI-4s-HmT" userLabel="loginName" customClass="loginName" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bUA-Gd-May"/>
                         <viewControllerLayoutGuide type="bottom" id="VZo-jb-8ZU"/>
@@ -168,39 +168,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hlo-o0-8Hx">
-                                <rect key="frame" x="243" y="243" width="115" height="115"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpf-Vo-KIv">
+                                <rect key="frame" x="163" y="150" width="275" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for a caketalk account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-aY-Mq8">
+                                        <rect key="frame" x="12" y="93" width="250" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="P9y-fF-hxx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="we will never share your email with anyone - it's just to sign up" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwY-yY-cvP">
+                                        <rect key="frame" x="12" y="122" width="250" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="kRJ-ac-Poo"/>
+                                            <constraint firstAttribute="height" constant="60" id="oJ3-Aw-566"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RnK-xD-MdK">
+                                        <rect key="frame" x="114" y="246" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="please OK ability to be found by email" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFW-VB-kLu">
+                                        <rect key="frame" x="12" y="20" width="250" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="HPP-ug-rwW"/>
+                                            <constraint firstAttribute="height" constant="60" id="Omg-Hp-Kbn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="115" id="WcB-G4-lw8"/>
-                                    <constraint firstAttribute="width" constant="115" id="laR-d1-zuh"/>
+                                    <constraint firstItem="RnK-xD-MdK" firstAttribute="centerX" secondItem="rpf-Vo-KIv" secondAttribute="centerX" id="7mx-Pu-mXw"/>
+                                    <constraint firstItem="UR8-aY-Mq8" firstAttribute="centerX" secondItem="rpf-Vo-KIv" secondAttribute="centerX" id="7u0-XL-3VZ"/>
+                                    <constraint firstItem="jwY-yY-cvP" firstAttribute="centerX" secondItem="rpf-Vo-KIv" secondAttribute="centerX" id="BaY-Md-tNe"/>
+                                    <constraint firstItem="RnK-xD-MdK" firstAttribute="top" secondItem="jwY-yY-cvP" secondAttribute="bottom" constant="64" id="FEu-uS-Olr"/>
+                                    <constraint firstItem="uFW-VB-kLu" firstAttribute="top" secondItem="rpf-Vo-KIv" secondAttribute="top" constant="20" id="FKF-DD-NeX"/>
+                                    <constraint firstAttribute="width" constant="275" id="KtZ-Ir-rYd"/>
+                                    <constraint firstItem="UR8-aY-Mq8" firstAttribute="top" secondItem="uFW-VB-kLu" secondAttribute="bottom" constant="13" id="Lvy-a3-QIE"/>
+                                    <constraint firstItem="jwY-yY-cvP" firstAttribute="top" secondItem="UR8-aY-Mq8" secondAttribute="bottom" constant="8" id="dpa-rv-Iql"/>
+                                    <constraint firstItem="UR8-aY-Mq8" firstAttribute="top" secondItem="uFW-VB-kLu" secondAttribute="bottom" constant="13" id="fvS-vZ-wj3"/>
+                                    <constraint firstAttribute="height" constant="300" id="hqL-be-XRD"/>
+                                    <constraint firstItem="jwY-yY-cvP" firstAttribute="top" secondItem="UR8-aY-Mq8" secondAttribute="bottom" constant="8" id="mn7-yZ-kIk"/>
+                                    <constraint firstItem="uFW-VB-kLu" firstAttribute="centerX" secondItem="rpf-Vo-KIv" secondAttribute="centerX" id="n8V-R9-28g"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="icloud.png"/>
-                                <connections>
-                                    <action selector="iCloudAction:" destination="hKI-4s-HmT" eventType="touchUpInside" id="gfS-qM-SKn"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up with iCloud" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TF8-Pd-VDl">
-                                <rect key="frame" x="226" y="192" width="148" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="centerY" secondItem="HEV-hX-Obr" secondAttribute="centerY" id="89n-Bg-saE"/>
-                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="top" secondItem="TF8-Pd-VDl" secondAttribute="bottom" constant="30" id="FwG-Uf-oet"/>
-                            <constraint firstItem="Hlo-o0-8Hx" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="LPt-he-y8C"/>
-                            <constraint firstItem="TF8-Pd-VDl" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="NQS-n9-2B6"/>
+                            <constraint firstItem="rpf-Vo-KIv" firstAttribute="centerX" secondItem="HEV-hX-Obr" secondAttribute="centerX" id="1Uj-vY-tuJ"/>
+                            <constraint firstItem="rpf-Vo-KIv" firstAttribute="centerY" secondItem="HEV-hX-Obr" secondAttribute="centerY" id="xrh-yb-jfj"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="iCloudButton" destination="Hlo-o0-8Hx" id="nTU-Lf-skq"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rnb-xd-tbm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2147" y="-290"/>
+            <point key="canvasLocation" x="715" y="-266"/>
         </scene>
         <!--PageView-->
         <scene sceneID="0aP-7b-wK4">
@@ -208,12 +239,12 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="A7T-Ec-iyt" userLabel="PageView" customClass="pageView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tfP-Ta-ha7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="43" y="-274"/>
+            <point key="canvasLocation" x="-757" y="-261"/>
         </scene>
         <!--loginCode-->
         <scene sceneID="Ev3-UN-PnY">
             <objects>
-                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pC2-6g-e7d" userLabel="loginCode" customClass="loginCode" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlueViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pC2-6g-e7d" userLabel="loginCode" customClass="loginCode" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hww-ll-d91"/>
                         <viewControllerLayoutGuide type="bottom" id="uZd-Ko-uKv"/>
@@ -366,12 +397,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HA0-13-ejJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1479" y="-290"/>
+            <point key="canvasLocation" x="2083" y="-261"/>
         </scene>
         <!--loginPhone-->
         <scene sceneID="BEs-zQ-m8p">
             <objects>
-                <viewController storyboardIdentifier="GreenViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4l-k4-8x9" userLabel="loginPhone" customClass="loginPhone" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RedViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4l-k4-8x9" userLabel="loginPhone" customClass="loginPhone" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zbK-II-4kG"/>
                         <viewControllerLayoutGuide type="bottom" id="v7S-WU-79C"/>
@@ -438,7 +469,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdz-ZR-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="-274"/>
+            <point key="canvasLocation" x="1423" y="-266"/>
         </scene>
         <!--ActivityView-->
         <scene sceneID="zBZ-Ga-tM6">
@@ -1024,7 +1055,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyN-Ht-3JE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="526"/>
+            <point key="canvasLocation" x="793" y="1278"/>
         </scene>
         <!--playerView-->
         <scene sceneID="Mfx-e1-own">
@@ -1090,12 +1121,226 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vuu-wj-yIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-719" y="-150"/>
+            <point key="canvasLocation" x="1413" y="1278"/>
+        </scene>
+        <!--carousel3-->
+        <scene sceneID="8us-kg-RUT">
+            <objects>
+                <viewController storyboardIdentifier="Blue2ViewController" title="carousel3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hdD-eM-9EM" userLabel="carousel3" customClass="carousel3" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rmg-6D-rbG"/>
+                        <viewControllerLayoutGuide type="bottom" id="3qO-0S-yW4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XmV-rv-TUe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cml-y7-dDP">
+                                <rect key="frame" x="0.0" y="50" width="600" height="375"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVd-Ha-FGO">
+                                <rect key="frame" x="30" y="540" width="540" height="50"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.1647058824" blue="0.35686274509999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="520" id="ZF7-Dq-EOo"/>
+                                    <constraint firstAttribute="height" constant="50" id="dbA-Ej-bRQ"/>
+                                    <constraint firstAttribute="width" constant="300" id="f9G-FW-tpx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="next">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ZF7-Dq-EOo"/>
+                                        <exclude reference="f9G-FW-tpx"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="nextButtAct:" destination="hdD-eM-9EM" eventType="touchUpInside" id="dRA-gp-Mbq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="NVd-Ha-FGO" firstAttribute="width" secondItem="XmV-rv-TUe" secondAttribute="width" constant="-60" id="0ML-mc-qXU"/>
+                            <constraint firstItem="NVd-Ha-FGO" firstAttribute="centerX" secondItem="XmV-rv-TUe" secondAttribute="centerX" id="3nU-IT-3qj"/>
+                            <constraint firstItem="Cml-y7-dDP" firstAttribute="centerX" secondItem="XmV-rv-TUe" secondAttribute="centerX" id="5Fx-Y5-wIy"/>
+                            <constraint firstItem="3qO-0S-yW4" firstAttribute="top" secondItem="NVd-Ha-FGO" secondAttribute="bottom" constant="10" id="ZVB-9n-xjs"/>
+                            <constraint firstItem="Cml-y7-dDP" firstAttribute="centerY" secondItem="XmV-rv-TUe" secondAttribute="centerY" id="dRb-wV-T9a"/>
+                            <constraint firstItem="Cml-y7-dDP" firstAttribute="height" secondItem="XmV-rv-TUe" secondAttribute="height" constant="-225" id="fBP-XD-hWY"/>
+                            <constraint firstItem="Cml-y7-dDP" firstAttribute="width" secondItem="XmV-rv-TUe" secondAttribute="width" id="hLg-t7-OC7"/>
+                            <constraint firstItem="Cml-y7-dDP" firstAttribute="top" secondItem="Rmg-6D-rbG" secondAttribute="bottom" constant="30" id="zkX-GA-YkU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dRb-wV-T9a"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="nextButt" destination="NVd-Ha-FGO" id="0A7-E0-VMt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="01v-fU-AeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2127" y="-1124"/>
+        </scene>
+        <!--carousel2-->
+        <scene sceneID="3b5-AK-M7t">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU8-Oy-byP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="Red2ViewController" title="carousel2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sae-05-i3v" userLabel="carousel2" customClass="carousel2" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bxZ-6Z-y8p"/>
+                        <viewControllerLayoutGuide type="bottom" id="BlE-T8-F9N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zp8-jS-HgG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-ad-zZD">
+                                <rect key="frame" x="0.0" y="50" width="600" height="375"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="t7j-ad-zZD" firstAttribute="centerX" secondItem="Zp8-jS-HgG" secondAttribute="centerX" id="5AT-cW-xFA"/>
+                            <constraint firstItem="t7j-ad-zZD" firstAttribute="width" secondItem="Zp8-jS-HgG" secondAttribute="width" id="7Oh-4m-jO1"/>
+                            <constraint firstItem="t7j-ad-zZD" firstAttribute="height" secondItem="Zp8-jS-HgG" secondAttribute="height" constant="-225" id="NIo-3w-zcR"/>
+                            <constraint firstItem="t7j-ad-zZD" firstAttribute="top" secondItem="bxZ-6Z-y8p" secondAttribute="bottom" constant="30" id="Rr8-kK-ucU"/>
+                            <constraint firstItem="t7j-ad-zZD" firstAttribute="centerY" secondItem="Zp8-jS-HgG" secondAttribute="centerY" id="pvy-QH-onJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="pvy-QH-onJ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1447" y="-1130"/>
+        </scene>
+        <!--carousel1-->
+        <scene sceneID="S5X-EW-P9E">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbp-BU-OC8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="Green2ViewController" title="carousel1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UOv-rr-YSY" userLabel="carousel1" customClass="carousel1" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yvz-1k-3NJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="LzS-gx-6z3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OQN-vt-aaW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ztv-51-6Gt">
+                                <rect key="frame" x="0.0" y="50" width="600" height="375"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ztv-51-6Gt" firstAttribute="width" secondItem="OQN-vt-aaW" secondAttribute="width" id="8on-VB-z76"/>
+                            <constraint firstItem="Ztv-51-6Gt" firstAttribute="top" secondItem="Yvz-1k-3NJ" secondAttribute="bottom" constant="30" id="RJZ-XD-Lqf"/>
+                            <constraint firstItem="Ztv-51-6Gt" firstAttribute="height" secondItem="OQN-vt-aaW" secondAttribute="height" constant="-225" id="aq3-pT-XYe"/>
+                            <constraint firstItem="Ztv-51-6Gt" firstAttribute="centerY" secondItem="OQN-vt-aaW" secondAttribute="centerY" id="esa-4j-8lt"/>
+                            <constraint firstItem="Ztv-51-6Gt" firstAttribute="centerX" secondItem="OQN-vt-aaW" secondAttribute="centerX" id="gdM-zq-LWK"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="esa-4j-8lt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="741" y="-1124"/>
+        </scene>
+        <!--carouselroot-->
+        <scene sceneID="a6s-w5-UYB">
+            <objects>
+                <viewController storyboardIdentifier="login2" id="Rmf-pz-rbL" userLabel="carouselroot" customClass="TutorialViewController" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="120-Zh-fQH"/>
+                        <viewControllerLayoutGuide type="bottom" id="c2O-ST-Cuz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U3M-YR-mse">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89J-8c-hMb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="0.30167355000000001" blue="0.66502875189999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="Gpf-bC-DoY" kind="embed" id="ysg-7X-Dc0"/>
+                                </connections>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-gB-Z7o">
+                                <rect key="frame" x="279" y="15" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="xrV-Tp-2Rz">
+                                <rect key="frame" x="281" y="503" width="39" height="37"/>
+                            </pageControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqh-sh-cUE">
+                                <rect key="frame" x="279" y="459" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="89J-8c-hMb" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="3Gz-pl-GVz"/>
+                            <constraint firstItem="PzR-gB-Z7o" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="4JS-Xs-foM"/>
+                            <constraint firstItem="c2O-ST-Cuz" firstAttribute="top" secondItem="uqh-sh-cUE" secondAttribute="bottom" constant="120" id="IBs-Bg-pbe"/>
+                            <constraint firstItem="89J-8c-hMb" firstAttribute="height" secondItem="U3M-YR-mse" secondAttribute="height" id="LWj-hE-l5m"/>
+                            <constraint firstItem="c2O-ST-Cuz" firstAttribute="top" secondItem="xrV-Tp-2Rz" secondAttribute="bottom" constant="60" id="Wbs-N8-bBX"/>
+                            <constraint firstItem="uqh-sh-cUE" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="WdY-TZ-bGk"/>
+                            <constraint firstItem="xrV-Tp-2Rz" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="gy4-pj-Xc3"/>
+                            <constraint firstItem="89J-8c-hMb" firstAttribute="centerY" secondItem="U3M-YR-mse" secondAttribute="centerY" id="jA7-wl-yGB"/>
+                            <constraint firstItem="89J-8c-hMb" firstAttribute="width" secondItem="U3M-YR-mse" secondAttribute="width" id="y7H-Vd-xq4"/>
+                            <constraint firstItem="PzR-gB-Z7o" firstAttribute="top" secondItem="U3M-YR-mse" secondAttribute="topMargin" constant="15" id="yyf-Ic-XX8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="89J-8c-hMb" id="i8T-Hi-5uA"/>
+                        <outlet property="pageControl" destination="xrV-Tp-2Rz" id="hTM-gV-sPO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JSv-c0-wKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-135" y="-1143"/>
+        </scene>
+        <!--PageView-->
+        <scene sceneID="yfK-UH-Wtj">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="nGh-eD-ysg" userLabel="PageView" customClass="pageView" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CfN-qd-iuS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-757" y="-261"/>
+        </scene>
+        <!--carouselPage-->
+        <scene sceneID="SF8-OD-ffs">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iKA-Wc-rZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Gpf-bC-DoY" userLabel="carouselPage" customClass="TutorialPageViewController" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="-813" y="-1124"/>
         </scene>
     </scenes>
     <resources>
         <image name="fb.png" width="160" height="160"/>
-        <image name="icloud.png" width="380" height="384"/>
         <image name="insta.png" width="160" height="160"/>
         <image name="twtr.png" width="160" height="160"/>
     </resources>

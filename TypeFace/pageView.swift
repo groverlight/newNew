@@ -102,7 +102,7 @@ extension pageView: UIPageViewControllerDataSource {
             }
             
             return orderedViewControllers[previousIndex]
-                }
+        }
 
     func pageViewController(pageViewController: UIPageViewController,
         viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {

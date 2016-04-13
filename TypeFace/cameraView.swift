@@ -320,7 +320,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         typingButton.titleLabel?.alpha = 0.4
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
-        cameraTextField.delegate = self
+        
          NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardDidShow(_:)), name:UIKeyboardDidShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(cameraView.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
@@ -421,6 +421,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         shouldEdit = true
     }
     override func viewDidAppear(animated: Bool) {
+        if (backWindow?.hidden == false){
+            cameraTextField.delegate = self
+        }
+        
         let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let blurView = UIVisualEffectView(effect: blur)
         let BlurSurface = UIView.init(frame: UIScreen.mainScreen().bounds)
@@ -434,7 +438,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     override func viewWillDisappear(animated: Bool) {
        // print("disappear")
         shouldEdit = false
-   
+        self.cameraTextField.removeObserver(self, forKeyPath: "contentSize")
         actualOffset = self.scrollView.contentOffset
        // print (actualOffset)
         cameraTextField.resignFirstResponder()
