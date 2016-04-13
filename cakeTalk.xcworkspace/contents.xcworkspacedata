@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:carousel1.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/aaronliu/Documents/newNew/cakeTalk.xcodeproj">
+      location = "group:cakeTalk.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

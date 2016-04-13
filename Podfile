@@ -1,15 +1,17 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '6.0'
+# platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
 
-target 'TypeFace' do
+target 'cakeTalk' do
 pod 'pop', '~> 1.0'
 end
 
-target 'TypeFaceTests' do
+target 'cakeTalkTests' do
 
 end
 
-target 'TypeFaceUITests' do
+target 'cakeTalkUITests' do
 
 end
 

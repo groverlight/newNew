@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-TypeFace.xcscheme</key>
+		<key>Pods-cakeTalk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -16,17 +16,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>47C800E42623009B7192B025B3DD25A1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6B40B266E3BA852C689AD8CE5AA4AC4E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
