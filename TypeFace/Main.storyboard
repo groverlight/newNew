@@ -193,7 +193,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rpf-Vo-KIv">
                                 <rect key="frame" x="163" y="150" width="275" height="300"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="for a caketalk 🍰 account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-aY-Mq8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="for a caketalk 🍰 account" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-aY-Mq8">
                                         <rect key="frame" x="12" y="93" width="250" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="4Xj-o3-e7h"/>
@@ -336,6 +336,10 @@
                                         <exclude reference="z0i-Yl-Grh"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="8aH-6K-Hcm"/>
+                                        <exclude reference="Oup-GO-KkY"/>
+                                        <exclude reference="jVz-1h-MhC"/>
+                                        <exclude reference="rvG-Rp-PYS"/>
                                         <exclude reference="lWi-HP-fNQ"/>
                                         <exclude reference="mBn-1X-Lxr"/>
                                         <exclude reference="oex-6I-dMF"/>
@@ -348,10 +352,6 @@
                                         <exclude reference="Pdg-MX-a59"/>
                                         <exclude reference="R8S-gi-crG"/>
                                         <exclude reference="Z4W-kZ-7t6"/>
-                                        <exclude reference="8aH-6K-Hcm"/>
-                                        <exclude reference="Oup-GO-KkY"/>
-                                        <exclude reference="jVz-1h-MhC"/>
-                                        <exclude reference="rvG-Rp-PYS"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -361,6 +361,10 @@
                                     <mask key="constraints">
                                         <exclude reference="KtZ-Ir-rYd"/>
                                         <exclude reference="hqL-be-XRD"/>
+                                        <include reference="8aH-6K-Hcm"/>
+                                        <include reference="Oup-GO-KkY"/>
+                                        <include reference="jVz-1h-MhC"/>
+                                        <include reference="rvG-Rp-PYS"/>
                                         <exclude reference="FKF-DD-NeX"/>
                                         <include reference="lWi-HP-fNQ"/>
                                         <include reference="mBn-1X-Lxr"/>
@@ -383,10 +387,6 @@
                                         <include reference="Pdg-MX-a59"/>
                                         <include reference="R8S-gi-crG"/>
                                         <include reference="Z4W-kZ-7t6"/>
-                                        <include reference="8aH-6K-Hcm"/>
-                                        <include reference="Oup-GO-KkY"/>
-                                        <include reference="jVz-1h-MhC"/>
-                                        <include reference="rvG-Rp-PYS"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -602,7 +602,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnO-zT-x6o" userLabel="phoneTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnO-zT-x6o" userLabel="phoneTextField">
                                 <rect key="frame" x="215" y="186" width="236" height="40"/>
                                 <color key="backgroundColor" red="0.87470267936720136" green="0.15963631538955853" blue="0.34855599251157221" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -626,7 +626,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6de-qo-DiA" userLabel="countryTextField">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6de-qo-DiA" userLabel="countryTextField">
                                 <rect key="frame" x="147" y="186" width="60" height="40"/>
                                 <color key="backgroundColor" red="0.87470267940000002" green="0.15963631540000001" blue="0.34855599250000002" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -653,7 +653,7 @@
                                     <action selector="countryCode:" destination="t4l-k4-8x9" eventType="touchDown" id="Hrd-9D-FAc"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5V-yA-axn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5V-yA-axn">
                                 <rect key="frame" x="0.0" y="120" width="600" height="24"/>
                                 <string key="text">find friends via
 mobile number </string>
@@ -1413,7 +1413,7 @@ mobile number </string>
                                         <fragment content="login">
                                             <attributes>
                                                 <color key="NSColor" red="1" green="0.56470588239999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" size="16" name="RionaSans-Bold"/>
+                                                <font key="NSFont" metaFont="system" size="16"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>

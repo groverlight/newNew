@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if (userRecord!["phoneNumber"] == nil){
                    // print ("this is nil")
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.window?.rootViewController = vc
+                       // self.window?.rootViewController = vc
                     }
                 }
                 else{
