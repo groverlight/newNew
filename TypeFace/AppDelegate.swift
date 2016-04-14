@@ -117,8 +117,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
-
-
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {print("got notification1")}
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         print ("got notification2")
