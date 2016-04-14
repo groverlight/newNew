@@ -56,10 +56,10 @@
 		27D92ED51C86994E00433112 /* lookup_soft_elegance_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */; };
 		27D92ED61C86994E00433112 /* lookup.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D92ED11C86994E00433112 /* lookup.png */; };
 		27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */; };
+		27EE5C081CC03129008DFA65 /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */; };
 		27EF18111C877B1C003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27EF18131C877B63003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F0FED5B521AAE4093C136831 /* libPods-cakeTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */; };
-		F4F3371A1CBEBD5800250AA6 /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */; };
 		F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */; };
 		F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */; };
 		F4F337311CBF051F00250AA6 /* RionaSans-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */; };
@@ -205,6 +205,8 @@
 		27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup_soft_elegance_2.png; sourceTree = "<group>"; };
 		27D92ED11C86994E00433112 /* lookup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup.png; sourceTree = "<group>"; };
 		27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		27EE5C061CC03129008DFA65 /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialVideoHelper.h; sourceTree = "<group>"; };
+		27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialVideoHelper.m; sourceTree = "<group>"; };
 		27EF18051C877670003A49A2 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "GPUImage-master/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
 		556E9D1703146381FC70AAAC /* libPods-TypeFace.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TypeFace.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		570DB3AA52FC472E95661A15 /* Pods-cakeTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cakeTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cakeTalk/Pods-cakeTalk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -212,8 +214,6 @@
 		72BA24B8E8FD8245CC00DC15 /* Pods-TypeFace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypeFace.release.xcconfig"; path = "Pods/Target Support Files/Pods-TypeFace/Pods-TypeFace.release.xcconfig"; sourceTree = "<group>"; };
 		DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cakeTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44DF493322CEC7C438A7E8B /* Pods-cakeTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cakeTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-cakeTalk/Pods-cakeTalk.release.xcconfig"; sourceTree = "<group>"; };
-		F4F337181CBEBD5800250AA6 /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialVideoHelper.h; path = "../../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.h"; sourceTree = "<group>"; };
-		F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialVideoHelper.m; path = "../../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.m"; sourceTree = "<group>"; };
 		F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BlackIt.otf"; sourceTree = "<group>"; };
 		F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Black.otf"; sourceTree = "<group>"; };
 		F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BoldIt.otf"; sourceTree = "<group>"; };
@@ -391,12 +391,12 @@
 				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
 				27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */,
 				27D92ED11C86994E00433112 /* lookup.png */,
+				27EE5C061CC03129008DFA65 /* SocialVideoHelper.h */,
+				27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */,
 				2757FC811C92254D00050C11 /* RandomColor.h */,
 				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
 				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
 				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
-				F4F337181CBEBD5800250AA6 /* SocialVideoHelper.h */,
-				F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
 				2742A4511C6AF1F500B369E7 /* Info.plist */,
@@ -689,13 +689,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				277339AE1CBDC7C600E845D1 /* carouselPageViewController.swift in Sources */,
+				27EE5C081CC03129008DFA65 /* SocialVideoHelper.m in Sources */,
 				2757FC8B1C92256300050C11 /* Luminosity.swift in Sources */,
 				2796D2F11C6D477B00FE580B /* WindowExtension.swift in Sources */,
 				27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */,
 				27862F121C6DA8B500C62AAE /* loginName.swift in Sources */,
 				27862F101C6DA8A700C62AAE /* loginCode.swift in Sources */,
 				27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */,
-				F4F3371A1CBEBD5800250AA6 /* SocialVideoHelper.m in Sources */,
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */,
 				277CB0441C98DF680032E109 /* User.swift in Sources */,
