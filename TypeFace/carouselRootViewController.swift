@@ -3,12 +3,15 @@
 import UIKit
 
 class TutorialViewController: UIViewController {
-   
+
+    
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var containerView: UIView!
 
-    
+    @IBOutlet var headerLabel: UILabel!
+
+
 
     var tutorialPageViewController: TutorialPageViewController? {
         didSet {
@@ -18,6 +21,16 @@ class TutorialViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
         //nextButt.hidden = true
         pageControl.addTarget(self, action: #selector(TutorialViewController.didChangePageControlValue), forControlEvents: .ValueChanged)
     }

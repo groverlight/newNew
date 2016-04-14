@@ -39,13 +39,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var clipCount = 1
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
-    @IBOutlet weak var textViewBottom: NSLayoutConstraint!
 
+    @IBOutlet weak var textViewBottom: NSLayoutConstraint!
     @IBOutlet weak var weGoodEmoji: UILabel!
     @IBOutlet weak var clearAllEmoji: UILabel!
-    
-    @IBOutlet weak var progressBar: UIView!
-    
+    @IBOutlet weak var progressBar: UIView!    
     @IBOutlet weak var animatedBar: UIView!
     @IBOutlet weak var characterCounter: UILabel!
     @IBOutlet weak var quitScrollView: UIButton!

@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RionaSans-BlackIt.otf</string>
+		<string>RionaSans-Black.otf</string>
+		<string>RionaSans-Bold.otf</string>
+		<string>RionaSans-BoldIt.otf</string>
+		<string>RionaSans-ExtraBlack.otf</string>
+		<string>RionaSans-ExtraBlackIt.otf</string>
+		<string>RionaSans-ExtraLight.otf</string>
+		<string>RionaSans-ExtraLightIt.otf</string>
+		<string>RionaSans-Italic.otf</string>
+		<string>RionaSans-Light.otf</string>
+		<string>RionaSans-LightIt.otf</string>
+		<string>RionaSans-Medium.otf</string>
+		<string>RionaSans-MediumIt.otf</string>
+		<string>RionaSans-Regular.otf</string>
+		<string>RionaSans-Thin.otf</string>
+		<string></string>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

@@ -12,7 +12,6 @@
 		270A90671C7D1EE1006FC3A0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */; };
 		272110011CA6FA76004C2408 /* playerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272110001CA6FA76004C2408 /* playerView2.swift */; };
 		273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */; };
-		273F75681CB7032B00F5546B /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 273F75671CB7032B00F5546B /* SocialVideoHelper.m */; };
 		273F756E1CB71CD900F5546B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */; };
 		273F756F1CB71CD900F5546B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */; };
 		273F75701CB71CD900F5546B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */; };
@@ -60,6 +59,22 @@
 		27EF18111C877B1C003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27EF18131C877B63003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F0FED5B521AAE4093C136831 /* libPods-cakeTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */; };
+		F4F3371A1CBEBD5800250AA6 /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */; };
+		F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */; };
+		F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */; };
+		F4F337311CBF051F00250AA6 /* RionaSans-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */; };
+		F4F337321CBF051F00250AA6 /* RionaSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337231CBF051F00250AA6 /* RionaSans-Bold.otf */; };
+		F4F337331CBF051F00250AA6 /* RionaSans-ExtraBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337241CBF051F00250AA6 /* RionaSans-ExtraBlack.otf */; };
+		F4F337341CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337251CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf */; };
+		F4F337351CBF051F00250AA6 /* RionaSans-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337261CBF051F00250AA6 /* RionaSans-ExtraLight.otf */; };
+		F4F337361CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337271CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf */; };
+		F4F337371CBF051F00250AA6 /* RionaSans-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337281CBF051F00250AA6 /* RionaSans-Italic.otf */; };
+		F4F337381CBF051F00250AA6 /* RionaSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337291CBF051F00250AA6 /* RionaSans-Light.otf */; };
+		F4F337391CBF051F00250AA6 /* RionaSans-LightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F3372A1CBF051F00250AA6 /* RionaSans-LightIt.otf */; };
+		F4F3373A1CBF051F00250AA6 /* RionaSans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F3372B1CBF051F00250AA6 /* RionaSans-Medium.otf */; };
+		F4F3373B1CBF051F00250AA6 /* RionaSans-MediumIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F3372C1CBF051F00250AA6 /* RionaSans-MediumIt.otf */; };
+		F4F3373C1CBF051F00250AA6 /* RionaSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F3372D1CBF051F00250AA6 /* RionaSans-Regular.otf */; };
+		F4F3373D1CBF051F00250AA6 /* RionaSans-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F3372E1CBF051F00250AA6 /* RionaSans-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,8 +153,6 @@
 		272110001CA6FA76004C2408 /* playerView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playerView2.swift; sourceTree = "<group>"; };
 		273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKCollectionIndexView.h; sourceTree = "<group>"; };
 		273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKCollectionIndexView.m; sourceTree = "<group>"; };
-		273F75661CB7032B00F5546B /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialVideoHelper.h; path = "../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.h"; sourceTree = "<group>"; };
-		273F75671CB7032B00F5546B /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialVideoHelper.m; path = "../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.m"; sourceTree = "<group>"; };
 		273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = TypeFace/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = TypeFace/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = TypeFace/FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -199,6 +212,23 @@
 		72BA24B8E8FD8245CC00DC15 /* Pods-TypeFace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypeFace.release.xcconfig"; path = "Pods/Target Support Files/Pods-TypeFace/Pods-TypeFace.release.xcconfig"; sourceTree = "<group>"; };
 		DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cakeTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44DF493322CEC7C438A7E8B /* Pods-cakeTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cakeTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-cakeTalk/Pods-cakeTalk.release.xcconfig"; sourceTree = "<group>"; };
+		F4F337181CBEBD5800250AA6 /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialVideoHelper.h; path = "../../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.h"; sourceTree = "<group>"; };
+		F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SocialVideoHelper.m; path = "../../../../Downloads/SocialVideoHelper-master/SocialVideoHelper.m"; sourceTree = "<group>"; };
+		F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BlackIt.otf"; sourceTree = "<group>"; };
+		F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Black.otf"; sourceTree = "<group>"; };
+		F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BoldIt.otf"; sourceTree = "<group>"; };
+		F4F337231CBF051F00250AA6 /* RionaSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Bold.otf"; sourceTree = "<group>"; };
+		F4F337241CBF051F00250AA6 /* RionaSans-ExtraBlack.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-ExtraBlack.otf"; sourceTree = "<group>"; };
+		F4F337251CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-ExtraBlackIt.otf"; sourceTree = "<group>"; };
+		F4F337261CBF051F00250AA6 /* RionaSans-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-ExtraLight.otf"; sourceTree = "<group>"; };
+		F4F337271CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-ExtraLightIt.otf"; sourceTree = "<group>"; };
+		F4F337281CBF051F00250AA6 /* RionaSans-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Italic.otf"; sourceTree = "<group>"; };
+		F4F337291CBF051F00250AA6 /* RionaSans-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Light.otf"; sourceTree = "<group>"; };
+		F4F3372A1CBF051F00250AA6 /* RionaSans-LightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-LightIt.otf"; sourceTree = "<group>"; };
+		F4F3372B1CBF051F00250AA6 /* RionaSans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Medium.otf"; sourceTree = "<group>"; };
+		F4F3372C1CBF051F00250AA6 /* RionaSans-MediumIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-MediumIt.otf"; sourceTree = "<group>"; };
+		F4F3372D1CBF051F00250AA6 /* RionaSans-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Regular.otf"; sourceTree = "<group>"; };
+		F4F3372E1CBF051F00250AA6 /* RionaSans-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Thin.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,13 +282,13 @@
 		2742A4391C6AF1F500B369E7 = {
 			isa = PBXGroup;
 			children = (
-				27EF18051C877670003A49A2 /* GPUImage.xcodeproj */,
 				2742A4441C6AF1F500B369E7 /* cakeTalk */,
 				2742A4591C6AF1F500B369E7 /* cakeTalkTests */,
 				2742A4641C6AF1F500B369E7 /* cakeTalkUITests */,
 				2742A4431C6AF1F500B369E7 /* Products */,
 				1EAFF290495ED62E899E49F4 /* Pods */,
 				38CB80103A402F40F49FC041 /* Frameworks */,
+				27EF18051C877670003A49A2 /* GPUImage.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -337,6 +367,21 @@
 		27862F141C6E61F400C62AAE /* misc */ = {
 			isa = PBXGroup;
 			children = (
+				F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */,
+				F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */,
+				F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */,
+				F4F337231CBF051F00250AA6 /* RionaSans-Bold.otf */,
+				F4F337241CBF051F00250AA6 /* RionaSans-ExtraBlack.otf */,
+				F4F337251CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf */,
+				F4F337261CBF051F00250AA6 /* RionaSans-ExtraLight.otf */,
+				F4F337271CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf */,
+				F4F337281CBF051F00250AA6 /* RionaSans-Italic.otf */,
+				F4F337291CBF051F00250AA6 /* RionaSans-Light.otf */,
+				F4F3372A1CBF051F00250AA6 /* RionaSans-LightIt.otf */,
+				F4F3372B1CBF051F00250AA6 /* RionaSans-Medium.otf */,
+				F4F3372C1CBF051F00250AA6 /* RionaSans-MediumIt.otf */,
+				F4F3372D1CBF051F00250AA6 /* RionaSans-Regular.otf */,
+				F4F3372E1CBF051F00250AA6 /* RionaSans-Thin.otf */,
 				273F75711CB731B600F5546B /* fb.png */,
 				273F75721CB731B600F5546B /* insta.png */,
 				273F75731CB731B600F5546B /* twtr.png */,
@@ -350,8 +395,8 @@
 				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
 				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
 				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
-				273F75661CB7032B00F5546B /* SocialVideoHelper.h */,
-				273F75671CB7032B00F5546B /* SocialVideoHelper.m */,
+				F4F337181CBEBD5800250AA6 /* SocialVideoHelper.h */,
+				F4F337191CBEBD5800250AA6 /* SocialVideoHelper.m */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
 				2742A4511C6AF1F500B369E7 /* Info.plist */,
@@ -545,17 +590,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				2742A47B1C6AF2C300B369E7 /* Main.storyboard in Resources */,
+				F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */,
 				2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */,
 				2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */,
+				F4F337341CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf in Resources */,
 				27D92ED51C86994E00433112 /* lookup_soft_elegance_2.png in Resources */,
+				F4F337321CBF051F00250AA6 /* RionaSans-Bold.otf in Resources */,
+				F4F3373C1CBF051F00250AA6 /* RionaSans-Regular.otf in Resources */,
 				273F75751CB731B600F5546B /* insta.png in Resources */,
 				27D92ED41C86994E00433112 /* lookup_soft_elegance_1.png in Resources */,
+				F4F337361CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf in Resources */,
+				F4F337391CBF051F00250AA6 /* RionaSans-LightIt.otf in Resources */,
 				273F75741CB731B600F5546B /* fb.png in Resources */,
+				F4F3373D1CBF051F00250AA6 /* RionaSans-Thin.otf in Resources */,
+				F4F337331CBF051F00250AA6 /* RionaSans-ExtraBlack.otf in Resources */,
+				F4F337351CBF051F00250AA6 /* RionaSans-ExtraLight.otf in Resources */,
 				27D92ED21C86994E00433112 /* lookup_amatorka.png in Resources */,
 				273F75761CB731B600F5546B /* twtr.png in Resources */,
+				F4F337311CBF051F00250AA6 /* RionaSans-BoldIt.otf in Resources */,
 				27D92ED31C86994E00433112 /* lookup_miss_etikate.png in Resources */,
+				F4F3373B1CBF051F00250AA6 /* RionaSans-MediumIt.otf in Resources */,
+				F4F337371CBF051F00250AA6 /* RionaSans-Italic.otf in Resources */,
 				27D92ED61C86994E00433112 /* lookup.png in Resources */,
+				F4F337381CBF051F00250AA6 /* RionaSans-Light.otf in Resources */,
+				F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */,
 				27C8FF631C9D1463005B98FF /* icloud.png in Resources */,
+				F4F3373A1CBF051F00250AA6 /* RionaSans-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +695,7 @@
 				27862F121C6DA8B500C62AAE /* loginName.swift in Sources */,
 				27862F101C6DA8A700C62AAE /* loginCode.swift in Sources */,
 				27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */,
-				273F75681CB7032B00F5546B /* SocialVideoHelper.m in Sources */,
+				F4F3371A1CBEBD5800250AA6 /* SocialVideoHelper.m in Sources */,
 				2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */,
 				2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */,
 				277CB0441C98DF680032E109 /* User.swift in Sources */,
@@ -726,7 +786,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Grover Light (4MBTY8L594)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Grover Light (4MBTY8L594)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -748,7 +809,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0fc324d6-7628-46e2-994f-0cc893cbfb5c";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -771,7 +832,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Grover Light (4MBTY8L594)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Grover Light (4MBTY8L594)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -786,7 +848,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0fc324d6-7628-46e2-994f-0cc893cbfb5c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

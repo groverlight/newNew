@@ -23,7 +23,6 @@ public class GradientView: UIView {
 		case Radial
 	}
 
-
 	/// The direction of the gradient.
 	public enum Direction {
 		/// The gradient is vertical.
