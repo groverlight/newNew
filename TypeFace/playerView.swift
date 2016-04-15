@@ -220,14 +220,14 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
         
-        scrollLabel.font = labelFont
+        scrollLabel.font = UIFont(name:"RionaSans-Bold", size: 22.0)
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
-        scrollLabel.layer.cornerRadius = 8
+        scrollLabel.layer.cornerRadius = 10
         scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
-        scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
+        scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7)
         
         scrollLabel.setLineHeight(0)
         // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
@@ -394,7 +394,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
             //print("iPhone 6+")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 32 )
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 22 )
         default:
             break
             //print("not an iPhone")

@@ -216,19 +216,19 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             var duration:NSTimeInterval = 0
             switch (time){
             case 1:
-                duration = 2
+                duration = 1.5
                 break
             case 2:
-                duration = 2.75
+                duration = 2.25
                 break
             case 3:
-               duration = 3.5
+               duration = 3.0
                 break
             case 4:
-                duration = 4.25
+                duration = 3.75
                 break
             case 5:
-                duration = 5
+                duration = 4.55
                 break
             default:
                 print("wtf 2 many lines")
@@ -241,12 +241,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             moveUp.toValue = 30
             emojiLabel.hidden = true
             characterCounter.hidden = true
-            self.typingButton.setTitle("look👆🏻", forState: UIControlState.Normal)
+            self.typingButton.setTitle("look", forState: UIControlState.Normal)
        
             moveUp.completionBlock = { (animation, finished) in
                 arrayofText.addObject(newLabel.text!)
                 self.startRecording()
-                UIView.animateWithDuration(duration, delay: 0.25, options: [], animations: { () -> Void in
+                UIView.animateWithDuration(duration, delay: 0, options: [], animations: { () -> Void in
                     self.animatedBar.transform = CGAffineTransformMakeScale(0.0001, 1)
                     }, completion: { (finished) -> Void in
                         if (finished){
@@ -261,7 +261,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                                     self.progressBar.hidden = true
                                     self.stopRecording()
                                     self.characterCounter.text = "70"
-                                    self.emojiLabel.text = ("👆")
+                                    self.emojiLabel.text = ("👆🏻")
                                     self.emojiLabel.hidden = false
                                     self.characterCounter.hidden = false
                                     self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
@@ -299,6 +299,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         super.viewDidLoad()
         self.progressBar.hidden = true
         self.animatedBar.hidden = true
+        self.cameraTextField.font = UIFont(name:"RionaSans-Bold", size: 22.0)
         characterCounter.layer.masksToBounds = true
         characterCounter.layer.cornerRadius = characterCounter.bounds.size.width/2
         characterCounter.layer.borderWidth = 1
@@ -409,6 +410,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             emojiLabel.hidden = false
             characterCounter.hidden = false
             emojiLabel.text = "💬"
+            self.cameraTextField.font = UIFont(name:"RionaSans-Bold", size: 22.0)
+
         }
         self.view.bringSubviewToFront(emojiLabel)
         self.view.bringSubviewToFront(characterCounter)
@@ -869,7 +872,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
             //print("iPhone 6+")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 32 )
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 25 )
         default:
             break
             //print("not an iPhone")

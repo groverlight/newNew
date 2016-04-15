@@ -196,7 +196,7 @@ class playerView2: UIViewController {
             labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
         case 736.0:
             //print("iPhone 6+")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 32 )
+            labelFont = UIFont(name: "AvenirNext-Medium", size: 25 )
         default:
            // print("not an iPhone")
             break
