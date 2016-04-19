@@ -21,7 +21,9 @@ import MobileCoreServices
 class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     
     
+    @IBOutlet weak var headerLabel: UILabel!
     
+    @IBOutlet weak var header: UIView!
     //var imagePicker:UIImagePickerController
     @IBOutlet weak var facebookBut: UIButton!
     
@@ -29,6 +31,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBOutlet weak var twitterBut: UIButton!
     
     
+    @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var instagramBut: UIButton!
     
     @IBOutlet weak var shareBut: UIButton!
@@ -196,7 +199,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         twitterBut.hidden = true
         instagramBut.hidden = true
         shareBut.hidden = true
-        progressBar.hidden = true
+        progressBarView.hidden = true
         backButton.hidden = true
         self.moviePlayer?.seekToTime(kCMTimeZero)
         self.moviePlayer?.volume = 0.0
@@ -214,7 +217,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         let avLayer = AVPlayerLayer(player: moviePlayer)
         avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         avLayer.frame = self.view.bounds
-        self.view.layer.addSublayer(avLayer)
+        self.view.layer.insertSublayer(avLayer, below: self.header.layer)
+    
         self.moviePlayer?.play()
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
@@ -279,10 +283,13 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         duration = CMTimeGetSeconds(asset.duration)
 
         
-        self.progressBar.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0)
-        self.progressBar.hidden = false
+        self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
+        self.progressBarView.hidden = false
+        self.view.bringSubviewToFront(self.header)
+        self.view.bringSubviewToFront(self.progressBarView)
+        
         UIView.animateWithDuration(duration) { () -> Void in
-             self.progressBar.transform = CGAffineTransformMakeTranslation(0, 0)
+             self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
         }
         setupVideo(1)
     
@@ -303,6 +310,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         }
         else{
             //print ("done with video clips")
+
             do{
                 let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
@@ -317,7 +325,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
-            let overlayScrollView = UIScrollView(frame: CGRectMake(20,20,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
+            let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
             // print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
@@ -347,6 +355,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             overlay.frame = self.view.bounds
             self.view.addSubview(overlay)
             UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
+                    self.header.backgroundColor = UIColor.blueColor()
+                    self.headerLabel.text = "share"
                         self.view.addSubview(overlayScrollView)
                         self.view.bringSubviewToFront(overlayScrollView)
                         self.view.bringSubviewToFront(self.backButton)
@@ -354,7 +364,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                         self.view.bringSubviewToFront(self.twitterBut)
                         self.view.bringSubviewToFront(self.instagramBut)
                         self.view.bringSubviewToFront(self.shareBut)
-                
+                        self.view.bringSubviewToFront(self.header)
                         self.facebookBut.hidden = false
                         self.twitterBut.hidden = false
                         self.instagramBut.hidden = false

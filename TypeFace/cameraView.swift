@@ -10,8 +10,14 @@ import AVFoundation
 import UIKit
 import GPUImage
 import CloudKit
+/*
 
-
+ let date = NSDate()
+ let calendar = NSCalendar.currentCalendar()
+ let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+ let hour = components.hour
+ let minutes = components.minute
+*/
 var arrayofText: NSMutableArray = []
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     var recording = false
@@ -40,6 +46,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
 
+    @IBOutlet weak var header: UIView!
+    
+    @IBOutlet weak var cakeTalkLabel: UILabel!
     @IBOutlet weak var textViewBottom: NSLayoutConstraint!
     @IBOutlet weak var weGoodEmoji: UILabel!
     @IBOutlet weak var clearAllEmoji: UILabel!
@@ -97,13 +106,15 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
     }
     @IBAction func quitScrollAct(sender: AnyObject) {
-
+      
         self.typingButton.userInteractionEnabled = true
         panGesture?.enabled = true
         longPressRecognizer.enabled = true
         self.weGoodEmoji.hidden = true
         self.clearAllEmoji.hidden = true
         UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.header.backgroundColor = UIColor.blackColor()
+            self.cakeTalkLabel.text = "caketalk"
             self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
             self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
             }) { (finished) -> Void in
@@ -160,6 +171,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
+            cakeTalkLabel.hidden = true
             newImage = GPUImageView()
             newImage?.frame = self.view.bounds
             let newfilter = GPUImagePixellateFilter()
@@ -238,11 +250,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
             /*======================================HERE================================================*/
             scaleDown.toValue = NSValue(CGSize: CGSize(width: self.typingButton.bounds.size.width*0.4, height: self.typingButton.bounds.size.height*0.6))
-            moveUp.toValue = 30
+            moveUp.toValue = 53
             emojiLabel.hidden = true
             characterCounter.hidden = true
             self.typingButton.setTitle("look", forState: UIControlState.Normal)
-       
+            self.view.bringSubviewToFront(self.typingButton)
+            self.view.bringSubviewToFront(self.progressBar)
             moveUp.completionBlock = { (animation, finished) in
                 arrayofText.addObject(newLabel.text!)
                 self.startRecording()
@@ -252,7 +265,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         if (finished){
                             
                                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
-                                        self.typingButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
+                                    self.typingButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.characterCounter.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.emojiLabel.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                         }, completion: {(finished) -> Void in
@@ -752,6 +765,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
+        self.cakeTalkLabel.hidden = false
         exportVideo()
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
        
@@ -759,10 +773,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     func longPressed(sender: UILongPressGestureRecognizer)
     {
 
-
+        
 
         if (sender.state == UIGestureRecognizerState.Began){
                         // Put it somewhere, give it a frame...
+            self.header.backgroundColor = UIColor.orangeColor()
+            self.cakeTalkLabel.text = "edit"
             self.typingButton.userInteractionEnabled = false
             panGesture?.enabled = false
             sender.enabled = false
@@ -772,7 +788,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
             let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             let vibrantOverlay = UIVisualEffectView(effect: vibrancyEffect)
-            let overlayScrollView = UIScrollView(frame: CGRectMake(20,20,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
+            let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
            // print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
@@ -819,7 +835,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         overlayScrollView.flashScrollIndicators()
                         self.view.bringSubviewToFront(self.clearAllScroll)
                         self.view.bringSubviewToFront(self.quitScrollView)
-    
+                        self.view.bringSubviewToFront(self.header)
 
                         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: {
                            

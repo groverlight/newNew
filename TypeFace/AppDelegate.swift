@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let prefs = NSUserDefaults.standardUserDefaults()
         if let login = prefs.stringForKey("Login"){
             print (login)
-            self.window?.rootViewController = vc // supposed to be front
+            self.window?.rootViewController = front // supposed to be front
 
             
         }else{

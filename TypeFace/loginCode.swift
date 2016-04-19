@@ -35,6 +35,11 @@ class loginCode: UIViewController, UITextFieldDelegate {
         labelCounter = 0
     }
     
+    
+    @IBAction func backAction(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
+    }
+    
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         //print ("\(textField.text!)\(string)")
         var newDigit:UILabel!
@@ -73,6 +78,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
        // print (newDigit)
         if (labelCounter == 5){
             codeDigit5.text = string
+            let animation = MAActivityIndicatorView(frame: self.view.bounds)
             if ( code == textField.text! + string){
                // NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
                 
@@ -119,6 +125,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
     }
     func keyboardWillHide (notification: NSNotification) {
          //print ("keyboardwillhide")
-   
+        
     }
+
 }

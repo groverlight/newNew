@@ -539,6 +539,9 @@
                                     <constraint firstAttribute="width" constant="58" id="RL3-pQ-MMt"/>
                                 </constraints>
                                 <state key="normal" title="Go Back"/>
+                                <connections>
+                                    <action selector="backAction:" destination="pC2-6g-e7d" eventType="touchUpInside" id="31h-gK-lnx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.56470588239999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -612,29 +615,39 @@ mobile number </string>
                                 <color key="textColor" red="0.98823529409999999" green="0.96078431369999995" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By continuing you agree to the Terms of Use and Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4I-28-9JX">
-                                <rect key="frame" x="53" y="306" width="494" height="107"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Huq-pF-J1C">
-                                <rect key="frame" x="288" y="345" width="108" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Terms of Use"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qUb-ur-DZa">
-                                <rect key="frame" x="425" y="345" width="113" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Privacy Policy"/>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Myp-8c-axF">
+                                <rect key="frame" x="25" y="372" width="550" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By continuing you agree to the Terms of Use and Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4I-28-9JX">
+                                        <rect key="frame" x="0.0" y="10" width="550" height="108"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="R4I-28-9JX" firstAttribute="centerX" secondItem="Myp-8c-axF" secondAttribute="centerX" id="2xW-Dt-SjL"/>
+                                    <constraint firstItem="R4I-28-9JX" firstAttribute="width" secondItem="Myp-8c-axF" secondAttribute="width" id="6Ft-2q-8d0"/>
+                                    <constraint firstItem="R4I-28-9JX" firstAttribute="top" secondItem="Myp-8c-axF" secondAttribute="top" constant="10" id="fnO-UI-inu"/>
+                                    <constraint firstAttribute="bottom" secondItem="R4I-28-9JX" secondAttribute="bottom" constant="10" id="pl6-lV-lTl"/>
+                                    <constraint firstAttribute="height" constant="128" id="wvC-Yu-Ki1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.56470588239999997" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="centerX" secondItem="0bV-f5-MGa" secondAttribute="centerX" id="8Ma-5I-IT6"/>
+                            <constraint firstItem="v7S-WU-79C" firstAttribute="top" secondItem="Myp-8c-axF" secondAttribute="bottom" constant="100" id="MPB-t7-DQJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Myp-8c-axF" secondAttribute="trailing" constant="5" id="ZF4-UZ-7ek"/>
                             <constraint firstItem="u5V-yA-axn" firstAttribute="top" secondItem="zbK-II-4kG" secondAttribute="bottom" constant="30" id="ZeK-W9-SiN"/>
+                            <constraint firstItem="Myp-8c-axF" firstAttribute="centerX" secondItem="0bV-f5-MGa" secondAttribute="centerX" id="iK6-cx-H2E"/>
+                            <constraint firstItem="Myp-8c-axF" firstAttribute="leading" secondItem="0bV-f5-MGa" secondAttribute="leadingMargin" constant="5" id="pj6-TV-Wow"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="termsBottomConstraint" destination="MPB-t7-DQJ" id="3qZ-nW-oxM"/>
+                        <outlet property="termsView" destination="R4I-28-9JX" id="kJe-Qm-Jcw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdz-ZR-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -831,6 +844,27 @@ mobile number </string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
+                                <rect key="frame" x="0.0" y="20" width="600" height="55"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="caketalk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9D-ht-hf7">
+                                        <rect key="frame" x="250" y="8" width="100" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Fwx-4z-ZPC"/>
+                                            <constraint firstAttribute="height" constant="40" id="Tzf-20-f2L"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="c9D-ht-hf7" firstAttribute="centerX" secondItem="ePl-Tl-Nl8" secondAttribute="centerX" id="hL4-cI-J8C"/>
+                                    <constraint firstAttribute="height" constant="55" id="raC-Ww-D7e"/>
+                                    <constraint firstItem="c9D-ht-hf7" firstAttribute="centerY" secondItem="ePl-Tl-Nl8" secondAttribute="centerY" id="yOb-vB-iPa"/>
+                                </constraints>
+                            </view>
                             <scrollView multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Y5I-t7-4wI">
                                 <rect key="frame" x="0.0" y="200" width="600" height="400"/>
                                 <constraints>
@@ -844,7 +878,7 @@ mobile number </string>
                                 </variation>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WDQ-SH-b1G" userLabel="progressBar">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="8"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="8"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bus-uU-Dxz" userLabel="animatedBar">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="8"/>
@@ -892,12 +926,15 @@ mobile number </string>
                             <constraint firstAttribute="trailingMargin" secondItem="oVM-oF-apa" secondAttribute="trailing" constant="20" id="VdL-2q-EEh"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="kw9-cJ-h9A" secondAttribute="bottom" constant="11" id="WT5-OC-y6T"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="Xca-9F-z5E"/>
+                            <constraint firstItem="ePl-Tl-Nl8" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="ZbM-jv-HD2"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Y5I-t7-4wI" secondAttribute="bottom" multiplier="2" id="bSQ-5g-CvC"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="dMH-0D-Y7u"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="bhD-hw-fU7" secondAttribute="bottom" constant="210" id="dqA-Fb-Abt"/>
+                            <constraint firstItem="ePl-Tl-Nl8" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" id="e1S-Tq-Elo"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="top" secondItem="92i-ss-J1z" secondAttribute="bottom" constant="8" id="ejt-v9-ubS"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="ftr-vy-USz"/>
                             <constraint firstItem="WDQ-SH-b1G" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="gDM-g2-UcR"/>
+                            <constraint firstItem="WDQ-SH-b1G" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" id="gg9-Vj-SWB"/>
                             <constraint firstItem="oVM-oF-apa" firstAttribute="bottom" secondItem="sh4-CX-jKl" secondAttribute="bottom" constant="13" id="iiZ-Kj-bzB"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="centerY" secondItem="VwB-MW-SDj" secondAttribute="centerY" id="jGo-jf-JwU"/>
                             <constraint firstItem="WDQ-SH-b1G" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="khL-pT-uqh"/>
@@ -906,6 +943,7 @@ mobile number </string>
                             <constraint firstItem="AG9-nA-6B6" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="33" id="mcx-cs-yOa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Skt-gV-BGX" secondAttribute="trailing" constant="20" id="ofS-70-hOt"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="oow-Bu-Vnt"/>
+                            <constraint firstItem="ePl-Tl-Nl8" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="p6N-Qq-gX1"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" multiplier="0.5" id="qeb-VJ-mwu"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leading" id="qlJ-fE-TOe"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" id="rNf-hB-3OU"/>
@@ -913,9 +951,14 @@ mobile number </string>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="Skt-gV-BGX" secondAttribute="bottom" constant="195" id="si9-ED-43f"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" multiplier="0.6" id="tpe-eV-LAr"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" constant="20" id="trL-RI-Kux"/>
+                            <constraint firstItem="ePl-Tl-Nl8" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="uy3-yG-a1S"/>
+                            <constraint firstItem="ePl-Tl-Nl8" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" id="zRN-6u-5lx"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="e1S-Tq-Elo"/>
+                                <exclude reference="p6N-Qq-gX1"/>
+                                <exclude reference="Ig3-ag-Tfi"/>
                                 <exclude reference="Gky-bH-hB2"/>
                                 <exclude reference="bSQ-5g-CvC"/>
                                 <exclude reference="dMH-0D-Y7u"/>
@@ -942,6 +985,7 @@ mobile number </string>
                         <outlet property="animatedBar" destination="Bus-uU-Dxz" id="iOP-VB-qmF"/>
                         <outlet property="bottomLayoutConstraint" destination="si9-ED-43f" id="N3n-fU-QFb"/>
                         <outlet property="bottomScrollView" destination="Xca-9F-z5E" id="UzY-Jq-Rry"/>
+                        <outlet property="cakeTalkLabel" destination="c9D-ht-hf7" id="k5g-3L-aUK"/>
                         <outlet property="cameraTextField" destination="kw9-cJ-h9A" id="1Uh-bQ-qab"/>
                         <outlet property="characterCountBottom" destination="dqA-Fb-Abt" id="Bjv-wn-cR3"/>
                         <outlet property="characterCounter" destination="bhD-hw-fU7" id="GKY-sK-N9T"/>
@@ -949,6 +993,7 @@ mobile number </string>
                         <outlet property="clearAllScroll" destination="oVM-oF-apa" id="B9L-x7-W60"/>
                         <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
                         <outlet property="emojiLabel" destination="CRs-pD-sa5" id="kVX-Qf-xhX"/>
+                        <outlet property="header" destination="ePl-Tl-Nl8" id="9Tx-6T-5Qt"/>
                         <outlet property="progressBar" destination="WDQ-SH-b1G" id="rDf-5J-eiQ"/>
                         <outlet property="quitScrollView" destination="92i-ss-J1z" id="adk-vZ-3E3"/>
                         <outlet property="scrollView" destination="Y5I-t7-4wI" id="qHX-C0-bXg"/>
@@ -1105,7 +1150,11 @@ mobile number </string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjn-gT-CrU">
-                                <rect key="frame" x="40" y="51" width="520" height="499"/>
+                                <rect key="frame" x="260" y="280" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3kr-DQ-DTb"/>
+                                    <constraint firstAttribute="width" constant="80" id="qCf-hL-a7V"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="29"/>
                                 <state key="normal" title="Message Sent! ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1154,6 +1203,54 @@ mobile number </string>
                                     <action selector="share:" destination="9aT-QD-KO1" eventType="touchUpInside" id="GiV-PI-0c3"/>
                                 </connections>
                             </button>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBV-Jm-TDJ">
+                                <rect key="frame" x="0.0" y="20" width="600" height="55"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-t0-nd4">
+                                        <rect key="frame" x="250" y="8" width="100" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="8Bc-0f-FiW"/>
+                                            <constraint firstAttribute="height" constant="40" id="H5w-KK-Z0O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="7xM-HO-ANO"/>
+                                    <constraint firstItem="sCh-t0-nd4" firstAttribute="centerX" secondItem="uBV-Jm-TDJ" secondAttribute="centerX" id="Lpb-RP-Zod"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="qD3-Z4-o5Q"/>
+                                    <constraint firstItem="sCh-t0-nd4" firstAttribute="centerY" secondItem="uBV-Jm-TDJ" secondAttribute="centerY" id="ujd-DK-7Lb"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qD3-Z4-o5Q"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKG-8W-Q24">
+                                <rect key="frame" x="0.0" y="20" width="600" height="10"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4I4-qI-TFU">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="10"/>
+                                        <color key="backgroundColor" red="0.56470588239999997" green="1" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="Z90-Hk-eBD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.48999999999999999" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="width" secondItem="oKG-8W-Q24" secondAttribute="width" id="0BG-uR-4UO"/>
+                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="leading" secondItem="oKG-8W-Q24" secondAttribute="leading" id="XmV-KI-0Lj"/>
+                                    <constraint firstAttribute="height" constant="10" id="Ydc-qH-jhe"/>
+                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="centerX" secondItem="oKG-8W-Q24" secondAttribute="centerX" id="a89-z4-Y2D"/>
+                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="top" secondItem="oKG-8W-Q24" secondAttribute="top" id="iD1-zd-UyQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="4I4-qI-TFU" secondAttribute="bottom" id="rDv-RK-Oj5"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCq-aZ-i6Y">
                                 <rect key="frame" x="298" y="0.0" width="5" height="600"/>
                                 <constraints>
@@ -1161,21 +1258,7 @@ mobile number </string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8Z-ew-Kaa">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4I4-qI-TFU">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="10"/>
-                                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="10" id="Z90-Hk-eBD"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="width" secondItem="v8Z-ew-Kaa" secondAttribute="width" id="Fxc-U2-Ke8"/>
-                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="top" secondItem="v8Z-ew-Kaa" secondAttribute="top" id="U57-l2-0nh"/>
-                                    <constraint firstItem="4I4-qI-TFU" firstAttribute="centerX" secondItem="v8Z-ew-Kaa" secondAttribute="centerX" id="rTB-Hn-BjK"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="20" width="600" height="560"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1187,25 +1270,35 @@ mobile number </string>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="56e-tK-wUD"/>
                             <constraint firstItem="1uA-pH-BL5" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="top" id="5Au-RT-fUg"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="7gI-Qo-lv2"/>
-                            <constraint firstItem="v8Z-ew-Kaa" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="99C-ZJ-6mm"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="9At-aE-KbF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vjn-gT-CrU" secondAttribute="trailing" constant="20" id="AJu-JD-Ump"/>
+                            <constraint firstItem="uBV-Jm-TDJ" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="ApE-i7-eW0"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="DOW-yV-qNo"/>
                             <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="vjn-gT-CrU" secondAttribute="bottom" constant="50" id="Eg5-2v-ZBb"/>
+                            <constraint firstItem="v8Z-ew-Kaa" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="Fdh-yU-dcP"/>
                             <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="bottom" constant="75" id="MYw-1u-lsC"/>
+                            <constraint firstItem="oKG-8W-Q24" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="Q2A-sO-4yU"/>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Sgm-H3-eHH"/>
+                            <constraint firstItem="uBV-Jm-TDJ" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="b9q-ZV-Fkg"/>
+                            <constraint firstItem="uBV-Jm-TDJ" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="jyA-QH-SjG"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="leading" secondItem="ldb-f9-CNM" secondAttribute="leading" id="lOs-zz-kFe"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="leading" secondItem="rFY-zB-l09" secondAttribute="trailing" constant="15" id="mQv-xT-qHU"/>
+                            <constraint firstItem="v8Z-ew-Kaa" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="poA-LG-hSs"/>
                             <constraint firstItem="m01-8M-Qa5" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="top" id="rRv-sa-QZc"/>
                             <constraint firstItem="m01-8M-Qa5" firstAttribute="leading" secondItem="XCq-aZ-i6Y" secondAttribute="trailing" constant="15" id="rUt-NN-6o3"/>
                             <constraint firstItem="rFY-zB-l09" firstAttribute="leading" secondItem="iv8-ko-PhJ" secondAttribute="trailing" constant="30" id="s1g-s2-k85"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="tMJ-AS-YRc"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="tMf-7f-CaK"/>
+                            <constraint firstItem="oKG-8W-Q24" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="to7-fY-wk7"/>
+                            <constraint firstItem="oKG-8W-Q24" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="vI6-h7-k05"/>
                             <constraint firstItem="1uA-pH-BL5" firstAttribute="leading" secondItem="m01-8M-Qa5" secondAttribute="trailing" constant="30" id="yLN-Cz-S0F"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="9At-aE-KbF"/>
                                 <exclude reference="tMf-7f-CaK"/>
+                                <exclude reference="AJu-JD-Ump"/>
+                                <exclude reference="Eg5-2v-ZBb"/>
                                 <exclude reference="0eq-AY-pAM"/>
                                 <exclude reference="33D-Qr-wgA"/>
                             </mask>
@@ -1214,9 +1307,12 @@ mobile number </string>
                     <connections>
                         <outlet property="backButton" destination="vjn-gT-CrU" id="AxC-PU-kGb"/>
                         <outlet property="facebookBut" destination="iv8-ko-PhJ" id="cuv-te-4Iz"/>
+                        <outlet property="header" destination="uBV-Jm-TDJ" id="GSX-Z4-8Ns"/>
+                        <outlet property="headerLabel" destination="sCh-t0-nd4" id="NSM-MY-RMP"/>
                         <outlet property="instagramBut" destination="m01-8M-Qa5" id="aHW-Uo-HIh"/>
                         <outlet property="labelView" destination="v8Z-ew-Kaa" id="KhF-Aw-wRg"/>
                         <outlet property="progressBar" destination="4I4-qI-TFU" id="ANi-3Q-zDF"/>
+                        <outlet property="progressBarView" destination="oKG-8W-Q24" id="yik-sS-lro"/>
                         <outlet property="shareBut" destination="1uA-pH-BL5" id="Bxs-Dv-BoE"/>
                         <outlet property="twitterBut" destination="rFY-zB-l09" id="cDx-Pm-FlU"/>
                         <segue destination="xoz-Im-lQw" kind="presentation" identifier="segueToCamera" id="w1J-sQ-Der"/>
@@ -1226,10 +1322,10 @@ mobile number </string>
             </objects>
             <point key="canvasLocation" x="793" y="1278"/>
         </scene>
-        <!--playerView-->
+        <!--playerView2-->
         <scene sceneID="Mfx-e1-own">
             <objects>
-                <viewController storyboardIdentifier="playerView2" id="2r0-lu-hH3" userLabel="playerView" customClass="playerView2" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerView2" id="2r0-lu-hH3" userLabel="playerView2" customClass="playerView2" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Cq-eg-JcI"/>
                         <viewControllerLayoutGuide type="bottom" id="Svc-AV-WiT"/>
@@ -1605,6 +1701,6 @@ mobile number </string>
         <image name="twtr.png" width="160" height="160"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="clR-8d-uYj"/>
+        <segue reference="w1J-sQ-Der"/>
     </inferredMetricsTieBreakers>
 </document>
