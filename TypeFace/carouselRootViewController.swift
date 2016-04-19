@@ -12,6 +12,7 @@ class TutorialViewController: UIViewController {
     @IBOutlet var headerLabel: UILabel!
 
 
+    @IBOutlet weak var bottomLabel: UILabel!
 
     var tutorialPageViewController: TutorialPageViewController? {
         didSet {
@@ -23,15 +24,6 @@ class TutorialViewController: UIViewController {
         super.viewDidLoad()
 
 
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
-        //nextButt.hidden = true
         pageControl.addTarget(self, action: #selector(TutorialViewController.didChangePageControlValue), forControlEvents: .ValueChanged)
     }
     
@@ -62,7 +54,18 @@ extension TutorialViewController: TutorialPageViewControllerDelegate {
     
     func tutorialPageViewController(tutorialPageViewController: TutorialPageViewController,
                                     didUpdatePageIndex index: Int) {
-
+        if (index == 0){
+            self.headerLabel.text = "what"
+            self.bottomLabel.text = "Caketalk 🍰 bakes fun into sharing personal updates "
+        }
+        else if (index == 1){
+            self.headerLabel.text = "how"
+            self.bottomLabel.text = "Record an expression to give additional meaning to each statement"
+        }
+        else{
+            self.headerLabel.text = "why"
+            self.bottomLabel.text =  "Watch your message come to life as it plays, and talk without the disturbance of sound"
+        }
         pageControl.currentPage = index
     }
     

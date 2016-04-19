@@ -41,6 +41,13 @@ class pageView: UIPageViewController {
                     scrollToViewController(nextViewController)
         }
     }
+    func scrollToPreviousViewController() {
+        if let visibleViewController = viewControllers?.first,
+        let previousViewController = pageViewController(self, viewControllerBeforeViewController: visibleViewController){
+            scrollToViewController(previousViewController)
+        
+        }
+    }
 
     private func newColoredViewController(color: String) -> UIViewController {
         

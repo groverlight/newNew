@@ -11,6 +11,7 @@
 		270A90651C7D1BA8006FC3A0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270A90641C7D1BA8006FC3A0 /* AVKit.framework */; };
 		270A90671C7D1EE1006FC3A0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */; };
 		272110011CA6FA76004C2408 /* playerView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272110001CA6FA76004C2408 /* playerView2.swift */; };
+		272DD9521CC5E03D00F2ED5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 272DD9511CC5E03D00F2ED5B /* Main.storyboard */; };
 		273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */; };
 		273F756E1CB71CD900F5546B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */; };
 		273F756F1CB71CD900F5546B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */; };
@@ -23,7 +24,6 @@
 		2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4741C6AF2A500B369E7 /* cameraView.swift */; };
 		2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4751C6AF2A500B369E7 /* pageView.swift */; };
 		2742A4791C6AF2A500B369E7 /* loginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4761C6AF2A500B369E7 /* loginView.swift */; };
-		2742A47B1C6AF2C300B369E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A47A1C6AF2C300B369E7 /* Main.storyboard */; };
 		2757FC831C92254D00050C11 /* RandomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC821C92254D00050C11 /* RandomColor.swift */; };
 		2757FC891C92256300050C11 /* ColorDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC861C92256300050C11 /* ColorDefinition.swift */; };
 		2757FC8A1C92256300050C11 /* Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2757FC871C92256300050C11 /* Hue.swift */; };
@@ -151,6 +151,7 @@
 		270A90641C7D1BA8006FC3A0 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		270A90661C7D1EE1006FC3A0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		272110001CA6FA76004C2408 /* playerView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = playerView2.swift; sourceTree = "<group>"; };
+		272DD9511CC5E03D00F2ED5B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDKCollectionIndexView.h; sourceTree = "<group>"; };
 		273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDKCollectionIndexView.m; sourceTree = "<group>"; };
 		273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = TypeFace/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -170,7 +171,6 @@
 		2742A4741C6AF2A500B369E7 /* cameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cameraView.swift; sourceTree = "<group>"; };
 		2742A4751C6AF2A500B369E7 /* pageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = pageView.swift; sourceTree = "<group>"; };
 		2742A4761C6AF2A500B369E7 /* loginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginView.swift; sourceTree = "<group>"; };
-		2742A47A1C6AF2C300B369E7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TypeFace-Bridging-Header.h"; sourceTree = "<group>"; };
 		2757FC811C92254D00050C11 /* RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomColor.h; sourceTree = "<group>"; };
 		2757FC821C92254D00050C11 /* RandomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomColor.swift; sourceTree = "<group>"; };
@@ -279,6 +279,64 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		272DD94C1CC470A800F2ED5B /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */,
+				F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */,
+				F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */,
+				F4F337231CBF051F00250AA6 /* RionaSans-Bold.otf */,
+				F4F337241CBF051F00250AA6 /* RionaSans-ExtraBlack.otf */,
+				F4F337251CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf */,
+				F4F337261CBF051F00250AA6 /* RionaSans-ExtraLight.otf */,
+				F4F337271CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf */,
+				F4F337281CBF051F00250AA6 /* RionaSans-Italic.otf */,
+				F4F337291CBF051F00250AA6 /* RionaSans-Light.otf */,
+				F4F3372A1CBF051F00250AA6 /* RionaSans-LightIt.otf */,
+				F4F3372B1CBF051F00250AA6 /* RionaSans-Medium.otf */,
+				F4F3372C1CBF051F00250AA6 /* RionaSans-MediumIt.otf */,
+				F4F3372D1CBF051F00250AA6 /* RionaSans-Regular.otf */,
+				F4F3372E1CBF051F00250AA6 /* RionaSans-Thin.otf */,
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
+		272DD94F1CC470B200F2ED5B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				273F75711CB731B600F5546B /* fb.png */,
+				273F75721CB731B600F5546B /* insta.png */,
+				273F75731CB731B600F5546B /* twtr.png */,
+				27C8FF621C9D1463005B98FF /* icloud.png */,
+				27D92ECD1C86994E00433112 /* lookup_amatorka.png */,
+				27D92ECE1C86994E00433112 /* lookup_miss_etikate.png */,
+				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
+				27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */,
+				27D92ED11C86994E00433112 /* lookup.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		272DD9501CC470BC00F2ED5B /* custom classes */ = {
+			isa = PBXGroup;
+			children = (
+				27D592AC1C8FB78900D37E5B /* paddedLabel.swift */,
+				2757FC861C92256300050C11 /* ColorDefinition.swift */,
+				2757FC871C92256300050C11 /* Hue.swift */,
+				2757FC881C92256300050C11 /* Luminosity.swift */,
+				2757FC821C92254D00050C11 /* RandomColor.swift */,
+				27D592A81C8FAD7E00D37E5B /* GradientView.swift */,
+				2796D2F01C6D477B00FE580B /* WindowExtension.swift */,
+				27EE5C061CC03129008DFA65 /* SocialVideoHelper.h */,
+				27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */,
+				2757FC811C92254D00050C11 /* RandomColor.h */,
+				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
+				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
+				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
+			);
+			name = "custom classes";
+			sourceTree = "<group>";
+		};
 		2742A4391C6AF1F500B369E7 = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				277CB03E1C9892A70032E109 /* cakeTalk.entitlements */,
-				2742A47A1C6AF2C300B369E7 /* Main.storyboard */,
+				272DD9511CC5E03D00F2ED5B /* Main.storyboard */,
 				27862F131C6E61C000C62AAE /* mainViews */,
 				27862F141C6E61F400C62AAE /* misc */,
 				27862F081C6DA54F00C62AAE /* login */,
@@ -367,48 +425,14 @@
 		27862F141C6E61F400C62AAE /* misc */ = {
 			isa = PBXGroup;
 			children = (
-				F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */,
-				F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */,
-				F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */,
-				F4F337231CBF051F00250AA6 /* RionaSans-Bold.otf */,
-				F4F337241CBF051F00250AA6 /* RionaSans-ExtraBlack.otf */,
-				F4F337251CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf */,
-				F4F337261CBF051F00250AA6 /* RionaSans-ExtraLight.otf */,
-				F4F337271CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf */,
-				F4F337281CBF051F00250AA6 /* RionaSans-Italic.otf */,
-				F4F337291CBF051F00250AA6 /* RionaSans-Light.otf */,
-				F4F3372A1CBF051F00250AA6 /* RionaSans-LightIt.otf */,
-				F4F3372B1CBF051F00250AA6 /* RionaSans-Medium.otf */,
-				F4F3372C1CBF051F00250AA6 /* RionaSans-MediumIt.otf */,
-				F4F3372D1CBF051F00250AA6 /* RionaSans-Regular.otf */,
-				F4F3372E1CBF051F00250AA6 /* RionaSans-Thin.otf */,
-				273F75711CB731B600F5546B /* fb.png */,
-				273F75721CB731B600F5546B /* insta.png */,
-				273F75731CB731B600F5546B /* twtr.png */,
-				27C8FF621C9D1463005B98FF /* icloud.png */,
-				27D92ECD1C86994E00433112 /* lookup_amatorka.png */,
-				27D92ECE1C86994E00433112 /* lookup_miss_etikate.png */,
-				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
-				27D92ED01C86994E00433112 /* lookup_soft_elegance_2.png */,
-				27D92ED11C86994E00433112 /* lookup.png */,
-				27EE5C061CC03129008DFA65 /* SocialVideoHelper.h */,
-				27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */,
-				2757FC811C92254D00050C11 /* RandomColor.h */,
-				27D592A71C8FAD7E00D37E5B /* GradientView.h */,
-				273A37621C8D967E00EDFC6B /* BDKCollectionIndexView.h */,
-				273A37631C8D967E00EDFC6B /* BDKCollectionIndexView.m */,
+				272DD94C1CC470A800F2ED5B /* fonts */,
+				272DD94F1CC470B200F2ED5B /* images */,
+				272DD9501CC470BC00F2ED5B /* custom classes */,
 				2742A44C1C6AF1F500B369E7 /* Assets.xcassets */,
 				2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */,
 				2742A4511C6AF1F500B369E7 /* Info.plist */,
 				2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */,
 				27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */,
-				2796D2F01C6D477B00FE580B /* WindowExtension.swift */,
-				27D592AC1C8FB78900D37E5B /* paddedLabel.swift */,
-				2757FC861C92256300050C11 /* ColorDefinition.swift */,
-				2757FC871C92256300050C11 /* Hue.swift */,
-				2757FC881C92256300050C11 /* Luminosity.swift */,
-				2757FC821C92254D00050C11 /* RandomColor.swift */,
-				27D592A81C8FAD7E00D37E5B /* GradientView.swift */,
 			);
 			name = misc;
 			sourceTree = "<group>";
@@ -589,7 +613,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2742A47B1C6AF2C300B369E7 /* Main.storyboard in Resources */,
 				F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */,
 				2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */,
 				2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */,
@@ -615,6 +638,7 @@
 				F4F337381CBF051F00250AA6 /* RionaSans-Light.otf in Resources */,
 				F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */,
 				27C8FF631C9D1463005B98FF /* icloud.png in Resources */,
+				272DD9521CC5E03D00F2ED5B /* Main.storyboard in Resources */,
 				F4F3373A1CBF051F00250AA6 /* RionaSans-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

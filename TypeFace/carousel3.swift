@@ -13,7 +13,10 @@ class carousel3: UIViewController {
    
     @IBAction func nextButtAct(sender: AnyObject) {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login") as! loginView
-        UIApplication.sharedApplication().delegate?.window!?.rootViewController = vc
+        self.dismissViewControllerAnimated(true, completion: nil)
+        dispatch_async(dispatch_get_main_queue()) {
+            UIApplication.sharedApplication().delegate?.window!?.rootViewController = vc
+        }
     }
 
 }

@@ -20,11 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print ("starting appdelegate...")
         //NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(AppDelegate.timerFunc(_:)), userInfo: nil, repeats: true)
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        
+
+       /* let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
-        //window?.rootViewController!.view.endEditing(true)
-        self.window?.rootViewController!.view.hidden = true
+        //window?.rootViewController!.view.endEditing(true)*/
+       // self.window?.rootViewController!.view.hidden = true
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -33,6 +35,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
       //  frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         let defaultContainer = CKContainer.defaultContainer()
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let login = prefs.stringForKey("Login"){
+            print (login)
+            self.window?.rootViewController = vc // supposed to be front
+
+            
+        }else{
+            //Nothing stored in NSUserDefaults yet. Set a value.
+            //prefs.setValue("Berlin", forKey: "Login")
+            self.window?.rootViewController = vc
+
+        }
         defaultContainer.fetchUserRecordIDWithCompletionHandler { (userRecordID, error) in
                 let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
             if (error == nil){
@@ -49,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if (userRecord!["phoneNumber"] == nil){
                    // print ("this is nil")
                     dispatch_async(dispatch_get_main_queue()) {
-                       // self.window?.rootViewController = vc
+                     //   self.window?.rootViewController = vc
                     }
                 }
                 else{
@@ -65,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                     }
                     dispatch_async(dispatch_get_main_queue()) {
-                        self.window?.rootViewController = front
+                       // self.window?.rootViewController = front
                     
                     let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
                     let blurView = UIVisualEffectView(effect: blur)
@@ -78,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    self.window?.rootViewController!.view.hidden = false
+                   //   self.window?.rootViewController!.view.hidden = false
                 }
             })
             }
@@ -158,7 +172,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         operation.notificationChangedBlock = { (notification: CKNotification) -> Void in
             // Process each notification received
-            print (notification.notificationType)
+            //print (notification.notificationType)
             if notification.notificationType == .Query {
                 let queryNotification = notification as! CKQueryNotification
                // let reason = queryNotification.queryNotificationReason
@@ -265,7 +279,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func organizeMessages(){
        // print ("organize messages")
-        print (recentMessages)
+        //print (recentMessages)
         for message in messages{
             var addToRecent: Bool = true
             for i in 0 ..< recentMessages.count {

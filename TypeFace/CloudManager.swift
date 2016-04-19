@@ -38,13 +38,21 @@ class CloudManager: NSObject {
                         completionHandler(success: false, user: nil)
                     } else {
                         //print (error)
-                        userRecord!["phoneNumber"] = phoneNumber
-                        
-                        userFull?.phoneNumber = phoneNumber
-                    
-                        
-                        privateDatabase.saveRecord(userRecord!, completionHandler: { record, error in
-                                                   })
+                        self.defaultContainer!.discoverUserInfoWithUserRecordID(userRecordID!) { (info, fetchError) in
+                            if fetchError != nil {
+                                completionHandler(success: false, user: nil)
+                            } else {
+                               userRecord!["fullName"] = "\(info!.displayContact!.givenName) \(info!.displayContact!.familyName)"
+                                userRecord!["phoneNumber"] = phoneNumber
+                                
+                                userFull?.phoneNumber = phoneNumber
+                                
+                                
+                                privateDatabase.saveRecord(userRecord!, completionHandler: { record, error in
+                                })
+                            }
+                        }
+
                         let user = User(userRecordID: userRecordID!, phoneNumber:phoneNumber)
                         completionHandler(success: true, user: user)
                     }

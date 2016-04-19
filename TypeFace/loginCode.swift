@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CloudKit
 
 class loginCode: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var codeTextField: UITextField!
@@ -32,7 +32,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
     }
     override func viewDidAppear(animated: Bool) {
         codeTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay: 0)
-
+        labelCounter = 0
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -71,18 +71,46 @@ class loginCode: UIViewController, UITextFieldDelegate {
             labelCounter -= 1
         }
        // print (newDigit)
+        if (labelCounter == 5){
+            codeDigit5.text = string
+            if ( code == textField.text! + string){
+               // NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
+                
+                //self.dismissViewControllerAnimated(true, completion: nil)
+                let delay = 1 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue()) {
+                let prefs = NSUserDefaults.standardUserDefaults()
+                prefs.setValue("didLogin", forKey: "Login")
+                self.performSegueWithIdentifier("goCamera", sender: self)
 
-        if ( code == textField.text! + string){
-                NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
-                self.dismissViewControllerAnimated(true, completion: nil)
+
+
+                    }
             }
-            
+            else {
+                let wrongCode = UIAlertController(title: "Wrong Code Bruh", message: "Looks like the verification code was incorrect. Please Try Again.", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+                    NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
+                })
+                wrongCode.addAction(okAction)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.codeTextField.text = ""
+                    self.codeDigit1.text = ""
+                    self.codeDigit2.text = ""
+                    self.codeDigit3.text = ""
+                    self.codeDigit4.text = ""
+                    self.codeDigit5.text = ""
+                    self.presentViewController(wrongCode, animated: true, completion: nil)
+                }
+            }
         
+        }
 
         
         return true
     }
-
+    
 
     func keyboardWillShow(notification: NSNotification) {
        // print ("keyboardwillshow")

@@ -9,24 +9,17 @@
 import UIKit
 import CloudKit
 
-class loginName: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var iCloudButton: UIButton!
-    
+class loginName: UIViewController {
+   
+    @IBOutlet weak var AlerView: UIView!
+    override func viewDidLoad() {
+        AlerView.hidden = false
+    }
     @IBAction func iCloudAction(sender: AnyObject) {
         self.iCloudLogin({ (success) -> () in
             if success {
                
-                dispatch_async(dispatch_get_main_queue()) {
-                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("camera") as! cameraView
-                    frontWindow?.rootViewController = vc
-                    let blur = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-                    let blurView = UIVisualEffectView(effect: blur)
-                    blurView.frame = UIScreen.mainScreen().bounds
-                    
-                    frontWindow?.insertSubview(blurView, atIndex: 0)
-                  //  NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(loginName.timerFunc(_:)), userInfo: nil, repeats: true)
 
-                }
                // print ("success")
             } else {
                 ("error")
@@ -34,17 +27,11 @@ class loginName: UIViewController, UITextFieldDelegate {
             }
         })
     }
+    //var PageView: pageView?
     func timerFunc(timer : NSTimer){
         //  print("timerfunc")
         if (userFull != nil){
-            // print ("userfull not init")
-            /* let privateDB = CKContainer.defaultContainer().privateCloudDatabase
-            privateDB.fetchRecordWithID((userFull?.userRecordID)!, completionHandler: { (Record, ErrorType) -> Void in
-            if (ErrorType == nil){
-            //Record!["message"] = recentMessages
-            
-            }
-            })*/
+
             let publicDB = CKContainer.defaultContainer().publicCloudDatabase
             let searchTerm = String(userFull!.phoneNumber!.characters.suffix(10))
             // print (searchTerm)
@@ -166,7 +153,7 @@ class loginName: UIViewController, UITextFieldDelegate {
                         
                         cloudManager.getUserInfo(userFull!, completionHandler: { (success, user) -> () in
                             if success {
-                                
+                              //  self.PageView!.scrollToNextViewController()
                                 completionHandler(success: true)
                             }
                         })
@@ -177,4 +164,6 @@ class loginName: UIViewController, UITextFieldDelegate {
             }
         }
     }
+
+
 }
