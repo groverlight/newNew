@@ -171,6 +171,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
+            self.longPressRecognizer.enabled = false
             cakeTalkLabel.hidden = true
             newImage = GPUImageView()
             newImage?.frame = self.view.bounds
@@ -264,7 +265,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     }, completion: { (finished) -> Void in
                         if (finished){
                             
-                                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                                     self.typingButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.characterCounter.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.emojiLabel.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
@@ -766,6 +767,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             print("bad")
         }
         self.cakeTalkLabel.hidden = false
+        self.longPressRecognizer.enabled = true
         exportVideo()
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
        
@@ -902,14 +904,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
-       
-       
+
        
         let composition = AVMutableComposition()
-        let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
+
         
-        let insertTime = kCMTimeZero
+        let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
+               let insertTime = kCMTimeZero
         do{
+
+            
             try NSFileManager().removeItemAtURL(outputPath)
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
@@ -920,10 +924,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 //let moviePathUrl = NSURL(fileURLWithPath: moviePath)
                 //let sourceAsset = AVURLAsset(URL: moviePathUrl, options: nil)
                 
-                let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
-                
+                 let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
+               
                 if tracks.count > 0{
-                    let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
+                let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
                   try  trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
                     .duration), ofTrack: assetTrack, atTime: insertTime)
                     
@@ -936,28 +940,109 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
+              //AVMutableVideoCompositionLayerInstruction *videolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+       // let avassettrack = tracks[0]
+        //let videolayerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: avassettrack)
+        let videotrack = composition.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack
+        let layerinstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videotrack)
+        let videoComposition = AVMutableVideoComposition()
+        let instruction = AVMutableVideoCompositionInstruction()
+        videoComposition.frameDuration = CMTimeMake(1, 30)
+        videoComposition.renderSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)//videotrack.naturalSize
+        instruction.timeRange = CMTimeRangeMake(kCMTimeZero, composition.duration)
+        
+        instruction.layerInstructions = NSArray(object: layerinstruction) as! [AVVideoCompositionLayerInstruction]
+        videoComposition.instructions = NSArray(object: instruction) as! [AVVideoCompositionInstructionProtocol]
+        
+        
+
+
+        // 1
+        let overlayLayer1: CALayer = CALayer()
+        // overlayLayer1.contents = (animationImage.CGImage as! AnyObject)
+        overlayLayer1.frame = self.view.bounds
+        overlayLayer1.masksToBounds = true
+        
+        // 2 - translate
+        //for i in 1..<files!.count+1
+        for i in 0..<(arrayofText.count){
+            
+            
+            let scrollLabel = CATextLayer()
+
+            scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-40,50)
+            //scrollLabel = UIColor.whiteColor()
+            
+            scrollLabel.font = UIFont(name:"RionaSans-Bold", size: 22.0)
+            scrollLabel.string = makeAttributedString((arrayofText.objectAtIndex(i) as! String))
+
+            
+            scrollLabel.cornerRadius = 10
+            scrollLabel.masksToBounds = true
+            //scrollLabel.alpha = 0.5
+            scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7).CGColor
+            
+           // scrollLabel.setLineHeight(0)
+            // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
+            overlayLayer1.addSublayer(scrollLabel)
+            
+           // let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             
         
-            let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
-            exporter!.outputURL = outputPath
-            exporter!.outputFileType = AVFileTypeQuickTimeMovie //AVFileTypeQuickTimeMovie
+        let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
+        animation.duration = CMTimeGetSeconds(composition.duration)
+        animation.repeatCount = 0
+        animation.autoreverses = false
+        animation.fromValue =  self.view.bounds.size.height*0.55
+        animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
+        animation.beginTime = AVCoreAnimationBeginTimeAtZero
+        animation.removedOnCompletion = true
+        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+        scrollLabel.pop_addAnimation(animation, forKey: "goUP")
+        scrollLabel.shouldRasterize = true
+           
 
-            exporter!.exportAsynchronouslyWithCompletionHandler({
-                switch exporter!.status{
-                case  AVAssetExportSessionStatus.Failed:
-                    print("failed \(exporter!.error)")
-                case AVAssetExportSessionStatus.Cancelled:
-                    print("cancelled \(exporter!.error)")
-                default:
-                    print("complete")
-                    print (AVURLAsset(URL: outputPath))
-                }
-            })
-            return true
-
+        let parentLayer: CALayer = CALayer()
+        let videoLayer: CALayer = CALayer()
+        parentLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
+        videoLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
+        parentLayer.addSublayer(videoLayer)
+        parentLayer.addSublayer(overlayLayer1)
+        videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)
+        }
+        let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
+        exporter!.outputURL = outputPath
+        exporter!.outputFileType = AVFileTypeQuickTimeMovie //AVFileTypeQuickTimeMovie
+        exporter!.videoComposition = videoComposition;
+        exporter!.exportAsynchronouslyWithCompletionHandler({
+            switch exporter!.status{
+            case  AVAssetExportSessionStatus.Failed:
+                print("failed \(exporter!.error)")
+            case AVAssetExportSessionStatus.Cancelled:
+                print("cancelled \(exporter!.error)")
+            default:
+                print("complete")
+                print (AVURLAsset(URL: outputPath))
+            }
+        })
+            
+        
+        return true
+    }
+    func makeAttributedString(title: String) -> NSAttributedString {
+        let titleAttributes = [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline), NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
+        
+        
+      
+        
+        return titleString
     }
 
-
 }
+
+
+    
 
 

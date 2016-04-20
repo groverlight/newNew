@@ -284,7 +284,7 @@
                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="93l-bm-2dC">
                                 <rect key="frame" x="163" y="150" width="275" height="300"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for a caketalk 🍰 account" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-aY-Mq8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="for a caketalk 🍰 account" textAlignment="center" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-aY-Mq8">
                                         <rect key="frame" x="10" y="94" width="255" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="4Xj-o3-e7h"/>
@@ -312,7 +312,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="please OK ability to be found by email" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFW-VB-kLu">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="please OK ability to be found by email" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFW-VB-kLu">
                                         <rect key="frame" x="10" y="20" width="255" height="54"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="HPP-ug-rwW"/>
@@ -343,7 +343,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="we will never share your email with anyone - it's just to sign up" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwY-yY-cvP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="we will never share your email with anyone - it's just to sign up" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwY-yY-cvP">
                                         <rect key="frame" x="10" y="134" width="255" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="PZg-S0-4Df"/>
@@ -604,7 +604,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5V-yA-axn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5V-yA-axn">
                                 <rect key="frame" x="150" y="50" width="300" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="OeC-v8-uTm"/>
@@ -956,9 +956,9 @@ mobile number </string>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Ig3-ag-Tfi"/>
                                 <exclude reference="e1S-Tq-Elo"/>
                                 <exclude reference="p6N-Qq-gX1"/>
-                                <exclude reference="Ig3-ag-Tfi"/>
                                 <exclude reference="Gky-bH-hB2"/>
                                 <exclude reference="bSQ-5g-CvC"/>
                                 <exclude reference="dMH-0D-Y7u"/>
@@ -1203,6 +1203,10 @@ mobile number </string>
                                     <action selector="share:" destination="9aT-QD-KO1" eventType="touchUpInside" id="GiV-PI-0c3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zHP-Gl-AhP">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBV-Jm-TDJ">
                                 <rect key="frame" x="0.0" y="20" width="600" height="55"/>
                                 <subviews>
@@ -1266,6 +1270,7 @@ mobile number </string>
                             <constraint firstAttribute="trailingMargin" secondItem="1uA-pH-BL5" secondAttribute="trailing" constant="20" id="0eq-AY-pAM"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="top" secondItem="ldb-f9-CNM" secondAttribute="topMargin" id="0xl-jk-4Ef"/>
                             <constraint firstItem="rFY-zB-l09" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="top" id="10A-Ur-24l"/>
+                            <constraint firstItem="zHP-Gl-AhP" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="1TX-kf-p7h"/>
                             <constraint firstItem="1uA-pH-BL5" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="33D-Qr-wgA"/>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="56e-tK-wUD"/>
                             <constraint firstItem="1uA-pH-BL5" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="top" id="5Au-RT-fUg"/>
@@ -1274,15 +1279,18 @@ mobile number </string>
                             <constraint firstAttribute="trailingMargin" secondItem="vjn-gT-CrU" secondAttribute="trailing" constant="20" id="AJu-JD-Ump"/>
                             <constraint firstItem="uBV-Jm-TDJ" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="ApE-i7-eW0"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="DOW-yV-qNo"/>
+                            <constraint firstItem="zHP-Gl-AhP" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="E1U-ao-98d"/>
                             <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="vjn-gT-CrU" secondAttribute="bottom" constant="50" id="Eg5-2v-ZBb"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="Fdh-yU-dcP"/>
                             <constraint firstItem="4K0-8P-Z5V" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="bottom" constant="75" id="MYw-1u-lsC"/>
                             <constraint firstItem="oKG-8W-Q24" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="Q2A-sO-4yU"/>
                             <constraint firstItem="vjn-gT-CrU" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="Sgm-H3-eHH"/>
                             <constraint firstItem="uBV-Jm-TDJ" firstAttribute="centerX" secondItem="ldb-f9-CNM" secondAttribute="centerX" id="b9q-ZV-Fkg"/>
+                            <constraint firstItem="zHP-Gl-AhP" firstAttribute="height" secondItem="ldb-f9-CNM" secondAttribute="height" id="brI-5A-dg8"/>
                             <constraint firstItem="uBV-Jm-TDJ" firstAttribute="width" secondItem="ldb-f9-CNM" secondAttribute="width" id="jyA-QH-SjG"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="leading" secondItem="ldb-f9-CNM" secondAttribute="leading" id="lOs-zz-kFe"/>
                             <constraint firstItem="XCq-aZ-i6Y" firstAttribute="leading" secondItem="rFY-zB-l09" secondAttribute="trailing" constant="15" id="mQv-xT-qHU"/>
+                            <constraint firstItem="zHP-Gl-AhP" firstAttribute="centerY" secondItem="ldb-f9-CNM" secondAttribute="centerY" id="nNy-oz-QyY"/>
                             <constraint firstItem="v8Z-ew-Kaa" firstAttribute="top" secondItem="3Og-ra-Hd8" secondAttribute="bottom" id="poA-LG-hSs"/>
                             <constraint firstItem="m01-8M-Qa5" firstAttribute="top" secondItem="iv8-ko-PhJ" secondAttribute="top" id="rRv-sa-QZc"/>
                             <constraint firstItem="m01-8M-Qa5" firstAttribute="leading" secondItem="XCq-aZ-i6Y" secondAttribute="trailing" constant="15" id="rUt-NN-6o3"/>
@@ -1311,6 +1319,7 @@ mobile number </string>
                         <outlet property="headerLabel" destination="sCh-t0-nd4" id="NSM-MY-RMP"/>
                         <outlet property="instagramBut" destination="m01-8M-Qa5" id="aHW-Uo-HIh"/>
                         <outlet property="labelView" destination="v8Z-ew-Kaa" id="KhF-Aw-wRg"/>
+                        <outlet property="movieView" destination="zHP-Gl-AhP" id="HG6-22-gzR"/>
                         <outlet property="progressBar" destination="4I4-qI-TFU" id="ANi-3Q-zDF"/>
                         <outlet property="progressBarView" destination="oKG-8W-Q24" id="yik-sS-lro"/>
                         <outlet property="shareBut" destination="1uA-pH-BL5" id="Bxs-Dv-BoE"/>
@@ -1574,7 +1583,7 @@ mobile number </string>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="xrV-Tp-2Rz">
                                 <rect key="frame" x="281" y="503" width="39" height="37"/>
                             </pageControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="what" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-gB-Z7o">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="what" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzR-gB-Z7o">
                                 <rect key="frame" x="281" y="15" width="39" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="MKV-pa-o6B"/>
@@ -1596,7 +1605,7 @@ mobile number </string>
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caketalk 🍰  bakes fun into sharing personal updates " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqh-sh-cUE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Caketalk 🍰  bakes fun into sharing personal updates " lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqh-sh-cUE">
                                 <rect key="frame" x="89" y="455" width="422" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="132" id="05H-be-0JW"/>

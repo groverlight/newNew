@@ -18,7 +18,7 @@ import FBSDKLoginKit
 import Photos
 import MobileCoreServices
 
-class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
+class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate  , UIScrollViewDelegate {
     
     
     @IBOutlet weak var headerLabel: UILabel!
@@ -26,10 +26,10 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBOutlet weak var header: UIView!
     //var imagePicker:UIImagePickerController
     @IBOutlet weak var facebookBut: UIButton!
-    
-    
+
+    @IBOutlet weak var movieView: UIView!
     @IBOutlet weak var twitterBut: UIButton!
-    
+
     
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var instagramBut: UIButton!
@@ -38,8 +38,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBAction func facebook(sender: AnyObject) {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        
+       let outputPath = NSURL(fileURLWithPath: destinationPath)
+
         let photoLibrary = PHPhotoLibrary.sharedPhotoLibrary()
         var videoAssetPlaceholder:PHObjectPlaceholder!
         photoLibrary.performChanges({
@@ -209,16 +209,19 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     func setupVideo(index: Int){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
-        
-        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov"))
-        // print("duration\(avAsset.duration)")
+        //movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).mov"
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        let outputPath = NSURL(fileURLWithPath: destinationPath)
+        let avAsset = AVAsset(URL: outputPath)
+        print("duration\(avAsset.duration)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
+        //let avlayer = AVPla
         avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         avLayer.frame = self.view.bounds
         self.view.layer.insertSublayer(avLayer, below: self.header.layer)
-    
         self.moviePlayer?.play()
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
@@ -228,15 +231,15 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
-        scrollLabel.layer.cornerRadius = 10
-        scrollLabel.layer.masksToBounds = true
+       // scrollLabel.layer.cornerRadius = 10
+        //scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7)
         
         scrollLabel.setLineHeight(0)
         // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
-        self.labelView.addSubview(scrollLabel)
-        self.view.bringSubviewToFront(labelView)
+       // self.labelView.addSubview(scrollLabel)
+        //self.view.bringSubviewToFront(labelView)
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
         
         labelSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -258,8 +261,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         numOfClips -= 1
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         print ("videw did appear")
+        
         var duration: CFTimeInterval = 0
         do{
             let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
@@ -279,9 +283,12 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
+       
+       
         let asset = AVURLAsset(URL: outputPath)
         duration = CMTimeGetSeconds(asset.duration)
 
+        
         
         self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
         self.progressBarView.hidden = false
@@ -291,6 +298,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         UIView.animateWithDuration(duration) { () -> Void in
              self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
         }
+        
+        
+        
         setupVideo(1)
     
     
@@ -306,10 +316,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             //print ("(numfoclips\(numOfClips)")
             let clipsLeft = totalReceivedClips - numOfClips + 1
            // print ("clipsLeft\(clipsLeft)")
-            setupVideo(clipsLeft)
+            //setupVideo(clipsLeft)
         }
         else{
-            //print ("done with video clips")
 
             do{
                 let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
