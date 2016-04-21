@@ -910,7 +910,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         
         let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
-               let insertTime = kCMTimeZero
+        let insertTime = kCMTimeZero
         do{
 
             
@@ -980,24 +980,26 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             scrollLabel.cornerRadius = 10
             scrollLabel.masksToBounds = true
             //scrollLabel.alpha = 0.5
-            scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7).CGColor
-            
+            //scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7).CGColor
+            //scrollLabel.alignmentMode =
            // scrollLabel.setLineHeight(0)
             // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
             overlayLayer1.addSublayer(scrollLabel)
             
            // let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             
-        
+        scrollLabel.geometryFlipped = true
         let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
-        animation.duration = CMTimeGetSeconds(composition.duration)
+        
+        animation.duration = CMTimeGetSeconds(composition.duration) + 4.25
         animation.repeatCount = 0
         animation.autoreverses = false
-        animation.fromValue =  self.view.bounds.size.height*0.55
-        animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
+        animation.fromValue = 300
+        animation.toValue = -300
         animation.beginTime = AVCoreAnimationBeginTimeAtZero
         animation.removedOnCompletion = true
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+        
         scrollLabel.pop_addAnimation(animation, forKey: "goUP")
         scrollLabel.shouldRasterize = true
            
@@ -1008,6 +1010,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         videoLayer.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)
         parentLayer.addSublayer(videoLayer)
         parentLayer.addSublayer(overlayLayer1)
+        
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)
         }
         let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
