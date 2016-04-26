@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaultContainer = CKContainer.defaultContainer()
         let prefs = NSUserDefaults.standardUserDefaults()
         if let login = prefs.stringForKey("Login"){
-            print (login)
+            //print (login)
             self.window?.rootViewController = front // supposed to be front
 
             
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let privateDatabase = cloudManager.defaultContainer!.privateCloudDatabase
             if (error == nil){
             privateDatabase.fetchRecordWithID(userRecordID!, completionHandler: { (userRecord: CKRecord?, anError) -> Void in
-                print (userRecord)
+               // print (userRecord)
                 
 
                

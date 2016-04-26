@@ -35,7 +35,91 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBOutlet weak var instagramBut: UIButton!
     
     @IBOutlet weak var shareBut: UIButton!
+    var moviePlayer: AVPlayer?
+    var numOfClips = 0
+    var totalReceivedClips = 0
+    var fileManager: NSFileManager? = NSFileManager()
+    var labelFont: UIFont?
+    var overlay: UIVisualEffectView?
+    var didPlay = false
+    var showStatusBar = false
+    override func viewDidLoad() {
+        //let vc = MFMessageComposeViewControlle
+        
+        
+        // let vc = SLComposeViewController(forServiceType: SLSer)
+        super.viewDidLoad()
+        //setupVideo(1)
+        
+        facebookBut.hidden = true
+        twitterBut.hidden = true
+        instagramBut.hidden = true
+        shareBut.hidden = true
+        // progressBarView.hidden = true
+        backButton.hidden = true
+        self.moviePlayer?.seekToTime(kCMTimeZero)
+        self.moviePlayer?.volume = 0.0
+        self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+        
+        iPhoneScreenSizes()
+        if (didPlay == false){
+            
+            setupVideo(1)
+            
+        }
+    }
+    override func viewWillAppear(animated: Bool) {
+        
+    }
+    override func viewDidAppear(animated: Bool) {
+        print ("videw did appear")
+        
+        var duration: CFTimeInterval = 0
+        do{
+            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            //  let String = "MediaCache"
+            
+            //try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
+            // print (files)
+            numOfClips = (files?.count)!
+            totalReceivedClips = numOfClips
+            //print (numOfClips) // last where I Started
+            //print (files)
+        }
+        catch {
+            print("bad")
+        }
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        let outputPath = NSURL(fileURLWithPath: destinationPath)
+        
+        
+        let asset = AVURLAsset(URL: outputPath)
+        duration = CMTimeGetSeconds(asset.duration)
+        
+        print (duration)
+        
+        //self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
+        if (didPlay == false){
+        
+        
+            self.progressBarView.hidden = false
+            self.view.bringSubviewToFront(self.header)
+            self.view.bringSubviewToFront(self.progressBarView)
+            
+            UIView.animateWithDuration(duration) { () -> Void in
+                self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
+            }
+        }
+        
+        
+        
+        
+        
+    }
     @IBAction func facebook(sender: AnyObject) {
+        self.backButton.setTitle("another one", forState: .Normal)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
        let outputPath = NSURL(fileURLWithPath: destinationPath)
@@ -90,7 +174,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     //var newButton:FBSDKShareButton = FBSDKShareButton()
     @IBAction func twitter(sender: AnyObject) {
 
-        
+        self.backButton.setTitle("another one", forState: .Normal)
 
         let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in
@@ -143,6 +227,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     }
     
     @IBAction func instagram(sender: AnyObject) {
+        self.backButton.setTitle("another one", forState: .Normal)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
                 if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(destinationPath)) {
@@ -164,6 +249,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
 
     
     @IBAction func share(sender: AnyObject) {
+        self.backButton.setTitle("another one", forState: .Normal)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
@@ -176,12 +262,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
 
     }
     @IBOutlet weak var progressBar: UIView!
-    var moviePlayer: AVPlayer?
-    var numOfClips = 0
-    var totalReceivedClips = 0
-    var fileManager: NSFileManager? = NSFileManager()
-    var labelFont: UIFont?
+
     
+
     @IBOutlet weak var labelView: UIView!
     @IBAction func backButtonAction(sender: AnyObject) {
         //self.performSegueWithIdentifier("segueToCamera", sender: self)
@@ -189,23 +272,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     @IBOutlet weak var backButton: UIButton!
-    override func viewDidLoad() {
-        //let vc = MFMessageComposeViewControlle
-        
 
-        // let vc = SLComposeViewController(forServiceType: SLSer)
-        super.viewDidLoad()
-        facebookBut.hidden = true
-        twitterBut.hidden = true
-        instagramBut.hidden = true
-        shareBut.hidden = true
-        progressBarView.hidden = true
-        backButton.hidden = true
-        self.moviePlayer?.seekToTime(kCMTimeZero)
-        self.moviePlayer?.volume = 0.0
-        self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-        iPhoneScreenSizes()
-    }
+
     func setupVideo(index: Int){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
@@ -240,6 +308,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
        // self.labelView.addSubview(scrollLabel)
         //self.view.bringSubviewToFront(labelView)
+        
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
         
         labelSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -261,64 +330,24 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         numOfClips -= 1
     }
 
-    override func viewWillAppear(animated: Bool) {
-        print ("videw did appear")
-        
-        var duration: CFTimeInterval = 0
-        do{
-            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-          //  let String = "MediaCache"
-
-            //try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
-            print (files)   
-            numOfClips = (files?.count)!
-            totalReceivedClips = numOfClips
-            //print (numOfClips) // last where I Started
-            print (files)
+    override func prefersStatusBarHidden() -> Bool {
+        if showStatusBar {
+            return false
         }
-        catch {
-            print("bad")
-        }
-        
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-       
-       
-        let asset = AVURLAsset(URL: outputPath)
-        duration = CMTimeGetSeconds(asset.duration)
-
-        
-        
-        self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
-        self.progressBarView.hidden = false
-        self.view.bringSubviewToFront(self.header)
-        self.view.bringSubviewToFront(self.progressBarView)
-        
-        UIView.animateWithDuration(duration) { () -> Void in
-             self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
-        }
-        
-        
-        
-        setupVideo(1)
-    
-    
+        return true
     }
     
+    private func showStatusBar(enabled: Bool) {
+        showStatusBar = enabled
+        self.setNeedsStatusBarAppearanceUpdate()
+        //prefersStatusBarHidden()
+    }
     func playerItemDidReachEnd(notification: NSNotification){
-        //print ("item reached end \(numOfClips)")
+ 
        // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
         NSNotificationCenter.defaultCenter().removeObserver(self)
       
-        if (numOfClips > 0){
-           // print ("(totalreceivedclips\(totalReceivedClips)")
-            //print ("(numfoclips\(numOfClips)")
-            let clipsLeft = totalReceivedClips - numOfClips + 1
-           // print ("clipsLeft\(clipsLeft)")
-            //setupVideo(clipsLeft)
-        }
-        else{
+        self.didPlay = true
 
             do{
                 let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
@@ -331,8 +360,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             catch {
                 // print("bad")
             }
-            
-            let overlay = UIVisualEffectView()
+            overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
             // print (overlayScrollView.frame)
@@ -344,6 +372,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             var scrollHeightOverlay:CGFloat = 0.0
             //  let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
+        let arrayofBorders = NSMutableArray()
             for text in arrayofText{
                 
                 
@@ -354,43 +383,71 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                     newerLabel.numberOfLines = 0
                     newerLabel.sizeToFit()
                     overlayScrollView.addSubview(newerLabel)
-                    scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
-                }
                 
-            
-            overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
+                    let border = CALayer()
+                    border.frame = CGRectMake(0 , scrollHeightOverlay + 40 + self.header.bounds.size.height, 3, CGRectGetHeight(newerLabel.frame)+10)
+                    border.backgroundColor = UIColor.blueColor().CGColor;
+                    arrayofBorders.addObject(border)
+                    //overlay!.layer.addSublayer(border)
+                    scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
+                
+                }
+        overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
+        let timeStampLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
+        timeStampLabel.font = UIFont(name:"Avenir Next", size:15)
+        timeStampLabel.textColor = UIColor.whiteColor()
+        timeStampLabel.text = "now"
+        timeStampLabel.numberOfLines = 0
+        timeStampLabel.sizeToFit()
+        overlayScrollView.addSubview(timeStampLabel)
+        let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
+        emojiLabel.font = UIFont(name:"Avenir Next", size:15)
+        emojiLabel.textColor = UIColor.whiteColor()
+        emojiLabel.text = "📖"
+        emojiLabel.numberOfLines = 0
+        timeStampLabel.sizeToFit()
+        overlayScrollView.addSubview(emojiLabel)
+        showStatusBar(true)
+        
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             // Put it somewhere, give it a frame...
-            overlay.frame = self.view.bounds
-            self.view.addSubview(overlay)
-            UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
-                    self.header.backgroundColor = UIColor.blueColor()
-                    self.headerLabel.text = "share"
-                        self.view.addSubview(overlayScrollView)
-                        self.view.bringSubviewToFront(overlayScrollView)
-                        self.view.bringSubviewToFront(self.backButton)
-                        self.view.bringSubviewToFront(self.facebookBut)
-                        self.view.bringSubviewToFront(self.twitterBut)
-                        self.view.bringSubviewToFront(self.instagramBut)
-                        self.view.bringSubviewToFront(self.shareBut)
-                        self.view.bringSubviewToFront(self.header)
-                        self.facebookBut.hidden = false
-                        self.twitterBut.hidden = false
-                        self.instagramBut.hidden = false
-                        self.shareBut.hidden = false
-                        self.backButton.hidden = false
-                        self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
-                        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
-                            self.backButton.transform = CGAffineTransformMakeScale(1, 1)
-                            }, completion: { finished in
-                               
-                        })
+            overlay!.frame = self.view.bounds
+            self.view.addSubview(overlay!)
+            UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
+                self.header.backgroundColor = UIColor.blueColor()
+                self.headerLabel.text = "share"
+                let line = UIView(frame: CGRectMake(0,self.facebookBut.frame.origin.y, self.view.bounds.size.width, 1))
+                line.backgroundColor = UIColor.whiteColor()
+                self.view.addSubview(line)
+                for border in arrayofBorders{
+                    self.overlay!.layer.addSublayer(border as! CALayer)
+                }
+                self.view.addSubview(overlayScrollView)
+                self.view.bringSubviewToFront(overlayScrollView)
+                self.view.bringSubviewToFront(self.backButton)
+                self.view.bringSubviewToFront(self.facebookBut)
+                self.view.bringSubviewToFront(self.twitterBut)
+                self.view.bringSubviewToFront(self.instagramBut)
+                self.view.bringSubviewToFront(self.shareBut)
+                self.view.bringSubviewToFront(self.header)
+                self.view.bringSubviewToFront(line)
+                self.facebookBut.hidden = false
+                self.twitterBut.hidden = false
+                self.instagramBut.hidden = false
+                self.shareBut.hidden = false
+                self.backButton.hidden = false
+                self.backButton.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                    self.backButton.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion: { finished in
+                       
+                })
 
                 
                 
                 })
 
-        }
+        
         
     }
     
