@@ -34,6 +34,107 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var instagramBut: UIButton!
     
+    //var newButton:FBSDKShareButton = FBSDKShareButton()
+    @IBAction func twitter(sender: AnyObject) {
+        
+        self.backButton.setTitle("another one", forState: .Normal)
+        
+        let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "#cakeTalk"
+        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            //Just dismiss the action sheet
+        }
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+            let outputPath = NSURL(fileURLWithPath: destinationPath)
+            let videoData = NSData(contentsOfURL: outputPath)
+            // if (SocialVideoHelper.userHasAccessToTwitter()){
+            let accountStore = ACAccountStore()
+            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+            
+            
+            accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
+                if (granted){
+                    guard let tweetAcc = accountStore.accountsWithAccountType(accountType) where !tweetAcc.isEmpty else {
+                        print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
+                        return
+                    }
+                    let twitAccount = tweetAcc[0] as! ACAccount
+                    print (twitAccount)
+                    let textfield = alertController.textFields![0] as UITextField
+                    SocialVideoHelper.uploadTwitterVideo(videoData,comment:textfield.text,account: twitAccount, withCompletion: nil)
+                }
+                else{
+                    print (error)
+                }
+                
+                
+                
+                
+                
+            }
+            
+        })
+        
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    @IBAction func instagram(sender: AnyObject) {
+        self.backButton.setTitle("another one", forState: .Normal)
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(destinationPath)) {
+            
+            UISaveVideoAtPathToSavedPhotosAlbum(destinationPath, self,#selector(playerView.video(_:didFinishSavingWithError:contextInfo:)),nil)
+            
+            
+            
+        }
+    }
+    func video(video: NSString, didFinishSavingWithError error:NSError, contextInfo:UnsafeMutablePointer<Void>){
+        print("saved")
+        let instagramURL = NSURL(string:  "instagram://library?AssetPath=\(video)" )
+        // if(UIApplication.sharedApplication().canOpenURL(instagramURL!)){
+        UIApplication.sharedApplication().openURL(instagramURL!)
+        //}
+        
+    }
+    
+    
+    @IBAction func share(sender: AnyObject) {
+        self.backButton.setTitle("another one", forState: .Normal)
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
+        let outputPath = NSURL(fileURLWithPath: destinationPath)
+        let objectsToShare = [outputPath]
+        
+        let activityViewController  = UIActivityViewController(activityItems:objectsToShare as [AnyObject], applicationActivities: nil)
+        
+        presentViewController(activityViewController, animated: true, completion: nil)
+        
+        
+    }
+    @IBOutlet weak var progressBar: UIView!
+    
+    
+    
+    @IBOutlet weak var labelView: UIView!
+    @IBAction func backButtonAction(sender: AnyObject) {
+        //self.performSegueWithIdentifier("segueToCamera", sender: self)
+        arrayofText.removeAllObjects()
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var shareBut: UIButton!
     var moviePlayer: AVPlayer?
     var numOfClips = 0
@@ -43,81 +144,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     var overlay: UIVisualEffectView?
     var didPlay = false
     var showStatusBar = false
-    override func viewDidLoad() {
-        //let vc = MFMessageComposeViewControlle
-        
-        
-        // let vc = SLComposeViewController(forServiceType: SLSer)
-        super.viewDidLoad()
-        //setupVideo(1)
-        
-        facebookBut.hidden = true
-        twitterBut.hidden = true
-        instagramBut.hidden = true
-        shareBut.hidden = true
-        // progressBarView.hidden = true
-        backButton.hidden = true
-        self.moviePlayer?.seekToTime(kCMTimeZero)
-        self.moviePlayer?.volume = 0.0
-        self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
-        
-        iPhoneScreenSizes()
-        if (didPlay == false){
-            
-            setupVideo(1)
-            
-        }
-    }
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    override func viewDidAppear(animated: Bool) {
-        print ("videw did appear")
-        
-        var duration: CFTimeInterval = 0
-        do{
-            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            //  let String = "MediaCache"
-            
-            //try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")
-            // print (files)
-            numOfClips = (files?.count)!
-            totalReceivedClips = numOfClips
-            //print (numOfClips) // last where I Started
-            //print (files)
-        }
-        catch {
-            print("bad")
-        }
-        
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        
-        
-        let asset = AVURLAsset(URL: outputPath)
-        duration = CMTimeGetSeconds(asset.duration)
-        
-        print (duration)
-        
-        //self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
-        if (didPlay == false){
-        
-        
-            self.progressBarView.hidden = false
-            self.view.bringSubviewToFront(self.header)
-            self.view.bringSubviewToFront(self.progressBarView)
-            
-            UIView.animateWithDuration(duration) { () -> Void in
-                self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
-            }
-        }
-        
-        
-        
-        
-        
-    }
+
+
     @IBAction func facebook(sender: AnyObject) {
         self.backButton.setTitle("another one", forState: .Normal)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -171,144 +199,38 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
        
     }
 
-    //var newButton:FBSDKShareButton = FBSDKShareButton()
-    @IBAction func twitter(sender: AnyObject) {
-
-        self.backButton.setTitle("another one", forState: .Normal)
-
-        let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
-            textField.placeholder = "#cakeTalk"
-        }
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
-            //Just dismiss the action sheet
-        }
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-            let outputPath = NSURL(fileURLWithPath: destinationPath)
-            let videoData = NSData(contentsOfURL: outputPath)
-            // if (SocialVideoHelper.userHasAccessToTwitter()){
-            let accountStore = ACAccountStore()
-            let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-            
-            
-            accountStore.requestAccessToAccountsWithType(accountType, options: nil) { granted, error in
-                if (granted){
-                    guard let tweetAcc = accountStore.accountsWithAccountType(accountType) where !tweetAcc.isEmpty else {
-                        print("There are no Twitter accounts configured. You can add or create a Twitter account in Settings.")
-                        return
-                    }
-                    let twitAccount = tweetAcc[0] as! ACAccount
-                    print (twitAccount)
-                    let textfield = alertController.textFields![0] as UITextField
-                    SocialVideoHelper.uploadTwitterVideo(videoData,comment:textfield.text,account: twitAccount, withCompletion: nil)
-                }
-                else{
-                    print (error)
-                }
-                
-                
-                
-                
-                
-            }
-            
-        })
-        
-        
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-       
-        
-    }
-    
-    @IBAction func instagram(sender: AnyObject) {
-        self.backButton.setTitle("another one", forState: .Normal)
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-                if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(destinationPath)) {
-            
-            UISaveVideoAtPathToSavedPhotosAlbum(destinationPath, self,#selector(playerView.video(_:didFinishSavingWithError:contextInfo:)),nil)
-        
-            
-            
-        }
-    }
-    func video(video: NSString, didFinishSavingWithError error:NSError, contextInfo:UnsafeMutablePointer<Void>){
-        print("saved")
-        let instagramURL = NSURL(string:  "instagram://library?AssetPath=\(video)" )
-       // if(UIApplication.sharedApplication().canOpenURL(instagramURL!)){
-            UIApplication.sharedApplication().openURL(instagramURL!)
-        //}
-
-    }
-
-    
-    @IBAction func share(sender: AnyObject) {
-        self.backButton.setTitle("another one", forState: .Normal)
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let objectsToShare = [outputPath]
-
-        let activityViewController  = UIActivityViewController(activityItems:objectsToShare as [AnyObject], applicationActivities: nil)
-        
-        presentViewController(activityViewController, animated: true, completion: nil)
-
-
-    }
-    @IBOutlet weak var progressBar: UIView!
-
-    
-
-    @IBOutlet weak var labelView: UIView!
-    @IBAction func backButtonAction(sender: AnyObject) {
-        //self.performSegueWithIdentifier("segueToCamera", sender: self)
-        arrayofText.removeAllObjects()
-        self.dismissViewControllerAnimated(false, completion: nil)
-    }
-    @IBOutlet weak var backButton: UIButton!
-
-
     func setupVideo(index: Int){
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
-        //movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).mov"
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let avAsset = AVAsset(URL: outputPath)
-        print("duration\(avAsset.duration)")
+        
+        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov"))
+        print("index: \(index)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
-        //let avlayer = AVPla
         avLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         avLayer.frame = self.view.bounds
-        self.view.layer.insertSublayer(avLayer, below: self.header.layer)
+        self.movieView.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
-        
-        scrollLabel.font = UIFont(name:"RionaSans-Bold", size: 22.0)
+        print (scrollLabel.frame)
+        scrollLabel.font = labelFont
         scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
+        print (scrollLabel.text)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
-       // scrollLabel.layer.cornerRadius = 10
-        //scrollLabel.layer.masksToBounds = true
+        scrollLabel.layer.cornerRadius = 8
+        scrollLabel.layer.masksToBounds = true
         //scrollLabel.alpha = 0.5
-        scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7)
+        scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
         
         scrollLabel.setLineHeight(0)
         // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
-       // self.labelView.addSubview(scrollLabel)
-        //self.view.bringSubviewToFront(labelView)
-        
+        self.view.addSubview(scrollLabel)
+       
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
         
         labelSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -330,6 +252,76 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         numOfClips -= 1
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+     
+    }
+    override func viewWillAppear(animated: Bool) {
+        self.view.bringSubviewToFront(labelView)
+        //let vc = MFMessageComposeViewControlle
+        
+        
+        // let vc = SLComposeViewController(forServiceType: SLSer)
+        // super.viewDidLoad()
+        do{
+            let String = "MediaCache"
+            try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(String)")        }
+        catch{
+            print("no media cache")
+        }
+        do{
+            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+            print (files)
+            numOfClips = (files?.count)!
+            totalReceivedClips = numOfClips
+            print (numOfClips) // last where I Started
+            //print (files)
+        }
+        catch {
+            print("bad")
+        }
+        
+        facebookBut.hidden = true
+        twitterBut.hidden = true
+        instagramBut.hidden = true
+        shareBut.hidden = true
+        // progressBarView.hidden = true
+        backButton.hidden = true
+        
+        
+        iPhoneScreenSizes()
+        if (didPlay == false){
+            self.moviePlayer?.seekToTime(kCMTimeZero)
+            self.moviePlayer?.volume = 0.0
+            self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+            self.setupVideo(1)
+            
+        }
+        var duration: CFTimeInterval = 0
+        
+        
+        for i in 0..<arrayofText.count{
+            let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i+1).mov"))
+            duration = duration + CMTimeGetSeconds(avAsset.duration)
+        }
+        
+        self.progressBar.transform = CGAffineTransformMakeScale(1, 1)
+        if (didPlay == false){
+            
+            
+            
+            
+            
+            self.progressBarView.hidden = false
+            self.view.bringSubviewToFront(self.header)
+            self.view.bringSubviewToFront(self.progressBarView)
+            
+            print (duration)
+            UIView.animateWithDuration(duration) { () -> Void in
+                self.progressBar.transform = CGAffineTransformMakeScale(0.000001, 1)
+            }
+        }
+    }
     override func prefersStatusBarHidden() -> Bool {
         if showStatusBar {
             return false
@@ -343,12 +335,19 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         //prefersStatusBarHidden()
     }
     func playerItemDidReachEnd(notification: NSNotification){
- 
-       // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
+        print ("item reached end \(numOfClips)")
+        // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
         NSNotificationCenter.defaultCenter().removeObserver(self)
-      
-        self.didPlay = true
-
+        
+        if (numOfClips > 0){
+            // print ("(totalreceivedclips\(totalReceivedClips)")
+            //print ("(numfoclips\(numOfClips)")
+            let clipsLeft = totalReceivedClips - numOfClips + 1
+            // print ("clipsLeft\(clipsLeft)")
+            setupVideo(clipsLeft)
+        }
+        else{
+            //print ("done with video clips")
             do{
                 let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
                 for file:NSString in files!{
@@ -360,9 +359,10 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             catch {
                 // print("bad")
             }
-            overlay = UIVisualEffectView()
+            
+            let overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
-            let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
+            let overlayScrollView = UIScrollView(frame: CGRectMake(20,20,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
             // print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
@@ -372,56 +372,26 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             var scrollHeightOverlay:CGFloat = 0.0
             //  let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
-        let arrayofBorders = NSMutableArray()
             for text in arrayofText{
                 
                 
-                    let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
-                    newerLabel.font = UIFont(name: "Avenir Next", size: 22)
-                    newerLabel.textColor = UIColor.whiteColor()
-                    newerLabel.text = text as? String
-                    newerLabel.numberOfLines = 0
-                    newerLabel.sizeToFit()
-                    overlayScrollView.addSubview(newerLabel)
-                
-                    let border = CALayer()
-                    border.frame = CGRectMake(0 , scrollHeightOverlay + 40 + self.header.bounds.size.height, 3, CGRectGetHeight(newerLabel.frame)+10)
-                    border.backgroundColor = UIColor.blueColor().CGColor;
-                    arrayofBorders.addObject(border)
-                    //overlay!.layer.addSublayer(border)
-                    scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
-                
-                }
-        overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
-        let timeStampLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
-        timeStampLabel.font = UIFont(name:"Avenir Next", size:15)
-        timeStampLabel.textColor = UIColor.whiteColor()
-        timeStampLabel.text = "now"
-        timeStampLabel.numberOfLines = 0
-        timeStampLabel.sizeToFit()
-        overlayScrollView.addSubview(timeStampLabel)
-        let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
-        emojiLabel.font = UIFont(name:"Avenir Next", size:15)
-        emojiLabel.textColor = UIColor.whiteColor()
-        emojiLabel.text = "📖"
-        emojiLabel.numberOfLines = 0
-        timeStampLabel.sizeToFit()
-        overlayScrollView.addSubview(emojiLabel)
-        showStatusBar(true)
-        
+                let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
+                newerLabel.font = UIFont(name: "Avenir Next", size: 22)
+                newerLabel.textColor = UIColor.whiteColor()
+                newerLabel.text = text as? String
+                newerLabel.numberOfLines = 0
+                newerLabel.sizeToFit()
+                overlayScrollView.addSubview(newerLabel)
+                scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
+            }
+            
+            
+            overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             // Put it somewhere, give it a frame...
-            overlay!.frame = self.view.bounds
-            self.view.addSubview(overlay!)
-            UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
-                self.header.backgroundColor = UIColor.blueColor()
-                self.headerLabel.text = "share"
-                let line = UIView(frame: CGRectMake(0,self.facebookBut.frame.origin.y, self.view.bounds.size.width, 1))
-                line.backgroundColor = UIColor.whiteColor()
-                self.view.addSubview(line)
-                for border in arrayofBorders{
-                    self.overlay!.layer.addSublayer(border as! CALayer)
-                }
+            overlay.frame = self.view.bounds
+            self.view.addSubview(overlay)
+            UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
                 self.view.addSubview(overlayScrollView)
                 self.view.bringSubviewToFront(overlayScrollView)
                 self.view.bringSubviewToFront(self.backButton)
@@ -429,8 +399,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 self.view.bringSubviewToFront(self.twitterBut)
                 self.view.bringSubviewToFront(self.instagramBut)
                 self.view.bringSubviewToFront(self.shareBut)
-                self.view.bringSubviewToFront(self.header)
-                self.view.bringSubviewToFront(line)
+                
                 self.facebookBut.hidden = false
                 self.twitterBut.hidden = false
                 self.instagramBut.hidden = false
@@ -440,14 +409,14 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                     self.backButton.transform = CGAffineTransformMakeScale(1, 1)
                     }, completion: { finished in
-                       
+                        
                 })
-
                 
                 
-                })
-
-        
+                
+            })
+            
+        }
         
     }
     
