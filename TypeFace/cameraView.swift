@@ -790,7 +790,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.header.alpha = 0.75
         movieWriter?.finishRecording()
         do{
-        let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
+        //let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
        // print (files)
         }
         catch {
@@ -979,11 +979,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
             for i in 1..<files!.count+1{
-                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).mov"))
-                  //  duration += CMTimeGetSeconds(avAsset.duration)
-                //let moviePath = path.stringByAppendingPathComponent("mp4")
-                //let moviePathUrl = NSURL(fileURLWithPath: moviePath)
-                //let sourceAsset = AVURLAsset(URL: moviePathUrl, options: nil)
+                print ("files: \(files!.count+1-i)")
+                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(files!.count+1-i).mov"))
+               
+                print (avAsset.duration)
                 movieTimes.append(avAsset.duration)
                 let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
                 if tracks.count > 0{
@@ -996,18 +995,19 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 
             }
             print (movieTimes.count)
+            print (movieTimes)
         }
         
         catch {
             print("bad")
         }
-
+        
         let videotrack = composition.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack
         let layerinstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videotrack)
         let videoComposition = AVMutableVideoComposition()
         let instruction = AVMutableVideoCompositionInstruction()
-        instruction.enablePostProcessing = true
-        videoComposition.frameDuration = CMTimeMake(1, 60)
+       // instruction.enablePostProcessing = true
+        videoComposition.frameDuration = CMTimeMake(1, 80)
         videoComposition.renderSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         instruction.timeRange = CMTimeRangeMake(kCMTimeZero, composition.duration)
         instruction.layerInstructions = NSArray(object: layerinstruction) as! [AVVideoCompositionLayerInstruction]
@@ -1026,9 +1026,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         // 2 - translate
         //for i in 1..<files!.count+1
-        let beginTime:CFTimeInterval = AVCoreAnimationBeginTimeAtZero
+        
         for i in 0..<(arrayofText.count){
-            
+        var beginTime:CMTime = CMTime(value: 0, timescale: 1)
             
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
@@ -1039,8 +1039,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
         scrollLabel.layer.cornerRadius = 10
+        scrollLabel.layer.opacity = 0.0
         scrollLabel.layer.masksToBounds = true
-        //scrollLabel.alpha = 0.5
+        //scrollLabel.alpha = 0
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7)
         
         scrollLabel.setLineHeight(0)
@@ -1048,51 +1049,58 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             //scrollLabel.alignmentMode =
            // scrollLabel.setLineHeight(0)
             // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
-            var duration:CMTime = CMTime()
-            for j in 0..<(i){
-                
-               duration = duration + movieTimes[j]
-            }
+           
+        for j in 0..<(i){
+            
+           beginTime = beginTime + movieTimes[j]
+        }
+        
+        print (i)
+        let currentLayerTime = scrollLabel.layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
         let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
 
-        animation.duration = CMTimeGetSeconds(time) + 4.25
+        animation.duration = CMTimeGetSeconds(movieTimes[i]) + 4.25
         animation.repeatCount = 0
         animation.autoreverses = false
-       // animation.fromValue =
-        animation.toValue = self.view.bounds.size.height*0.3
-        animation.beginTime = AVCoreAnimationBeginTimeAtZero
-        animation.removedOnCompletion = true
+        animation.fromValue = scrollLabel.frame.origin.y
+        animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
+        animation.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-        let animation2: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
-        animation2.duration = CMTimeGetSeconds(time) + 4.25
-        animation2.repeatCount = 0
-        animation2.autoreverses = false
-        animation2.toValue = 0
-        animation2.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+
+
         let animation3 = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
         animation3.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         animation3.velocity = NSValue(CGPoint: CGPointMake(6, 6))
         animation3.springBounciness = 20.0
+        animation3.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
         animation3.repeatCount = 0
         animation3.autoreverses = false
+        //animation3.removedOnCompletion = true
        // animation3.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-    
+        let animation4 = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
+        animation4.duration = 0.00000001
+        animation4.repeatCount = 0
+        animation4.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
+        animation4.autoreverses = false
+        animation4.fromValue = 0.0
+        animation4.toValue = 1.0
+        animation4.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+
+       // animation4.removedOnCompletion = true
+        animation4.completionBlock = {(animation,finished) in
+            let animation2: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
+            animation2.duration = CMTimeGetSeconds(movieTimes[i]) + 4.25
+            animation2.repeatCount = 0
+            animation2.autoreverses = false
+            animation2.toValue = 0
+            animation2.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
+            scrollLabel.layer.pop_addAnimation(animation2, forKey: "goDisappear")
+        }
         scrollLabel.layer.pop_addAnimation(animation, forKey: "goUP")
-        scrollLabel.layer.pop_addAnimation(animation2, forKey: "goDisappear")
         scrollLabel.layer.pop_addAnimation(animation3, forKey: "spring")
+        scrollLabel.layer.pop_addAnimation(animation4, forKey: "goAppear")
         
-       /* let animation: CABasicAnimation = CABasicAnimation(keyPath: "translation.y")
-        
-        animation.duration = CMTimeGetSeconds(composition.duration) + 4.25
-        animation.repeatCount = 0
-        animation.autoreverses = false
-        animation.fromValue = 0
-        animation.toValue = 500
-        animation.beginTime = AVCoreAnimationBeginTimeAtZero
-        animation.removedOnCompletion = true
-        animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-        
-       scrollLabel.addAnimation(animation, forKey: "goUP")*/
+
 
         overlayLayer1.addSublayer(scrollLabel.layer)
         }
@@ -1112,8 +1120,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)
         let movieOutput = GPUImageMovieWriter(movieURL: outputPath, size: self.view.bounds.size)
+        let outputFilter = GPUImageSepiaFilter()
+        outputFilter.addTarget(movieOutput)
         movieComposition = GPUImageMovieComposition(composition: composition, andVideoComposition: videoComposition, andAudioMix: nil)
-        movieComposition!.playAtActualSpeed = true
+     //   movieComposition!.playAtActualSpeed = true
         movieComposition!.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
         movieComposition!.addTarget(movieOutput)
         movieOutput.startRecording()

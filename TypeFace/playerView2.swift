@@ -90,29 +90,23 @@ class playerView2: UIViewController {
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
-        
         scrollLabel.font = labelFont
         scrollLabel.text = arrayofMessageTxt[index-1] 
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
         scrollLabel.layer.cornerRadius = 8
         scrollLabel.layer.masksToBounds = true
-        //scrollLabel.alpha = 0.5
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
-        
         scrollLabel.setLineHeight(0)
-        // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.labelView.addSubview(scrollLabel)
         self.view.bringSubviewToFront(labelView)
         let labelSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
-        
         labelSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         labelSpring.velocity = NSValue(CGPoint: CGPointMake(6, 6))
         labelSpring.springBounciness = 20.0
         scrollLabel.pop_addAnimation(labelSpring, forKey: "spring")
         UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveLinear], animations: { () -> Void in
-            scrollLabel.frame.origin.y = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height//scrollLabel.frame.origin.y - self.view.bounds.size.height * 0.5
-            
+            scrollLabel.frame.origin.y = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
             },completion: {(finished) -> Void in
                 scrollLabel.removeFromSuperview()})
         UIView.animateWithDuration(CMTimeGetSeconds(avAsset.duration) + 4.25, delay: 0, options: [UIViewAnimationOptions.CurveEaseIn], animations: { () -> Void in
