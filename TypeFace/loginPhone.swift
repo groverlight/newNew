@@ -58,6 +58,8 @@ class loginPhone: UIViewController{
         let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
         //print (CGRectGetMaxY(self.view.bounds))
         //print(CGRectGetMinY(convertedKeyboardEndFrame))
+
+        
         dispatch_async(dispatch_get_main_queue()) { [unowned self] in
             
             self.termsBottomConstraint.constant = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + 40

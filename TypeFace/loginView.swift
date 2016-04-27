@@ -30,7 +30,8 @@ class loginView: UIViewController, UITextFieldDelegate {
     var viewIndex = 0
     
     @IBOutlet weak var cloudLoginButt: UIButton!
-    
+
+
     @IBAction func cloudLoginAct(sender: AnyObject) {
         cloudLoginButt.userInteractionEnabled = false
         self.iCloudLogin({ (success) -> () in
@@ -276,23 +277,29 @@ extension loginView: pageDelegate {
     
     func PageView(PageView: pageView,
         didUpdatePageCount count: Int) {
+        self.cloudLoginButt.layer.cornerRadius = 6
+
 
     }
-    
+
     func PageView(PageView: pageView,
         didUpdatePageIndex index: Int) {
+
+        
 
         //print ("did update:\(index)")
         viewIndex = index
             if(viewIndex == 0){
+
               //  goButton.hidden = true
             }
             if(viewIndex == 1){
-                twoLabel.textColor = UIColor.whiteColor()
-                twoLabel.backgroundColor = UIColor.blackColor()
-                twoLabel.layer.backgroundColor = UIColor.blackColor().CGColor
+                twoLabel.textColor = UIColor(red: 255/255, green: 132/255, blue: 174/255, alpha: 1)
+                twoLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1)
+                twoLabel.layer.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1).CGColor
                 self.textFieldView.hidden = false
                 self.phoneTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay:0)
+
                 cloudLoginButt.userInteractionEnabled = true
                 if (self.phoneTextField.text?.characters.count > 0){
                     goButton.hidden = false

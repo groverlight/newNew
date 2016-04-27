@@ -14,6 +14,11 @@ class loginName: UIViewController {
     @IBOutlet weak var AlerView: UIView!
     override func viewDidLoad() {
         AlerView.hidden = false
+
+        self.AlerView.layer.cornerRadius = 20
+        
+
+
     }
     @IBAction func iCloudAction(sender: AnyObject) {
         self.iCloudLogin({ (success) -> () in
@@ -27,6 +32,8 @@ class loginName: UIViewController {
             }
         })
     }
+
+
     //var PageView: pageView?
     func timerFunc(timer : NSTimer){
         //  print("timerfunc")
@@ -104,6 +111,7 @@ class loginName: UIViewController {
         
         
     }
+
     func organizeMessages(){
         print ("organize messages")
         print (recentMessages)
