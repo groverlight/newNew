@@ -17,7 +17,9 @@ import CloudKit
  let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
  let hour = components.hour
  let minutes = components.minute
+ @IBOutlet weak var toolTipPos: UIButton!
 */
+
 var arrayofText: NSMutableArray = []
 var dateArray: NSMutableArray = []
 
@@ -49,9 +51,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var fileManager: NSFileManager? = NSFileManager()
     var longPressRecognizer: UILongPressGestureRecognizer!
     var showStatusBar = true
+    var firstTime = false
+    var toolTip:EasyTipView?
     @IBOutlet weak var header: UIView!
-    
-    @IBOutlet weak var cakeTalkLabel: UILabel!
+       @IBOutlet weak var cakeTalkLabel: UILabel!
     @IBOutlet weak var textViewBottom: NSLayoutConstraint!
     @IBOutlet weak var weGoodEmoji: UILabel!
     @IBOutlet weak var clearAllEmoji: UILabel!
@@ -64,7 +67,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBAction func clearScrollAct(sender: AnyObject) {
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
-
+        toolTip?.dismiss()
         self.typingButton.userInteractionEnabled = true
         panGesture?.enabled = true
         longPressRecognizer.enabled = true
@@ -88,16 +91,28 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         catch {
             print("bad")
         }
-        self.cameraTextField.returnKeyType = UIReturnKeyType.Send
+        self.cameraTextField.returnKeyType = UIReturnKeyType.Default
         self.weGoodEmoji.hidden = true
         self.clearAllEmoji.hidden = true
+        arrayofText.removeAllObjects()
         UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.header.backgroundColor = UIColor.blackColor()
+            self.cakeTalkLabel.text = "caketalk"
             self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
             self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
             }) { (finished) -> Void in
                 self.quitScrollView.hidden = true
                 self.clearAllScroll.hidden = true
-         
+                self.toolTip?.dismiss()
+                var preferences = EasyTipView.Preferences()
+                preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+                preferences.drawing.foregroundColor = UIColor.whiteColor()
+                preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+                preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+                self.toolTip = EasyTipView(text: "type: I like [something you like]", preferences: preferences, delegate: nil)
+                self.toolTip!.show(forView: self.toolTipBut,
+                              withinSuperview: self.view)
+
                 for subview in self.view.subviews {
                     if subview is UIVisualEffectView {
                         subview.removeFromSuperview()
@@ -108,8 +123,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         }
 
     }
-    @IBAction func quitScrollAct(sender: AnyObject) {
-      
+    @IBAction func quitScrollAct(sender: AnyObject){
+      toolTip?.dismiss()
         self.typingButton.userInteractionEnabled = true
         panGesture?.enabled = true
         longPressRecognizer.enabled = true
@@ -123,6 +138,18 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             }) { (finished) -> Void in
                 self.quitScrollView.hidden = true
                 self.clearAllScroll.hidden = true
+                if (self.cameraTextField.text.characters.count == 0){
+                    self.toolTip?.dismiss()
+                    var preferences = EasyTipView.Preferences()
+                    preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+                    preferences.drawing.foregroundColor = UIColor.whiteColor()
+                    preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+                    preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+                    self.toolTip = EasyTipView(text: "type: I like [something you like]", preferences: preferences, delegate: nil)
+                   self.toolTip!.show(forView: self.toolTipBut,
+                                  withinSuperview: self.view)
+
+                }
                 for subview in self.view.subviews {
                     if subview is UIVisualEffectView {
                         subview.removeFromSuperview()
@@ -134,6 +161,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         }
     }
 
+    @IBOutlet weak var toolTipBut: UIButton!
+    @IBOutlet weak var toolTipLayout: NSLayoutConstraint!
     @IBOutlet weak var characterCountBottom: NSLayoutConstraint!
     
     @IBOutlet weak var emojiLabel: UILabel!
@@ -174,156 +203,177 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
         }
         else{
-            showStatusBar(false)
-            self.header.alpha = 0.35
-            self.longPressRecognizer.enabled = false
-            cakeTalkLabel.hidden = true
-            newImage = GPUImageView()
-            newImage?.frame = self.view.bounds
-            let newfilter = GPUImagePixellateFilter()
-            //filter?.blurRadiusInPixels = 4
-            videoCamera?.addTarget(newfilter)
-            //print (filter)
-            newfilter.addTarget(newImage)
-            self.view.insertSubview(newImage!, aboveSubview:(filteredImage)!)
-            self.typingButton.userInteractionEnabled = false
-            self.cameraTextField.resignFirstResponder()
-            //cameraTextField.
-            panGesture?.enabled = false
-            //print(self.cameraTextField.contentInset)
-            let textHeight = self.cameraTextField.font?.lineHeight
-            shouldGoDown = false
-            if (oldLabel?.bounds.size.height != nil){
-                scrollHeight = scrollHeight + (oldLabel?.bounds.size.height)!
-            }
-            
-            
-            let newLabel = UILabel(frame: CGRectMake(20, scrollView.bounds.size.height + scrollHeight, self.view.bounds.size.width*(2/3)-20, textHeight! ))
-            newLabel.font = self.cameraTextField.font
-            newLabel.textColor = UIColor.whiteColor()
-            ++scrollCounter
-            newLabel.text = cameraTextField.text
-            newLabel.numberOfLines = 0
-            newLabel.sizeToFit()
-            oldLabel = newLabel
-            cameraTextField.text.removeAll()
-            // print ((self.oldLabel?.bounds.size.height)!)
-            //print (self.scrollHeight)
-            self.scrollView.addSubview(newLabel)
-            newLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
-            UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
-                newLabel.transform = CGAffineTransformMakeScale(1, 1)
-                }, completion: nil)
-            
-           
-            
-            //print (totalHeight)
-            
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollHeight+(self.oldLabel?.bounds.size.height)!   )
-                }, completion: { (finished) -> Void in
-                    // print ((self.oldLabel?.bounds.size.height)! + self.scrollHeight)
-                    UIView.animateWithDuration(2, animations: { () -> Void in
-                        newLabel.alpha = 0.4
-                    })
-            })
-            self.progressBar.hidden = false
-            self.animatedBar.hidden = false
-            let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
-            //print (time)
-            var duration:NSTimeInterval = 0
-            switch (time){
-            case 1:
-                duration = 1.5
-                break
-            case 2:
-                duration = 2.25
-                break
-            case 3:
-               duration = 3.0
-                break
-            case 4:
-                duration = 3.75
-                break
-            case 5:
-                duration = 4.55
-                break
-            default:
-                print("wtf 2 many lines")
-                break
-            }
-            let moveUp = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
-            let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
-            /*======================================HERE================================================*/
-            scaleDown.toValue = NSValue(CGSize: CGSize(width: self.typingButton.bounds.size.width*0.4, height: self.typingButton.bounds.size.height*0.6))
-            moveUp.toValue = 27.5
-            emojiLabel.hidden = true
-            characterCounter.hidden = true
-            self.typingButton.setTitle("look", forState: UIControlState.Normal)
-            self.view.bringSubviewToFront(self.typingButton)
-            self.view.bringSubviewToFront(self.progressBar)
-            moveUp.completionBlock = { (animation, finished) in
-                arrayofText.addObject(newLabel.text!)
-                self.startRecording()
-                UIView.animateWithDuration(duration, delay: 0, options: [], animations: { () -> Void in
-                    self.animatedBar.transform = CGAffineTransformMakeScale(0.0001, 1)
+                self.toolTip?.hidden = true
+                self.showStatusBar(false)
+                self.header.alpha = 0.35
+         
+                
+                
+                
+                self.longPressRecognizer.enabled = false
+                self.cakeTalkLabel.hidden = true
+                self.newImage = GPUImageView()
+                self.newImage?.frame = self.view.bounds
+                let newfilter = GPUImagePixellateFilter()
+                //filter?.blurRadiusInPixels = 4
+                self.videoCamera?.addTarget(newfilter)
+                //print (filter)
+                newfilter.addTarget(self.newImage)
+                self.view.insertSubview(self.newImage!, aboveSubview:(self.filteredImage)!)
+                self.typingButton.userInteractionEnabled = false
+                self.cameraTextField.resignFirstResponder()
+                //cameraTextField.
+                panGesture?.enabled = false
+                //print(self.cameraTextField.contentInset)
+                let textHeight = self.cameraTextField.font?.lineHeight
+                self.shouldGoDown = false
+                if (self.oldLabel?.bounds.size.height != nil){
+                    self.scrollHeight = self.scrollHeight + (self.oldLabel?.bounds.size.height)!
+                }
+                
+                
+                let newLabel = UILabel(frame: CGRectMake(20, self.scrollView.bounds.size.height + self.scrollHeight, self.view.bounds.size.width*(2/3)-20, textHeight! ))
+                newLabel.font = self.cameraTextField.font
+                newLabel.textColor = UIColor.whiteColor()
+                ++self.scrollCounter
+                newLabel.text = self.cameraTextField.text
+                newLabel.numberOfLines = 0
+                newLabel.sizeToFit()
+                self.oldLabel = newLabel
+                self.cameraTextField.text.removeAll()
+                // print ((self.oldLabel?.bounds.size.height)!)
+                //print (self.scrollHeight)
+                self.scrollView.addSubview(newLabel)
+                newLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
+                    newLabel.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion: nil)
+                
+                
+                
+                //print (totalHeight)
+                
+                UIView.animateWithDuration(0.5, animations: { () -> Void in
+                    self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollHeight+(self.oldLabel?.bounds.size.height)!   )
                     }, completion: { (finished) -> Void in
-                        if (finished){
-                            
+                        
+                        // print ((self.oldLabel?.bounds.size.height)! + self.scrollHeight)
+                        UIView.animateWithDuration(2, animations: { () -> Void in
+                            newLabel.alpha = 0.4
+                        })
+                })
+                self.progressBar.hidden = false
+                self.animatedBar.hidden = false
+                let time = (Int)(newLabel.bounds.size.height/(self.cameraTextField.font?.lineHeight)!)
+                //print (time)
+                var duration:NSTimeInterval = 0
+                switch (time){
+                case 1:
+                    duration = 1.5
+                    break
+                case 2:
+                    duration = 2.25
+                    break
+                case 3:
+                    duration = 3.0
+                    break
+                case 4:
+                    duration = 3.75
+                    break
+                case 5:
+                    duration = 4.55
+                    break
+                default:
+                    print("wtf 2 many lines")
+                    break
+                }
+                let moveUp = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
+                let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
+                /*======================================HERE================================================*/
+                scaleDown.toValue = NSValue(CGSize: CGSize(width: self.typingButton.bounds.size.width*0.4, height: self.typingButton.bounds.size.height*0.6))
+                moveUp.toValue = 27.5
+                self.emojiLabel.hidden = true
+                self.characterCounter.hidden = true
+                self.typingButton.setTitle("look", forState: UIControlState.Normal)
+                self.view.bringSubviewToFront(self.typingButton)
+                self.view.bringSubviewToFront(self.progressBar)
+                moveUp.completionBlock = { (animation, finished) in
+                    arrayofText.addObject(newLabel.text!)
+                    self.startRecording()
+                    
+                    UIView.animateWithDuration(duration, delay: 0, options: [], animations: { () -> Void in
+                        self.animatedBar.transform = CGAffineTransformMakeScale(0.0001, 1)
+                        }, completion: { (finished) -> Void in
+                            if (finished){
+                                
                                 UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                                     self.typingButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.characterCounter.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.emojiLabel.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
-                                        }, completion: {(finished) -> Void in
-                                    self.animatedBar.hidden = true
-                                    self.animatedBar.transform = CGAffineTransformMakeScale(1, 1)
-                                    self.progressBar.hidden = true
-                                    self.stopRecording()
-                                    self.characterCounter.text = "70"
-                                    //self.emojiLabel.text = ("👆🏻")
-                                    self.emojiLabel.hidden = false
-                                    self.characterCounter.hidden = false
-                                    self.view.bringSubviewToFront(self.emojiLabel)
-                                    self.view.bringSubviewToFront(self.characterCounter)
-                                    //self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
-                                    //self.typingButton.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0)
-                                    self.typingButton.setTitle("record", forState: UIControlState.Normal)
-                                    self.cameraTextField.returnKeyType = UIReturnKeyType.Send
-                                    //self.longPressRecognizer.enabled = true
-                                    self.typingButton.hidden = true
-                                    self.emojiLabel.hidden = true
-                                    self.characterCounter.hidden = true
-                                    self.cameraTextField.becomeFirstResponder()
-                                    self.typingButton.userInteractionEnabled = true
-                                    self.typingButton.layer.borderWidth = 0
+                                    }, completion: {(finished) -> Void in
+                                        self.animatedBar.hidden = true
+                                        self.animatedBar.transform = CGAffineTransformMakeScale(1, 1)
+                                        self.progressBar.hidden = true
+                                        self.stopRecording()
+                                        self.characterCounter.text = "70"
+                                        //self.emojiLabel.text = ("👆🏻")
+                                        self.emojiLabel.hidden = false
+                                        self.characterCounter.hidden = false
+                                        self.view.bringSubviewToFront(self.emojiLabel)
+                                        self.view.bringSubviewToFront(self.characterCounter)
+                                        //self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
+                                        //self.typingButton.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0)
+                                        self.typingButton.setTitle("record", forState: UIControlState.Normal)
+                                        self.cameraTextField.returnKeyType = UIReturnKeyType.Send
+                                        //self.longPressRecognizer.enabled = true
+                                        self.typingButton.hidden = true
+                                        self.emojiLabel.hidden = true
+                                        self.characterCounter.hidden = true
+                                        self.cameraTextField.becomeFirstResponder()
+                                        self.typingButton.userInteractionEnabled = true
+                                        self.typingButton.layer.borderWidth = 0
                                         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.9, options: [], animations: { () -> Void in                                                   self.typingButton.transform = CGAffineTransformMakeScale(1, 1)
                                             self.characterCounter.transform = CGAffineTransformMakeScale(1, 1)
                                             self.emojiLabel.transform = CGAffineTransformMakeScale(1, 1)
-                                        }, completion: nil)
-   
-                            })
-                        }
-                        
+                                            }, completion: nil)
+                                        
+                                })
+                            }
+                            
+                            
+                    })
+                }
+                self.typingButton.pop_addAnimation(moveUp, forKey: "moveUP")
+                self.typingButton.pop_addAnimation(scaleDown, forKey: "scaleDown")
                 
-                })
-            }
-            self.typingButton.pop_addAnimation(moveUp, forKey: "moveUP")
-            self.typingButton.pop_addAnimation(scaleDown, forKey: "scaleDown")
-
-     
-
+                
+                
+                
+                
             
 
-         }
-
+            
+        }
+        
     }
     @IBOutlet weak var cameraTextField: UITextView!
     override func viewDidLoad() {
-       
-       // self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
+             // self.cameraTextField.spellCheckingType = UITextSpellCheckingType.Yes
         self.view.clipsToBounds = true
         super.viewDidLoad()
-        
+
+
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let login = prefs.stringForKey("firstTime"){
+            
+            firstTime = false
+        }else{
+            
+            prefs.setValue("didFirsTTime", forKey: "firstTime")
+            // first time
+            firstTime = true
+
+        }
 
         self.progressBar.hidden = true
         self.animatedBar.hidden = true
@@ -480,6 +530,19 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         BlurSurface.alpha = 0
         frontWindow?.insertSubview(BlurSurface, atIndex: 1)
         self.cameraTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay: 0)
+        if (firstTime == false){
+            toolTip?.dismiss()
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+            preferences.drawing.foregroundColor = UIColor.whiteColor()
+            preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+            preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+            toolTip = EasyTipView(text: "type: I like [something you like]", preferences: preferences, delegate: nil)
+            toolTip!.show(forView: self.toolTipBut,
+                          withinSuperview: self.view)
+            
+            
+        }
 
     }
     override func viewWillDisappear(animated: Bool) {
@@ -515,7 +578,25 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         }
         if (isBackSpace == -92) {
            // print("Backspace was pressed")
-            
+            if (textView.text.characters.count == 1){
+                toolTip?.dismiss()
+                self.typingButton.hidden = true
+                self.emojiLabel.hidden = true
+                self.characterCounter.hidden = true
+                
+                var preferences = EasyTipView.Preferences()
+                preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+                preferences.drawing.foregroundColor = UIColor.whiteColor()
+                preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+                preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+                toolTip = EasyTipView(text: "type: I like [something you like]", preferences: preferences, delegate: nil)
+                toolTip!.show(forView: self.toolTipBut,
+                              withinSuperview: self.view)
+                
+
+                
+                
+            }
             if (textView.text == ""){
                 self.typingButton.hidden = true
                 self.emojiLabel.hidden = true
@@ -602,6 +683,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 
                 return false
             }
+            toolTip?.dismiss()
+            
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+            preferences.drawing.foregroundColor = UIColor.whiteColor()
+            preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+            preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+            toolTip = EasyTipView(text: "tap record & do this", preferences: preferences, delegate: nil)
+            toolTip!.show(forView: self.typingButton,
+                          withinSuperview: self.view)
             let buttonSpring = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             let buttonSpring2 = POPSpringAnimation(propertyNamed: kPOPViewScaleXY)
             buttonSpring.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -634,7 +725,17 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         return true
     }
     func textViewDidChange(textView: UITextView) {
-
+      /*  var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        preferences.drawing.foregroundColor = UIColor.whiteColor()
+        preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+        
+        EasyTipView.show(forView: self.typingButton,
+                         withinSuperview: self.view,
+                         text: "Tip view inside the navigation controller's view. Tap to dismiss!",
+                         preferences: preferences,
+                         delegate: nil)*/
         characterCounter.text = String(70-self.cameraTextField.text.characters.count)
         let textHeight = self.cameraTextField.font?.lineHeight
         let pos = self.cameraTextField.endOfDocument
@@ -658,6 +759,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         previousRect = currentRect;
         if (self.cameraTextField.text.characters.count == 0 && clipCount > 1){
           //  print ("send c")
+           
             if (self.cameraTextField.returnKeyType == UIReturnKeyType.Default){
 
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
@@ -690,7 +792,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func keyboardWillShow(notification: NSNotification) {
                //print (self.typingButton.frame)
-
+        let userInfo = notification.userInfo!
+        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+        
+        toolTipLayout.constant = CGRectGetMaxY(   view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
         panGesture?.enabled = true
         updateBottomLayoutConstraintWithNotification(notification)
 
@@ -729,8 +835,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.bottomScrollView.constant  = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) +
                     self.typingButton.bounds.height + 11 + 10 + 50
                 self.textViewBottom.constant = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + self.typingButton.bounds.height + 10 + 11
-              
-
+               
             }
             }
             
@@ -779,6 +884,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         movieWriter?.shouldPassthroughAudio = false
 
         movieWriter?.startRecording()
+//        self.toolTip?.dismiss()
+
         
     }
     func stopRecording() {
@@ -789,17 +896,22 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         showStatusBar(true)
         self.header.alpha = 0.75
         movieWriter?.finishRecording()
-        do{
-        //let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-       // print (files)
-        }
-        catch {
-            print("bad")
-        }
+
         self.cakeTalkLabel.hidden = false
         self.longPressRecognizer.enabled = true
         exportVideo()
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
+        toolTip?.dismiss()
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        preferences.drawing.foregroundColor = UIColor.whiteColor()
+        preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+        toolTip = EasyTipView(text: "type: I like [something you like]", preferences: preferences, delegate: nil)
+        toolTip!.show(forView: self.toolTipBut,
+                      withinSuperview: self.view)
+        
+
        
     }
     func longPressed(sender: UILongPressGestureRecognizer)
@@ -882,6 +994,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             overlayScrollView.transform = CGAffineTransformMakeTranslation (0, -1000)
             clearAllScroll.hidden = false
             quitScrollView.hidden = false
+            var preferences = EasyTipView.Preferences()
+            preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+            preferences.drawing.foregroundColor = UIColor.whiteColor()
+            preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+            preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+            self.toolTip?.dismiss()
+            self.toolTip = EasyTipView(text: "careful this deletes stuff", preferences: preferences, delegate: nil)
 
             cameraTextField.resignFirstResponder()
             UIView.animateWithDuration(0.1, animations: {
@@ -889,12 +1008,20 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 }, completion: {
                     finished in
                     if (finished){
+                        let line = UIView(frame: CGRectMake(0,self.quitScrollView.frame.origin.y-10, self.view.bounds.size.width, 1))
+                        line.backgroundColor = UIColor.whiteColor()
+                        self.view.addSubview(line)
+                        
+
+
                         overlayScrollView.flashScrollIndicators()
                         self.view.bringSubviewToFront(self.clearAllScroll)
                         self.view.bringSubviewToFront(self.quitScrollView)
                         self.view.bringSubviewToFront(self.header)
-
-                        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: {
+                        self.view.bringSubviewToFront(line)
+                        self.view.bringSubviewToFront(self.toolTip!)
+                       
+                                               UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.85, initialSpringVelocity: 3, options: .CurveEaseInOut, animations: {
                            
                             self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
                             overlayScrollView.transform = CGAffineTransformMakeTranslation(0, 0)
@@ -922,6 +1049,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                                 self.clearAllEmoji.hidden = false
                                 self.view.bringSubviewToFront(self.clearAllEmoji)
                                 self.clearAllEmoji.pop_addAnimation(buttonSpring, forKey: "spring")
+                                self.toolTip!.show(forView: self.clearAllScroll,
+                                    withinSuperview: self.view)
                         }
                     }
             })
@@ -1019,6 +1148,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         // 1
         let overlayLayer1: CALayer = CALayer()
+        let currentTime = CACurrentMediaTime()
         overlayLayer1.geometryFlipped = true
         // overlayLayer1.contents = (animationImage.CGImage as! AnyObject)
         overlayLayer1.frame = self.view.bounds
@@ -1055,8 +1185,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
            beginTime = beginTime + movieTimes[j]
         }
         
-        print (i)
-        let currentLayerTime = scrollLabel.layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+        print ("begin\(CMTimeGetSeconds(beginTime))")
+
         let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
 
         animation.duration = CMTimeGetSeconds(movieTimes[i]) + 4.25
@@ -1064,15 +1194,15 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         animation.autoreverses = false
         animation.fromValue = scrollLabel.frame.origin.y
         animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
-        animation.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
+        animation.beginTime = currentTime + CMTimeGetSeconds(beginTime)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-
-
+        
+        
         let animation3 = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
         animation3.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         animation3.velocity = NSValue(CGPoint: CGPointMake(6, 6))
         animation3.springBounciness = 20.0
-        animation3.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
+        animation3.beginTime = currentTime + CMTimeGetSeconds(beginTime)
         animation3.repeatCount = 0
         animation3.autoreverses = false
         //animation3.removedOnCompletion = true
@@ -1080,7 +1210,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let animation4 = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
         animation4.duration = 0.00000001
         animation4.repeatCount = 0
-        animation4.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(beginTime)
+        animation4.beginTime = currentTime + CMTimeGetSeconds(beginTime)
         animation4.autoreverses = false
         animation4.fromValue = 0.0
         animation4.toValue = 1.0
@@ -1099,7 +1229,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         scrollLabel.layer.pop_addAnimation(animation, forKey: "goUP")
         scrollLabel.layer.pop_addAnimation(animation3, forKey: "spring")
         scrollLabel.layer.pop_addAnimation(animation4, forKey: "goAppear")
-        
+        print (animation.beginTime - currentTime)
+        print (animation4.beginTime - currentTime)
+        print(animation3.beginTime - currentTime)
 
 
         overlayLayer1.addSublayer(scrollLabel.layer)

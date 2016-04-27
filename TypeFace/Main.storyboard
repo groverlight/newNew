@@ -743,7 +743,7 @@ mobile number </string>
                                     <constraint firstAttribute="height" constant="50" id="z8S-4m-anv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                <state key="normal" title="we good">
+                                <state key="normal" title="clear draft">
                                     <color key="titleColor" white="0.0" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -757,7 +757,7 @@ mobile number </string>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="quitScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="urq-Bu-wFT"/>
+                                    <action selector="clearScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="SeE-dy-LeW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVM-oF-apa">
@@ -768,7 +768,7 @@ mobile number </string>
                                     <constraint firstAttribute="height" constant="50" id="uLE-Gx-VQW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
-                                <state key="normal" title="clear all">
+                                <state key="normal" title="nvm">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -782,7 +782,7 @@ mobile number </string>
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="clearScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="qbn-fW-AHm"/>
+                                    <action selector="quitScrollAct:" destination="xoz-Im-lQw" eventType="touchUpInside" id="Jgb-ds-6ms"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skt-gV-BGX">
@@ -844,6 +844,9 @@ mobile number </string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGW-LD-1jJ">
+                                <rect key="frame" x="285" y="570" width="30" height="30"/>
+                            </button>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                 <subviews>
@@ -917,6 +920,7 @@ mobile number </string>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="Fni-jX-e3I"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="leading" secondItem="CRs-pD-sa5" secondAttribute="trailing" id="Gky-bH-hB2"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="width" secondItem="VwB-MW-SDj" secondAttribute="width" id="Gr5-ZL-QbI"/>
+                            <constraint firstItem="eGW-LD-1jJ" firstAttribute="centerX" secondItem="VwB-MW-SDj" secondAttribute="centerX" id="ISp-iY-bU0"/>
                             <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="oVM-oF-apa" secondAttribute="bottom" constant="46" id="IUq-Sv-7Am"/>
                             <constraint firstItem="WDQ-SH-b1G" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="Ig3-ag-Tfi"/>
                             <constraint firstItem="Skt-gV-BGX" firstAttribute="top" secondItem="bhD-hw-fU7" secondAttribute="bottom" constant="-10" id="K8r-hy-Ti5"/>
@@ -946,6 +950,7 @@ mobile number </string>
                             <constraint firstAttribute="trailingMargin" secondItem="Skt-gV-BGX" secondAttribute="trailing" constant="20" id="ofS-70-hOt"/>
                             <constraint firstItem="kw9-cJ-h9A" firstAttribute="top" secondItem="Y5I-t7-4wI" secondAttribute="bottom" id="oow-Bu-Vnt"/>
                             <constraint firstItem="ePl-Tl-Nl8" firstAttribute="top" secondItem="VwB-MW-SDj" secondAttribute="topMargin" id="p6N-Qq-gX1"/>
+                            <constraint firstItem="LhW-hI-PaP" firstAttribute="top" secondItem="eGW-LD-1jJ" secondAttribute="bottom" id="q1w-4c-2dy"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="top" secondItem="rEe-LU-WEu" secondAttribute="bottom" multiplier="0.5" id="qeb-VJ-mwu"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leading" id="qlJ-fE-TOe"/>
                             <constraint firstItem="Y5I-t7-4wI" firstAttribute="leading" secondItem="VwB-MW-SDj" secondAttribute="leadingMargin" id="rNf-hB-3OU"/>
@@ -994,14 +999,16 @@ mobile number </string>
                         <outlet property="characterCountBottom" destination="dqA-Fb-Abt" id="Bjv-wn-cR3"/>
                         <outlet property="characterCounter" destination="bhD-hw-fU7" id="GKY-sK-N9T"/>
                         <outlet property="clearAllEmoji" destination="sh4-CX-jKl" id="SiB-EI-o25"/>
-                        <outlet property="clearAllScroll" destination="oVM-oF-apa" id="B9L-x7-W60"/>
+                        <outlet property="clearAllScroll" destination="92i-ss-J1z" id="996-O5-RGQ"/>
                         <outlet property="emoji" destination="DPU-CD-FTe" id="wgc-aM-6W8"/>
                         <outlet property="emojiLabel" destination="CRs-pD-sa5" id="kVX-Qf-xhX"/>
                         <outlet property="header" destination="ePl-Tl-Nl8" id="9Tx-6T-5Qt"/>
                         <outlet property="progressBar" destination="WDQ-SH-b1G" id="rDf-5J-eiQ"/>
-                        <outlet property="quitScrollView" destination="92i-ss-J1z" id="adk-vZ-3E3"/>
+                        <outlet property="quitScrollView" destination="oVM-oF-apa" id="1ug-u2-32J"/>
                         <outlet property="scrollView" destination="Y5I-t7-4wI" id="qHX-C0-bXg"/>
                         <outlet property="textViewBottom" destination="1oy-rq-4UY" id="0u5-4N-27a"/>
+                        <outlet property="toolTipBut" destination="eGW-LD-1jJ" id="mfp-Ek-0uo"/>
+                        <outlet property="toolTipLayout" destination="q1w-4c-2dy" id="f6m-Lq-qVV"/>
                         <outlet property="typingButton" destination="Skt-gV-BGX" id="sF5-ud-wLa"/>
                         <outlet property="weGoodEmoji" destination="AG9-nA-6B6" id="x3I-PL-4A9"/>
                         <segue destination="GY4-Pq-8RY" kind="presentation" identifier="goSend" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="HRl-Gu-UzX"/>

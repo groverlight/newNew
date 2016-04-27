@@ -144,7 +144,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     var overlay: UIVisualEffectView?
     var didPlay = false
     var showStatusBar = false
-
+    var toolTip: EasyTipView?
 
     @IBAction func facebook(sender: AnyObject) {
         self.backButton.setTitle("another one", forState: .Normal)
@@ -360,9 +360,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 // print("bad")
             }
             
-            let overlay = UIVisualEffectView()
+            overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
-            let overlayScrollView = UIScrollView(frame: CGRectMake(20,20,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
+            let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
             // print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
@@ -372,6 +372,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             var scrollHeightOverlay:CGFloat = 0.0
             //  let newLabel = UILabel(frame: CGRectMake(0, scrollView.bounds.size.height + scrollHeight, scrollView.bounds.size.width, textHeight! ))
+            let arrayofBorders = NSMutableArray()
             for text in arrayofText{
                 
                 
@@ -382,16 +383,45 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 newerLabel.numberOfLines = 0
                 newerLabel.sizeToFit()
                 overlayScrollView.addSubview(newerLabel)
+                
+                let border = CALayer()
+                border.frame = CGRectMake(0 , scrollHeightOverlay + 40 + self.header.bounds.size.height, 3, CGRectGetHeight(newerLabel.frame)+10)
+                border.backgroundColor = UIColor.blueColor().CGColor;
+                arrayofBorders.addObject(border)
+                //overlay!.layer.addSublayer(border)
                 scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
+                
             }
-            
-            
             overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
+            let timeStampLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
+            timeStampLabel.font = UIFont(name:"Avenir Next", size:15)
+            timeStampLabel.textColor = UIColor.whiteColor()
+            timeStampLabel.text = "now"
+            timeStampLabel.numberOfLines = 0
+            timeStampLabel.sizeToFit()
+            overlayScrollView.addSubview(timeStampLabel)
+            let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
+            emojiLabel.font = UIFont(name:"Avenir Next", size:15)
+            emojiLabel.textColor = UIColor.whiteColor()
+            emojiLabel.text = "📖"
+            emojiLabel.numberOfLines = 0
+            timeStampLabel.sizeToFit()
+            overlayScrollView.addSubview(emojiLabel)
+            showStatusBar(true)
+            
             //let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             // Put it somewhere, give it a frame...
-            overlay.frame = self.view.bounds
-            self.view.addSubview(overlay)
-            UIView.animateWithDuration(1.5, animations: {overlay.effect = blurEffect}, completion: { finished in
+            overlay!.frame = self.view.bounds
+            self.view.addSubview(overlay!)
+            UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
+                self.header.backgroundColor = UIColor.blueColor()
+                self.headerLabel.text = "share"
+                let line = UIView(frame: CGRectMake(0,self.facebookBut.frame.origin.y-10, self.view.bounds.size.width, 1))
+                line.backgroundColor = UIColor.whiteColor()
+                self.view.addSubview(line)
+                for border in arrayofBorders{
+                    self.overlay!.layer.addSublayer(border as! CALayer)
+                }
                 self.view.addSubview(overlayScrollView)
                 self.view.bringSubviewToFront(overlayScrollView)
                 self.view.bringSubviewToFront(self.backButton)
@@ -399,7 +429,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 self.view.bringSubviewToFront(self.twitterBut)
                 self.view.bringSubviewToFront(self.instagramBut)
                 self.view.bringSubviewToFront(self.shareBut)
-                
+                self.view.bringSubviewToFront(self.header)
+                self.view.bringSubviewToFront(line)
                 self.facebookBut.hidden = false
                 self.twitterBut.hidden = false
                 self.instagramBut.hidden = false
@@ -409,6 +440,17 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                     self.backButton.transform = CGAffineTransformMakeScale(1, 1)
                     }, completion: { finished in
+                        self.toolTip?.dismiss()
+                        
+                        var preferences = EasyTipView.Preferences()
+                        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+                        preferences.drawing.foregroundColor = UIColor.whiteColor()
+                        preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+                        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.Bottom
+                        self.toolTip = EasyTipView(text: "share with followers", preferences: preferences, delegate: nil)
+                        self.toolTip!.show(forView: line,
+                            withinSuperview: self.view)
+
                         
                 })
                 
