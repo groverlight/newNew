@@ -113,9 +113,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     
     @IBAction func share(sender: AnyObject) {
         self.backButton.setTitle("another one", forState: .Normal)
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
+        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mov")
         let objectsToShare = [outputPath]
         
         let activityViewController  = UIActivityViewController(activityItems:objectsToShare as [AnyObject], applicationActivities: nil)
@@ -273,7 +271,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         do{
             let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
-            numOfClips = (files?.count)!
+            numOfClips = arrayofText.count
             totalReceivedClips = numOfClips
             print (numOfClips) // last where I Started
             //print (files)
@@ -323,6 +321,9 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             }
         }
     }
+    override func viewDidAppear(animated: Bool) {
+         exportVideo()
+    }
     override func prefersStatusBarHidden() -> Bool {
         if showStatusBar {
             return false
@@ -348,18 +349,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             setupVideo(clipsLeft)
         }
         else{
-            //print ("done with video clips")
-            do{
-                let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-                for file:NSString in files!{
-                    try self.fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(file)")
-                }
-                
-                
-            }
-            catch {
-                // print("bad")
-            }
+
             
             overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
@@ -504,29 +494,23 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         print("sharerDidCancel")
     }
     func exportVideo() -> Void{
-        print ("exporting video...")
+        print ("exporting animated video...")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let inputURL = NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov",isDirectory: true)
-        
+
+        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mov")
+        let animatedOutput =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mov")
+
         let composition = AVMutableComposition()
         //let timeStartArray = Array[Double]
         var movieTimes:Array = [CMTime]()
         let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
         let insertTime = kCMTimeZero
-        do{
-            try NSFileManager().removeItemAtURL(outputPath)
-        }
-        catch{
-            print("no movie")
-        }
+
         do{
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
 
             let avAssetBig = AVAsset(URL: outputPath)
-           
             let tracksBig = avAssetBig.tracksWithMediaType(AVMediaTypeVideo)
 
             let assetTrackBig:AVAssetTrack = tracksBig[0] as AVAssetTrack
@@ -539,17 +523,22 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         catch {
             print("bad")
         }
-        
+        do{
+            try NSFileManager().removeItemAtURL(animatedOutput)
+        }
+        catch{
+            print("no movie")
+        }
         let videotrack = composition.tracksWithMediaType(AVMediaTypeVideo)[0] as AVAssetTrack
         let layerinstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videotrack)
         let videoComposition = AVMutableVideoComposition()
         let instruction = AVMutableVideoCompositionInstruction()
-        // instruction.enablePostProcessing = true
+         instruction.enablePostProcessing = true
         videoComposition.frameDuration = CMTimeMake(1, 80)
         videoComposition.renderSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         instruction.timeRange = CMTimeRangeMake(kCMTimeZero, composition.duration)
         instruction.layerInstructions = NSArray(object: layerinstruction) as! [AVVideoCompositionLayerInstruction]
-        //layerinstruction.setTransform( CGAffineTransformMakeTranslation(0, 320), atTime:kCMTimeZero)
+        layerinstruction.setTransform(videotrack.preferredTransform, atTime: kCMTimeZero)
         videoComposition.instructions = NSArray(object: instruction) as! [AVVideoCompositionInstructionProtocol]
         
         
@@ -567,8 +556,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          //for i in 1..<files!.count+1
          
          for i in 0..<(arrayofText.count){
-         var beginTime:CMTime = CMTime(value: 0, timescale: 1)
-         
+         var beginTime:CFTimeInterval = 0.0
          let scrollLabel = PaddingLabel()
          scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
          scrollLabel.textColor = UIColor.whiteColor()
@@ -591,19 +579,19 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          
          for j in 0..<(i){
          
-         beginTime = beginTime + movieTimes[j]
+            beginTime = beginTime + animationBeginTimes[j]
          }
          
-         print ("begin\(CMTimeGetSeconds(beginTime))")
-         
+       
+         print (animationBeginTimes)
          let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
          
-         animation.duration = CMTimeGetSeconds(movieTimes[i]) + 4.25
+         animation.duration = animationBeginTimes[i] + 4.25
          animation.repeatCount = 0
          animation.autoreverses = false
          animation.fromValue = scrollLabel.frame.origin.y
          animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
-         animation.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(animationBeginTimes[i])
+         animation.beginTime = CACurrentMediaTime() + beginTime
          animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
          
          
@@ -611,7 +599,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          animation3.toValue = NSValue(CGPoint: CGPointMake(1, 1))
          animation3.velocity = NSValue(CGPoint: CGPointMake(6, 6))
          animation3.springBounciness = 20.0
-         animation3.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(animationBeginTimes[i])
+         animation3.beginTime = CACurrentMediaTime() + beginTime
          animation3.repeatCount = 0
          animation3.autoreverses = false
          //animation3.removedOnCompletion = true
@@ -619,8 +607,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          let animation4 = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
          animation4.duration = 0.00000001
          animation4.repeatCount = 0
-         animation4.beginTime = CACurrentMediaTime() + CMTimeGetSeconds(animationBeginTimes[i])
-         animation4.autoreverses = false
+         animation4.beginTime = CACurrentMediaTime() + beginTime
+        animation4.autoreverses = false
          animation4.fromValue = 0.0
          animation4.toValue = 1.0
          animation4.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
@@ -628,7 +616,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          // animation4.removedOnCompletion = true
          animation4.completionBlock = {(animation,finished) in
          let animation2: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
-         animation2.duration = CMTimeGetSeconds(movieTimes[i]) + 4.25
+         animation2.duration = animationBeginTimes[i] + 4.25
          animation2.repeatCount = 0
          animation2.autoreverses = false
          animation2.toValue = 0
@@ -641,7 +629,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          print (animation.beginTime - currentTime)
          print (animation4.beginTime - currentTime)
          print(animation3.beginTime - currentTime)
-         
+         print (animation.duration)
          
          overlayLayer1.addSublayer(scrollLabel.layer)
          }
@@ -660,14 +648,18 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          parentLayer.addSublayer(overlayLayer1)
          
          videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)
-        let movieOutput = GPUImageMovieWriter(movieURL: outputPath, size: self.view.bounds.size)
+        let movieOutput = GPUImageMovieWriter(movieURL: animatedOutput, size: self.view.bounds.size)
+        movieOutput.encodingLiveVideo = true
+        movieOutput.shouldPassthroughAudio = false
+
         let outputFilter = GPUImageSepiaFilter()
         outputFilter.addTarget(movieOutput)
         
         let movieComposition = GPUImageMovieComposition(composition: composition, andVideoComposition: videoComposition, andAudioMix: nil)
-        //   movieComposition!.playAtActualSpeed = true
-        movieComposition.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
+        movieComposition!.playAtActualSpeed = true
+      //  movieComposition.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
         movieComposition.addTarget(movieOutput)
+        
         movieOutput.startRecording()
         movieComposition.startProcessing()
         

@@ -22,7 +22,7 @@ import CloudKit
 
 var arrayofText: NSMutableArray = []
 var dateArray: NSMutableArray = []
-var animationBeginTimes:Array = [CMTime]()
+var animationBeginTimes:Array = [CFTimeInterval]()
 
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     var recording = false
@@ -290,7 +290,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     print("wtf 2 many lines")
                     break
                 }
-                animationBeginTimes.append(duration)
+                animationBeginTimes.append(duration+1)
                 let moveUp = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
                 let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
                 /*======================================HERE================================================*/
@@ -1103,8 +1103,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         print ("exporting video...")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
-        let outputPath = NSURL(fileURLWithPath: destinationPath)
-        let inputURL = NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov",isDirectory: true)
+        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mov")
+        
         
         let composition = AVMutableComposition()
         //let timeStartArray = Array[Double]
@@ -1112,44 +1112,36 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let trackVideo:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeVideo, preferredTrackID: CMPersistentTrackID())
         let insertTime = kCMTimeZero
         do{
-             try NSFileManager().removeItemAtURL(outputPath)
+            try NSFileManager().removeItemAtURL(outputPath)
         }
         catch{
             print("no movie")
         }
         do{
+            
+            
+            
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
-            /*for i in 1..<files!.count+1{
+            for i in 1..<files!.count+1{
                 print ("files: \(files!.count+1-i)")
                 let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(files!.count+1-i).mov"))
-               
+                
                 print (avAsset.duration)
                 movieTimes.append(avAsset.duration)
                 let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
                 if tracks.count > 0{
-                let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
-                try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
-                    .duration), ofTrack: assetTrack, atTime: insertTime)
+                    let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
+                    try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
+                        .duration), ofTrack: assetTrack, atTime: insertTime)
                     
                     //insertTime = CMTimeAdd(insertTime, sourceAsset.duration)
                 }
                 
-            }*/
-            let avAssetBig = AVAsset(URL: outputPath)
-            let avAsset = AVAsset(URL: inputURL)
-           // movieTimes.append(avAsset.duration)
-            let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
-            let tracksBig = avAssetBig.tracksWithMediaType(AVMediaTypeVideo)
-            let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
-            let assetTrackBig:AVAssetTrack = tracksBig[0] as AVAssetTrack
-            try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAssetBig
-                .duration), ofTrack: assetTrackBig, atTime: insertTime)
-            try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
-                .duration), ofTrack: assetTrack, atTime: insertTime)
+            }
 
         }
-        
+            
         catch {
             print("bad")
         }
@@ -1281,6 +1273,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
      //   movieComposition!.playAtActualSpeed = true
         movieComposition!.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
         movieComposition!.addTarget(movieOutput)
+        
         movieOutput.startRecording()
         movieComposition!.startProcessing()
         
