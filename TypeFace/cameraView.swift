@@ -22,6 +22,7 @@ import CloudKit
 
 var arrayofText: NSMutableArray = []
 var dateArray: NSMutableArray = []
+var animationBeginTimes:Array = [CMTime]()
 
 class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIScrollViewDelegate {
     var recording = false
@@ -95,6 +96,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         self.weGoodEmoji.hidden = true
         self.clearAllEmoji.hidden = true
         arrayofText.removeAllObjects()
+        animationBeginTimes.removeAll()
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.header.backgroundColor = UIColor.blackColor()
             self.cakeTalkLabel.text = "caketalk"
@@ -270,6 +272,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 switch (time){
                 case 1:
                     duration = 1.5
+                    
                     break
                 case 2:
                     duration = 2.25
@@ -287,6 +290,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     print("wtf 2 many lines")
                     break
                 }
+                animationBeginTimes.append(duration)
                 let moveUp = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
                 let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
                 /*======================================HERE================================================*/
@@ -655,6 +659,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                             //let file = files[files?.endIndex-1]
                             try fileManager?.removeItemAtPath("\(NSTemporaryDirectory())\(clipCount).mov")
                             arrayofText.removeLastObject()
+                            animationBeginTimes.removeLast()
                             print (files)
                             
                         }
@@ -909,7 +914,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         self.cakeTalkLabel.hidden = false
         self.longPressRecognizer.enabled = true
-        exportVideo()
+        let index = clipCount - 1
+        exportVideo(index)
        // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
         toolTip?.dismiss()
         var preferences = EasyTipView.Preferences()
@@ -1093,13 +1099,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         
     }
-    func exportVideo() -> Bool{
+    func exportVideo(index: Int) -> Bool{
         print ("exporting video...")
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let destinationPath = documentsPath.stringByAppendingPathComponent("movie.mov")
         let outputPath = NSURL(fileURLWithPath: destinationPath)
-
-    
+        let inputURL = NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov",isDirectory: true)
+        
         let composition = AVMutableComposition()
         //let timeStartArray = Array[Double]
         var movieTimes:Array = [CMTime]()
@@ -1112,12 +1118,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             print("no movie")
         }
         do{
-
-            
-            
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
-            for i in 1..<files!.count+1{
+            /*for i in 1..<files!.count+1{
                 print ("files: \(files!.count+1-i)")
                 let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(files!.count+1-i).mov"))
                
@@ -1132,9 +1135,19 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     //insertTime = CMTimeAdd(insertTime, sourceAsset.duration)
                 }
                 
-            }
-            print (movieTimes.count)
-            print (movieTimes)
+            }*/
+            let avAssetBig = AVAsset(URL: outputPath)
+            let avAsset = AVAsset(URL: inputURL)
+           // movieTimes.append(avAsset.duration)
+            let tracks = avAsset.tracksWithMediaType(AVMediaTypeVideo)
+            let tracksBig = avAssetBig.tracksWithMediaType(AVMediaTypeVideo)
+            let assetTrack:AVAssetTrack = tracks[0] as AVAssetTrack
+            let assetTrackBig:AVAssetTrack = tracksBig[0] as AVAssetTrack
+            try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAssetBig
+                .duration), ofTrack: assetTrackBig, atTime: insertTime)
+            try trackVideo.insertTimeRange(CMTimeRangeMake(kCMTimeZero,avAsset
+                .duration), ofTrack: assetTrack, atTime: insertTime)
+
         }
         
         catch {
@@ -1153,7 +1166,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         //layerinstruction.setTransform( CGAffineTransformMakeTranslation(0, 320), atTime:kCMTimeZero)
         videoComposition.instructions = NSArray(object: instruction) as! [AVVideoCompositionInstructionProtocol]
         
-        
+        /*
 
 
         // 1
@@ -1203,8 +1216,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         animation.repeatCount = 0
         animation.autoreverses = false
         animation.fromValue = scrollLabel.frame.origin.y
-        animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
-        animation.beginTime = currentTime + CMTimeGetSeconds(beginTime)
+        animation.toValue = self.AVCoreAnimationBeginTimeAtZero.bounds.size.height/3 - scrollLabel.bounds.size.height
+        animation.beginTime = kCMTimeZero//currentTime + CMTimeGetSeconds(beginTime)
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
         
         
@@ -1212,7 +1225,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         animation3.toValue = NSValue(CGPoint: CGPointMake(1, 1))
         animation3.velocity = NSValue(CGPoint: CGPointMake(6, 6))
         animation3.springBounciness = 20.0
-        animation3.beginTime = currentTime + CMTimeGetSeconds(beginTime)
+        animation3.beginTime = AVCoreAnimationBeginTimeAtZero
         animation3.repeatCount = 0
         animation3.autoreverses = false
         //animation3.removedOnCompletion = true
@@ -1220,7 +1233,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let animation4 = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
         animation4.duration = 0.00000001
         animation4.repeatCount = 0
-        animation4.beginTime = currentTime + CMTimeGetSeconds(beginTime)
+        animation4.beginTime = AVCoreAnimationBeginTimeAtZero
         animation4.autoreverses = false
         animation4.fromValue = 0.0
         animation4.toValue = 1.0
@@ -1260,7 +1273,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         parentLayer.addSublayer(videoLayer)
         parentLayer.addSublayer(overlayLayer1)
         
-        videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)
+        videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, inLayer: parentLayer)*/
         let movieOutput = GPUImageMovieWriter(movieURL: outputPath, size: self.view.bounds.size)
         let outputFilter = GPUImageSepiaFilter()
         outputFilter.addTarget(movieOutput)
@@ -1272,23 +1285,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         movieComposition!.startProcessing()
         
         
-        /*
-        let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
-        exporter!.outputURL = outputPath
-        exporter!.outputFileType = AVFileTypeQuickTimeMovie
-        exporter!.videoComposition = videoComposition;
-        exporter!.shouldOptimizeForNetworkUse = true
-        exporter!.exportAsynchronouslyWithCompletionHandler({
-            switch exporter!.status{
-            case  AVAssetExportSessionStatus.Failed:
-                print("failed \(exporter!.error)")
-            case AVAssetExportSessionStatus.Cancelled:
-                print("cancelled \(exporter!.error)")
-            default:
-                print("complete")
-                print (AVURLAsset(URL: outputPath))
-            }
-        })*/
+         //export 1 small file and 1 large file into the full compilated video file then add animation begin times based on switch statemente from typingbutton
             
         
         return true

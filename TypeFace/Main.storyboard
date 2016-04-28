@@ -3,11 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RionaSans-Bold.otf">
+            <string>RionaSans-Bold</string>
             <string>RionaSans-Bold</string>
             <string>RionaSans-Bold</string>
             <string>RionaSans-Bold</string>
@@ -206,7 +208,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DG2-3w-Szz">
                                 <rect key="frame" x="25" y="170" width="550" height="50"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xR-M4-Ta9" userLabel="phoneTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xR-M4-Ta9" userLabel="phoneTextField">
                                         <rect key="frame" x="60" y="5" width="485" height="40"/>
                                         <color key="backgroundColor" red="0.87470267940000002" green="0.15963631540000001" blue="0.34855599250000002" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -224,7 +226,7 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-12-mTC" userLabel="countryTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-12-mTC" userLabel="countryTextField">
                                         <rect key="frame" x="5" y="5" width="47" height="40"/>
                                         <color key="backgroundColor" red="0.87470267940000002" green="0.15963631540000001" blue="0.34855599250000002" alpha="0.41999999999999998" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -401,6 +403,9 @@
                                 <exclude reference="poG-7f-3Fl"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BLz-my-CVD"/>
+                                <exclude reference="VXX-JY-m8m"/>
+                                <exclude reference="rja-nD-hxd"/>
                                 <exclude reference="9hR-ba-ImR"/>
                                 <exclude reference="k1c-Lg-zw6"/>
                                 <exclude reference="9Nq-I4-VDo"/>
@@ -410,9 +415,6 @@
                                 <exclude reference="Gf3-V1-Uer"/>
                                 <exclude reference="kf2-to-inq"/>
                                 <exclude reference="rUO-X7-V35"/>
-                                <exclude reference="BLz-my-CVD"/>
-                                <exclude reference="VXX-JY-m8m"/>
-                                <exclude reference="rja-nD-hxd"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -632,7 +634,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="enter the code we just texted you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chf-Si-Odk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="enter the code we just texted you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chf-Si-Odk">
                                 <rect key="frame" x="150" y="50" width="300" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="cR7-Bo-bJL">
@@ -736,7 +738,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLk-5L-pmD">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLk-5L-pmD">
                                 <rect key="frame" x="296" y="583" width="8" height="17"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.98823529409999999" green="0.96078431369999995" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -746,7 +748,7 @@
                                     <rect key="frame" x="196" y="783" width="8" height="17"/>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThP-Hh-vPO">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ThP-Hh-vPO">
                                 <rect key="frame" x="271" y="261" width="58" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="RL3-pQ-MMt">
@@ -805,15 +807,15 @@
                                 <exclude reference="Xey-yK-i5p"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="3ff-Fl-qWQ"/>
+                                <exclude reference="TeR-9a-jyn"/>
+                                <exclude reference="Zys-e3-95B"/>
                                 <exclude reference="Wml-jq-cru"/>
                                 <exclude reference="2rz-RW-piU"/>
                                 <exclude reference="9T9-cG-VzN"/>
                                 <exclude reference="K0E-QO-Vf5"/>
-                                <exclude reference="3ff-Fl-qWQ"/>
-                                <exclude reference="TeR-9a-jyn"/>
-                                <exclude reference="Zys-e3-95B"/>
-                                <exclude reference="nbp-7f-qUB"/>
                                 <exclude reference="wom-Qg-KBs"/>
+                                <exclude reference="nbp-7f-qUB"/>
                                 <exclude reference="aHi-i6-6s8"/>
                                 <exclude reference="yzX-qK-pdK"/>
                                 <exclude reference="DKv-Fz-8TN"/>
@@ -825,10 +827,10 @@
                                 <include reference="Xey-yK-i5p"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Wml-jq-cru"/>
                                 <include reference="3ff-Fl-qWQ"/>
                                 <exclude reference="TeR-9a-jyn"/>
                                 <include reference="Zys-e3-95B"/>
+                                <include reference="Wml-jq-cru"/>
                                 <include reference="wom-Qg-KBs"/>
                                 <include reference="yzX-qK-pdK"/>
                             </mask>
@@ -1107,7 +1109,6 @@ mobile number </string>
                                         <exclude reference="cIw-FA-cVb"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact"/>
                                 <connections>
                                     <action selector="typingButtonFunc:" destination="xoz-Im-lQw" eventType="touchUpInside" id="Bgo-Kl-mJh"/>
                                 </connections>
@@ -1825,10 +1826,10 @@ mobile number </string>
                                 <exclude reference="gMQ-Qs-fKb"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="dRb-wV-T9a"/>
                                 <exclude reference="3gR-oZ-n8g"/>
                                 <exclude reference="QTV-of-UNv"/>
                                 <exclude reference="jd0-Ip-Le6"/>
+                                <exclude reference="dRb-wV-T9a"/>
                                 <exclude reference="BsF-rh-u7E"/>
                             </mask>
                         </variation>
