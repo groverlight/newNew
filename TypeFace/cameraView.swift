@@ -324,6 +324,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                                         //self.typingButton.setTitleColor(UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.4), forState: UIControlState.Normal)
                                         //self.typingButton.backgroundColor = UIColor.init(colorLiteralRed: 1.00, green: 0.28, blue: 0.44, alpha: 1.0)
                                         self.typingButton.setTitle("record", forState: UIControlState.Normal)
+
+
                                         self.cameraTextField.returnKeyType = UIReturnKeyType.Send
                                         //self.longPressRecognizer.enabled = true
                                         self.typingButton.hidden = true
@@ -363,6 +365,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         super.viewDidLoad()
 
 
+
         let prefs = NSUserDefaults.standardUserDefaults()
         if let login = prefs.stringForKey("firstTime"){
             
@@ -374,6 +377,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             firstTime = true
 
         }
+
+
+
+        self.header.backgroundColor = UIColor.clearColor()
+        self.cakeTalkLabel.text = "caketalk"
+        self.cakeTalkLabel.textColor = UIColor .blackColor() .colorWithAlphaComponent(0.5)
+        self.cakeTalkLabel.font = UIFont(name:"RionaSans-Bold", size: 18.0)
 
         self.progressBar.hidden = true
         self.animatedBar.hidden = true

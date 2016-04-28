@@ -32,6 +32,7 @@ class loginView: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cloudLoginButt: UIButton!
 
 
+
     @IBAction func cloudLoginAct(sender: AnyObject) {
         cloudLoginButt.userInteractionEnabled = false
         self.iCloudLogin({ (success) -> () in
@@ -103,15 +104,29 @@ class loginView: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         print ("loading login...")
            // print("start sending message")
-        
             // Use your own details here
+        self.countryTextField.backgroundColor = UIColor .blackColor() .colorWithAlphaComponent(0.05)
+        self.countryTextField.layer.cornerRadius = 6
+
+
+
+
+
         self.phoneTextField.delegate = self
+        self.phoneTextField.backgroundColor = UIColor .blackColor() .colorWithAlphaComponent(0.05)
+        self.phoneTextField.layer.cornerRadius = 10
+
+
+
+
         panGesture?.enabled = false
         self.textFieldView.hidden = true
         self.goButton.hidden = true
         let networkInfo = CTTelephonyNetworkInfo()
         let carrier = networkInfo.subscriberCellularProvider
-        
+
+
+
         // Get carrier name
         let countryCode = carrier?.isoCountryCode
         
