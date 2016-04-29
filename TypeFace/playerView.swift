@@ -113,7 +113,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     
     @IBAction func share(sender: AnyObject) {
         self.backButton.setTitle("another one", forState: .Normal)
-        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mov")
+        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mp4")
         let objectsToShare = [outputPath]
         
         let activityViewController  = UIActivityViewController(activityItems:objectsToShare as [AnyObject], applicationActivities: nil)
@@ -202,7 +202,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
         
-        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mov"))
+        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mp4"))
         print("index: \(index)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
@@ -252,7 +252,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        exportVideo()
+        
      
     }
     override func viewWillAppear(animated: Bool) {
@@ -322,7 +322,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         }
     }
     override func viewDidAppear(animated: Bool) {
-         exportVideo()
+        // exportVideo()
     }
     override func prefersStatusBarHidden() -> Bool {
         if showStatusBar {
@@ -350,7 +350,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         }
         else{
 
-            
+           
             overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
@@ -651,13 +651,14 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         let movieOutput = GPUImageMovieWriter(movieURL: animatedOutput, size: self.view.bounds.size)
         movieOutput.encodingLiveVideo = true
         movieOutput.shouldPassthroughAudio = false
-
+        
         let outputFilter = GPUImageSepiaFilter()
         outputFilter.addTarget(movieOutput)
         
         let movieComposition = GPUImageMovieComposition(composition: composition, andVideoComposition: videoComposition, andAudioMix: nil)
         movieComposition!.playAtActualSpeed = true
-      //  movieComposition.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
+        movieComposition.audioEncodingTarget = nil
+        movieComposition.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
         movieComposition.addTarget(movieOutput)
         
         movieOutput.startRecording()

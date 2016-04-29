@@ -58,6 +58,10 @@
 		27D92ED61C86994E00433112 /* lookup.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D92ED11C86994E00433112 /* lookup.png */; };
 		27DF70471CC6B7850087BB0D /* MAActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DF70461CC6B7850087BB0D /* MAActivityIndicatorView.swift */; };
 		27DFAD761C6AF564000DC7A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */; };
+		27EC53031CD2E94500845DC5 /* Glimpse.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53001CD2E94500845DC5 /* Glimpse.m */; };
+		27EC53041CD2E94500845DC5 /* GlimpseAssetWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53021CD2E94500845DC5 /* GlimpseAssetWriter.m */; };
+		27EC53091CD2F2BA00845DC5 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EC53081CD2F2BA00845DC5 /* Player.swift */; };
+		27EC530C1CD2F57600845DC5 /* ScreenCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EC530B1CD2F57600845DC5 /* ScreenCaptureView.m */; };
 		27EE5C081CC03129008DFA65 /* SocialVideoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */; };
 		27EF18111C877B1C003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27EF18131C877B63003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -209,6 +213,14 @@
 		27D92ED11C86994E00433112 /* lookup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lookup.png; sourceTree = "<group>"; };
 		27DF70461CC6B7850087BB0D /* MAActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAActivityIndicatorView.swift; sourceTree = "<group>"; };
 		27DFAD751C6AF564000DC7A8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		27EC52FF1CD2E94500845DC5 /* Glimpse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glimpse.h; sourceTree = "<group>"; };
+		27EC53001CD2E94500845DC5 /* Glimpse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Glimpse.m; sourceTree = "<group>"; };
+		27EC53011CD2E94500845DC5 /* GlimpseAssetWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlimpseAssetWriter.h; sourceTree = "<group>"; };
+		27EC53021CD2E94500845DC5 /* GlimpseAssetWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlimpseAssetWriter.m; sourceTree = "<group>"; };
+		27EC53071CD2F2BA00845DC5 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		27EC53081CD2F2BA00845DC5 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		27EC530A1CD2F57600845DC5 /* ScreenCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCaptureView.h; sourceTree = "<group>"; };
+		27EC530B1CD2F57600845DC5 /* ScreenCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCaptureView.m; sourceTree = "<group>"; };
 		27EE5C061CC03129008DFA65 /* SocialVideoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialVideoHelper.h; sourceTree = "<group>"; };
 		27EE5C071CC03129008DFA65 /* SocialVideoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialVideoHelper.m; sourceTree = "<group>"; };
 		27EF18051C877670003A49A2 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = "GPUImage-master/framework/GPUImage.xcodeproj"; sourceTree = "<group>"; };
@@ -324,6 +336,14 @@
 		272DD9501CC470BC00F2ED5B /* custom classes */ = {
 			isa = PBXGroup;
 			children = (
+				27EC530A1CD2F57600845DC5 /* ScreenCaptureView.h */,
+				27EC530B1CD2F57600845DC5 /* ScreenCaptureView.m */,
+				27EC52FF1CD2E94500845DC5 /* Glimpse.h */,
+				27EC53071CD2F2BA00845DC5 /* Player.h */,
+				27EC53081CD2F2BA00845DC5 /* Player.swift */,
+				27EC53001CD2E94500845DC5 /* Glimpse.m */,
+				27EC53011CD2E94500845DC5 /* GlimpseAssetWriter.h */,
+				27EC53021CD2E94500845DC5 /* GlimpseAssetWriter.m */,
 				27A8003F1CD03F1F00D68666 /* EasyTipView.swift */,
 				2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */,
 				27DF70461CC6B7850087BB0D /* MAActivityIndicatorView.swift */,
@@ -731,11 +751,15 @@
 				277CB0441C98DF680032E109 /* User.swift in Sources */,
 				27A800401CD03F1F00D68666 /* EasyTipView.swift in Sources */,
 				277339A41CBDC75600E845D1 /* carouselRootViewController.swift in Sources */,
+				27EC53031CD2E94500845DC5 /* Glimpse.m in Sources */,
 				277339AC1CBDC7A600E845D1 /* carousel3.swift in Sources */,
 				277CB0431C98DF680032E109 /* CloudManager.swift in Sources */,
 				277339AA1CBDC79500E845D1 /* carousel2.swift in Sources */,
+				27EC53041CD2E94500845DC5 /* GlimpseAssetWriter.m in Sources */,
 				27DF70471CC6B7850087BB0D /* MAActivityIndicatorView.swift in Sources */,
 				273A37641C8D967E00EDFC6B /* BDKCollectionIndexView.m in Sources */,
+				27EC530C1CD2F57600845DC5 /* ScreenCaptureView.m in Sources */,
+				27EC53091CD2F2BA00845DC5 /* Player.swift in Sources */,
 				2757FC8A1C92256300050C11 /* Hue.swift in Sources */,
 				27D859451C6BA5DC00F44985 /* sendView.swift in Sources */,
 				2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */,
