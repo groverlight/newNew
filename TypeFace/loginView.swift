@@ -31,10 +31,13 @@ class loginView: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var cloudLoginButt: UIButton!
 
+    @IBOutlet var keyEmoji: UILabel!
 
 
     @IBAction func cloudLoginAct(sender: AnyObject) {
+        
         cloudLoginButt.userInteractionEnabled = false
+        print("is this a button push")
         self.iCloudLogin({ (success) -> () in
             if success {
                 
@@ -97,6 +100,7 @@ class loginView: UIViewController, UITextFieldDelegate {
             self.phoneTextField.resignFirstResponder()
             self.goButton.hidden = true
             self.PageView!.scrollToNextViewController()
+            self.keyEmoji.hidden = true
 
 
         
@@ -105,16 +109,15 @@ class loginView: UIViewController, UITextFieldDelegate {
         print ("loading login...")
            // print("start sending message")
             // Use your own details here
-        self.countryTextField.backgroundColor = UIColor .blackColor() .colorWithAlphaComponent(0.05)
         self.countryTextField.layer.cornerRadius = 6
+        self.keyEmoji.hidden = true
 
 
 
 
 
         self.phoneTextField.delegate = self
-        self.phoneTextField.backgroundColor = UIColor .blackColor() .colorWithAlphaComponent(0.05)
-        self.phoneTextField.layer.cornerRadius = 10
+        self.phoneTextField.layer.cornerRadius = 6
 
 
 
@@ -241,13 +244,24 @@ class loginView: UIViewController, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let length = getLength(textField.text!)
         //print (length)
+
+        if (length < 9){
+            goButton.hidden = true
+            self.keyEmoji.hidden = true
+            print (length)
+        }
+
         if (length == 9){
             goButton.hidden = false
+            self.keyEmoji.hidden = false
+            print (length)
+
         }
         if (length == 10){
             if (range.length == 0){
                // goButton.hidden = false
                 return false;
+
                 
             }
         }
@@ -304,27 +318,35 @@ extension loginView: pageDelegate {
 
         //print ("did update:\(index)")
         viewIndex = index
-            if(viewIndex == 0){
+        if(viewIndex == 0){
+            print("1")
+            self.twoLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 0.4)
+            self.threeLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 0.4)
 
-              //  goButton.hidden = true
-            }
-            if(viewIndex == 1){
-                twoLabel.textColor = UIColor(red: 255/255, green: 132/255, blue: 174/255, alpha: 1)
-                twoLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1)
-                twoLabel.layer.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1).CGColor
-                self.textFieldView.hidden = false
-                self.phoneTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay:0)
 
-                cloudLoginButt.userInteractionEnabled = true
-                if (self.phoneTextField.text?.characters.count > 0){
-                    goButton.hidden = false
-                }
+            //  goButton.hidden = true
+        }
+        if(viewIndex == 1){
+            print("2")
+            self.textFieldView.hidden = false
+            self.phoneTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay:0)
+
+            self.twoLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1)
+            self.threeLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 0.4)
+
+            cloudLoginButt.userInteractionEnabled = true
+            if (self.phoneTextField.text?.characters.count > 0){
+                goButton.hidden = false
+                self.keyEmoji.hidden = false
+
             }
-            else if (viewIndex == 2){
-                threeLabel.textColor = UIColor.whiteColor()
-                threeLabel.layer.backgroundColor = UIColor.blackColor().CGColor
-                threeLabel.backgroundColor = UIColor.blackColor()
-                //goButton.hidden = true
+        }
+        else if (viewIndex == 2){
+            print("3")
+            self.twoLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1)
+            self.threeLabel.backgroundColor = UIColor(red: 252/255, green: 245/255, blue: 226/255, alpha: 1)
+
+            //goButton.hidden = true
             }
     }
     

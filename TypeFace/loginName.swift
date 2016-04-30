@@ -21,6 +21,7 @@ class loginName: UIViewController {
 
     }
     @IBAction func iCloudAction(sender: AnyObject) {
+       
         self.iCloudLogin({ (success) -> () in
             if success {
                

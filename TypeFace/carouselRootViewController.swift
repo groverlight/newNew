@@ -60,11 +60,11 @@ extension TutorialViewController: TutorialPageViewControllerDelegate {
         }
         else if (index == 1){
             self.headerLabel.text = "how"
-            self.bottomLabel.text = "Type a statement and record a gesture. Repeat"
+            self.bottomLabel.text = "Type a statement and record a gesture. Repeat until satisfied"
         }
         else{
             self.headerLabel.text = "why"
-            self.bottomLabel.text =  "Tell your story in the way it was meant to be told"
+            self.bottomLabel.text =  "Tell your story to your audience the way it was meant to be told"
         }
         pageControl.currentPage = index
     }

@@ -34,10 +34,13 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var instagramBut: UIButton!
     
+    @IBOutlet var backEmoji: UILabel!
+
     //var newButton:FBSDKShareButton = FBSDKShareButton()
     @IBAction func twitter(sender: AnyObject) {
         
         self.backButton.setTitle("another one", forState: .Normal)
+        self.backButton.layer.cornerRadius = 6
         
         let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in
@@ -252,6 +255,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        backButton.layer.cornerRadius = 6
         
      
     }

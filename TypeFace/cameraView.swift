@@ -66,9 +66,18 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     @IBOutlet weak var quitScrollView: UIButton!
     @IBOutlet weak var clearAllScroll: UIButton!
     @IBOutlet weak var bottomScrollView: NSLayoutConstraint!
+
+
+
+
+
+
+
+
     @IBAction func clearScrollAct(sender: AnyObject) {
         quitScrollView.hidden = true
         clearAllScroll.hidden = true
+        self.cakeTalkLabel.hidden = true
         toolTip?.dismiss()
         self.typingButton.userInteractionEnabled = true
         panGesture?.enabled = true
@@ -99,11 +108,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         arrayofText.removeAllObjects()
         animationBeginTimes.removeAll()
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.header.backgroundColor = UIColor.blackColor()
-            self.cakeTalkLabel.text = "caketalk"
+            self.cakeTalkLabel.textColor = UIColor .blackColor()
+            self.header.backgroundColor = UIColor .clearColor()
             self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
             self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
             }) { (finished) -> Void in
+
+                self.cakeTalkLabel.hidden = false
+                self.cakeTalkLabel.text = "caketalk"
+                self.cakeTalkLabel.font = UIFont (name: "RionaSans-Bold", size: 17)
+
                 self.quitScrollView.hidden = true
                 self.clearAllScroll.hidden = true
                 self.toolTip?.dismiss()
@@ -127,18 +141,25 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
     }
     @IBAction func quitScrollAct(sender: AnyObject){
+
       toolTip?.dismiss()
         self.typingButton.userInteractionEnabled = true
         panGesture?.enabled = true
         longPressRecognizer.enabled = true
         self.weGoodEmoji.hidden = true
         self.clearAllEmoji.hidden = true
+        self.cakeTalkLabel.hidden = true
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.header.backgroundColor = UIColor.blackColor()
-            self.cakeTalkLabel.text = "caketalk"
+            self.cakeTalkLabel.textColor = UIColor .blackColor()
+            self.header.backgroundColor = UIColor .clearColor()
             self.quitScrollView.transform = CGAffineTransformMakeTranslation(0, 2000)
             self.clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
             }) { (finished) -> Void in
+                self.cakeTalkLabel.hidden = false
+                self.cakeTalkLabel.text = "caketalk"
+                self.cakeTalkLabel.font = UIFont (name: "RionaSans-Bold", size: 17)
+
+
                 self.quitScrollView.hidden = true
                 self.clearAllScroll.hidden = true
                 if (self.cameraTextField.text.characters.count == 0){
@@ -295,11 +316,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 let moveUp = POPSpringAnimation(propertyNamed: kPOPLayerPositionY)
                 let scaleDown = POPSpringAnimation(propertyNamed: kPOPViewSize)
                 /*======================================HERE================================================*/
-                scaleDown.toValue = NSValue(CGSize: CGSize(width: self.typingButton.bounds.size.width*0.4, height: self.typingButton.bounds.size.height*0.6))
+                scaleDown.toValue = NSValue(CGSize: CGSize(width: self.typingButton.bounds.size.width*0.3, height: self.typingButton.bounds.size.height*0.6))
                 moveUp.toValue = 27.5
                 self.emojiLabel.hidden = true
                 self.characterCounter.hidden = true
                 self.typingButton.setTitle("look", forState: UIControlState.Normal)
+                self.typingButton.layer.cornerRadius = 14
+                self.typingButton.titleLabel?.font = UIFont(name:"RionaSans-Bold", size: 13.0)
+
                 self.view.bringSubviewToFront(self.typingButton)
                 self.view.bringSubviewToFront(self.progressBar)
                 moveUp.completionBlock = { (animation, finished) in
@@ -310,12 +334,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                         self.animatedBar.transform = CGAffineTransformMakeScale(0.0001, 1)
                         }, completion: { (finished) -> Void in
                             if (finished){
-                                
+
+
+
                                 UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: [], animations: { () -> Void in
                                     self.typingButton.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.characterCounter.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     self.emojiLabel.transform = CGAffineTransformMakeScale(0.0001, 0.0001)
                                     }, completion: {(finished) -> Void in
+                                        self.typingButton.titleLabel?.font = UIFont(name:"RionaSans-Bold", size: 15.0)
+                                        self.typingButton.layer.cornerRadius = 6
                                         self.animatedBar.hidden = true
                                         self.animatedBar.transform = CGAffineTransformMakeScale(1, 1)
                                         self.progressBar.hidden = true
@@ -387,17 +415,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         self.header.backgroundColor = UIColor.clearColor()
         self.cakeTalkLabel.text = "caketalk"
-        self.cakeTalkLabel.textColor = UIColor .blackColor() .colorWithAlphaComponent(0.5)
-        self.cakeTalkLabel.font = UIFont(name:"RionaSans-Bold", size: 18.0)
-
         self.progressBar.hidden = true
         self.animatedBar.hidden = true
         self.cameraTextField.font = UIFont(name:"RionaSans-Bold", size: 22.0)
         characterCounter.layer.masksToBounds = true
         characterCounter.layer.cornerRadius = characterCounter.bounds.size.width/2
-        characterCounter.layer.borderWidth = 1
-        characterCounter.layer.borderColor = UIColor.whiteColor().CGColor
-        characterCounter.layer.backgroundColor = UIColor.grayColor().CGColor
         self.cameraTextField.textContainer.lineFragmentPadding = 0
        // self.cameraTextField.autocorrectionType = UITextAutocorrectionType.Default
         self.scrollView.contentOffset = CGPoint(x: 0, y: self.scrollView.contentOffset.y+100)
@@ -410,7 +432,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         //longPressRecognizer.minimumPressDuration =
         self.view.addGestureRecognizer(longPressRecognizer)
         
-        typingButton.titleLabel?.alpha = 0.4
+        
         typingButton.titleLabel?.textAlignment = NSTextAlignment.Center
         typingButtonFrame = typingButton.frame
         
@@ -939,8 +961,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         if (sender.state == UIGestureRecognizerState.Began){
                         // Put it somewhere, give it a frame...
-            self.header.backgroundColor = UIColor.orangeColor()
-            self.cakeTalkLabel.text = "edit"
+            self.header.backgroundColor = UIColor(red: 255/255, green: 110/255, blue: 110/255, alpha: 1.0)
+            self.cakeTalkLabel.text = "view"
             self.typingButton.userInteractionEnabled = false
             panGesture?.enabled = false
             sender.enabled = false
@@ -981,8 +1003,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     newerLabel.sizeToFit()
                     overlayScrollView.addSubview(newerLabel)
                     let border = CALayer()
-                    border.frame = CGRectMake(0 , scrollHeightOverlay+40+self.header.bounds.size.height, 2, CGRectGetHeight(newerLabel.frame)+10)
-                    border.backgroundColor = UIColor.orangeColor().CGColor;
+                    border.frame = CGRectMake(0 , scrollHeightOverlay+44+self.header.bounds.size.height, 4, CGRectGetHeight(newerLabel.frame)+10)
+                    border.backgroundColor =  UIColor(red: 255/255, green: 110/255, blue: 110/255, alpha: 1.0).CGColor
                     vibrantOverlay.layer.addSublayer(border)
                     scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
 
@@ -1001,7 +1023,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
             emojiLabel.font = UIFont(name:"Avenir Next", size:15)
             emojiLabel.textColor = UIColor.whiteColor()
-            emojiLabel.text = "📖"
+            emojiLabel.text = "✍🏻"
             emojiLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(emojiLabel)
