@@ -16,9 +16,6 @@
 		273F756E1CB71CD900F5546B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */; };
 		273F756F1CB71CD900F5546B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */; };
 		273F75701CB71CD900F5546B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */; };
-		273F75741CB731B600F5546B /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75711CB731B600F5546B /* fb.png */; };
-		273F75751CB731B600F5546B /* insta.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75721CB731B600F5546B /* insta.png */; };
-		273F75761CB731B600F5546B /* twtr.png in Resources */ = {isa = PBXBuildFile; fileRef = 273F75731CB731B600F5546B /* twtr.png */; };
 		2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44C1C6AF1F500B369E7 /* Assets.xcassets */; };
 		2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2742A44E1C6AF1F500B369E7 /* LaunchScreen.storyboard */; };
 		2742A4771C6AF2A500B369E7 /* cameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2742A4741C6AF2A500B369E7 /* cameraView.swift */; };
@@ -46,7 +43,6 @@
 		27C2FE801CB32A2800091E65 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27C2FE811CB32A2800091E65 /* GPUImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		27C2FE891CB32B0700091E65 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C2FE7C1CB329C300091E65 /* AVFoundation.framework */; };
-		27C8FF631C9D1463005B98FF /* icloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C8FF621C9D1463005B98FF /* icloud.png */; };
 		27D592A91C8FAD7E00D37E5B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592A81C8FAD7E00D37E5B /* GradientView.swift */; };
 		27D592AD1C8FB78900D37E5B /* paddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D592AC1C8FB78900D37E5B /* paddedLabel.swift */; };
 		27D859451C6BA5DC00F44985 /* sendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D859441C6BA5DC00F44985 /* sendView.swift */; };
@@ -66,6 +62,10 @@
 		27EF18111C877B1C003A49A2 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; };
 		27EF18131C877B63003A49A2 /* GPUImage.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27EF180E1C877671003A49A2 /* GPUImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F0FED5B521AAE4093C136831 /* libPods-cakeTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */; };
+		F4163BEB1CD947AE00D4751F /* insta.png in Resources */ = {isa = PBXBuildFile; fileRef = F4163BE81CD947AE00D4751F /* insta.png */; };
+		F4163BEC1CD947AE00D4751F /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = F4163BE91CD947AE00D4751F /* more.png */; };
+		F4163BED1CD947AE00D4751F /* twtr.png in Resources */ = {isa = PBXBuildFile; fileRef = F4163BEA1CD947AE00D4751F /* twtr.png */; };
+		F4163BEF1CD94A7800D4751F /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = F4163BEE1CD94A7800D4751F /* fb.png */; };
 		F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */; };
 		F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */; };
 		F4F337311CBF051F00250AA6 /* RionaSans-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */; };
@@ -163,9 +163,6 @@
 		273F756B1CB71CD900F5546B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = TypeFace/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		273F756C1CB71CD900F5546B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = TypeFace/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		273F756D1CB71CD900F5546B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = TypeFace/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		273F75711CB731B600F5546B /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
-		273F75721CB731B600F5546B /* insta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta.png; sourceTree = "<group>"; };
-		273F75731CB731B600F5546B /* twtr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twtr.png; sourceTree = "<group>"; };
 		2742A4421C6AF1F500B369E7 /* cakeTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cakeTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2742A44C1C6AF1F500B369E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2742A44F1C6AF1F500B369E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -200,7 +197,6 @@
 		2796D2F01C6D477B00FE580B /* WindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowExtension.swift; sourceTree = "<group>"; };
 		27A8003F1CD03F1F00D68666 /* EasyTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyTipView.swift; sourceTree = "<group>"; };
 		27C2FE7C1CB329C300091E65 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		27C8FF621C9D1463005B98FF /* icloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icloud.png; sourceTree = "<group>"; };
 		27D592A71C8FAD7E00D37E5B /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		27D592A81C8FAD7E00D37E5B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		27D592AC1C8FB78900D37E5B /* paddedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = paddedLabel.swift; sourceTree = "<group>"; };
@@ -230,6 +226,10 @@
 		72BA24B8E8FD8245CC00DC15 /* Pods-TypeFace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TypeFace.release.xcconfig"; path = "Pods/Target Support Files/Pods-TypeFace/Pods-TypeFace.release.xcconfig"; sourceTree = "<group>"; };
 		DACAC74FCAD377418AB0B995 /* libPods-cakeTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cakeTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E44DF493322CEC7C438A7E8B /* Pods-cakeTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cakeTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-cakeTalk/Pods-cakeTalk.release.xcconfig"; sourceTree = "<group>"; };
+		F4163BE81CD947AE00D4751F /* insta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insta.png; sourceTree = "<group>"; };
+		F4163BE91CD947AE00D4751F /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		F4163BEA1CD947AE00D4751F /* twtr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twtr.png; sourceTree = "<group>"; };
+		F4163BEE1CD94A7800D4751F /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
 		F4F337201CBF051F00250AA6 /* RionaSans-BlackIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BlackIt.otf"; sourceTree = "<group>"; };
 		F4F337211CBF051F00250AA6 /* RionaSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-Black.otf"; sourceTree = "<group>"; };
 		F4F337221CBF051F00250AA6 /* RionaSans-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RionaSans-BoldIt.otf"; sourceTree = "<group>"; };
@@ -320,10 +320,10 @@
 		272DD94F1CC470B200F2ED5B /* images */ = {
 			isa = PBXGroup;
 			children = (
-				273F75711CB731B600F5546B /* fb.png */,
-				273F75721CB731B600F5546B /* insta.png */,
-				273F75731CB731B600F5546B /* twtr.png */,
-				27C8FF621C9D1463005B98FF /* icloud.png */,
+				F4163BEE1CD94A7800D4751F /* fb.png */,
+				F4163BE81CD947AE00D4751F /* insta.png */,
+				F4163BE91CD947AE00D4751F /* more.png */,
+				F4163BEA1CD947AE00D4751F /* twtr.png */,
 				27D92ECD1C86994E00433112 /* lookup_amatorka.png */,
 				27D92ECE1C86994E00433112 /* lookup_miss_etikate.png */,
 				27D92ECF1C86994E00433112 /* lookup_soft_elegance_1.png */,
@@ -641,29 +641,29 @@
 			files = (
 				F4F3372F1CBF051F00250AA6 /* RionaSans-BlackIt.otf in Resources */,
 				2742A4501C6AF1F500B369E7 /* LaunchScreen.storyboard in Resources */,
+				F4163BEC1CD947AE00D4751F /* more.png in Resources */,
 				2742A44D1C6AF1F500B369E7 /* Assets.xcassets in Resources */,
 				F4F337341CBF051F00250AA6 /* RionaSans-ExtraBlackIt.otf in Resources */,
 				27D92ED51C86994E00433112 /* lookup_soft_elegance_2.png in Resources */,
 				F4F337321CBF051F00250AA6 /* RionaSans-Bold.otf in Resources */,
 				F4F3373C1CBF051F00250AA6 /* RionaSans-Regular.otf in Resources */,
-				273F75751CB731B600F5546B /* insta.png in Resources */,
+				F4163BED1CD947AE00D4751F /* twtr.png in Resources */,
 				27D92ED41C86994E00433112 /* lookup_soft_elegance_1.png in Resources */,
 				F4F337361CBF051F00250AA6 /* RionaSans-ExtraLightIt.otf in Resources */,
 				F4F337391CBF051F00250AA6 /* RionaSans-LightIt.otf in Resources */,
-				273F75741CB731B600F5546B /* fb.png in Resources */,
 				F4F3373D1CBF051F00250AA6 /* RionaSans-Thin.otf in Resources */,
 				F4F337331CBF051F00250AA6 /* RionaSans-ExtraBlack.otf in Resources */,
 				F4F337351CBF051F00250AA6 /* RionaSans-ExtraLight.otf in Resources */,
+				F4163BEB1CD947AE00D4751F /* insta.png in Resources */,
 				27D92ED21C86994E00433112 /* lookup_amatorka.png in Resources */,
-				273F75761CB731B600F5546B /* twtr.png in Resources */,
 				F4F337311CBF051F00250AA6 /* RionaSans-BoldIt.otf in Resources */,
 				27D92ED31C86994E00433112 /* lookup_miss_etikate.png in Resources */,
 				F4F3373B1CBF051F00250AA6 /* RionaSans-MediumIt.otf in Resources */,
 				F4F337371CBF051F00250AA6 /* RionaSans-Italic.otf in Resources */,
 				27D92ED61C86994E00433112 /* lookup.png in Resources */,
 				F4F337381CBF051F00250AA6 /* RionaSans-Light.otf in Resources */,
+				F4163BEF1CD94A7800D4751F /* fb.png in Resources */,
 				F4F337301CBF051F00250AA6 /* RionaSans-Black.otf in Resources */,
-				27C8FF631C9D1463005B98FF /* icloud.png in Resources */,
 				272DD9521CC5E03D00F2ED5B /* Main.storyboard in Resources */,
 				F4F3373A1CBF051F00250AA6 /* RionaSans-Medium.otf in Resources */,
 			);

@@ -409,10 +409,10 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             overlay!.frame = self.view.bounds
             self.view.addSubview(overlay!)
             UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
-                self.header.backgroundColor = UIColor.blueColor()
+                self.header.backgroundColor = UIColor(red: 85/255, green: 172/255, blue: 238/255, alpha: 1.0)
                 self.headerLabel.text = "share"
-                let line = UIView(frame: CGRectMake(0,self.facebookBut.frame.origin.y-10, self.view.bounds.size.width, 1))
-                line.backgroundColor = UIColor.whiteColor()
+                let line = UIView(frame: CGRectMake(20,(self.twitterBut.frame.origin.y + self.instagramBut.frame.origin.y)/2-10, 20, 1))
+                line.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.30)
                 self.view.addSubview(line)
                 for border in arrayofBorders{
                     self.overlay!.layer.addSublayer(border as! CALayer)

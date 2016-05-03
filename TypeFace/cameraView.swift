@@ -497,7 +497,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
     }
     override func viewWillAppear(animated: Bool) {
-        
+
+
         self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
         self.emojiLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
         self.characterCounter.transform = CGAffineTransformMakeScale(0.5, 0.5)
@@ -872,7 +873,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 //print ("uh oh")
                 self.bottomScrollView.constant  = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) +
-                    self.typingButton.bounds.height + 11 + 10 + 50
+                self.typingButton.bounds.height + 11 + 10 + 50
                 self.textViewBottom.constant = CGRectGetMaxY(self.view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame) + self.typingButton.bounds.height + 10 + 11
                
             }
@@ -933,7 +934,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         clipCount += 1
         recording = false;
         showStatusBar(true)
-        self.header.alpha = 0.75
         movieWriter?.finishRecording()
 
         self.cakeTalkLabel.hidden = false
@@ -994,16 +994,17 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                       for subview in scrollView.subviews{
                 if subview is UILabel{
                     let olderLabel = subview as! UILabel
-                    let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
+                    let newerLabel = UILabel(frame: CGRectMake(6, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
                     
-                    newerLabel.font = UIFont(name: "Avenir Next", size: 22)
+                    newerLabel.font =  UIFont(name:"RionaSans-Bold", size: 20.0)
                     newerLabel.textColor = UIColor.whiteColor()
                     newerLabel.text = olderLabel.text
                     newerLabel.numberOfLines = 0
                     newerLabel.sizeToFit()
                     overlayScrollView.addSubview(newerLabel)
                     let border = CALayer()
-                    border.frame = CGRectMake(0 , scrollHeightOverlay+44+self.header.bounds.size.height, 4, CGRectGetHeight(newerLabel.frame)+10)
+                    border.frame = CGRectMake(0 , scrollHeightOverlay+45+self.header.bounds.size.height, 4, CGRectGetHeight(newerLabel.frame)-12)
+                    border.cornerRadius = 0.5
                     border.backgroundColor =  UIColor(red: 255/255, green: 110/255, blue: 110/255, alpha: 1.0).CGColor
                     vibrantOverlay.layer.addSublayer(border)
                     scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
@@ -1013,14 +1014,14 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 
             }
             overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
-            let timeStampLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
-            timeStampLabel.font = UIFont(name:"Avenir Next", size:15)
+            let timeStampLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
+            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 12.0)
             timeStampLabel.textColor = UIColor.whiteColor()
             timeStampLabel.text = "now"
             timeStampLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(timeStampLabel)
-            let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
+            let emojiLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height+16, self.view.bounds.size.width*(2/3)-20,25))
             emojiLabel.font = UIFont(name:"Avenir Next", size:15)
             emojiLabel.textColor = UIColor.whiteColor()
             emojiLabel.text = "✍🏻"

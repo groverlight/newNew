@@ -210,7 +210,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DG2-3w-Szz">
                                 <rect key="frame" x="25" y="170" width="550" height="50"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xR-M4-Ta9" userLabel="phoneTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6xR-M4-Ta9" userLabel="phoneTextField">
                                         <rect key="frame" x="60" y="5" width="485" height="40"/>
                                         <color key="backgroundColor" red="0.94509803920000002" green="0.49803921569999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" red="0.56470588239999997" green="1" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -229,7 +229,7 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-12-mTC" userLabel="countryTextField">
+                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pfd-12-mTC" userLabel="countryTextField">
                                         <rect key="frame" x="5" y="5" width="47" height="40"/>
                                         <color key="backgroundColor" red="0.94509803920000002" green="0.49803921569999998" blue="0.63137254899999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -860,7 +860,8 @@
                                         <exclude reference="yn8-jv-Yxe"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="196" y="783" width="9" height="17"/>
                                     <mask key="constraints">
                                         <include reference="yn8-jv-Yxe"/>
                                     </mask>
@@ -1013,6 +1014,12 @@
                                 <exclude reference="Xey-yK-i5p"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2ms-yJ-orz"/>
+                                <exclude reference="4yX-rU-bv4"/>
+                                <exclude reference="I6a-EY-Yl2"/>
+                                <exclude reference="TeR-9a-jyn"/>
+                                <exclude reference="ast-5i-dEb"/>
+                                <exclude reference="fJX-jB-hcN"/>
                                 <exclude reference="7Fg-i9-ZXi"/>
                                 <exclude reference="N2s-wu-HjQ"/>
                                 <exclude reference="Wmk-5p-qFu"/>
@@ -1041,20 +1048,14 @@
                                 <exclude reference="qPe-ij-ftK"/>
                                 <exclude reference="qxi-cg-qJ4"/>
                                 <exclude reference="tLO-id-Hy6"/>
-                                <exclude reference="2ms-yJ-orz"/>
-                                <exclude reference="4yX-rU-bv4"/>
-                                <exclude reference="I6a-EY-Yl2"/>
-                                <exclude reference="TeR-9a-jyn"/>
-                                <exclude reference="ast-5i-dEb"/>
-                                <exclude reference="fJX-jB-hcN"/>
+                                <exclude reference="N1g-dq-4vz"/>
+                                <exclude reference="qN2-xz-pMG"/>
+                                <exclude reference="rR0-m0-U2i"/>
                                 <exclude reference="T8F-5p-UdX"/>
                                 <exclude reference="kmZ-FA-ro0"/>
                                 <exclude reference="nbp-7f-qUB"/>
                                 <exclude reference="omp-Wp-IYv"/>
                                 <exclude reference="xm9-LO-bUP"/>
-                                <exclude reference="N1g-dq-4vz"/>
-                                <exclude reference="qN2-xz-pMG"/>
-                                <exclude reference="rR0-m0-U2i"/>
                                 <exclude reference="BXP-hV-he8"/>
                                 <exclude reference="DYz-w8-Ltw"/>
                                 <exclude reference="Jmi-gd-SGb"/>
@@ -1076,6 +1077,12 @@
                                 <include reference="Xey-yK-i5p"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2ms-yJ-orz"/>
+                                <exclude reference="4yX-rU-bv4"/>
+                                <include reference="I6a-EY-Yl2"/>
+                                <exclude reference="TeR-9a-jyn"/>
+                                <include reference="ast-5i-dEb"/>
+                                <include reference="fJX-jB-hcN"/>
                                 <include reference="7Fg-i9-ZXi"/>
                                 <include reference="N2s-wu-HjQ"/>
                                 <include reference="Wmk-5p-qFu"/>
@@ -1107,23 +1114,17 @@
                                 <include reference="qPe-ij-ftK"/>
                                 <exclude reference="qxi-cg-qJ4"/>
                                 <include reference="tLO-id-Hy6"/>
-                                <include reference="2ms-yJ-orz"/>
-                                <exclude reference="4yX-rU-bv4"/>
-                                <include reference="I6a-EY-Yl2"/>
-                                <exclude reference="TeR-9a-jyn"/>
-                                <include reference="ast-5i-dEb"/>
-                                <include reference="fJX-jB-hcN"/>
+                                <exclude reference="6xZ-ET-UAk"/>
+                                <include reference="N1g-dq-4vz"/>
+                                <exclude reference="gwm-na-JB4"/>
+                                <include reference="qN2-xz-pMG"/>
+                                <include reference="rR0-m0-U2i"/>
                                 <include reference="T8F-5p-UdX"/>
                                 <exclude reference="aaY-VN-Vfh"/>
                                 <exclude reference="g2P-u2-VyE"/>
                                 <include reference="kmZ-FA-ro0"/>
                                 <include reference="omp-Wp-IYv"/>
                                 <include reference="xm9-LO-bUP"/>
-                                <exclude reference="6xZ-ET-UAk"/>
-                                <include reference="N1g-dq-4vz"/>
-                                <exclude reference="gwm-na-JB4"/>
-                                <include reference="qN2-xz-pMG"/>
-                                <include reference="rR0-m0-U2i"/>
                                 <include reference="BXP-hV-he8"/>
                                 <exclude reference="DYz-w8-Ltw"/>
                                 <exclude reference="Jmi-gd-SGb"/>
@@ -1256,15 +1257,15 @@ mobile number </string>
                                 <exclude reference="R4I-28-9JX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7xb-ov-His"/>
-                                <exclude reference="RXp-Ge-kIy"/>
-                                <exclude reference="T0v-KJ-vXe"/>
                                 <exclude reference="Blb-Rr-F5u"/>
                                 <exclude reference="In1-iF-Naj"/>
                                 <exclude reference="YnW-rD-YDu"/>
                                 <exclude reference="cKB-BK-sPK"/>
                                 <exclude reference="jpB-aK-9Da"/>
                                 <exclude reference="xKH-QT-zge"/>
+                                <exclude reference="7xb-ov-His"/>
+                                <exclude reference="RXp-Ge-kIy"/>
+                                <exclude reference="T0v-KJ-vXe"/>
                                 <exclude reference="B1I-2f-ufh"/>
                                 <exclude reference="EXN-4g-yVN"/>
                             </mask>
@@ -1274,17 +1275,17 @@ mobile number </string>
                                 <include reference="R4I-28-9JX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7xb-ov-His"/>
-                                <exclude reference="8Ma-5I-IT6"/>
-                                <include reference="RXp-Ge-kIy"/>
-                                <include reference="T0v-KJ-vXe"/>
-                                <exclude reference="ZeK-W9-SiN"/>
                                 <include reference="Blb-Rr-F5u"/>
                                 <include reference="In1-iF-Naj"/>
                                 <exclude reference="YnW-rD-YDu"/>
                                 <exclude reference="cKB-BK-sPK"/>
                                 <exclude reference="jpB-aK-9Da"/>
                                 <include reference="xKH-QT-zge"/>
+                                <include reference="7xb-ov-His"/>
+                                <exclude reference="8Ma-5I-IT6"/>
+                                <include reference="RXp-Ge-kIy"/>
+                                <include reference="T0v-KJ-vXe"/>
+                                <exclude reference="ZeK-W9-SiN"/>
                                 <exclude reference="B1I-2f-ufh"/>
                                 <exclude reference="EXN-4g-yVN"/>
                             </mask>
@@ -1440,9 +1441,7 @@ mobile number </string>
                                     <constraint firstAttribute="width" constant="300" id="cIw-FA-cVb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="RionaSans-Bold" family="Riona Sans" pointSize="15"/>
-                                <state key="normal" title="record">
-                                    <color key="titleColor" red="0.98823529409999999" green="0.96078431369999995" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="record"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="8"/>
@@ -1495,7 +1494,7 @@ mobile number </string>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGW-LD-1jJ">
                                 <rect key="frame" x="285" y="570" width="30" height="30"/>
                             </button>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
+                            <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="caketalk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9D-ht-hf7">
@@ -2061,6 +2060,8 @@ mobile number </string>
                                 <exclude reference="zDz-AR-kuW"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="KuI-JC-3ii"/>
+                                <exclude reference="v2J-IL-bzp"/>
                                 <exclude reference="Q2A-sO-4yU"/>
                                 <exclude reference="ApE-i7-eW0"/>
                                 <exclude reference="e0P-U2-eVv"/>
@@ -2069,13 +2070,11 @@ mobile number </string>
                                 <exclude reference="Baj-P4-4B8"/>
                                 <exclude reference="Sgm-H3-eHH"/>
                                 <exclude reference="msw-cY-4om"/>
-                                <exclude reference="0eq-AY-pAM"/>
-                                <exclude reference="33D-Qr-wgA"/>
-                                <exclude reference="KuI-JC-3ii"/>
-                                <exclude reference="v2J-IL-bzp"/>
                                 <exclude reference="Eg5-2v-ZBb"/>
                                 <exclude reference="YUz-6T-gID"/>
                                 <exclude reference="oZ0-2L-Sp8"/>
+                                <exclude reference="0eq-AY-pAM"/>
+                                <exclude reference="33D-Qr-wgA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2083,6 +2082,8 @@ mobile number </string>
                                 <include reference="zDz-AR-kuW"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="KuI-JC-3ii"/>
+                                <include reference="v2J-IL-bzp"/>
                                 <include reference="e0P-U2-eVv"/>
                                 <exclude reference="56e-tK-wUD"/>
                                 <include reference="5HK-t2-UCX"/>
@@ -2090,8 +2091,6 @@ mobile number </string>
                                 <include reference="Baj-P4-4B8"/>
                                 <include reference="msw-cY-4om"/>
                                 <exclude reference="wTF-uK-TEy"/>
-                                <include reference="KuI-JC-3ii"/>
-                                <include reference="v2J-IL-bzp"/>
                                 <include reference="YUz-6T-gID"/>
                                 <include reference="oZ0-2L-Sp8"/>
                                 <exclude reference="xfv-z7-sDw"/>
@@ -2515,7 +2514,7 @@ mobile number </string>
         </scene>
     </scenes>
     <resources>
-        <image name="fb.png" width="160" height="160"/>
+        <image name="fb.png" width="166" height="166"/>
         <image name="insta.png" width="160" height="160"/>
         <image name="twtr.png" width="160" height="160"/>
     </resources>
