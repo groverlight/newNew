@@ -229,7 +229,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         else{
                 self.toolTip?.hidden = true
                 self.showStatusBar(false)
-                self.header.alpha = 0.35
          
                 
                 

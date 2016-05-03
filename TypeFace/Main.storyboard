@@ -1494,7 +1494,7 @@ mobile number </string>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eGW-LD-1jJ">
                                 <rect key="frame" x="285" y="570" width="30" height="30"/>
                             </button>
-                            <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePl-Tl-Nl8">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="caketalk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9D-ht-hf7">
@@ -1950,7 +1950,7 @@ mobile number </string>
                                     </view>
                                 </subviews>
                             </view>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBV-Jm-TDJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBV-Jm-TDJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCh-t0-nd4">
@@ -1964,13 +1964,15 @@ mobile number </string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="7xM-HO-ANO"/>
+                                    <constraint firstAttribute="height" constant="55" id="7xM-HO-ANO">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="68"/>
+                                    </constraint>
                                     <constraint firstItem="sCh-t0-nd4" firstAttribute="centerX" secondItem="uBV-Jm-TDJ" secondAttribute="centerX" id="Lpb-RP-Zod"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="qD3-Z4-o5Q"/>
                                     <constraint firstItem="sCh-t0-nd4" firstAttribute="centerY" secondItem="uBV-Jm-TDJ" secondAttribute="centerY" id="ujd-DK-7Lb">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="13.5"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="7"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
