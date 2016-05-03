@@ -371,8 +371,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             for text in arrayofText{
                 
                 
-                let newerLabel = UILabel(frame: CGRectMake(20, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
-                newerLabel.font = UIFont(name: "Avenir Next", size: 22)
+                let newerLabel = UILabel(frame: CGRectMake(6, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
+                newerLabel.font =  UIFont(name:"RionaSans-Bold", size: 20.0)
                 newerLabel.textColor = UIColor.whiteColor()
                 newerLabel.text = text as? String
                 newerLabel.numberOfLines = 0
@@ -380,25 +380,26 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 overlayScrollView.addSubview(newerLabel)
                 
                 let border = CALayer()
-                border.frame = CGRectMake(0 , scrollHeightOverlay + 40 + self.header.bounds.size.height, 3, CGRectGetHeight(newerLabel.frame)+10)
-                border.backgroundColor = UIColor.blueColor().CGColor;
+                border.frame = CGRectMake(0 , scrollHeightOverlay + 45 + self.header.bounds.size.height, 4, CGRectGetHeight(newerLabel.frame)-12)
+                border.backgroundColor = UIColor(red: 85/255, green: 172/255, blue: 238/255, alpha: 1.0).CGColor
+
                 arrayofBorders.addObject(border)
                 //overlay!.layer.addSublayer(border)
                 scrollHeightOverlay = scrollHeightOverlay + newerLabel.bounds.size.height + 10
                 
             }
             overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
-            let timeStampLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
-            timeStampLabel.font = UIFont(name:"Avenir Next", size:15)
+            let timeStampLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
+            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 12.0)
             timeStampLabel.textColor = UIColor.whiteColor()
             timeStampLabel.text = "now"
             timeStampLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(timeStampLabel)
-            let emojiLabel = UILabel(frame: CGRectMake(20, overlayScrollView.contentSize.height+20, self.view.bounds.size.width*(2/3)-20,25))
+            let emojiLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height+16, self.view.bounds.size.width*(2/3)-20,25))
             emojiLabel.font = UIFont(name:"Avenir Next", size:15)
             emojiLabel.textColor = UIColor.whiteColor()
-            emojiLabel.text = "📖"
+            emojiLabel.text = "👁"
             emojiLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(emojiLabel)
@@ -411,7 +412,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
                 self.header.backgroundColor = UIColor(red: 85/255, green: 172/255, blue: 238/255, alpha: 1.0)
                 self.headerLabel.text = "share"
-                let line = UIView(frame: CGRectMake(20,(self.twitterBut.frame.origin.y + self.instagramBut.frame.origin.y)/2-10, 20, 1))
+                let line = UIView(frame: CGRectMake(20,(self.facebookBut.frame.origin.y)-20, (self.view.bounds.size.width)-40, 0.5))
                 line.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.30)
                 self.view.addSubview(line)
                 for border in arrayofBorders{
