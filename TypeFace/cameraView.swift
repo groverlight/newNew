@@ -954,17 +954,23 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
     }
     func longPressed(sender: UILongPressGestureRecognizer)
+
     {
 
-        
-
         if (sender.state == UIGestureRecognizerState.Began){
-                        // Put it somewhere, give it a frame...
+
+
             self.header.backgroundColor = UIColor(red: 255/255, green: 110/255, blue: 110/255, alpha: 1.0)
+
+            let line = UIView(frame: CGRectMake(20,(self.clearAllScroll.frame.origin.y)-33, (self.view.bounds.size.width)-40, 0.5))
+            line.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.30)
+            self.view.addSubview(line)
+
             self.cakeTalkLabel.text = "view"
             self.typingButton.userInteractionEnabled = false
             panGesture?.enabled = false
             sender.enabled = false
+
             let blurEffect = UIBlurEffect(style: .Dark)
             let blurOverlay = UIVisualEffectView()
             
@@ -972,7 +978,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
             let vibrantOverlay = UIVisualEffectView(effect: vibrancyEffect)
             let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
-           // print (overlayScrollView.frame)
+            print (overlayScrollView.frame)
             overlayScrollView.showsVerticalScrollIndicator = true
             overlayScrollView.indicatorStyle = UIScrollViewIndicatorStyle.White
             overlayScrollView.userInteractionEnabled = true
@@ -987,20 +993,28 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             var scrollHeightOverlay:CGFloat = 0.0
            
 
-            
             vibrantOverlay.contentView.addSubview(overlayScrollView)
             blurOverlay.contentView.addSubview(vibrantOverlay)
-                      for subview in scrollView.subviews{
+
+
+
+            for subview in scrollView.subviews{
                 if subview is UILabel{
+                     print("kendall")
+
+
                     let olderLabel = subview as! UILabel
                     let newerLabel = UILabel(frame: CGRectMake(6, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
+
                     
                     newerLabel.font =  UIFont(name:"RionaSans-Bold", size: 20.0)
+
                     newerLabel.textColor = UIColor.whiteColor()
                     newerLabel.text = olderLabel.text
                     newerLabel.numberOfLines = 0
                     newerLabel.sizeToFit()
                     overlayScrollView.addSubview(newerLabel)
+
                     let border = CALayer()
                     border.frame = CGRectMake(0 , scrollHeightOverlay+45+self.header.bounds.size.height, 4, CGRectGetHeight(newerLabel.frame)-12)
                     border.cornerRadius = 0.5
@@ -1012,21 +1026,27 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 }
                 
             }
+
+
+            print("khole")
+
             overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
             let timeStampLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
-            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 12.0)
+            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 10.0)
             timeStampLabel.textColor = UIColor.whiteColor()
             timeStampLabel.text = "now"
             timeStampLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(timeStampLabel)
             let emojiLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height+16, self.view.bounds.size.width*(2/3)-20,25))
-            emojiLabel.font = UIFont(name:"Avenir Next", size:15)
+            emojiLabel.font = UIFont(name:"Avenir Next", size:14)
             emojiLabel.textColor = UIColor.whiteColor()
             emojiLabel.text = "✍🏻"
             emojiLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(emojiLabel)
+
+
 
             
             clearAllScroll.transform = CGAffineTransformMakeTranslation(0, 2000)
@@ -1042,16 +1062,23 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             self.toolTip?.dismiss()
             self.toolTip = EasyTipView(text: "careful this deletes stuff", preferences: preferences, delegate: nil)
 
+
+
             cameraTextField.resignFirstResponder()
-            UIView.animateWithDuration(0.1, animations: {
+            UIView.animateWithDuration(0.1, animations: {  print("kim")
+
+
                 blurOverlay.effect = blurEffect
                 }, completion: {
+                    
+
+
                     finished in
                     if (finished){
-                        let line = UIView(frame: CGRectMake(0,self.quitScrollView.frame.origin.y-10, self.view.bounds.size.width, 1))
-                        line.backgroundColor = UIColor.whiteColor()
-                        self.view.addSubview(line)
-                        
+
+
+
+
 
 
                         overlayScrollView.flashScrollIndicators()
@@ -1105,16 +1132,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         switch height {
         case 480.0:
            // print("iPhone 3,4")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 24)
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 19)
         case 568.0:
             //print("iPhone 5")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 24)
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 20)
         case 667.0:
             //print("iPhone 6")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 28.5)
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 21)
         case 736.0:
             //print("iPhone 6+")
-            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 25 )
+            self.cameraTextField.font = UIFont(name: "AvenirNext-Medium", size: 22 )
         default:
             break
             //print("not an iPhone")

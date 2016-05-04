@@ -41,6 +41,8 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         
         self.backButton.setTitle("another one", forState: .Normal)
         self.backButton.layer.cornerRadius = 6
+        self.backEmoji.text = "👔"
+        self.backEmoji.hidden = false
         
         let alertController = UIAlertController(title: "Twitter Video sharing", message: "Enter your tweet", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in
@@ -373,7 +375,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 
                 let newerLabel = UILabel(frame: CGRectMake(6, scrollHeightOverlay, self.view.bounds.size.width*(2/3)-20, 25))
                 newerLabel.font =  UIFont(name:"RionaSans-Bold", size: 20.0)
-                newerLabel.textColor = UIColor.whiteColor()
+                newerLabel.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
                 newerLabel.text = text as? String
                 newerLabel.numberOfLines = 0
                 newerLabel.sizeToFit()
@@ -390,14 +392,14 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             }
             overlayScrollView.contentSize = CGSizeMake(self.view.bounds.size.width-20,scrollHeightOverlay)
             let timeStampLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height , self.view.bounds.size.width*(2/3)-20,25))
-            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 12.0)
-            timeStampLabel.textColor = UIColor.whiteColor()
+            timeStampLabel.font = UIFont(name:"RionaSans-Bold", size: 10.0)
+            timeStampLabel.textColor = UIColor.whiteColor() .colorWithAlphaComponent(0.4)
             timeStampLabel.text = "now"
             timeStampLabel.numberOfLines = 0
             timeStampLabel.sizeToFit()
             overlayScrollView.addSubview(timeStampLabel)
             let emojiLabel = UILabel(frame: CGRectMake(6, overlayScrollView.contentSize.height+16, self.view.bounds.size.width*(2/3)-20,25))
-            emojiLabel.font = UIFont(name:"Avenir Next", size:15)
+            emojiLabel.font = UIFont(name:"Avenir Next", size:14)
             emojiLabel.textColor = UIColor.whiteColor()
             emojiLabel.text = "👁"
             emojiLabel.numberOfLines = 0
@@ -412,7 +414,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             UIView.animateWithDuration(1.5, animations: {self.overlay!.effect = blurEffect}, completion: { finished in
                 self.header.backgroundColor = UIColor(red: 85/255, green: 172/255, blue: 238/255, alpha: 1.0)
                 self.headerLabel.text = "share"
-                let line = UIView(frame: CGRectMake(20,(self.facebookBut.frame.origin.y)-20, (self.view.bounds.size.width)-40, 0.5))
+                let line = UIView(frame: CGRectMake(20,(self.facebookBut.frame.origin.y)-23, (self.view.bounds.size.width)-40, 0.5))
                 line.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.30)
                 self.view.addSubview(line)
                 for border in arrayofBorders{
@@ -468,16 +470,16 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         switch height {
         case 480.0:
             //print("iPhone 3,4")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
+            labelFont = UIFont(name: "RionaSans-Bold", size: 24)
         case 568.0:
             //print("iPhone 5")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 24)
+            labelFont = UIFont(name: "RionaSans-Bold", size: 24)
         case 667.0:
             //print("iPhone 6")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 28.5)
+            labelFont = UIFont(name: "RionaSans-Bold", size: 28.5)
         case 736.0:
             //print("iPhone 6+")
-            labelFont = UIFont(name: "AvenirNext-Medium", size: 22 )
+            labelFont = UIFont(name: "RionaSans-Bold", size: 22 )
         default:
             break
             //print("not an iPhone")
@@ -567,6 +569,14 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          scrollLabel.textColor = UIColor.whiteColor()
          
          scrollLabel.font = UIFont(name:"RionaSans-Bold", size: 22.0)
+
+
+            scrollLabel.shadowColor = UIColor .blackColor()
+            scrollLabel.shadowOffset = CGSizeMake(10, 10)
+            scrollLabel.layer.masksToBounds = false
+
+
+
          scrollLabel.text = (arrayofText.objectAtIndex(i) as! String)
          scrollLabel.numberOfLines = 0
          scrollLabel.sizeToFit()
@@ -574,7 +584,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
          scrollLabel.layer.opacity = 0.0
          scrollLabel.layer.masksToBounds = true
          //scrollLabel.alpha = 0
-         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.7)
+         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light) .colorWithAlphaComponent(0.8)
          
          scrollLabel.setLineHeight(0)
          scrollLabel.layer.display()
