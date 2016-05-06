@@ -2623,7 +2623,7 @@ mobile number </string>
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.2784313725" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.56470588239999997" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="89J-8c-hMb" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="3Gz-pl-GVz"/>
                             <constraint firstItem="PzR-gB-Z7o" firstAttribute="centerX" secondItem="U3M-YR-mse" secondAttribute="centerX" id="4JS-Xs-foM"/>
@@ -2698,7 +2698,7 @@ mobile number </string>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Gpf-bC-DoY" userLabel="carouselPage" customClass="TutorialPageViewController" customModule="cakeTalk" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKA-Wc-rZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-813" y="-1124"/>
+            <point key="canvasLocation" x="-787.5" y="-1143"/>
         </scene>
     </scenes>
     <resources>
