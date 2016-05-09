@@ -78,7 +78,7 @@ class loginCode: UIViewController, UITextFieldDelegate {
        // print (newDigit)
         if (labelCounter == 5){
             codeDigit5.text = string
-            let animation = MAActivityIndicatorView(frame: self.view.bounds)
+           // let animation = MAActivityIndicatorView(frame: self.view.bounds)
             if ( code == textField.text! + string){
                // NSNotificationCenter.defaultCenter().postNotificationName("move", object: nil)
                 

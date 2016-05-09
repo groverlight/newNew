@@ -36,7 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //  frontWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         let defaultContainer = CKContainer.defaultContainer()
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let login = prefs.stringForKey("Login"){
+        let login = prefs.stringForKey("Login")
+        if (login != nil){
             //print (login)
             self.window?.rootViewController = front // supposed to be front
 

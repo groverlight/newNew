@@ -146,8 +146,8 @@ class loginView: UIViewController, UITextFieldDelegate {
         //let storyboard = UIStoryboard(name: "Main", bundle: nil)
         //let camera:UIViewController =  storyboard.instantiateViewControllerWithIdentifier("camera") as UIViewController
         //self.dismissViewControllerAnimated(true, completion: nil)
-        let delay = 1 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        //let delay = 1 * Double(NSEC_PER_SEC)
+        //let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         self.PageView!.scrollToPreviousViewController()
        // dispatch_after(time, dispatch_get_main_queue()) {
          //   self.phoneTextField.performSelector(#selector(UIResponder.becomeFirstResponder), withObject: nil, afterDelay:0)

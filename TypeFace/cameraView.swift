@@ -399,7 +399,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
 
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let login = prefs.stringForKey("firstTime"){
+        let login = prefs.stringForKey("firstTime")
+        if (login != nil){
             
             firstTime = false
         }else{
@@ -941,9 +942,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
 
         self.cakeTalkLabel.hidden = false
         self.longPressRecognizer.enabled = true
-        let index = clipCount - 1
-       
-       // let files = fileManager.contentsOfDirectoryAtPath(NSTemporaryDirectory(), error: error) as? [String]
+
         toolTip?.dismiss()
         var preferences = EasyTipView.Preferences()
         preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
@@ -1168,8 +1167,8 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     }
     func exportVideo() -> Bool{
         print ("exporting video...")
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-        let destinationPath = documentsPath.stringByAppendingPathComponent("mp4")
+
+        //let destinationPath = documentsPath.stringByAppendingPathComponent("mp4")
         let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mp4")
         
         
