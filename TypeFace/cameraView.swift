@@ -54,7 +54,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     var showStatusBar = true
     var firstTime = false
     var toolTip:EasyTipView?
-    
+    var newOne = true
     @IBOutlet weak var header: UIView!
        @IBOutlet weak var cakeTalkLabel: UILabel!
     @IBOutlet weak var textViewBottom: NSLayoutConstraint!
@@ -229,7 +229,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         else{
                 self.toolTip?.hidden = true
                 self.showStatusBar(false)
-         
+            
                 
                 
                 
@@ -239,6 +239,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.newImage?.frame = self.view.bounds
                 let newfilter = GPUImagePixellateFilter()
                 //filter?.blurRadiusInPixels = 4
+                self.videoCamera?.frameRate = 30
                 self.videoCamera?.addTarget(newfilter)
                 //print (filter)
                 newfilter.addTarget(self.newImage)
@@ -473,6 +474,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             self.view.insertSubview(filteredImage!, atIndex: 0)
             //self.view.insertSubview(imagePicker.view, aboveSubview: filteredImage!)
             videoCamera?.startCameraCapture()
+            movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mp4",isDirectory: true), size: view.frame.size)
+            filter?.addTarget(movieWriter)
+            movieWriter?.encodingLiveVideo = true
+            movieWriter?.shouldPassthroughAudio = false
             gradientView.frame = CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)
             gradientView.backgroundColor = UIColor.clearColor()
             // Set the gradient colors
@@ -498,7 +503,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
     }
     override func viewWillAppear(animated: Bool) {
-
 
         self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
         self.emojiLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
@@ -591,11 +595,13 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         actualOffset = self.scrollView.contentOffset
        // print (actualOffset)
         cameraTextField.resignFirstResponder()
+        newOne = true
         self.view.endEditing(true)
 
     }
     override func viewDidDisappear(animated: Bool) {
-        exportVideo()
+        movieWriter?.finishRecording()
+
     }
     override func prefersStatusBarHidden() -> Bool {
         if showStatusBar {
@@ -716,6 +722,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                 self.cameraTextField.resignFirstResponder()
                 self.view.endEditing(true)
               //  self.presentViewController(vc, animated: false, completion: nil)
+                exportVideo()
                 self.performSegueWithIdentifier("goPreview", sender: self)
                 //typingButton.setTitle("", forState: UIControlState.Normal)
                 emojiLabel.hidden = true
@@ -919,15 +926,16 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
     func startRecording() {
         print ("starting recording...")
         recording = true;
-        let clipCountString = String(clipCount)
-        movieWriter = GPUImageMovieWriter(movieURL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(clipCountString).mp4",isDirectory: true), size: view.frame.size)
-        filter?.addTarget(movieWriter)
+       
 
-
-        movieWriter?.encodingLiveVideo = true
-        movieWriter?.shouldPassthroughAudio = false
-
-        movieWriter?.startRecording()
+        if (newOne == true){
+            movieWriter?.startRecording()
+           
+        }
+        else{
+            movieWriter?.paused = false
+        }
+        
 //        self.toolTip?.dismiss()
 
         
@@ -938,8 +946,9 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         clipCount += 1
         recording = false;
         showStatusBar(true)
-        movieWriter?.finishRecording()
-
+        if (movieWriter?.paused == false){
+            movieWriter?.paused = true
+        }
         self.cakeTalkLabel.hidden = false
         self.longPressRecognizer.enabled = true
 
@@ -1169,7 +1178,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         print ("exporting video...")
 
         //let destinationPath = documentsPath.stringByAppendingPathComponent("mp4")
-        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mp4")
+        let outputPath =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mp4")
         
         
         let composition = AVMutableComposition()
@@ -1190,9 +1199,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
             
             let files = try fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
             print (files)
-            for i in 1..<files!.count+1{
-                print ("files: \(files!.count+1-i)")
-                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(i).mp4"))
+                let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mp4"))
                 
                 print (avAsset.duration)
                 movieTimes.append(avAsset.duration)
@@ -1205,7 +1212,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                     insertTime = CMTimeAdd(insertTime, avAsset.duration)
                 }
                 
-            }
+            
             
             
         }
@@ -1220,7 +1227,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         let instruction = AVMutableVideoCompositionInstruction()
         // instruction.enablePostProcessing = true
         print (CMTimeGetSeconds(composition.duration))
-        videoComposition.frameDuration = CMTimeMake(1, 30)
+        videoComposition.frameDuration = CMTimeMake(1, 30   )
         videoComposition.renderSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         instruction.timeRange = CMTimeRangeMake(kCMTimeZero, composition.duration)
         instruction.layerInstructions = NSArray(object: layerinstruction) as! [AVVideoCompositionLayerInstruction]
@@ -1344,7 +1351,7 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         movieOutput.startRecording()
         movieComposition!.startProcessing()
         movieOutput.completionBlock = {
-            movieOutput.finishRecording()
+        movieOutput.finishRecording()
         }
         
         //export 1 small file and 1 large file into the full compilated video file then add animation begin times based on switch statemente from typingbutton

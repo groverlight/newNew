@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -1899,6 +1900,7 @@ mobile number </string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3kr-DQ-DTb"/>
                                     <constraint firstAttribute="width" constant="80" id="qCf-hL-a7V"/>
+                                    <constraint firstAttribute="width" secondItem="vjn-gT-CrU" secondAttribute="height" multiplier="52:5" id="yrI-B9-HYB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="RionaSans-Bold" family="Riona Sans" pointSize="15"/>
                                 <state key="normal" title="do over">
@@ -1926,15 +1928,12 @@ mobile number </string>
                                     </constraint>
                                     <constraint firstAttribute="width" constant="50" id="euu-Nq-2hp"/>
                                     <constraint firstAttribute="height" constant="50" id="fer-Iq-vuH"/>
-                                    <constraint firstAttribute="width" constant="50" id="lWq-bb-Szy">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="54"/>
-                                    </constraint>
+                                    <constraint firstAttribute="width" secondItem="iv8-ko-PhJ" secondAttribute="height" multiplier="1:1" id="vUX-RS-vqs"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="fb.png"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="Te7-1d-k92"/>
-                                        <exclude reference="lWq-bb-Szy"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1950,6 +1949,7 @@ mobile number </string>
                                     <constraint firstAttribute="width" constant="50" id="MU3-jo-tvb">
                                         <variation key="heightClass=regular-widthClass=compact" constant="54"/>
                                     </constraint>
+                                    <constraint firstAttribute="width" secondItem="rFY-zB-l09" secondAttribute="height" multiplier="1:1" id="jg4-aD-pSU"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="twtr.png"/>
                                 <variation key="default">
@@ -1971,6 +1971,7 @@ mobile number </string>
                                     <constraint firstAttribute="height" constant="50" id="Mjd-R9-nkT">
                                         <variation key="heightClass=regular-widthClass=compact" constant="54"/>
                                     </constraint>
+                                    <constraint firstAttribute="width" secondItem="m01-8M-Qa5" secondAttribute="height" multiplier="1:1" id="te4-wZ-OT0"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="insta.png"/>
                                 <variation key="default">
