@@ -928,10 +928,12 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
 
         if (newOne == true){
+            print ("starting recording...")
             movieWriter?.startRecording()
             newOne = false
         }
         else{
+            print ("resuming recording...")
             movieWriter?.paused = false
         }
         
