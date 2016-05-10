@@ -503,7 +503,6 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
        
     }
     override func viewWillAppear(animated: Bool) {
-
         self.typingButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
         self.emojiLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
         self.characterCounter.transform = CGAffineTransformMakeScale(0.5, 0.5)
