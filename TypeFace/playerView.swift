@@ -215,20 +215,12 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     }
 
     func setupVideo(index: Int){
-        do{
-            let files = try self.fileManager?.contentsOfDirectoryAtPath(NSTemporaryDirectory())
-            print (files)
-            
-            
-        }
-        catch {
-            // print("bad")
-        }
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerItemDidReachEnd(_:)), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(playerView.playerStartPlaying(_:)), name:UIApplicationDidBecomeActiveNotification, object: nil);
         
-        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())movie.mp4"))
-        print (avAsset)
+        let avAsset = AVAsset(URL: NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(index).mp4"))
+        print("index: \(index)")
         let avPlayerItem = AVPlayerItem(asset: avAsset)
         moviePlayer = AVPlayer(playerItem: avPlayerItem)
         let avLayer = AVPlayerLayer(player: moviePlayer)
@@ -236,42 +228,34 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         avLayer.frame = self.view.bounds
         self.movieView.layer.addSublayer(avLayer)
         self.moviePlayer?.play()
-        for i in 0..<(arrayofText.count){
-            var beginTime:CFTimeInterval = 0
-            for j in 0..<(i){
-                
-                beginTime = beginTime + animationBeginTimes[j]
-            }
         let scrollLabel = PaddingLabel()
         scrollLabel.frame = CGRectMake(20,self.view.bounds.size.height*0.55, self.view.bounds.size.width*(2/3)-20,50)
         scrollLabel.textColor = UIColor.whiteColor()
         print (scrollLabel.frame)
         scrollLabel.font = labelFont
-        scrollLabel.text = (arrayofText.objectAtIndex(i) as! String)
+        scrollLabel.text = (arrayofText.objectAtIndex(index-1) as! String)
         print (scrollLabel.text)
         scrollLabel.numberOfLines = 0
         scrollLabel.sizeToFit()
         scrollLabel.layer.cornerRadius = 8
         scrollLabel.layer.masksToBounds = true
-        scrollLabel.layer.opacity = 0   
         //scrollLabel.alpha = 0.5
         scrollLabel.backgroundColor = randomColor(hue: .Random, luminosity: .Light)
         
         scrollLabel.setLineHeight(0)
         // scrollLabel.frame.origin.y = self.view.bounds.size.height/2-scrollLabel.bounds.size.height/2
         self.view.addSubview(scrollLabel)
-
-            
+        
         let animation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPositionY)
         
-        animation.duration = animationBeginTimes[i] + 4.25
+        animation.duration = animationBeginTimes[index-1] + 4.25
         animation.repeatCount = 0
         animation.autoreverses = false
         //  animation.fromValue = scrollLabel.frame.origin.y
         animation.toValue = self.view.bounds.size.height/3 - scrollLabel.bounds.size.height
         animation.beginTime = AVCoreAnimationBeginTimeAtZero
         animation.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
-        animation.beginTime = CACurrentMediaTime() + beginTime
+        
         
         let animation3 = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
         animation3.toValue = NSValue(CGPoint: CGPointMake(1, 1))
@@ -280,7 +264,6 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         animation3.beginTime = AVCoreAnimationBeginTimeAtZero
         animation3.repeatCount = 0
         animation3.autoreverses = false
-        animation3.beginTime = CACurrentMediaTime() + beginTime
         //animation3.removedOnCompletion = true
         // animation3.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
         let animation4 = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
@@ -290,13 +273,12 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         animation4.autoreverses = false
         animation4.fromValue = 0.0
         animation4.toValue = 1.0
-        animation4.beginTime = CACurrentMediaTime() + beginTime
         animation4.timingFunction = CAMediaTimingFunction(name:kCAMediaTimingFunctionLinear)
         
         // animation4.removedOnCompletion = true
         animation4.completionBlock = {(animation,finished) in
             let animation2: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerOpacity)
-            animation2.duration = animationBeginTimes[i] + 4.25
+            animation2.duration = animationBeginTimes[index-1] + 4.25
             animation2.repeatCount = 0
             animation2.autoreverses = false
             animation2.toValue = 0
@@ -304,11 +286,13 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             scrollLabel.layer.pop_addAnimation(animation2, forKey: "goDisappear")
         }
         
-        scrollLabel.layer.pop_addAnimation(animation, forKey: "goUP)")
+        scrollLabel.layer.pop_addAnimation(animation, forKey: "goUP")
         scrollLabel.layer.pop_addAnimation(animation3, forKey: "spring)")
         scrollLabel.layer.pop_addAnimation(animation4, forKey: "goAppear)")
-        }
-           }
+        
+        numOfClips -= 1
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -398,10 +382,21 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
         //prefersStatusBarHidden()
     }
     func playerItemDidReachEnd(notification: NSNotification){
+
         print ("item reached end \(numOfClips)")
         // moviePlayer.removeObserver(self, forKeyPath: "contentSize")
         NSNotificationCenter.defaultCenter().removeObserver(self)
         
+        if (numOfClips > 0){
+            // print ("(totalreceivedclips\(totalReceivedClips)")
+            print ("(numfoclips\(numOfClips)")
+            let clipsLeft = totalReceivedClips - numOfClips + 1
+            // print ("clipsLeft\(clipsLeft)")
+            setupVideo(clipsLeft)
+        }
+        else{
+            
+            
 
 
            
@@ -504,7 +499,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
                 
             })
             
-        
+        }
         
     }
     
