@@ -7,3 +7,4 @@
 #import "BDKCollectionIndexView.h"
 #import "GradientView.h"
 #import "SocialVideoHelper.h"
+#import "ASScreenRecorder.h"

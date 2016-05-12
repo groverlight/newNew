@@ -720,9 +720,10 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
                // let vc = self.storyboard?.instantiateViewControllerWithIdentifier("playerView") as! playerView
                 self.cameraTextField.resignFirstResponder()
                 self.view.endEditing(true)
-              //  self.presentViewController(vc, animated: false, completion: nil)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.performSegueWithIdentifier("goPreview", sender: self)
+                }
                 exportVideo()
-                
                 //typingButton.setTitle("", forState: UIControlState.Normal)
                 emojiLabel.hidden = true
                 characterCounter.hidden = true
@@ -1331,13 +1332,11 @@ class cameraView: UIViewController, UITextViewDelegate, UIImagePickerControllerD
         
         movieComposition!.enableSynchronizedEncodingUsingMovieWriter(movieOutput)
         movieComposition!.addTarget(movieOutput)
-        movieOutput.startRecording()
-        movieComposition!.startProcessing()
+       // movieOutput.startRecording()
+       // movieComposition!.startProcessing()
         movieOutput.completionBlock = {
             movieOutput.finishRecording()
-            dispatch_async(dispatch_get_main_queue()) {
-                self.performSegueWithIdentifier("goPreview", sender: self)
-            }
+
         }
         
 

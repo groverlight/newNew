@@ -33,6 +33,7 @@
 		277CB0401C9892B40032E109 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277CB03F1C9892B40032E109 /* CloudKit.framework */; };
 		277CB0431C98DF680032E109 /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CB0411C98DF680032E109 /* CloudManager.swift */; };
 		277CB0441C98DF680032E109 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277CB0421C98DF680032E109 /* User.swift */; };
+		277DFAC31CE3B688006B4ADA /* ASScreenRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 277DFAC21CE3B688006B4ADA /* ASScreenRecorder.m */; };
 		27862EF71C6D9B3100C62AAE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27862EF61C6D9B3100C62AAE /* CFNetwork.framework */; };
 		27862EFD1C6D9B6500C62AAE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27862EFC1C6D9B6500C62AAE /* QuartzCore.framework */; };
 		27862F0E1C6DA89A00C62AAE /* loginPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27862F0D1C6DA89A00C62AAE /* loginPhone.swift */; };
@@ -185,6 +186,8 @@
 		277CB03F1C9892B40032E109 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		277CB0411C98DF680032E109 /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		277CB0421C98DF680032E109 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		277DFAC11CE3B688006B4ADA /* ASScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASScreenRecorder.h; sourceTree = "<group>"; };
+		277DFAC21CE3B688006B4ADA /* ASScreenRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASScreenRecorder.m; sourceTree = "<group>"; };
 		27862EF61C6D9B3100C62AAE /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		27862EFC1C6D9B6500C62AAE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		27862F0D1C6DA89A00C62AAE /* loginPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginPhone.swift; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 		272DD9501CC470BC00F2ED5B /* custom classes */ = {
 			isa = PBXGroup;
 			children = (
+				277DFAC11CE3B688006B4ADA /* ASScreenRecorder.h */,
+				277DFAC21CE3B688006B4ADA /* ASScreenRecorder.m */,
 				27A8003F1CD03F1F00D68666 /* EasyTipView.swift */,
 				2742A47C1C6AF32D00B369E7 /* TypeFace-Bridging-Header.h */,
 				27DF70461CC6B7850087BB0D /* MAActivityIndicatorView.swift */,
@@ -739,6 +744,7 @@
 				2757FC8A1C92256300050C11 /* Hue.swift in Sources */,
 				27D859451C6BA5DC00F44985 /* sendView.swift in Sources */,
 				2742A4781C6AF2A500B369E7 /* pageView.swift in Sources */,
+				277DFAC31CE3B688006B4ADA /* ASScreenRecorder.m in Sources */,
 				270A90611C7D1779006FC3A0 /* playerView.swift in Sources */,
 				277339A81CBDC77900E845D1 /* carousel1.swift in Sources */,
 				272110011CA6FA76004C2408 /* playerView2.swift in Sources */,

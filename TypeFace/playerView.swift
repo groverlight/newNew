@@ -18,7 +18,7 @@ import FBSDKLoginKit
 import Photos
 import MobileCoreServices
 
-class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate  , UIScrollViewDelegate {
+class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingDelegate,UINavigationControllerDelegate  , UIScrollViewDelegate, ASScreenRecorderDelegate,AVCaptureVideoDataOutputSampleBufferDelegate {
     
     
     @IBOutlet weak var headerLabel: UILabel!
@@ -160,7 +160,13 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     var didPlay = false
     var showStatusBar = false
     var toolTip: EasyTipView?
-
+    var screenRecorder = ASScreenRecorder()
+    var image:CGImageRef?
+    var imageQueue:dispatch_queue_t?
+    var capturedImage:CGImageRef?
+    var needsNewImage = true
+    var captureSession = AVCaptureSession()
+    var captureDevice: AVCaptureDevice?
     @IBAction func facebook(sender: AnyObject) {
         self.backButton.setTitle("another one", forState: .Normal)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
@@ -297,6 +303,40 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     override func viewDidLoad() {
         super.viewDidLoad()
         backButton.layer.cornerRadius = 6
+        screenRecorder.delegate = self
+        imageQueue = dispatch_queue_create("CameraViewController.imageQueue", DISPATCH_QUEUE_SERIAL)
+    
+        screenRecorder.videoURL =  NSURL.fileURLWithPath("\(NSTemporaryDirectory())animmovie.mp4")
+        let devices = AVCaptureDevice.devices()
+        
+        // Loop through all the capture devices on this phone
+        for device in devices {
+            // Make sure this particular device supports video
+            if (device.hasMediaType(AVMediaTypeVideo)) {
+                // Finally check the position and confirm we've got the back camera
+                if(device.position == AVCaptureDevicePosition.Unspecified) {
+                    captureDevice = device as? AVCaptureDevice
+                }
+            }
+        }
+       
+        
+        do{
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            let output = AVCaptureVideoDataOutput()
+            output.videoSettings = [ kCVPixelBufferPixelFormatTypeKey: Int(kCVPixelFormatType_32BGRA) ]
+            output.setSampleBufferDelegate(self, queue:imageQueue!)
+            captureSession.addOutput(output)
+            captureSession.addInput(input)
+            captureSession.sessionPreset = AVCaptureSessionPresetHigh
+            let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+            self.view.layer.addSublayer(previewLayer)
+            captureSession.startRunning()
+
+        }
+        catch{
+            
+        }
         
      
     }
@@ -338,6 +378,7 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             self.moviePlayer?.seekToTime(kCMTimeZero)
             self.moviePlayer?.volume = 0.0
             self.moviePlayer?.actionAtItemEnd = AVPlayerActionAtItemEnd.None
+            screenRecorder.startRecording()
             self.setupVideo(1)
             
         }
@@ -398,8 +439,11 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
             
             
 
-
-           
+            
+            screenRecorder.stopRecordingWithCompletion({
+                self.captureSession.stopRunning()
+                print("done")
+            })
             overlay = UIVisualEffectView()
             let blurEffect = UIBlurEffect(style: .Dark)
             let overlayScrollView = UIScrollView(frame: CGRectMake(20,40+self.header.bounds.size.height,self.view.bounds.size.width-20,2*self.view.bounds.height/3))
@@ -543,8 +587,31 @@ class playerView: UIViewController,UIImagePickerControllerDelegate,FBSDKSharingD
     func sharerDidCancel(sharer: FBSDKSharing!) {
         print("sharerDidCancel")
     }
+    func captureOutput(captureOutput: AVCaptureOutput!, didDropSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+        print ("captuing output...")
+        dispatch_sync(imageQueue!){
+            if (self.needsNewImage == true){
+                self.needsNewImage = false
+                let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+                let cImage = CIImage(CVImageBuffer: pixelBuffer!)
+                let context = CIContext()
+                self.image = context.createCGImage(cImage, fromRect: self.view.bounds)
+            }
+        }
+    }
 
-
+    func writeBackgroundFrameInContext(contextRef: UnsafeMutablePointer<Unmanaged<CGContext>?>) {
+        print ("writing frame...")
+        dispatch_sync(imageQueue!){
+            if ((self.image) != nil){
+                let reference:CGContext = (contextRef.memory?.takeRetainedValue())!
+                CGContextSaveGState(reference)
+                CGContextDrawImage(reference, self.view.bounds, self.image)
+                CGContextRestoreGState(reference)
+                self.needsNewImage = true
+            }
+        }
+    }
 
 }
 
